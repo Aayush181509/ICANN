@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Foundation 4: Seaborn — Statistical Visualisation - ICANN Training</title>
+    <title>Seaborn Basics - ICANN Training</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Foundation 4: Seaborn \u2014 Statistical Visualisation";
+        var mkdocs_page_name = "Seaborn Basics";
         var mkdocs_page_input_path = "icann/00d_seaborn_basics.md";
         var mkdocs_page_url = null;
       </script>
@@ -52,15 +52,61 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../00c_data_visualization.md">Data Visualization</a>
+                <li class="toctree-l1"><a class="reference internal" href="../00c_matplotlib_basics/">Matplotlib Basics</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Seaborn Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#data-science-for-chartered-accountants-pre-module">Data Science for Chartered Accountants — Pre-Module</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-this-notebook-about">What is this notebook about?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-will-you-learn">What will you learn?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-seaborn-vs-matplotlib-choose-the-right-tool">Section 1: Seaborn vs Matplotlib — Choose the Right Tool</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-themes-and-colour-palettes">Section 2: Themes and Colour Palettes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-distribution-plots">Section 3: Distribution Plots</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-categorical-plots">Section 4: Categorical Plots</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-relational-plots-trends-and-relationships">Section 5: Relational Plots — Trends and Relationships</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-heatmap-correlation-analysis">Section 6: Heatmap — Correlation Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-pairplot-multi-variable-snapshot">Section 7: Pairplot — Multi-variable Snapshot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-combining-seaborn-matplotlib">Section 8: Combining Seaborn + Matplotlib</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-accounting-bridge-monthly-expense-heatmap">Section 9: Accounting Bridge — Monthly Expense Heatmap</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-quick-reference-summary">Section 10: Quick Reference Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#seaborn-vs-matplotlib-recap">Seaborn vs Matplotlib recap:</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-exercises">Practice Exercises</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../00d_data_analysis.md">Data Analysis</a>
+                <li class="toctree-l1"><a class="reference internal" href="../01_numpy_for_finance/">Numpy for Finance</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="" href="../00e_machine_learning.md">Machine Learning</a>
+                <li class="toctree-l1"><a class="reference internal" href="../02_pandas_fundamentals/">Pandas for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../03_financial_statement_analysis/">Financial Statement Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../04_audit_data_analysis/">Audit Data Analysis</a>
                 </li>
               </ul>
       </div>
@@ -77,7 +123,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Foundation 4: Seaborn — Statistical Visualisation</li>
+      <li class="breadcrumb-item active">Seaborn Basics</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -955,6 +1001,10 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
               
             </div>
           </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../00c_matplotlib_basics/" class="btn btn-neutral float-left" title="Matplotlib Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../01_numpy_for_finance/" class="btn btn-neutral float-right" title="Numpy for Finance">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
 
   <hr/>
 
@@ -977,6 +1027,10 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
+      <span><a href="../00c_matplotlib_basics/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../01_numpy_for_finance/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
