@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Numpy Basics - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Numpy Basics";
+        var mkdocs_page_input_path = "icann/00a_numpy_basics.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Python Basics</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Numpy Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#data-science-for-chartered-accountants-pre-module">Data Science for Chartered Accountants — Pre-Module</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-this-notebook-about">What is this notebook about?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-will-you-learn">What will you learn?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-why-numpy-the-problem-with-python-lists">Section 1: Why NumPy? The Problem with Python Lists</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#key-difference-vectorized-operations">Key difference: Vectorized operations</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-creating-numpy-arrays">Section 2: Creating NumPy Arrays</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-array-attributes-understanding-your-data">Section 3: Array Attributes — Understanding Your Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-indexing-slicing-accessing-elements">Section 4: Indexing &amp; Slicing — Accessing Elements</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-arithmetic-broadcasting">Section 5: Arithmetic &amp; Broadcasting</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-aggregate-functions">Section 6: Aggregate Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-boolean-filtering-select-what-you-need">Section 7: Boolean Filtering — Select What You Need</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-2d-arrays-matrices">Section 8: 2D Arrays (Matrices)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-reshaping-arrays">Section 9: Reshaping Arrays</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-useful-math-functions">Section 10: Useful Math Functions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-quick-reference-summary">Section 11: Quick Reference Summary</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#practice-exercises">Practice Exercises</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Numpy Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="foundation-1-numpy-from-zero-to-confident">Foundation 1: NumPy — From Zero to Confident</h1>
+<h3 id="data-science-for-chartered-accountants-pre-module">Data Science for Chartered Accountants — Pre-Module</h3>
+<hr />
+<h2 id="what-is-this-notebook-about">What is this notebook about?</h2>
+<p>Before we process financial data, we need to understand <strong>NumPy</strong> — the core numerical engine of Python data science.</p>
+<p>This notebook assumes:
+- ✅ You know basic Python (variables, loops, lists)
+- ❌ No prior knowledge of NumPy required</p>
+<h2 id="what-will-you-learn">What will you learn?</h2>
+<ol>
+<li>Why NumPy exists — the problem with plain Python lists</li>
+<li>Creating NumPy arrays</li>
+<li>Array attributes and data types</li>
+<li>Indexing and slicing</li>
+<li>Arithmetic and broadcasting</li>
+<li>Useful built-in functions</li>
+<li>Boolean filtering</li>
+<li>2D arrays (matrices)</li>
+<li>Reshaping arrays</li>
+<li>Bridge to accounting use-cases</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>Think of NumPy as a supercharged Excel column.</strong> Instead of clicking cells one by one, you operate on the entire column at once — instantly.</p>
+</blockquote>
+<hr />
+<h2 id="section-1-why-numpy-the-problem-with-python-lists">Section 1: Why NumPy? The Problem with Python Lists</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Python list approach ──────────────────────────────────────────────────────</span>
+<span class="c1"># Suppose we have monthly sales figures (₹ in thousands)</span>
+<span class="n">sales_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">178</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+
+<span class="c1"># Problem 1: Can&#39;t do math directly on a list</span>
+<span class="c1"># sales_list * 1.18   →  this REPEATS the list 1.18 times... which is an error!</span>
+
+<span class="c1"># To add 18% GST, you&#39;d have to loop:</span>
+<span class="n">sales_with_gst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">sales_list</span><span class="p">:</span>
+    <span class="n">sales_with_gst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">s</span> <span class="o">*</span> <span class="mf">1.18</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;With loop:&#39;</span><span class="p">,</span> <span class="n">sales_with_gst</span><span class="p">[:</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;...&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This works, but imagine doing this for 50,000 invoices!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── NumPy approach ────────────────────────────────────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">sales_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">120</span><span class="p">,</span> <span class="mi">135</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">112</span><span class="p">,</span> <span class="mi">178</span><span class="p">,</span> <span class="mi">155</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">142</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+
+<span class="c1"># Add 18% GST — one line, no loop needed!</span>
+<span class="n">sales_with_gst_np</span> <span class="o">=</span> <span class="n">sales_array</span> <span class="o">*</span> <span class="mf">1.18</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NumPy result:&#39;</span><span class="p">,</span> <span class="n">sales_with_gst_np</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Type of sales_array :&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sales_array</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type of Python list :&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">sales_list</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="key-difference-vectorized-operations">Key difference: <strong>Vectorized operations</strong></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Python List</th>
+<th>NumPy Array</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Math on all elements</td>
+<td>Need a loop</td>
+<td>Just write the math directly</td>
+</tr>
+<tr>
+<td>Speed (50,000 items)</td>
+<td>Slow</td>
+<td>~100x faster</td>
+</tr>
+<tr>
+<td>Memory</td>
+<td>Each item stored separately</td>
+<td>Compact, like a C array</td>
+</tr>
+<tr>
+<td>Data type</td>
+<td>Mixed (int, str, etc.)</td>
+<td>All elements same type</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="section-2-creating-numpy-arrays">Section 2: Creating NumPy Arrays</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.1 From a Python list ────────────────────────────────────────────────────</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;From list     :&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+
+<span class="c1"># ── 2.2 Zeros and Ones ───────────────────────────────────────────────────────</span>
+<span class="n">zeros</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>          <span class="c1"># 5 zeros</span>
+<span class="n">ones</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>           <span class="c1"># 5 ones</span>
+<span class="n">filled</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>       <span class="c1"># 5 elements all equal to 99</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All zeros     :&#39;</span><span class="p">,</span> <span class="n">zeros</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All ones      :&#39;</span><span class="p">,</span> <span class="n">ones</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Filled with 99:&#39;</span><span class="p">,</span> <span class="n">filled</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.3 Range-based arrays ────────────────────────────────────────────────────</span>
+<span class="c1"># np.arange(start, stop, step)  — like Python range()</span>
+<span class="n">months</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>           <span class="c1"># 1 to 12 (months in a year)</span>
+<span class="n">even_nums</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>        <span class="c1"># 0, 2, 4, ..., 18</span>
+<span class="n">countdown</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>       <span class="c1"># 10, 9, 8, ..., 1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Months :&#39;</span><span class="p">,</span> <span class="n">months</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Evens  :&#39;</span><span class="p">,</span> <span class="n">even_nums</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reverse:&#39;</span><span class="p">,</span> <span class="n">countdown</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.4 np.linspace — evenly spaced values ────────────────────────────────────</span>
+<span class="c1"># linspace(start, stop, num_points)  — useful for interest rates, tax slabs</span>
+<span class="n">interest_rates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">6.0</span><span class="p">,</span> <span class="mf">12.0</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>  <span class="c1"># 7 rates from 6% to 12%</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Interest rates (linspace):&#39;</span><span class="p">,</span> <span class="n">interest_rates</span><span class="p">)</span>
+
+<span class="c1"># ── 2.5 Random arrays ────────────────────────────────────────────────────────</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>  <span class="c1"># seed = reproducible results (same &quot;random&quot; every time)</span>
+
+<span class="n">rand_int</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>    <span class="c1"># 6 random integers between ₹1000-₹50000</span>
+<span class="n">rand_flt</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>                          <span class="c1"># 4 random floats between 0 and 1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random invoices (₹):&#39;</span><span class="p">,</span> <span class="n">rand_int</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random fractions   :&#39;</span><span class="p">,</span> <span class="n">rand_flt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<h2 id="section-3-array-attributes-understanding-your-data">Section 3: Array Attributes — Understanding Your Data</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a sample array</span>
+<span class="n">invoices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15000</span><span class="p">,</span> <span class="mi">28000</span><span class="p">,</span> <span class="mi">9500</span><span class="p">,</span> <span class="mi">42000</span><span class="p">,</span> <span class="mi">3200</span><span class="p">,</span> <span class="mi">67000</span><span class="p">,</span> <span class="mi">18500</span><span class="p">,</span> <span class="mi">31000</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Array     :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape     :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>    <span class="c1"># number of elements in each dimension</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Size      :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>     <span class="c1"># total number of elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Dimensions:&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>     <span class="c1"># number of dimensions (1D = 1, 2D = 2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data type :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>    <span class="c1"># int64, float64, etc.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bytes used:&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">nbytes</span><span class="p">)</span>   <span class="c1"># memory in bytes</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Data Types ────────────────────────────────────────────────────────────────</span>
+<span class="c1"># NumPy is strict about data types — unlike Python lists</span>
+
+<span class="n">int_arr</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>             <span class="c1"># integers</span>
+<span class="n">float_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">100.5</span><span class="p">,</span> <span class="mf">200.75</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">])</span>      <span class="c1"># floats</span>
+<span class="n">str_arr</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchase&#39;</span><span class="p">,</span> <span class="s1">&#39;Tax&#39;</span><span class="p">])</span> <span class="c1"># strings</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;int64  dtype:&#39;</span><span class="p">,</span> <span class="n">int_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;float64 dtype:&#39;</span><span class="p">,</span> <span class="n">float_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;string dtype:&#39;</span><span class="p">,</span> <span class="n">str_arr</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+
+<span class="c1"># Convert type using .astype()</span>
+<span class="n">int_to_float</span> <span class="o">=</span> <span class="n">int_arr</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Converted to float:&#39;</span><span class="p">,</span> <span class="n">int_to_float</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-4-indexing-slicing-accessing-elements">Section 4: Indexing &amp; Slicing — Accessing Elements</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Our sample: 8 invoice amounts</span>
+<span class="n">invoices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">15000</span><span class="p">,</span> <span class="mi">28000</span><span class="p">,</span> <span class="mi">9500</span><span class="p">,</span> <span class="mi">42000</span><span class="p">,</span> <span class="mi">3200</span><span class="p">,</span> <span class="mi">67000</span><span class="p">,</span> <span class="mi">18500</span><span class="p">,</span> <span class="mi">31000</span><span class="p">])</span>
+<span class="c1">#                      [0]    [1]   [2]   [3]   [4]   [5]    [6]    [7]</span>
+<span class="c1">#                      [-8]   [-7]  [-6]  [-5]  [-4]  [-3]   [-2]   [-1]</span>
+
+<span class="c1"># Single element</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First invoice  :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># index 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Third invoice  :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>    <span class="c1"># index 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last invoice   :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># last element</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;2nd from last  :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Slicing: array[start : stop : step] ───────────────────────────────────────</span>
+<span class="c1"># stop is EXCLUSIVE (just like Python range)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First 3         :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># indices 0,1,2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Index 2 to 5    :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">6</span><span class="p">])</span>   <span class="c1"># indices 2,3,4,5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last 3          :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>   <span class="c1"># last 3 elements</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Every other     :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>   <span class="c1"># step=2: every alternate</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reversed        :&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># step=-1: reverse entire array</span>
+
+<span class="c1"># Practical: get Q1 data (first 3 months)</span>
+<span class="n">monthly_rev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">80</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">140</span><span class="p">])</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">monthly_rev</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">q2</span> <span class="o">=</span> <span class="n">monthly_rev</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">q3</span> <span class="o">=</span> <span class="n">monthly_rev</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">q4</span> <span class="o">=</span> <span class="n">monthly_rev</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Q1 Revenue :&#39;</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="s1">&#39;→ Total:&#39;</span><span class="p">,</span> <span class="n">q1</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q2 Revenue :&#39;</span><span class="p">,</span> <span class="n">q2</span><span class="p">,</span> <span class="s1">&#39;→ Total:&#39;</span><span class="p">,</span> <span class="n">q2</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q3 Revenue :&#39;</span><span class="p">,</span> <span class="n">q3</span><span class="p">,</span> <span class="s1">&#39;→ Total:&#39;</span><span class="p">,</span> <span class="n">q3</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q4 Revenue :&#39;</span><span class="p">,</span> <span class="n">q4</span><span class="p">,</span> <span class="s1">&#39;→ Total:&#39;</span><span class="p">,</span> <span class="n">q4</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<hr />
+<h2 id="section-5-arithmetic-broadcasting">Section 5: Arithmetic &amp; Broadcasting</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Element-wise arithmetic ───────────────────────────────────────────────────</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">500</span><span class="p">,</span> <span class="mi">620</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">710</span><span class="p">,</span> <span class="mi">590</span><span class="p">])</span>
+<span class="n">cogs</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">300</span><span class="p">,</span> <span class="mi">370</span><span class="p">,</span> <span class="mi">290</span><span class="p">,</span> <span class="mi">430</span><span class="p">,</span> <span class="mi">355</span><span class="p">])</span>
+
+<span class="n">gross_profit</span> <span class="o">=</span> <span class="n">revenue</span> <span class="o">-</span> <span class="n">cogs</span>                   <span class="c1"># subtract arrays</span>
+<span class="n">gp_margin</span>    <span class="o">=</span> <span class="n">gross_profit</span> <span class="o">/</span> <span class="n">revenue</span> <span class="o">*</span> <span class="mi">100</span>     <span class="c1"># divide + multiply</span>
+<span class="n">tax</span>          <span class="o">=</span> <span class="n">gross_profit</span> <span class="o">*</span> <span class="mf">0.25</span>              <span class="c1"># multiply by scalar</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Revenue      :&#39;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;COGS         :&#39;</span><span class="p">,</span> <span class="n">cogs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gross Profit :&#39;</span><span class="p">,</span> <span class="n">gross_profit</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GP Margin %  :&#39;</span><span class="p">,</span> <span class="n">gp_margin</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tax @25%     :&#39;</span><span class="p">,</span> <span class="n">tax</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Broadcasting: operations between arrays of different shapes ───────────────</span>
+<span class="c1"># Scalar broadcast: applies one value to ALL elements</span>
+<span class="n">prices</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">250</span><span class="p">])</span>
+<span class="n">gst_rate</span>  <span class="o">=</span> <span class="mf">0.18</span>  <span class="c1"># scalar</span>
+
+<span class="n">gst_amount</span>   <span class="o">=</span> <span class="n">prices</span> <span class="o">*</span> <span class="n">gst_rate</span>      <span class="c1"># 0.18 is &quot;broadcast&quot; across all 5 prices</span>
+<span class="n">total_price</span>  <span class="o">=</span> <span class="n">prices</span> <span class="o">+</span> <span class="n">gst_amount</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Base Price  :&#39;</span><span class="p">,</span> <span class="n">prices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GST (18%)   :&#39;</span><span class="p">,</span> <span class="n">gst_amount</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Price :&#39;</span><span class="p">,</span> <span class="n">total_price</span><span class="p">)</span>
+
+<span class="c1"># ── Power and other operations ────────────────────────────────────────────────</span>
+<span class="n">principal</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1_00_000</span><span class="p">,</span> <span class="mi">2_50_000</span><span class="p">,</span> <span class="mi">5_00_000</span><span class="p">])</span>
+<span class="n">rate</span>      <span class="o">=</span> <span class="mf">0.08</span>
+<span class="n">years</span>     <span class="o">=</span> <span class="mi">5</span>
+<span class="n">fv</span>        <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">years</span>   <span class="c1"># compound interest formula</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Compound value of ₹1L, 2.5L, 5L at 8</span><span class="si">% f</span><span class="s1">or 5 years:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">principal</span><span class="p">,</span> <span class="n">fv</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  ₹</span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s1">&gt;8,.0f</span><span class="si">}</span><span class="s1">  →  ₹</span><span class="si">{</span><span class="n">f</span><span class="si">:</span><span class="s1">&gt;10,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-6-aggregate-functions">Section 6: Aggregate Functions</h2>
+<div class="highlight"><pre><span></span><code><span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">78</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">88</span><span class="p">,</span> <span class="mi">73</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="mi">84</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">95</span><span class="p">])</span>
+
+<span class="c1"># Basic statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Count  : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">size</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sum    : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Mean   : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Median : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Min    : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s1">  at index </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Max    : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s1">  at index </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Std Dev: </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">std</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Var    : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">var</span><span class="p">()</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Range  : </span><span class="si">{</span><span class="n">scores</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">scores</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── cumsum: running total ─────────────────────────────────────────────────────</span>
+<span class="c1"># Very useful for running balance, cumulative revenue, etc.</span>
+<span class="n">monthly_cf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">35</span><span class="p">,</span> <span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">90</span><span class="p">])</span>
+<span class="c1"># Positive = cash inflow, Negative = cash outflow</span>
+
+<span class="n">cumulative</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">monthly_cf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly CF   :&#39;</span><span class="p">,</span> <span class="n">monthly_cf</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Running total:&#39;</span><span class="p">,</span> <span class="n">cumulative</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">YTD at month 6: </span><span class="si">{</span><span class="n">cumulative</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Year-end total: </span><span class="si">{</span><span class="n">cumulative</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Sorting ───────────────────────────────────────────────────────────────────</span>
+<span class="n">invoice_amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">28000</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">45000</span><span class="p">,</span> <span class="mi">8500</span><span class="p">,</span> <span class="mi">32000</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">15000</span><span class="p">])</span>
+
+<span class="n">sorted_asc</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span>           <span class="c1"># smallest first</span>
+<span class="n">sorted_desc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># largest first</span>
+<span class="n">sort_idx</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span>         <span class="c1"># indices that would sort the array</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original    :&#39;</span><span class="p">,</span> <span class="n">invoice_amounts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ascending   :&#39;</span><span class="p">,</span> <span class="n">sorted_asc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Descending  :&#39;</span><span class="p">,</span> <span class="n">sorted_desc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sort indices:&#39;</span><span class="p">,</span> <span class="n">sort_idx</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Smallest invoice index:&#39;</span><span class="p">,</span> <span class="n">sort_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;→ amount:&#39;</span><span class="p">,</span> <span class="n">invoice_amounts</span><span class="p">[</span><span class="n">sort_idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Largest  invoice index:&#39;</span><span class="p">,</span> <span class="n">sort_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;→ amount:&#39;</span><span class="p">,</span> <span class="n">invoice_amounts</span><span class="p">[</span><span class="n">sort_idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-7-boolean-filtering-select-what-you-need">Section 7: Boolean Filtering — Select What You Need</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Boolean array: compare each element → returns True/False for each</span>
+<span class="n">expenses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">45000</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">12000</span><span class="p">,</span> <span class="mi">99000</span><span class="p">,</span> <span class="mi">3200</span><span class="p">,</span> <span class="mi">75000</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="mi">22000</span><span class="p">,</span> <span class="mi">500</span><span class="p">])</span>
+
+<span class="n">high_value</span> <span class="o">=</span> <span class="n">expenses</span> <span class="o">&gt;</span> <span class="mi">20000</span>   <span class="c1"># creates a boolean array</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original  :&#39;</span><span class="p">,</span> <span class="n">expenses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is &gt; 20000:&#39;</span><span class="p">,</span> <span class="n">high_value</span><span class="p">)</span>
+
+<span class="c1"># Use the boolean array to FILTER the data</span>
+<span class="n">high_expenses</span> <span class="o">=</span> <span class="n">expenses</span><span class="p">[</span><span class="n">high_value</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">High value expenses (&gt;20,000):&#39;</span><span class="p">,</span> <span class="n">high_expenses</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Combining conditions with &amp; (AND) and | (OR) ───────────────────────────────</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">500</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">15000</span><span class="p">,</span> <span class="mi">25000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">75000</span><span class="p">,</span> <span class="mi">90000</span><span class="p">,</span> <span class="mi">99500</span><span class="p">,</span> <span class="mi">1_20_000</span><span class="p">])</span>
+
+<span class="c1"># Amounts between ₹10,000 and ₹1,00,000</span>
+<span class="n">mid_range</span> <span class="o">=</span> <span class="n">amounts</span><span class="p">[(</span><span class="n">amounts</span> <span class="o">&gt;=</span> <span class="mi">10_000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">amounts</span> <span class="o">&lt;=</span> <span class="mi">1_00_000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;₹10K–₹1L   :&#39;</span><span class="p">,</span> <span class="n">mid_range</span><span class="p">)</span>
+
+<span class="c1"># Amounts either very small (&lt;1000) or very large (&gt;90000)</span>
+<span class="n">extremes</span>  <span class="o">=</span> <span class="n">amounts</span><span class="p">[(</span><span class="n">amounts</span> <span class="o">&lt;</span> <span class="mi">1_000</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">amounts</span> <span class="o">&gt;</span> <span class="mi">90_000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Extremes   :&#39;</span><span class="p">,</span> <span class="n">extremes</span><span class="p">)</span>
+
+<span class="c1"># np.where: conditional replacement</span>
+<span class="c1"># np.where(condition, value_if_true, value_if_false)</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">amounts</span> <span class="o">&gt;</span> <span class="mi">50_000</span><span class="p">,</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span> <span class="s1">&#39;Small&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Labels     :&#39;</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Counting and percentage ───────────────────────────────────────────────────</span>
+<span class="n">invoices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1_50_000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">above_threshold</span> <span class="o">=</span> <span class="n">invoices</span> <span class="o">&gt;</span> <span class="mi">50_000</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="n">above_threshold</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>         <span class="c1"># True = 1, False = 0</span>
+<span class="n">pct</span>   <span class="o">=</span> <span class="n">above_threshold</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># mean of True/False = proportion</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total invoices   : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">invoices</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Above ₹50,000    : </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Percentage       : </span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total value &gt;50K : ₹</span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="n">above_threshold</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-8-2d-arrays-matrices">Section 8: 2D Arrays (Matrices)</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># A 2D array = a table (like a spreadsheet)</span>
+<span class="c1"># Think: rows = months, columns = departments</span>
+
+<span class="c1"># 4 quarters × 3 departments (Sales, HR, IT)</span>
+<span class="n">quarterly_expense</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>   <span class="c1"># Q1: Sales=45L, HR=12L, IT=18L</span>
+    <span class="p">[</span><span class="mi">52</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>   <span class="c1"># Q2</span>
+    <span class="p">[</span><span class="mi">61</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span>   <span class="c1"># Q3</span>
+    <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span>   <span class="c1"># Q4</span>
+<span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape:&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (4 rows, 3 cols)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Array:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2D Indexing: array[row, col] ──────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q1 Sales     :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>   <span class="c1"># row 0, col 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q3 IT        :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>   <span class="c1"># row 2, col 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All Q2 data  :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>   <span class="c1"># row 1, all columns</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sales all Qtrs:&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>  <span class="c1"># all rows, column 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;IT dept Q2-Q4:&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="p">[</span><span class="mi">1</span><span class="p">:,</span> <span class="mi">2</span><span class="p">])</span>  <span class="c1"># rows 1-3, col 2</span>
+
+<span class="c1"># ── Axis-wise aggregation ─────────────────────────────────────────────────────</span>
+<span class="c1"># axis=0 → across rows (column totals)</span>
+<span class="c1"># axis=1 → across columns (row totals)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Dept totals  :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>   <span class="c1"># [228, 54, 91]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Qtr totals   :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>    <span class="c1"># [75, 85, 100, 113]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Grand total  :&#39;</span><span class="p">,</span> <span class="n">quarterly_expense</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<hr />
+<h2 id="section-9-reshaping-arrays">Section 9: Reshaping Arrays</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── reshape ───────────────────────────────────────────────────────────────────</span>
+<span class="c1"># Use case: 12 monthly figures → 4×3 quarterly layout</span>
+<span class="n">monthly</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">80</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">140</span><span class="p">])</span>
+
+<span class="n">quarterly_layout</span> <span class="o">=</span> <span class="n">monthly</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>   <span class="c1"># 4 quarters, 3 months each</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly (1D):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">monthly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Quarterly (2D, 4×3):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">quarterly_layout</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q1 average:&#39;</span><span class="p">,</span> <span class="n">quarterly_layout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q4 average:&#39;</span><span class="p">,</span> <span class="n">quarterly_layout</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># reshape back</span>
+<span class="n">flat_again</span> <span class="o">=</span> <span class="n">quarterly_layout</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Flattened back:&#39;</span><span class="p">,</span> <span class="n">flat_again</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Transpose ─────────────────────────────────────────────────────────────────</span>
+<span class="c1"># .T flips rows and columns (like Excel&#39;s TRANSPOSE function)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>   <span class="c1"># 3 rows, 2 cols</span>
+                 <span class="p">[</span><span class="mi">150</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">350</span><span class="p">],</span>
+                 <span class="p">[</span><span class="mi">120</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">320</span><span class="p">]])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Original (3x3):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Transposed (3x3):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>  <span class="c1"># rows become cols</span>
+
+<span class="c1"># ── np.hstack / np.vstack — joining arrays ─────────────────────────────────────</span>
+<span class="n">q1_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">75</span><span class="p">]])</span>
+<span class="n">q2_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">98</span><span class="p">]])</span>
+<span class="n">combined</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">q1_data</span><span class="p">,</span> <span class="n">q2_data</span><span class="p">])</span>   <span class="c1"># stack vertically (add rows)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Combined Q1+Q2:</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">combined</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-10-useful-math-functions">Section 10: Useful Math Functions</h2>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">100</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Square root :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>         <span class="c1"># useful for std deviation</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Absolute    :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">])))</span>  <span class="c1"># useful for variance</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Log base 10 :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># useful for Benford\&#39;s Law</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Natural log :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>     <span class="c1"># useful for growth rates</span>
+
+<span class="c1"># Rounding</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1234.5678</span><span class="p">,</span> <span class="mf">999.124</span><span class="p">,</span> <span class="mf">55555.999</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Round 2dp   :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">amounts</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Floor       :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">amounts</span><span class="p">))</span>      <span class="c1"># round down</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ceil        :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">amounts</span><span class="p">))</span>        <span class="c1"># round up</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Round -3    :&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">amounts</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">))</span>   <span class="c1"># nearest 1000 — useful for MIS</span>
+</code></pre></div>
+<hr />
+<h2 id="section-11-quick-reference-summary">Section 11: Quick Reference Summary</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Create</span>
+<span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>            <span class="c1"># from list</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                  <span class="c1"># n zeros</span>
+<span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>                   <span class="c1"># n ones</span>
+<span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span> <span class="c1"># like range()</span>
+<span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">stop</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>  <span class="c1"># n evenly spaced points</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>  <span class="c1"># n random integers</span>
+
+<span class="c1"># Attributes</span>
+<span class="n">a</span><span class="o">.</span><span class="n">shape</span>     <span class="c1"># dimensions</span>
+<span class="n">a</span><span class="o">.</span><span class="n">dtype</span>     <span class="c1"># data type</span>
+<span class="n">a</span><span class="o">.</span><span class="n">size</span>      <span class="c1"># total elements</span>
+<span class="n">a</span><span class="o">.</span><span class="n">ndim</span>      <span class="c1"># number of dimensions</span>
+
+<span class="c1"># Indexing</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>        <span class="c1"># first element</span>
+<span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>       <span class="c1"># last element</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>      <span class="c1"># slice</span>
+<span class="n">a</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>     <span class="c1"># 2D: row r, column c</span>
+<span class="n">a</span><span class="p">[:,</span> <span class="n">c</span><span class="p">]</span>     <span class="c1"># all rows, column c</span>
+
+<span class="c1"># Aggregation</span>
+<span class="n">a</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>     <span class="n">a</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>    <span class="n">a</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>    <span class="n">a</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>     <span class="n">a</span><span class="o">.</span><span class="n">var</span><span class="p">()</span>     <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>            <span class="c1"># running total</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>              <span class="c1"># sorted copy</span>
+
+<span class="c1"># Boolean filter</span>
+<span class="n">a</span><span class="p">[</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">]</span>              <span class="c1"># elements &gt; 100</span>
+<span class="n">a</span><span class="p">[(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="p">)]</span>  <span class="c1"># between 10 and 50</span>
+<span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;Pos&#39;</span><span class="p">,</span> <span class="s1">&#39;Neg&#39;</span><span class="p">)</span>  <span class="c1"># conditional labels</span>
+
+<span class="c1"># Shape</span>
+<span class="n">a</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>  <span class="c1"># change shape</span>
+<span class="n">a</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>      <span class="c1"># to 1D</span>
+<span class="n">a</span><span class="o">.</span><span class="n">T</span>              <span class="c1"># transpose</span>
+</code></pre></div>
+<hr />
+<h2 id="practice-exercises">Practice Exercises</h2>
+<ol>
+<li>
+<p>Create an array of 12 monthly salaries: <code>[45000, 45000, 47000, 47000, 47000, 48000, 48000, 50000, 50000, 50000, 52000, 55000]</code>. Compute total, average, and the month with the highest salary.</p>
+</li>
+<li>
+<p>Given a 5-year revenue array <code>[120, 145, 138, 162, 185]</code> (₹ in Lakhs), compute year-on-year growth% for each year.</p>
+</li>
+<li>
+<p>An expense array has 20 items. Select only those expenses between ₹5,000 and ₹25,000. Count them and compute their total.</p>
+</li>
+<li>
+<p>Create a 3×4 array representing 3 products × 4 quarters of sales. Compute total sales per product (row sum) and total sales per quarter (column sum).</p>
+</li>
+<li>
+<p>Given <code>principal = 5,00,000</code>, <code>rate = 0.09</code>, compute the compound interest for years 1 through 10 using <code>np.arange()</code>.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Exercise Solutions ─────────────────────────────────────────────────────────</span>
+
+<span class="c1"># Exercise 1: Salary analysis</span>
+<span class="n">salaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">45000</span><span class="p">,</span> <span class="mi">47000</span><span class="p">,</span> <span class="mi">47000</span><span class="p">,</span> <span class="mi">47000</span><span class="p">,</span> <span class="mi">48000</span><span class="p">,</span>
+                     <span class="mi">48000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">52000</span><span class="p">,</span> <span class="mi">55000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ex 1:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Total annual salary : ₹</span><span class="si">{</span><span class="n">salaries</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Average monthly     : ₹</span><span class="si">{</span><span class="n">salaries</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Highest salary month: Month </span><span class="si">{</span><span class="n">salaries</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s1"> (₹</span><span class="si">{</span><span class="n">salaries</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exercise 2: YoY growth</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">120</span><span class="p">,</span> <span class="mi">145</span><span class="p">,</span> <span class="mi">138</span><span class="p">,</span> <span class="mi">162</span><span class="p">,</span> <span class="mi">185</span><span class="p">])</span>
+<span class="n">yoy_growth</span> <span class="o">=</span> <span class="p">(</span><span class="n">revenue</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-</span> <span class="n">revenue</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ex 2: Year-on-Year Revenue Growth%:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">yr</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">yoy_growth</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Year </span><span class="si">{</span><span class="n">yr</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">g</span><span class="si">:</span><span class="s1">+.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+
+<span class="c1"># Exercise 5: Compound Interest</span>
+<span class="n">principal</span> <span class="o">=</span> <span class="mi">5_00_000</span>
+<span class="n">rate</span>      <span class="o">=</span> <span class="mf">0.09</span>
+<span class="n">years</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+<span class="n">amounts</span>   <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">years</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ex 5: Compound Growth at 9%&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">yr</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">years</span><span class="p">,</span> <span class="n">amounts</span><span class="p">):</span>
+    <span class="n">ci</span> <span class="o">=</span> <span class="n">amt</span> <span class="o">-</span> <span class="n">principal</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Year </span><span class="si">{</span><span class="n">yr</span><span class="si">:</span><span class="s1">2d</span><span class="si">}</span><span class="s1">: ₹</span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">&gt;10,.0f</span><span class="si">}</span><span class="s1">  (interest: ₹</span><span class="si">{</span><span class="n">ci</span><span class="si">:</span><span class="s1">&gt;8,.0f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../.." class="btn btn-neutral float-left" title="Python Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../.." style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

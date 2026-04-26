@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Module 4: Audit Data Analysis - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Module 4: Audit Data Analysis";
+        var mkdocs_page_input_path = "icann/04_audit_data_analysis.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Python Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../00a_numpy_basics/">Numpy Basics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Module 4: Audit Data Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="module-4-audit-data-analysis">Module 4: Audit Data Analysis</h1>
+<h3 id="data-science-for-chartered-accountants">Data Science for Chartered Accountants</h3>
+<hr />
+<h2 id="learning-objectives">Learning Objectives</h2>
+<ul>
+<li>Draw scientifically valid audit samples (random, stratified, monetary unit)</li>
+<li>Apply <strong>Benford's Law</strong> to detect anomalies in accounting data</li>
+<li>Identify <strong>duplicate invoices</strong> and <strong>gap testing</strong> in serial numbers</li>
+<li>Perform statistical outlier detection on transaction data</li>
+<li>Build a systematic <strong>audit risk flag</strong> report</li>
+</ul>
+<hr />
+<blockquote>
+<p><strong>CA Context:</strong> SA 530 (Audit Sampling), SA 520 (Analytical Procedures), and SA 240 (Fraud) all require quantitative analysis. These techniques directly support evidence gathering during statutory and tax audits.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:,.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Libraries loaded. Ready for audit analysis.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Libraries loaded. Ready for audit analysis.
+</code></pre></div>
+<hr />
+<h2 id="section-1-generating-realistic-audit-data">Section 1: Generating Realistic Audit Data</h2>
+<p>We simulate the <strong>purchase register</strong> of a manufacturing company with 500 invoices — typical for an MSME audit.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Simulate Purchase Register ────────────────────────────────────────────────</span>
+<span class="n">n_invoices</span> <span class="o">=</span> <span class="mi">500</span>
+
+<span class="n">vendors</span>     <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Ravi Steel Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;Shiva Metals&#39;</span><span class="p">,</span> <span class="s1">&#39;Om Electricals&#39;</span><span class="p">,</span> <span class="s1">&#39;Laxmi Traders&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;Ganesh Supplies&#39;</span><span class="p">,</span> <span class="s1">&#39;Krishna Components&#39;</span><span class="p">,</span> <span class="s1">&#39;Saraswati Hardware&#39;</span><span class="p">,</span> <span class="s1">&#39;Durga Chemicals&#39;</span><span class="p">]</span>
+<span class="n">categories</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Raw Material&#39;</span><span class="p">,</span> <span class="s1">&#39;Packing Material&#39;</span><span class="p">,</span> <span class="s1">&#39;Consumables&#39;</span><span class="p">,</span> <span class="s1">&#39;Spare Parts&#39;</span><span class="p">,</span> <span class="s1">&#39;Utilities&#39;</span><span class="p">]</span>
+<span class="n">approvers</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Manager A&#39;</span><span class="p">,</span> <span class="s1">&#39;Manager B&#39;</span><span class="p">,</span> <span class="s1">&#39;Manager C&#39;</span><span class="p">,</span> <span class="s1">&#39;Director&#39;</span><span class="p">]</span>
+
+<span class="c1"># Mostly legitimate invoices, some with embedded anomalies</span>
+<span class="n">amounts</span>     <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mf">10.5</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">460</span><span class="p">),</span>   <span class="c1"># Normal distribution</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">75000</span><span class="p">,</span> <span class="mi">75000</span><span class="p">,</span> <span class="mi">99999</span><span class="p">,</span> <span class="mi">99999</span><span class="p">]),</span>   <span class="c1"># Round numbers (suspicious)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1_00_001</span><span class="p">,</span> <span class="mi">2_00_001</span><span class="p">,</span> <span class="mi">4_99_999</span><span class="p">]),</span>               <span class="c1"># Just above approval limits</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">12500</span><span class="p">,</span> <span class="mi">12500</span><span class="p">,</span> <span class="mi">12500</span><span class="p">]),</span>                         <span class="c1"># Splitting invoices</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">lognormal</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>        <span class="c1"># Large invoices</span>
+<span class="p">])</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">amounts</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">20_00_000</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Date range: FY 2024-25 (Apr 2024 – Mar 2025)</span>
+<span class="n">date_range</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;2024-04-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2025-03-31&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="n">n_invoices</span><span class="p">)</span>
+<span class="n">invoice_dates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">date_range</span><span class="p">,</span> <span class="n">n_invoices</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Insert some weekend transactions</span>
+<span class="n">invoice_dates_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">invoice_dates</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">350</span><span class="p">]:</span>   <span class="c1"># specific positions</span>
+    <span class="c1"># Move to nearest Sunday</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">invoice_dates_list</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">invoice_dates_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">d</span> <span class="o">+</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span> <span class="o">-</span> <span class="n">d</span><span class="o">.</span><span class="n">dayofweek</span><span class="p">))</span>
+
+<span class="n">purchase_register</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Invoice_No&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;PI-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_invoices</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)],</span>
+    <span class="s1">&#39;Invoice_Date&#39;</span><span class="p">:</span> <span class="n">invoice_dates_list</span><span class="p">,</span>
+    <span class="s1">&#39;Vendor&#39;</span>      <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">vendors</span><span class="p">,</span> <span class="n">n_invoices</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.2</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.12</span><span class="p">,</span><span class="mf">0.12</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">0.06</span><span class="p">]),</span>
+    <span class="s1">&#39;Category&#39;</span>    <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">categories</span><span class="p">,</span> <span class="n">n_invoices</span><span class="p">),</span>
+    <span class="s1">&#39;Amount&#39;</span>      <span class="p">:</span> <span class="n">amounts</span><span class="p">[:</span><span class="n">n_invoices</span><span class="p">],</span>
+    <span class="s1">&#39;GST_Amount&#39;</span>  <span class="p">:</span> <span class="p">(</span><span class="n">amounts</span><span class="p">[:</span><span class="n">n_invoices</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.18</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+    <span class="s1">&#39;Approver&#39;</span>    <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">approvers</span><span class="p">,</span> <span class="n">n_invoices</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.4</span><span class="p">,</span><span class="mf">0.35</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.1</span><span class="p">]),</span>
+    <span class="s1">&#39;Payment_Date&#39;</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">NaT</span><span class="p">,</span>   <span class="c1"># will populate below</span>
+    <span class="s1">&#39;Booked_By&#39;</span>   <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;User1&#39;</span><span class="p">,</span><span class="s1">&#39;User2&#39;</span><span class="p">,</span><span class="s1">&#39;User3&#39;</span><span class="p">],</span> <span class="n">n_invoices</span><span class="p">)</span>
+<span class="p">})</span>
+
+<span class="c1"># Payment dates: 20-45 days after invoice</span>
+<span class="n">pay_delay</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="n">n_invoices</span><span class="p">)</span>
+<span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span> <span class="o">+</span> \
+                                     <span class="n">pd</span><span class="o">.</span><span class="n">to_timedelta</span><span class="p">(</span><span class="n">pay_delay</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
+
+<span class="c1"># Introduce some duplicates</span>
+<span class="n">dup_rows</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">iloc</span><span class="p">[[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">55</span><span class="p">]]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dup_rows</span><span class="p">[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;PI-0501&#39;</span><span class="p">,</span> <span class="s1">&#39;PI-0502&#39;</span><span class="p">,</span> <span class="s1">&#39;PI-0503&#39;</span><span class="p">]</span>  <span class="c1"># different voucher no, same details</span>
+<span class="n">purchase_register</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">purchase_register</span><span class="p">,</span> <span class="n">dup_rows</span><span class="p">],</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Purchase Register: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">purchase_register</span><span class="p">)</span><span class="si">}</span><span class="s1"> entries&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total Purchase Value: ₹</span><span class="si">{</span><span class="n">purchase_register</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">purchase_register</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Purchase Register: 503 entries
+Total Purchase Value: ₹40,615,985
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Invoice_Date</th>
+      <th>Vendor</th>
+      <th>Category</th>
+      <th>Amount</th>
+      <th>GST_Amount</th>
+      <th>Approver</th>
+      <th>Payment_Date</th>
+      <th>Booked_By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>PI-0001</td>
+      <td>2024-04-01 00:00:00.000000000</td>
+      <td>Krishna Components</td>
+      <td>Packing Material</td>
+      <td>65910</td>
+      <td>11863</td>
+      <td>Manager B</td>
+      <td>2024-05-09 00:00:00.000000000</td>
+      <td>User1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>PI-0002</td>
+      <td>2024-04-01 17:30:25.250501002</td>
+      <td>Durga Chemicals</td>
+      <td>Packing Material</td>
+      <td>30763</td>
+      <td>5537</td>
+      <td>Manager B</td>
+      <td>2024-05-09 17:30:25.250501002</td>
+      <td>User1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>PI-0003</td>
+      <td>2024-04-02 11:00:50.501002004</td>
+      <td>Krishna Components</td>
+      <td>Raw Material</td>
+      <td>79001</td>
+      <td>14220</td>
+      <td>Manager B</td>
+      <td>2024-05-04 11:00:50.501002004</td>
+      <td>User3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>PI-0004</td>
+      <td>2024-04-03 04:31:15.751503006</td>
+      <td>Ganesh Supplies</td>
+      <td>Consumables</td>
+      <td>225852</td>
+      <td>40653</td>
+      <td>Manager A</td>
+      <td>2024-04-20 04:31:15.751503006</td>
+      <td>User3</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>PI-0005</td>
+      <td>2024-04-03 22:01:41.002004008</td>
+      <td>Laxmi Traders</td>
+      <td>Utilities</td>
+      <td>27419</td>
+      <td>4935</td>
+      <td>Manager A</td>
+      <td>2024-04-22 22:01:41.002004008</td>
+      <td>User1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<hr />
+<h2 id="section-2-audit-sampling-sa-530">Section 2: Audit Sampling (SA 530)</h2>
+<p>Three sampling approaches:
+1. <strong>Simple Random Sampling</strong> — every item has equal probability
+2. <strong>Stratified Sampling</strong> — divide population into strata, sample each
+3. <strong>Monetary Unit Sampling (MUS)</strong> — higher-value items get higher selection probability</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.1 Simple Random Sampling ────────────────────────────────────────────────</span>
+<span class="n">sample_size</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">random_sample</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">sample_size</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">total_pop</span>    <span class="o">=</span> <span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">sample_mean</span>  <span class="o">=</span> <span class="n">random_sample</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">pop_estimate</span> <span class="o">=</span> <span class="n">sample_mean</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">purchase_register</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SIMPLE RANDOM SAMPLE&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Sample size     : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">random_sample</span><span class="p">)</span><span class="si">}</span><span class="s1"> invoices&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Sample total    : ₹</span><span class="si">{</span><span class="n">random_sample</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Sample mean     : ₹</span><span class="si">{</span><span class="n">sample_mean</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Population est. : ₹</span><span class="si">{</span><span class="n">pop_estimate</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">  (vs actual ₹</span><span class="si">{</span><span class="n">total_pop</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">error_pct</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">pop_estimate</span> <span class="o">-</span> <span class="n">total_pop</span><span class="p">)</span> <span class="o">/</span> <span class="n">total_pop</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Estimation error: </span><span class="si">{</span><span class="n">error_pct</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SIMPLE RANDOM SAMPLE
+  Sample size     : 50 invoices
+  Sample total    : ₹3,077,970
+  Sample mean     : ₹61,559
+  Population est. : ₹30,964,378  (vs actual ₹40,615,985)
+  Estimation error: 23.8%
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.2 Stratified Sampling — by Amount Band ──────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">assign_stratum</span><span class="p">(</span><span class="n">amount</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">10_000</span><span class="p">:</span>    <span class="k">return</span> <span class="s1">&#39;Low (&lt;10K)&#39;</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">50_000</span><span class="p">:</span>  <span class="k">return</span> <span class="s1">&#39;Medium (10K-50K)&#39;</span>
+    <span class="k">elif</span> <span class="n">amount</span> <span class="o">&lt;</span> <span class="mi">2_00_000</span><span class="p">:</span> <span class="k">return</span> <span class="s1">&#39;High (50K-2L)&#39;</span>
+    <span class="k">else</span><span class="p">:</span>                  <span class="k">return</span> <span class="s1">&#39;Very High (&gt;2L)&#39;</span>
+
+<span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Stratum&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_stratum</span><span class="p">)</span>
+
+<span class="c1"># Sample 20% from each stratum</span>
+<span class="n">stratified_sample</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Stratum&#39;</span><span class="p">,</span> <span class="n">group_keys</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">strat_summary</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Stratum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">Population</span>   <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+    <span class="n">Pop_Amount</span>   <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">),</span>
+<span class="p">)</span>
+<span class="n">strat_sample_summary</span> <span class="o">=</span> <span class="n">stratified_sample</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Stratum&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">Sampled</span>      <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span><span class="p">),</span>
+    <span class="n">Sample_Amount</span><span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">strat_report</span> <span class="o">=</span> <span class="n">strat_summary</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">strat_sample_summary</span><span class="p">)</span>
+<span class="n">strat_report</span><span class="p">[</span><span class="s1">&#39;Coverage%&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">strat_report</span><span class="p">[</span><span class="s1">&#39;Sample_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">strat_report</span><span class="p">[</span><span class="s1">&#39;Pop_Amount&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;STRATIFIED SAMPLING REPORT&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">strat_report</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Total sample size: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">stratified_sample</span><span class="p">)</span><span class="si">}</span><span class="s1"> invoices&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Value coverage: </span><span class="si">{</span><span class="n">stratified_sample</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_pop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% of total&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>STRATIFIED SAMPLING REPORT
+                  Population  Pop_Amount  Sampled  Sample_Amount  Coverage%
+Stratum                                                                    
+High (50K-2L)            172    16268343       34        2882584      17.70
+Low (&lt;10K)                59      372370       12          65055      17.50
+Medium (10K-50K)         225     5905230       45        1172925      19.90
+Very High (&gt;2L)           47    18070042        9        2991569      16.60
+
+Total sample size: 100 invoices
+Value coverage: 17.5% of total
+
+
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_84611/1885076552.py:11: FutureWarning: DataFrameGroupBy.apply operated on the grouping columns. This behavior is deprecated, and in a future version of pandas the grouping columns will be excluded from the operation. Either pass `include_groups=False` to exclude the groupings or explicitly select the grouping columns after groupby to silence this warning.
+  stratified_sample = purchase_register.groupby(&#39;Stratum&#39;, group_keys=False).apply(
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 2.3 Monetary Unit Sampling (MUS / PPS) ────────────────────────────────────</span>
+<span class="c1"># Every rupee has equal probability of selection — large items more likely to be sampled</span>
+<span class="n">sampling_interval</span> <span class="o">=</span> <span class="n">total_pop</span> <span class="o">/</span> <span class="n">sample_size</span>  <span class="c1"># rupee interval</span>
+<span class="n">random_start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">sampling_interval</span><span class="p">)</span>
+
+<span class="c1"># Create cumulative amount column</span>
+<span class="n">pr_sorted</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">pr_sorted</span><span class="p">[</span><span class="s1">&#39;Cumulative&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr_sorted</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+
+<span class="c1"># Select: pick every (interval)-th rupee</span>
+<span class="n">selection_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">random_start</span><span class="p">,</span> <span class="n">total_pop</span><span class="p">,</span> <span class="n">sampling_interval</span><span class="p">)</span>
+<span class="n">mus_sample_idx</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">sp</span> <span class="ow">in</span> <span class="n">selection_points</span><span class="p">:</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">pr_sorted</span><span class="p">[</span><span class="s1">&#39;Cumulative&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">sp</span><span class="p">)</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">idx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mus_sample_idx</span><span class="p">:</span>
+        <span class="n">mus_sample_idx</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+
+<span class="n">mus_sample</span> <span class="o">=</span> <span class="n">pr_sorted</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">mus_sample_idx</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MONETARY UNIT SAMPLING (MUS)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Sampling Interval : ₹</span><span class="si">{</span><span class="n">sampling_interval</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Random Start      : ₹</span><span class="si">{</span><span class="n">random_start</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Items selected    : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">mus_sample</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Min amount sampled: ₹</span><span class="si">{</span><span class="n">mus_sample</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Coverage          : </span><span class="si">{</span><span class="n">mus_sample</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">total_pop</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% of total value&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Top 10 MUS selections:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mus_sample</span><span class="p">[[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Category&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>MONETARY UNIT SAMPLING (MUS)
+  Sampling Interval : ₹812,320
+  Random Start      : ₹556,800
+  Items selected    : 49
+  Min amount sampled: ₹8,291
+  Coverage          : 31.9% of total value
+
+Top 10 MUS selections:
+Invoice_No             Vendor  Amount         Category
+   PI-0210 Krishna Components 2000000      Spare Parts
+   PI-0180     Ravi Steel Ltd  949986      Spare Parts
+   PI-0491      Laxmi Traders  758759      Spare Parts
+   PI-0114    Durga Chemicals  697941        Utilities
+   PI-0221 Krishna Components  583961     Raw Material
+   PI-0126     Ravi Steel Ltd  503101      Consumables
+   PI-0469     Ravi Steel Ltd  499999 Packing Material
+   PI-0235       Shiva Metals  475790      Consumables
+   PI-0285     Om Electricals  469601     Raw Material
+   PI-0324    Ganesh Supplies  447246        Utilities
+</code></pre></div>
+<hr />
+<h2 id="section-3-benfords-law-test">Section 3: Benford's Law Test</h2>
+<p><strong>Benford's Law</strong> states that in naturally occurring numerical data, the <strong>leading digit</strong> follows a specific logarithmic distribution:</p>
+<p>$$P(d) = \log_{10}\left(1 + \frac{1}{d}\right)$$</p>
+<table>
+<thead>
+<tr>
+<th>Digit</th>
+<th>Expected %</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>30.1%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>17.6%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>12.5%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>9.7%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>7.9%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>6.7%</td>
+</tr>
+<tr>
+<td>7</td>
+<td>5.8%</td>
+</tr>
+<tr>
+<td>8</td>
+<td>5.1%</td>
+</tr>
+<tr>
+<td>9</td>
+<td>4.6%</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Audit Application:</strong> A significant deviation from Benford's distribution in invoice amounts, expense claims, or journal entries can indicate <strong>fraud, fabricated invoices, or manipulation</strong>.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 3.1 Benford&#39;s Analysis ────────────────────────────────────────────────────</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">benfords_expected</span><span class="p">():</span>
+    <span class="n">digits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="n">digits</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">digits</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">leading_digit</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span> <span class="n">x</span> <span class="o">/=</span> <span class="mi">10</span>
+    <span class="k">while</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span>  <span class="p">:</span> <span class="n">x</span> <span class="o">*=</span> <span class="mi">10</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">amounts_for_benford</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="n">observed_digits</span> <span class="o">=</span> <span class="n">amounts_for_benford</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">leading_digit</span><span class="p">)</span>
+<span class="n">observed_pct</span>    <span class="o">=</span> <span class="n">observed_digits</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="n">expected_pct</span>    <span class="o">=</span> <span class="n">benfords_expected</span><span class="p">()</span>
+
+<span class="n">benford_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Expected %&#39;</span> <span class="p">:</span> <span class="n">expected_pct</span><span class="p">,</span>
+    <span class="s1">&#39;Observed %&#39;</span> <span class="p">:</span> <span class="n">observed_pct</span>
+<span class="p">})</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;Deviation %&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;Observed %&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;Expected %&#39;</span><span class="p">]</span>
+<span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;MAD&#39;</span><span class="p">]</span>          <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;Deviation %&#39;</span><span class="p">])</span>
+<span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;Flag&#39;</span><span class="p">]</span>         <span class="o">=</span> <span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;MAD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;⚠ SIGNIFICANT&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;MODERATE&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="k">else</span> <span class="s1">&#39;OK&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BENFORD</span><span class="se">\&#39;</span><span class="s1">S LAW TEST — Purchase Register&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">benford_df</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">overall_mad</span> <span class="o">=</span> <span class="n">benford_df</span><span class="p">[</span><span class="s1">&#39;MAD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Mean Absolute Deviation (MAD): </span><span class="si">{</span><span class="n">overall_mad</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">overall_mad</span> <span class="o">&lt;</span> <span class="mf">1.5</span><span class="p">:</span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Overall: CONFORMS to Benford</span><span class="se">\&#39;</span><span class="s1">s Law (low risk)&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">overall_mad</span> <span class="o">&lt;</span> <span class="mf">2.5</span><span class="p">:</span>  <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Overall: ACCEPTABLE deviation&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Overall: ⚠ SIGNIFICANT deviation — further investigation recommended&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>BENFORD&#39;S LAW TEST — Purchase Register
+   Expected %  Observed %  Deviation %  MAD      Flag
+1       30.10       30.42         0.31 0.31        OK
+2       17.61       15.51        -2.10 2.10  MODERATE
+3       12.49       12.52         0.03 0.03        OK
+4        9.69       10.14         0.45 0.45        OK
+5        7.92        9.15         1.23 1.23        OK
+6        6.69        6.36        -0.33 0.33        OK
+7        5.80        5.77        -0.03 0.03        OK
+8        5.12        5.17         0.05 0.05        OK
+9        4.58        4.97         0.39 0.39        OK
+
+Mean Absolute Deviation (MAD): 0.55%
+Overall: CONFORMS to Benford&#39;s Law (low risk)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 3.2 Vendor-wise Benford Test ──────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;BENFORD TEST — VENDOR WISE&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Vendor&quot;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Count&quot;</span><span class="si">:</span><span class="s1">&gt;6</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;MAD%&quot;</span><span class="si">:</span><span class="s1">&gt;8</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Result&quot;</span><span class="si">:</span><span class="s1">&gt;15</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">vendor</span> <span class="ow">in</span> <span class="n">vendors</span><span class="p">:</span>
+    <span class="n">vdata</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="p">[</span><span class="n">purchase_register</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">vendor</span><span class="p">][</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">vdata</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>   <span class="c1"># Need sufficient data for Benford&#39;s</span>
+        <span class="k">continue</span>
+    <span class="n">vdigits</span>  <span class="o">=</span> <span class="n">vdata</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">leading_digit</span><span class="p">)</span>
+    <span class="n">vobs_pct</span> <span class="o">=</span> <span class="n">vdigits</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">vmad</span>     <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">vobs_pct</span> <span class="o">-</span> <span class="n">expected_pct</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">result</span>   <span class="o">=</span> <span class="s1">&#39;⚠ FLAG&#39;</span> <span class="k">if</span> <span class="n">vmad</span> <span class="o">&gt;</span> <span class="mi">3</span> <span class="k">else</span> <span class="s1">&#39;OK&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">vendor</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">vdata</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;6</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">vmad</span><span class="si">:</span><span class="s1">&gt;7.2f</span><span class="si">}</span><span class="s1">%  </span><span class="si">{</span><span class="n">result</span><span class="si">:</span><span class="s1">&gt;15</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>BENFORD TEST — VENDOR WISE
+Vendor                     Count     MAD%          Result
+------------------------------------------------------------
+Ravi Steel Ltd               103     2.13%               OK
+Shiva Metals                  61     2.39%               OK
+Om Electricals                75     3.70%           ⚠ FLAG
+Laxmi Traders                 75     1.47%               OK
+Ganesh Supplies               57     3.49%           ⚠ FLAG
+Krishna Components            48     3.24%           ⚠ FLAG
+Saraswati Hardware            48     2.78%               OK
+Durga Chemicals               36     3.34%           ⚠ FLAG
+</code></pre></div>
+<hr />
+<h2 id="section-4-duplicate-invoice-detection">Section 4: Duplicate Invoice Detection</h2>
+<blockquote>
+<p><strong>Audit Risk:</strong> Duplicate payments are one of the most common errors/frauds in accounts payable. SA 240 requires auditors to be alert to duplicate entries.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 4.1 Exact Duplicates (same vendor + amount + date) ───────────────────────</span>
+<span class="n">dup_check</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">dup_check</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">dup_check</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span>
+
+<span class="c1"># Method 1: Exact match on vendor + amount + date</span>
+<span class="n">exact_dups</span> <span class="o">=</span> <span class="n">dup_check</span><span class="p">[</span>
+    <span class="n">dup_check</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Date&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;EXACT DUPLICATES (same vendor + amount + date): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">exact_dups</span><span class="p">)</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">exact_dups</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">exact_dups</span><span class="p">[[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">,</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Approver&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>EXACT DUPLICATES (same vendor + amount + date): 6 records
+Invoice_No                  Invoice_Date          Vendor  Amount  Approver
+   PI-0013 2024-04-09 18:05:03.006012024 Durga Chemicals   48550  Director
+   PI-0502 2024-04-09 18:05:03.006012024 Durga Chemicals   48550  Director
+   PI-0006 2024-04-04 15:32:06.252505010  Ravi Steel Ltd   27420 Manager C
+   PI-0501 2024-04-04 15:32:06.252505010  Ravi Steel Ltd   27420 Manager C
+   PI-0056 2024-05-11 02:53:08.777555110  Ravi Steel Ltd  111027 Manager B
+   PI-0503 2024-05-11 02:53:08.777555110  Ravi Steel Ltd  111027 Manager B
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 4.2 Near-Duplicates (same vendor + same amount within 7 days) ─────────────</span>
+<span class="n">pr_sorted2</span> <span class="o">=</span> <span class="n">dup_check</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">near_dups</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pr_sorted2</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">row1</span> <span class="o">=</span> <span class="n">pr_sorted2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">row2</span> <span class="o">=</span> <span class="n">pr_sorted2</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">]</span> <span class="ow">and</span>
+        <span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="ow">and</span>
+        <span class="nb">abs</span><span class="p">((</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">days</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">):</span>
+        <span class="n">near_dups</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+            <span class="s1">&#39;Invoice_1&#39;</span>  <span class="p">:</span> <span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Invoice_2&#39;</span>  <span class="p">:</span> <span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Vendor&#39;</span>     <span class="p">:</span> <span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Amount&#39;</span>     <span class="p">:</span> <span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Date_1&#39;</span>     <span class="p">:</span> <span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Date_2&#39;</span>     <span class="p">:</span> <span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;Days_Apart&#39;</span> <span class="p">:</span> <span class="nb">abs</span><span class="p">((</span><span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">row2</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span> <span class="o">-</span> <span class="n">pd</span><span class="o">.</span><span class="n">Timestamp</span><span class="p">(</span><span class="n">row1</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]))</span><span class="o">.</span><span class="n">days</span><span class="p">)</span>
+        <span class="p">})</span>
+
+<span class="n">near_dup_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">near_dups</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NEAR-DUPLICATES (same vendor+amount, within 7 days): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">near_dup_df</span><span class="p">)</span><span class="si">}</span><span class="s1"> pairs&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">near_dup_df</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">near_dup_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>NEAR-DUPLICATES (same vendor+amount, within 7 days): 3 pairs
+Invoice_1 Invoice_2          Vendor  Amount                        Date_1                        Date_2  Days_Apart
+  PI-0013   PI-0502 Durga Chemicals   48550 2024-04-09 18:05:03.006012024 2024-04-09 18:05:03.006012024           0
+  PI-0006   PI-0501  Ravi Steel Ltd   27420 2024-04-04 15:32:06.252505010 2024-04-04 15:32:06.252505010           0
+  PI-0056   PI-0503  Ravi Steel Ltd  111027 2024-05-11 02:53:08.777555110 2024-05-11 02:53:08.777555110           0
+</code></pre></div>
+<hr />
+<h2 id="section-5-sequence-gap-testing">Section 5: Sequence Gap Testing</h2>
+<blockquote>
+<p><strong>Audit Objective:</strong> Verify completeness — are all invoice/voucher numbers accounted for? Missing numbers may indicate suppressed transactions (common in sales understatement).</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 5.1 Create a Sales Register with deliberate gaps ─────────────────────────</span>
+<span class="c1"># Simulate all invoice numbers from SI-0001 to SI-0200, with some intentionally missing</span>
+<span class="n">all_numbers</span>   <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">))</span>
+<span class="n">missing_nums</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">42</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">143</span><span class="p">,</span> <span class="mi">177</span><span class="p">]</span>   <span class="c1"># these are &#39;suppressed&#39;</span>
+<span class="n">present_nums</span>  <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">all_numbers</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">missing_nums</span><span class="p">]</span>
+
+<span class="n">sales_reg_nums</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s1">&#39;SI-</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">present_nums</span><span class="p">]</span>
+<span class="n">sales_register</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Invoice_No&#39;</span>  <span class="p">:</span> <span class="n">sales_reg_nums</span><span class="p">,</span>
+    <span class="s1">&#39;Seq_Num&#39;</span>     <span class="p">:</span> <span class="n">present_nums</span><span class="p">,</span>
+    <span class="s1">&#39;Amount&#39;</span>      <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">5_00_000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">present_nums</span><span class="p">))</span>
+<span class="p">})</span>
+
+<span class="c1"># ── 5.2 Detect Gaps ───────────────────────────────────────────────────────────</span>
+<span class="n">seq_nums</span>     <span class="o">=</span> <span class="n">sales_register</span><span class="p">[</span><span class="s1">&#39;Seq_Num&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">expected_seq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">seq_nums</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">seq_nums</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">gaps</span>         <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">expected_seq</span><span class="p">,</span> <span class="n">seq_nums</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;SEQUENCE GAP TEST — Sales Register&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Expected invoices : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">expected_seq</span><span class="p">)</span><span class="si">:</span><span class="s1">4d</span><span class="si">}</span><span class="s1"> (SI-</span><span class="si">{</span><span class="n">expected_seq</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1"> to SI-</span><span class="si">{</span><span class="n">expected_seq</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Actual invoices   : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">seq_nums</span><span class="p">)</span><span class="si">:</span><span class="s1">4d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Missing invoices  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">gaps</span><span class="p">)</span><span class="si">:</span><span class="s1">4d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Missing numbers   : </span><span class="si">{</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;SI-</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">04d</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">gaps</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># Group consecutive gaps into ranges</span>
+<span class="n">gap_groups</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gaps</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">gaps</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gaps</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">gaps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">gaps</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">gap_groups</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">gaps</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">gaps</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">gap_groups</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">start</span><span class="p">,</span> <span class="n">gaps</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Gap ranges:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">g_start</span><span class="p">,</span> <span class="n">g_end</span> <span class="ow">in</span> <span class="n">gap_groups</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">g_end</span> <span class="o">-</span> <span class="n">g_start</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  SI-</span><span class="si">{</span><span class="n">g_start</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1"> to SI-</span><span class="si">{</span><span class="n">g_end</span><span class="si">:</span><span class="s1">04d</span><span class="si">}</span><span class="s1"> — </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s1"> invoice(s) missing  ⚠ Investigate&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>SEQUENCE GAP TEST — Sales Register
+Expected invoices :  200 (SI-0001 to SI-0200)
+Actual invoices   :  192
+Missing invoices  :    8
+
+Missing numbers   : [&#39;SI-0015&#39;, &#39;SI-0016&#39;, &#39;SI-0042&#39;, &#39;SI-0078&#39;, &#39;SI-0079&#39;, &#39;SI-0080&#39;, &#39;SI-0143&#39;, &#39;SI-0177&#39;]
+
+Gap ranges:
+  SI-0015 to SI-0016 — 2 invoice(s) missing  ⚠ Investigate
+  SI-0042 to SI-0042 — 1 invoice(s) missing  ⚠ Investigate
+  SI-0078 to SI-0080 — 3 invoice(s) missing  ⚠ Investigate
+  SI-0143 to SI-0143 — 1 invoice(s) missing  ⚠ Investigate
+  SI-0177 to SI-0177 — 1 invoice(s) missing  ⚠ Investigate
+</code></pre></div>
+<hr />
+<h2 id="section-6-statistical-outlier-detection">Section 6: Statistical Outlier Detection</h2>
+<p>Three methods for identifying unusual transactions:
+1. <strong>Z-Score</strong> — how many standard deviations from the mean
+2. <strong>IQR Method</strong> — interquartile range fencing
+3. <strong>Percentile Threshold</strong> — top N% of transactions</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 6.1 Z-Score Method ────────────────────────────────────────────────────────</span>
+<span class="n">pr</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+
+<span class="n">z_outliers</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">2.5</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Z-SCORE OUTLIERS (|Z| &gt; 2.5): </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">z_outliers</span><span class="p">)</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">z_outliers</span><span class="p">[[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">,</span><span class="s1">&#39;Category&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Z-SCORE OUTLIERS (|Z| &gt; 2.5): 15 records
+Invoice_No             Vendor  Amount  Z_Score         Category
+   PI-0210 Krishna Components 2000000    13.96      Spare Parts
+   PI-0180     Ravi Steel Ltd  949986     6.32      Spare Parts
+   PI-0491      Laxmi Traders  758759     4.93      Spare Parts
+   PI-0114    Durga Chemicals  697941     4.49        Utilities
+   PI-0221 Krishna Components  583961     3.66     Raw Material
+   PI-0126     Ravi Steel Ltd  503101     3.07      Consumables
+   PI-0379     Om Electricals  502707     3.07        Utilities
+   PI-0469     Ravi Steel Ltd  499999     3.05 Packing Material
+   PI-0375     Om Electricals  481094     2.91      Consumables
+   PI-0235       Shiva Metals  475790     2.87      Consumables
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── 6.2 IQR Method ────────────────────────────────────────────────────────────</span>
+<span class="n">Q1</span>    <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.25</span><span class="p">)</span>
+<span class="n">Q3</span>    <span class="o">=</span> <span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="n">IQR</span>   <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="n">Q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">upper</span> <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+
+<span class="n">iqr_outliers</span> <span class="o">=</span> <span class="n">pr</span><span class="p">[(</span><span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">pr</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;IQR OUTLIERS: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">iqr_outliers</span><span class="p">)</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Normal range: ₹</span><span class="si">{</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">lower</span><span class="p">)</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1"> – ₹</span><span class="si">{</span><span class="n">upper</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  High outliers: </span><span class="si">{</span><span class="p">(</span><span class="n">pr</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">upper</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Low outliers : </span><span class="si">{</span><span class="p">(</span><span class="n">pr</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">lower</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── 6.3 Vendor-wise Outliers ─────────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">VENDOR-WISE OUTLIER ANALYSIS&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Vendor&quot;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Avg Amount&quot;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Std Dev&quot;</span><span class="si">:</span><span class="s1">&gt;10</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Max Amount&quot;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Outliers&quot;</span><span class="si">:</span><span class="s1">&gt;9</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">75</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">vendor</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">pr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Vendor&#39;</span><span class="p">):</span>
+    <span class="n">avg</span>   <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+    <span class="n">std</span>   <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+    <span class="n">mx</span>    <span class="o">=</span> <span class="n">group</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+    <span class="n">z_fl</span>  <span class="o">=</span> <span class="p">((</span><span class="n">group</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">avg</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span><span class="p">)</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">2</span>
+    <span class="n">out_c</span> <span class="o">=</span> <span class="n">z_fl</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">vendor</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">avg</span><span class="si">:</span><span class="s1">&gt;10,.0f</span><span class="si">}</span><span class="s1">  ₹</span><span class="si">{</span><span class="n">std</span><span class="si">:</span><span class="s1">&gt;8,.0f</span><span class="si">}</span><span class="s1">  ₹</span><span class="si">{</span><span class="n">mx</span><span class="si">:</span><span class="s1">&gt;10,.0f</span><span class="si">}</span><span class="s1">  </span><span class="si">{</span><span class="n">out_c</span><span class="si">:</span><span class="s1">&gt;9</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>IQR OUTLIERS: 46 records
+  Normal range: ₹0 – ₹202,883
+  High outliers: 46
+  Low outliers : 0
+
+VENDOR-WISE OUTLIER ANALYSIS
+Vendor                      Avg Amount    Std Dev   Max Amount  Outliers
+---------------------------------------------------------------------------
+Durga Chemicals           ₹    95,126  ₹ 132,259  ₹   697,941          2
+Ganesh Supplies           ₹    77,026  ₹  82,404  ₹   447,246          2
+Krishna Components        ₹   108,043  ₹ 293,468  ₹ 2,000,000          1
+Laxmi Traders             ₹    70,718  ₹ 105,470  ₹   758,759          3
+Om Electricals            ₹    74,022  ₹ 107,591  ₹   502,707          5
+Ravi Steel Ltd            ₹    83,760  ₹ 128,183  ₹   949,986          4
+Saraswati Hardware        ₹    58,611  ₹  76,848  ₹   463,511          2
+Shiva Metals              ₹    87,193  ₹ 110,644  ₹   475,790          6
+</code></pre></div>
+<hr />
+<h2 id="section-7-consolidated-audit-risk-flag-report">Section 7: Consolidated Audit Risk Flag Report</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Comprehensive Risk Flagging ───────────────────────────────────────────────</span>
+<span class="n">pr_flags</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span>
+
+<span class="c1"># Flag 1: Weekend transactions</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Flag_Weekend&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span> <span class="o">&gt;=</span> <span class="mi">5</span>
+
+<span class="c1"># Flag 2: Round number amounts</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Flag_Round_Num&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">%</span> <span class="mi">5000</span> <span class="o">==</span> <span class="mi">0</span>
+
+<span class="c1"># Flag 3: Just below approval threshold (99,000–99,999 if limit is 1,00,000)</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Flag_Just_Below&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">95_000</span><span class="p">,</span> <span class="mi">99_999</span><span class="p">)</span>
+
+<span class="c1"># Flag 4: Z-Score outlier</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">]</span>         <span class="o">=</span> <span class="p">(</span><span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Flag_Outlier&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Z_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">2.5</span>
+
+<span class="c1"># Flag 5: Duplicate (same vendor + amount)</span>
+<span class="n">dup_mask</span> <span class="o">=</span> <span class="n">pr_flags</span><span class="o">.</span><span class="n">duplicated</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">],</span> <span class="n">keep</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Flag_Duplicate&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">dup_mask</span>
+
+<span class="c1"># Risk Score (sum of flags)</span>
+<span class="n">flag_cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Flag_Weekend&#39;</span><span class="p">,</span> <span class="s1">&#39;Flag_Round_Num&#39;</span><span class="p">,</span> <span class="s1">&#39;Flag_Just_Below&#39;</span><span class="p">,</span> <span class="s1">&#39;Flag_Outlier&#39;</span><span class="p">,</span> <span class="s1">&#39;Flag_Duplicate&#39;</span><span class="p">]</span>
+<span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Risk_Score&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="n">flag_cols</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">high_risk</span> <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="n">pr_flags</span><span class="p">[</span><span class="s1">&#39;Risk_Score&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Risk_Score&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;AUDIT RISK FLAG REPORT&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total invoices analysed : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pr_flags</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;High risk (score &gt;= 2)  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">high_risk</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Recommend for vouching  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">high_risk</span><span class="p">)</span><span class="si">}</span><span class="s1"> invoices&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">FLAG SUMMARY:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">flag_cols</span><span class="p">:</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="n">pr_flags</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">pct</span>   <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">pr_flags</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">col</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Flag_&quot;</span><span class="p">,</span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="si">:</span><span class="s1">&lt;15</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">count</span><span class="si">:</span><span class="s1">&gt;4</span><span class="si">}</span><span class="s1"> invoices (</span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">TOP 10 HIGH-RISK INVOICES:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_risk</span><span class="p">[[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">,</span><span class="s1">&#39;Risk_Score&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">flag_cols</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>AUDIT RISK FLAG REPORT
+Total invoices analysed : 503
+High risk (score &gt;= 2)  : 10
+Recommend for vouching  : 10 invoices
+
+FLAG SUMMARY:
+  Weekend        :  147 invoices (29.2%)
+  Round_Num      :    5 invoices (1.0%)
+  Just_Below     :   11 invoices (2.2%)
+  Outlier        :   15 invoices (3.0%)
+  Duplicate      :    6 invoices (1.2%)
+
+TOP 10 HIGH-RISK INVOICES:
+Invoice_No             Vendor  Amount                  Invoice_Date  Risk_Score  Flag_Weekend  Flag_Round_Num  Flag_Just_Below  Flag_Outlier  Flag_Duplicate
+   PI-0210 Krishna Components 2000000 2024-08-31 10:57:57.354709420           3          True            True            False          True           False
+   PI-0056     Ravi Steel Ltd  111027 2024-05-11 02:53:08.777555110           2          True           False            False         False            True
+   PI-0076    Ganesh Supplies   97370 2024-05-25 17:01:33.787575151           2          True           False             True         False           False
+   PI-0114    Durga Chemicals  697941 2024-06-22 10:17:33.306613227           2          True           False            False          True           False
+   PI-0221 Krishna Components  583961 2024-09-08 11:32:35.110220442           2          True           False            False          True           False
+   PI-0375     Om Electricals  481094 2024-12-29 19:37:23.687374752           2          True           False            False          True           False
+   PI-0421     Ravi Steel Ltd  430583 2025-02-01 08:56:45.210420844           2          True           False            False          True           False
+   PI-0461 Krishna Components   50000 2025-03-02 13:13:35.230460924           2          True            True            False         False           False
+   PI-0469     Ravi Steel Ltd  499999 2025-03-08 09:16:57.234468940           2          True           False            False          True           False
+   PI-0503     Ravi Steel Ltd  111027 2024-05-11 02:53:08.777555110           2          True           False            False         False            True
+</code></pre></div>
+<hr />
+<h2 id="practice-exercises">Practice Exercises</h2>
+<ol>
+<li>
+<p>Draw a <strong>systematic sample</strong> (every kth item) of 30 invoices from the purchase register. Compare the sample's mean amount to the population mean.</p>
+</li>
+<li>
+<p>Run Benford's test on <strong>only the high-value invoices</strong> (amount &gt; ₹1 lakh). Does the digit distribution change?</p>
+</li>
+<li>
+<p>Find all invoices where the <strong>payment date is before the invoice date</strong> — a clear accounting error.</p>
+</li>
+<li>
+<p>Identify <strong>split transactions</strong>: same vendor, same week, amounts that sum to just below ₹1 lakh.</p>
+</li>
+<li>
+<p>Build a <strong>Vendor Risk Score</strong> based on: frequency of round numbers, weekend entries, and Z-score outliers.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Exercise Solutions ────────────────────────────────────────────────────────</span>
+
+<span class="c1"># Exercise 3: Payment before invoice date</span>
+<span class="n">pr_date</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">])</span>
+<span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">]</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">])</span>
+<span class="n">pre_dated</span> <span class="o">=</span> <span class="n">pr_date</span><span class="p">[</span><span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">pr_date</span><span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ex 3 — Payment before invoice date: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pre_dated</span><span class="p">)</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">pre_dated</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pre_dated</span><span class="p">[[</span><span class="s1">&#39;Invoice_No&#39;</span><span class="p">,</span><span class="s1">&#39;Vendor&#39;</span><span class="p">,</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">,</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="c1"># Exercise 1: Systematic Sampling</span>
+<span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">purchase_register</span><span class="p">)</span> <span class="o">//</span> <span class="mi">30</span>   <span class="c1"># sampling interval</span>
+<span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="n">systematic</span> <span class="o">=</span> <span class="n">purchase_register</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">start</span><span class="p">::</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Ex 1 — Systematic Sample (every </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1">th):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Sample mean  : ₹</span><span class="si">{</span><span class="n">systematic</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Population mean: ₹</span><span class="si">{</span><span class="n">purchase_register</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Ex 3 — Payment before invoice date: 0 records
+
+Ex 1 — Systematic Sample (every 16th):
+  Sample mean  : ₹140,927
+  Population mean: ₹80,747
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

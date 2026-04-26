@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Foundation 2: Pandas — From Zero to Confident - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Foundation 2: Pandas \u2014 From Zero to Confident";
+        var mkdocs_page_input_path = "icann/00b_pandas_basics.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Python Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../00a_numpy_basics/">Numpy Basics</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Foundation 2: Pandas — From Zero to Confident</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="foundation-2-pandas-from-zero-to-confident">Foundation 2: Pandas — From Zero to Confident</h1>
+<h3 id="data-science-for-chartered-accountants-pre-module">Data Science for Chartered Accountants — Pre-Module</h3>
+<hr />
+<h2 id="what-is-this-notebook-about">What is this notebook about?</h2>
+<p><strong>Pandas</strong> is the most important library for data analysis in Python. Think of it as a smarter, programmable Excel — but capable of handling millions of rows in seconds.</p>
+<p>This notebook assumes:
+- ✅ You know basic Python (variables, lists, dicts)
+- ✅ You've done <code>00a_numpy_basics.ipynb</code> OR have basic NumPy awareness
+- ❌ No prior Pandas knowledge required</p>
+<h2 id="what-will-you-learn">What will you learn?</h2>
+<ol>
+<li>Series — the 1D building block</li>
+<li>DataFrame — the 2D table (like a spreadsheet)</li>
+<li>Viewing and exploring data</li>
+<li>Selecting rows and columns</li>
+<li>Boolean filtering</li>
+<li>Adding and modifying columns</li>
+<li>Sorting</li>
+<li>Handling missing values</li>
+<li>Aggregation and GroupBy</li>
+<li>Merging DataFrames (VLOOKUP equivalent)</li>
+<li>Reading &amp; writing files</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>If NumPy is a column of numbers, Pandas is the entire spreadsheet — with column names, row labels, and built-in analysis tools.</strong></p>
+</blockquote>
+<hr />
+<h2 id="section-1-series-pandas-1d-data-structure">Section 1: Series — Pandas' 1D Data Structure</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># ── A Series is like a NumPy array + labels (index) ───────────────────────────</span>
+<span class="n">monthly_revenue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">data</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">80</span><span class="p">,</span> <span class="mi">92</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">105</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">130</span><span class="p">,</span> <span class="mi">95</span><span class="p">,</span> <span class="mi">108</span><span class="p">,</span> <span class="mi">140</span><span class="p">],</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">],</span>
+    <span class="n">name</span>  <span class="o">=</span> <span class="s1">&#39;Revenue (₹ Lakhs)&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Data type  :&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Index      :&#39;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="o">.</span><span class="n">index</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name       :&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Accessing Series elements ─────────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;April revenue  :&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">])</span>      <span class="c1"># by label</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First month    :&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>     <span class="c1"># by position</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q1 (Apr-Jun)   :</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Series arithmetic</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Revenue × 1.18 (inc. GST):</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">monthly_revenue</span> <span class="o">*</span> <span class="mf">1.18</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Statistics on a Series</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Stats:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<hr />
+<h2 id="section-2-dataframe-the-2d-table">Section 2: DataFrame — The 2D Table</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Creating a DataFrame from a dict ─────────────────────────────────────────</span>
+<span class="c1"># Each key becomes a column name; each list becomes the column&#39;s data</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;emp_id&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;E001&#39;</span><span class="p">,</span> <span class="s1">&#39;E002&#39;</span><span class="p">,</span> <span class="s1">&#39;E003&#39;</span><span class="p">,</span> <span class="s1">&#39;E004&#39;</span><span class="p">,</span> <span class="s1">&#39;E005&#39;</span><span class="p">,</span> <span class="s1">&#39;E006&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;name&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Rajesh Kumar&#39;</span><span class="p">,</span> <span class="s1">&#39;Priya Sharma&#39;</span><span class="p">,</span> <span class="s1">&#39;Amit Verma&#39;</span><span class="p">,</span>
+                   <span class="s1">&#39;Sunita Joshi&#39;</span><span class="p">,</span> <span class="s1">&#39;Vikram Nair&#39;</span><span class="p">,</span> <span class="s1">&#39;Pooja Mehta&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;department&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;Audit&#39;</span><span class="p">,</span> <span class="s1">&#39;Tax&#39;</span><span class="p">,</span> <span class="s1">&#39;Accounts&#39;</span><span class="p">,</span> <span class="s1">&#39;Audit&#39;</span><span class="p">,</span> <span class="s1">&#39;Tax&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;grade&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;salary&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="mi">65000</span><span class="p">,</span> <span class="mi">45000</span><span class="p">,</span> <span class="mi">72000</span><span class="p">,</span> <span class="mi">55000</span><span class="p">,</span> <span class="mi">48000</span><span class="p">,</span> <span class="mi">60000</span><span class="p">],</span>
+    <span class="s1">&#39;joining_yr&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2018</span><span class="p">,</span> <span class="mi">2021</span><span class="p">,</span> <span class="mi">2016</span><span class="p">,</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">2022</span><span class="p">,</span> <span class="mi">2020</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Creating from a list of dicts ──────────────────────────────────────────────</span>
+<span class="c1"># Each dict is one row</span>
+<span class="n">ledger</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-04-01&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">:</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span>       <span class="s1">&#39;dr&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="s1">&#39;cr&#39;</span><span class="p">:</span> <span class="mi">5_00_000</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-04-02&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">:</span> <span class="s1">&#39;Purchase&#39;</span><span class="p">,</span>    <span class="s1">&#39;dr&#39;</span><span class="p">:</span> <span class="mi">2_00_000</span><span class="p">,</span><span class="s1">&#39;cr&#39;</span><span class="p">:</span> <span class="mi">0</span>      <span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-04-03&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">:</span> <span class="s1">&#39;Bank&#39;</span><span class="p">,</span>        <span class="s1">&#39;dr&#39;</span><span class="p">:</span> <span class="mi">5_00_000</span><span class="p">,</span><span class="s1">&#39;cr&#39;</span><span class="p">:</span> <span class="mi">0</span>      <span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-04-04&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">:</span> <span class="s1">&#39;Cash&#39;</span><span class="p">,</span>        <span class="s1">&#39;dr&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="s1">&#39;cr&#39;</span><span class="p">:</span> <span class="mi">15_000</span>  <span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;2024-04-05&#39;</span><span class="p">,</span> <span class="s1">&#39;head&#39;</span><span class="p">:</span> <span class="s1">&#39;Salary Exp&#39;</span><span class="p">,</span>  <span class="s1">&#39;dr&#39;</span><span class="p">:</span> <span class="mi">85_000</span><span class="p">,</span> <span class="s1">&#39;cr&#39;</span><span class="p">:</span> <span class="mi">0</span>      <span class="p">},</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ledger</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-3-exploring-a-dataframe">Section 3: Exploring a DataFrame</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># First look at any DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape:&#39;</span><span class="p">,</span> <span class="n">employees</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>           <span class="c1"># (rows, columns)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Column names:&#39;</span><span class="p">,</span> <span class="n">employees</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Data types:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Index:&#39;</span><span class="p">,</span> <span class="n">employees</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Quick peek methods</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First 3 rows:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Last 2 rows:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># .info() — types, missing values, memory</span>
+<span class="n">employees</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># .describe() — statistical summary (numeric columns)</span>
+<span class="n">employees</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="section-4-selecting-columns-and-rows">Section 4: Selecting Columns and Rows</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Select a single column → returns a Series ─────────────────────────────────</span>
+<span class="n">salaries</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">salaries</span><span class="p">))</span>          <span class="c1"># pd.Series</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Average salary:&#39;</span><span class="p">,</span> <span class="n">salaries</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Select multiple columns → returns a DataFrame ────────────────────────────</span>
+<span class="n">subset</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">subset</span><span class="p">))</span>            <span class="c1"># pd.DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">subset</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── .loc[]: label-based row selection ─────────────────────────────────────────</span>
+<span class="c1"># format: df.loc[row_label_or_condition, column_name_or_list]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Row at index 2:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Rows 1 to 3, columns name &amp; salary:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── .iloc[]: integer-position based ───────────────────────────────────────────</span>
+<span class="c1"># Useful when you don&#39;t know the labels, just the position</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First row (position 0):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Rows 0-2, first 3 columns:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Last 2 rows, last 2 columns:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:,</span> <span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-5-boolean-filtering">Section 5: Boolean Filtering</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Filter rows by condition ───────────────────────────────────────────────────</span>
+<span class="c1"># Step 1: condition creates a boolean Series</span>
+<span class="n">high_earners_mask</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">60000</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mask:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_earners_mask</span><span class="p">)</span>
+
+<span class="c1"># Step 2: apply mask to DataFrame</span>
+<span class="n">high_earners</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">high_earners_mask</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">High earners (&gt;60,000):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">high_earners</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Filter by text ────────────────────────────────────────────────────────────</span>
+<span class="n">audit_team</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Audit&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Audit team:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">audit_team</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Filter for multiple values using .isin()</span>
+<span class="n">senior_grades</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;M&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">])]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Manager + Senior grade employees:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">senior_grades</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Combining conditions ───────────────────────────────────────────────────────</span>
+<span class="c1"># Use &amp; (AND), | (OR), ~ (NOT) with parentheses around each condition</span>
+
+<span class="c1"># Accounts dept AND salary &gt; 55000</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[(</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Accounts&#39;</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">55000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Accounts dept, salary &gt; 55K:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+
+<span class="c1"># NOT in Audit</span>
+<span class="n">non_audit</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="o">~</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Audit&#39;</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Non-Audit employees:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">non_audit</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-6-adding-and-modifying-columns">Section 6: Adding and Modifying Columns</h2>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>   <span class="c1"># always work on a copy so original is safe</span>
+
+<span class="c1"># ── Add a computed column ─────────────────────────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;annual_ctc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;pf_deduction&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.12</span>          <span class="c1"># PF = 12% of salary</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;net_salary&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;pf_deduction&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;years_exp&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="mi">2024</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;joining_yr&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;pf_deduction&#39;</span><span class="p">,</span> <span class="s1">&#39;net_salary&#39;</span><span class="p">,</span> <span class="s1">&#39;years_exp&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Conditional column using np.where ─────────────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;senior&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;years_exp&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Junior&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Conditional column using pd.cut (bins) ────────────────────────────────────</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary_band&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">],</span>
+    <span class="n">bins</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50_000</span><span class="p">,</span> <span class="mi">65_000</span><span class="p">,</span> <span class="mi">1_00_000</span><span class="p">],</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Band A&#39;</span><span class="p">,</span> <span class="s1">&#39;Band B&#39;</span><span class="p">,</span> <span class="s1">&#39;Band C&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># ── Rename a column ───────────────────────────────────────────────────────────</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;emp_id&#39;</span><span class="p">:</span> <span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;joining_yr&#39;</span><span class="p">:</span> <span class="s1">&#39;joined&#39;</span><span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="s1">&#39;senior&#39;</span><span class="p">,</span> <span class="s1">&#39;salary_band&#39;</span><span class="p">,</span> <span class="s1">&#39;years_exp&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-7-sorting">Section 7: Sorting</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── sort_values ───────────────────────────────────────────────────────────────</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;salary&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># highest first</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorted by salary (desc):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_sorted</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Sort by multiple columns</span>
+<span class="n">df_multi</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">([</span><span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">],</span> <span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Sorted by dept (asc) then salary (desc):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_multi</span><span class="p">[[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Reset index after sorting (optional but clean)</span>
+<span class="n">df_sorted</span> <span class="o">=</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Top earner (index 0):&#39;</span><span class="p">,</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">],</span> <span class="n">df_sorted</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;salary&#39;</span><span class="p">])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-8-handling-missing-values">Section 8: Handling Missing Values</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a DataFrame with missing values (NaN = Not a Number)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">dirty</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;name&#39;</span>     <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Aarav&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhavna&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Deepika&#39;</span><span class="p">,</span> <span class="s1">&#39;Eshaan&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;amount&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">5000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">12000</span><span class="p">],</span>
+    <span class="s1">&#39;category&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Tax&#39;</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Tax&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;days_due&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;DataFrame with missing values:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dirty</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Missing value count per column:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dirty</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Option 1: fillna — fill with a specific value ────────────────────────────</span>
+<span class="n">filled</span> <span class="o">=</span> <span class="n">dirty</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">filled</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">filled</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>              <span class="c1"># fill amount with 0</span>
+<span class="n">filled</span><span class="p">[</span><span class="s1">&#39;days_due&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filled</span><span class="p">[</span><span class="s1">&#39;days_due&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">filled</span><span class="p">[</span><span class="s1">&#39;days_due&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>  <span class="c1"># fill with mean</span>
+<span class="n">filled</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filled</span><span class="p">[</span><span class="s1">&#39;category&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="s1">&#39;Unknown&#39;</span><span class="p">)</span>    <span class="c1"># fill text with label</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After fillna:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">filled</span><span class="p">)</span>
+
+<span class="c1"># ── Option 2: dropna — drop rows with any missing value ──────────────────────</span>
+<span class="n">clean</span> <span class="o">=</span> <span class="n">dirty</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">After dropna (rows with ANY missing removed):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">clean</span><span class="p">)</span>
+
+<span class="c1"># Drop only if ALL values in the row are missing</span>
+<span class="c1"># dirty.dropna(how=&#39;all&#39;)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-9-aggregation-and-groupby">Section 9: Aggregation and GroupBy</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Simple aggregation ────────────────────────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total salary bill:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average salary   :&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Salary range     :&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s1">&#39;—&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="c1"># Count unique departments</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unique depts     :&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">nunique</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Value counts:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── GroupBy: split → apply → combine ─────────────────────────────────────────</span>
+<span class="c1"># Q: What is the total and average salary by department?</span>
+
+<span class="n">dept_summary</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">df</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;department&#39;</span><span class="p">)[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+        <span class="n">Headcount</span> <span class="o">=</span> <span class="s1">&#39;count&#39;</span><span class="p">,</span>
+        <span class="n">Total_CTC</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+        <span class="n">Avg_Salary</span> <span class="o">=</span> <span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+        <span class="n">Min_Salary</span> <span class="o">=</span> <span class="s1">&#39;min&#39;</span><span class="p">,</span>
+        <span class="n">Max_Salary</span> <span class="o">=</span> <span class="s1">&#39;max&#39;</span>
+    <span class="p">)</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Total_CTC&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Department-wise salary analysis:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dept_summary</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── GroupBy on multiple columns ───────────────────────────────────────────────</span>
+<span class="c1"># Total salary by department AND grade</span>
+
+<span class="n">multi_group</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">employees</span>
+    <span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;department&#39;</span><span class="p">,</span> <span class="s1">&#39;grade&#39;</span><span class="p">])[</span><span class="s1">&#39;salary&#39;</span><span class="p">]</span>
+    <span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">])</span>
+    <span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;count&#39;</span><span class="p">:</span> <span class="s1">&#39;headcount&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">:</span> <span class="s1">&#39;total&#39;</span><span class="p">,</span> <span class="s1">&#39;mean&#39;</span><span class="p">:</span> <span class="s1">&#39;avg&#39;</span><span class="p">})</span>
+    <span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">multi_group</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-10-merging-dataframes-vlookup-equivalent">Section 10: Merging DataFrames (VLOOKUP Equivalent)</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Imagine: a transaction table and a master table</span>
+
+<span class="c1"># Master: Party details</span>
+<span class="n">party_master</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;party_code&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;P001&#39;</span><span class="p">,</span> <span class="s1">&#39;P002&#39;</span><span class="p">,</span> <span class="s1">&#39;P003&#39;</span><span class="p">,</span> <span class="s1">&#39;P004&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;party_name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;ABC Traders&#39;</span><span class="p">,</span> <span class="s1">&#39;XYZ Suppliers&#39;</span><span class="p">,</span> <span class="s1">&#39;PQR Services&#39;</span><span class="p">,</span> <span class="s1">&#39;LMN Corp&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;credit_limit&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5_00_000</span><span class="p">,</span> <span class="mi">10_00_000</span><span class="p">,</span> <span class="mi">2_50_000</span><span class="p">,</span> <span class="mi">8_00_000</span><span class="p">],</span>
+    <span class="s1">&#39;payment_terms&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Net30&#39;</span><span class="p">,</span> <span class="s1">&#39;Net45&#39;</span><span class="p">,</span> <span class="s1">&#39;Net30&#39;</span><span class="p">,</span> <span class="s1">&#39;Net60&#39;</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="c1"># Transactions: purchases this month</span>
+<span class="n">transactions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;inv_no&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;INV001&#39;</span><span class="p">,</span> <span class="s1">&#39;INV002&#39;</span><span class="p">,</span> <span class="s1">&#39;INV003&#39;</span><span class="p">,</span> <span class="s1">&#39;INV004&#39;</span><span class="p">,</span> <span class="s1">&#39;INV005&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;party_code&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;P002&#39;</span><span class="p">,</span> <span class="s1">&#39;P001&#39;</span><span class="p">,</span> <span class="s1">&#39;P003&#39;</span><span class="p">,</span> <span class="s1">&#39;P002&#39;</span><span class="p">,</span> <span class="s1">&#39;P004&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;amount&#39;</span>    <span class="p">:</span> <span class="p">[</span><span class="mi">1_50_000</span><span class="p">,</span> <span class="mi">85_000</span><span class="p">,</span> <span class="mi">45_000</span><span class="p">,</span> <span class="mi">3_20_000</span><span class="p">,</span> <span class="mi">2_10_000</span><span class="p">],</span>
+    <span class="s1">&#39;date&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;2024-04-05&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-04-07&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-04-10&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-04-12&#39;</span><span class="p">,</span> <span class="s1">&#39;2024-04-15&#39;</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Party Master:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">party_master</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Transactions:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">transactions</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── pd.merge = VLOOKUP ────────────────────────────────────────────────────────</span>
+<span class="c1"># how=&#39;left&#39;  → keep all rows from left (like VLOOKUP, no match = NaN)</span>
+<span class="c1"># how=&#39;inner&#39; → only matching rows from both</span>
+<span class="c1"># how=&#39;outer&#39; → all rows from both</span>
+
+<span class="n">enriched</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span>
+    <span class="n">left</span>   <span class="o">=</span> <span class="n">transactions</span><span class="p">,</span>
+    <span class="n">right</span>  <span class="o">=</span> <span class="n">party_master</span><span class="p">,</span>
+    <span class="n">on</span>     <span class="o">=</span> <span class="s1">&#39;party_code&#39;</span><span class="p">,</span>
+    <span class="n">how</span>    <span class="o">=</span> <span class="s1">&#39;left&#39;</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enriched transactions (with party details):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">enriched</span><span class="p">[[</span><span class="s1">&#39;inv_no&#39;</span><span class="p">,</span> <span class="s1">&#39;party_name&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="s1">&#39;credit_limit&#39;</span><span class="p">,</span> <span class="s1">&#39;payment_terms&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Useful check: is any amount &gt; credit limit?</span>
+<span class="n">over_limit</span> <span class="o">=</span> <span class="n">enriched</span><span class="p">[</span><span class="n">enriched</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">enriched</span><span class="p">[</span><span class="s1">&#39;credit_limit&#39;</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invoices exceeding credit limit:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">over_limit</span><span class="p">[[</span><span class="s1">&#39;inv_no&#39;</span><span class="p">,</span> <span class="s1">&#39;party_name&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">,</span> <span class="s1">&#39;credit_limit&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<hr />
+<h2 id="section-11-pivot-tables">Section 11: Pivot Tables</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a richer dataset</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">]</span>
+<span class="n">depts</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;Purchase&#39;</span><span class="p">,</span> <span class="s1">&#39;Admin&#39;</span><span class="p">]</span>
+
+<span class="n">txn_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;month&#39;</span>  <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;dept&#39;</span>   <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">depts</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;amount&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10_000</span><span class="p">,</span> <span class="mi">5_00_000</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="s1">&#39;type&#39;</span>   <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Expense&#39;</span><span class="p">,</span> <span class="s1">&#39;Income&#39;</span><span class="p">],</span> <span class="mi">30</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="c1"># ── pd.pivot_table ─────────────────────────────────────────────────────────────</span>
+<span class="n">pivot</span> <span class="o">=</span> <span class="n">txn_data</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span>
+    <span class="n">values</span>  <span class="o">=</span> <span class="s1">&#39;amount&#39;</span><span class="p">,</span>
+    <span class="n">index</span>   <span class="o">=</span> <span class="s1">&#39;month&#39;</span><span class="p">,</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="s1">&#39;dept&#39;</span><span class="p">,</span>
+    <span class="n">aggfunc</span> <span class="o">=</span> <span class="s1">&#39;sum&#39;</span><span class="p">,</span>
+    <span class="n">fill_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">margins</span>    <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>   <span class="c1"># adds row/column totals</span>
+    <span class="n">margins_name</span> <span class="o">=</span> <span class="s1">&#39;Total&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly Amount by Department:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pivot</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-12-reading-writing-files">Section 12: Reading &amp; Writing Files</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Write to CSV ──────────────────────────────────────────────────────────────</span>
+<span class="n">employees</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;/tmp/employees.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># index=False: don&#39;t save the row numbers</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CSV saved!&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Read from CSV ──────────────────────────────────────────────────────────────</span>
+<span class="n">df_from_csv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/tmp/employees.csv&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Read back from CSV:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df_from_csv</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Write to Excel ────────────────────────────────────────────────────────────</span>
+<span class="c1"># Requires: pip install openpyxl</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;/tmp/hr_data.xlsx&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;openpyxl&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+        <span class="n">employees</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Employees&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">dept_summary</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Dept Summary&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Excel file written to /tmp/hr_data.xlsx&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Install openpyxl: pip install openpyxl&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Read from Excel ───────────────────────────────────────────────────────────</span>
+<span class="c1"># df_excel = pd.read_excel(&#39;my_file.xlsx&#39;, sheet_name=&#39;Sheet1&#39;)</span>
+</code></pre></div>
+<hr />
+<h2 id="section-13-quick-reference-summary">Section 13: Quick Reference Summary</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Create</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;col1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span><span class="p">],</span> <span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">...</span><span class="p">]})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;file.csv&#39;</span><span class="p">)</span>            <span class="c1"># read CSV</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s1">&#39;file.xlsx&#39;</span><span class="p">)</span>         <span class="c1"># read Excel</span>
+
+<span class="c1"># Explore</span>
+<span class="n">df</span><span class="o">.</span><span class="n">shape</span>      <span class="c1"># (rows, cols)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span>    <span class="c1"># column names</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>     <span class="c1"># data types</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># first n rows</span>
+<span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>    <span class="c1"># last n rows</span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>     <span class="c1"># summary incl. nulls</span>
+<span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span> <span class="c1"># stats for numerics</span>
+
+<span class="c1"># Select</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span>              <span class="c1"># single column (Series)</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;c1&#39;</span><span class="p">,</span><span class="s1">&#39;c2&#39;</span><span class="p">]]</span>        <span class="c1"># multiple columns (DataFrame)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>       <span class="c1"># by label</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>      <span class="c1"># by position</span>
+
+<span class="c1"># Filter</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">val</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">])]</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">cond1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cond2</span><span class="p">)]</span>
+
+<span class="c1"># Modify</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;new&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;b&#39;</span><span class="p">]</span>          <span class="c1"># new column</span>
+<span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;old&#39;</span><span class="p">:</span> <span class="s1">&#39;new&#39;</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">])</span>
+
+<span class="c1"># Aggregation</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;col&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">/</span> <span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;col&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">&#39;col2&#39;</span><span class="p">:</span> <span class="s1">&#39;sum&#39;</span><span class="p">})</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="p">,</span> <span class="n">aggfunc</span><span class="p">)</span>
+
+<span class="c1"># Missing</span>
+<span class="n">df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>        <span class="c1"># count missing</span>
+<span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>       <span class="c1"># fill</span>
+<span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>            <span class="c1"># drop</span>
+
+<span class="c1"># Merge (VLOOKUP)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;key&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Sort</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;col&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Write</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;file.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s1">&#39;file.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<h2 id="practice-exercises">Practice Exercises</h2>
+<ol>
+<li>
+<p>Create a DataFrame for 5 vendors with columns: <code>vendor_id</code>, <code>vendor_name</code>, <code>city</code>, <code>outstanding_balance</code>, <code>days_overdue</code>. Filter vendors with balance &gt; ₹50,000 AND days overdue &gt; 30.</p>
+</li>
+<li>
+<p>Add a column <code>penalty</code> = 2% of <code>outstanding_balance</code> if <code>days_overdue</code> &gt; 45, else 0.</p>
+</li>
+<li>
+<p>Group the vendor DataFrame by <code>city</code> and compute total outstanding per city.</p>
+</li>
+<li>
+<p>Create two DataFrames — one with invoice numbers + amounts, another with invoice numbers + party names. Merge them to get a combined view.</p>
+</li>
+<li>
+<p>Create a pivot table from a 20-row transaction dataset showing total amount by month and transaction type.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Exercise Solutions ─────────────────────────────────────────────────────────</span>
+
+<span class="c1"># Exercise 1 &amp; 2: Vendor analysis</span>
+<span class="n">vendors</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;vendor_id&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;V01&#39;</span><span class="p">,</span> <span class="s1">&#39;V02&#39;</span><span class="p">,</span> <span class="s1">&#39;V03&#39;</span><span class="p">,</span> <span class="s1">&#39;V04&#39;</span><span class="p">,</span> <span class="s1">&#39;V05&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;vendor_name&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sunrise Trading&#39;</span><span class="p">,</span> <span class="s1">&#39;Metro Supplies&#39;</span><span class="p">,</span> <span class="s1">&#39;Galaxy Corp&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;Omega Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Zenith Ltd&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;city&#39;</span>       <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Mumbai&#39;</span><span class="p">,</span> <span class="s1">&#39;Delhi&#39;</span><span class="p">,</span> <span class="s1">&#39;Mumbai&#39;</span><span class="p">,</span> <span class="s1">&#39;Pune&#39;</span><span class="p">,</span> <span class="s1">&#39;Delhi&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;outstanding&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">80_000</span><span class="p">,</span> <span class="mi">30_000</span><span class="p">,</span> <span class="mi">1_20_000</span><span class="p">,</span> <span class="mi">15_000</span><span class="p">,</span> <span class="mi">90_000</span><span class="p">],</span>
+    <span class="s1">&#39;days_overdue&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">45</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">],</span>
+<span class="p">})</span>
+
+<span class="c1"># Filter: balance &gt; 50K AND overdue &gt; 30 days</span>
+<span class="n">risky</span> <span class="o">=</span> <span class="n">vendors</span><span class="p">[(</span><span class="n">vendors</span><span class="p">[</span><span class="s1">&#39;outstanding&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50_000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">vendors</span><span class="p">[</span><span class="s1">&#39;days_overdue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Risky vendors:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">risky</span><span class="p">[[</span><span class="s1">&#39;vendor_name&#39;</span><span class="p">,</span> <span class="s1">&#39;outstanding&#39;</span><span class="p">,</span> <span class="s1">&#39;days_overdue&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Penalty column</span>
+<span class="n">vendors</span><span class="p">[</span><span class="s1">&#39;penalty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">vendors</span><span class="p">[</span><span class="s1">&#39;days_overdue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">45</span><span class="p">,</span>
+                               <span class="n">vendors</span><span class="p">[</span><span class="s1">&#39;outstanding&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">With penalty:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">vendors</span><span class="p">[[</span><span class="s1">&#39;vendor_name&#39;</span><span class="p">,</span> <span class="s1">&#39;outstanding&#39;</span><span class="p">,</span> <span class="s1">&#39;days_overdue&#39;</span><span class="p">,</span> <span class="s1">&#39;penalty&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Group by city</span>
+<span class="n">city_summary</span> <span class="o">=</span> <span class="n">vendors</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;city&#39;</span><span class="p">)[</span><span class="s1">&#39;outstanding&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">&#39;count&#39;</span><span class="p">,</span> <span class="s1">&#39;sum&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">City-wise outstanding:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">city_summary</span><span class="p">)</span>
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
