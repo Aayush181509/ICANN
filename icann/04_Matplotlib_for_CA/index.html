@@ -43,52 +43,101 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../02_NumPy_for_CA/">Numpy</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../03_Pandas_for_CA/">Pandas</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Matplotlib</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Matplotlib</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-matplotlib">What is Matplotlib?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#why-visualise-financial-data">Why visualise financial data?</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-setup">Section 1: Installing &amp; Setup</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part-1-why-matplotlib">Part 1: Why Matplotlib?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-the-power-of-visual-communication-in-finance">Section 1: The Power of Visual Communication in Finance</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#your-brain-processes-charts-60000-faster-than-tables">Your brain processes charts 60,000× faster than tables</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</a>
+    <li class="toctree-l3"><a class="reference internal" href="#where-financial-professionals-use-charts">Where financial professionals use charts</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</a>
+    <li class="toctree-l3"><a class="reference internal" href="#the-cas-competitive-advantage">The CA's competitive advantage</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</a>
+        </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-what-is-matplotlib-history-position">Section 2: What is Matplotlib? — History &amp; Position</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-origin-story">The Origin Story</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</a>
+    <li class="toctree-l3"><a class="reference internal" href="#where-matplotlib-sits-in-the-python-ecosystem">Where Matplotlib sits in the Python ecosystem</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</a>
+    <li class="toctree-l3"><a class="reference internal" href="#what-matplotlib-can-produce">What Matplotlib can produce</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</a>
+        </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part-2-matplotlib-fundamentals">Part 2: Matplotlib Fundamentals</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-the-figure-axes-architecture">Section 3: The Figure / Axes Architecture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-three-level-hierarchy">The three-level hierarchy</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-12-saving-charts">Section 12: Saving Charts</a>
+    <li class="toctree-l3"><a class="reference internal" href="#level-1-figure">Level 1: Figure</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-13-practice-exercises">Section 13: Practice Exercises</a>
+    <li class="toctree-l3"><a class="reference internal" href="#level-2-axes">Level 2: Axes</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#level-3-artists">Level 3: Artists</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-two-interfaces-pyplot-vs-object-oriented">Section 4: Two Interfaces — pyplot vs Object-Oriented</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#interface-1-pyplot-implicit-state-machine">Interface 1: pyplot (implicit state machine)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#interface-2-object-oriented-explicit-professional">Interface 2: Object-Oriented (explicit, professional)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-rule-always-use-object-oriented">The rule: always use Object-Oriented</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-chart-selection-guide">Section 5: Chart Selection Guide</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-decision-framework">The decision framework</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#common-mistakes-to-avoid">Common mistakes to avoid</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#colour-conventions-for-finance">Colour conventions for finance</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part-3-hands-on-with-matplotlib">Part 3: Hands-on with Matplotlib</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-installing-setup">Section 6: Installing &amp; Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-anatomy-of-a-matplotlib-chart">Section 7: Anatomy of a Matplotlib Chart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-line-chart-revenue-trend">Section 8: Line Chart — Revenue Trend</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-bar-chart-expense-comparison">Section 9: Bar Chart — Expense Comparison</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-horizontal-bar-chart">Section 10: Horizontal Bar Chart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-grouped-bar-chart-budget-vs-actual">Section 11: Grouped Bar Chart — Budget vs Actual</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-pie-donut-chart-revenue-or-expense-mix">Section 12: Pie &amp; Donut Chart — Revenue or Expense Mix</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-13-histogram-invoice-amount-distribution">Section 13: Histogram — Invoice Amount Distribution</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-14-scatter-plot-profit-vs-revenue-relationship">Section 14: Scatter Plot — Profit vs Revenue Relationship</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-15-subplots-building-a-financial-dashboard">Section 15: Subplots — Building a Financial Dashboard</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-16-styling-formatting-tips">Section 16: Styling &amp; Formatting Tips</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-17-saving-charts">Section 17: Saving Charts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-18-practice-exercises">Section 18: Practice Exercises</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</a>
     </li>
@@ -105,11 +154,9 @@
         </ul>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -125,6 +172,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Basics</li>
       <li class="breadcrumb-item active">Matplotlib</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -138,117 +186,507 @@
 <p><strong>Turning Financial Data into Powerful Charts</strong></p>
 <hr />
 <p><strong>Pre-requisite:</strong> Module 3 — Pandas<br />
-<strong>Estimated time:</strong> 2–3 hours</p>
-<h3 id="what-is-matplotlib">What is Matplotlib?</h3>
-<p><strong>Matplotlib</strong> is Python's foundational charting library. It gives you complete control over every element of a chart — exactly like customising a chart in Excel, but with code.</p>
-<h3 id="why-visualise-financial-data">Why visualise financial data?</h3>
-<blockquote>
-<p><em>"A chart that shows revenue falling for 6 months straight is more convincing than a table of 72 numbers."</em></p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>Situation</th>
-<th>Best Chart</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Revenue trend over time</td>
-<td>Line Chart</td>
-</tr>
-<tr>
-<td>Expense comparison by category</td>
-<td>Bar Chart</td>
-</tr>
-<tr>
-<td>Revenue contribution by segment</td>
-<td>Pie / Donut</td>
-</tr>
-<tr>
-<td>Distribution of invoice amounts</td>
-<td>Histogram</td>
-</tr>
-<tr>
-<td>Budget vs Actual</td>
-<td>Grouped Bar</td>
-</tr>
-<tr>
-<td>Multi-metric dashboard</td>
-<td>Subplots</td>
-</tr>
-<tr>
-<td>Profit vs Revenue relationship</td>
-<td>Scatter Plot</td>
-</tr>
-</tbody>
-</table>
+<strong>Estimated time:</strong> 4–5 hours<br />
+<strong>Session structure:</strong> Why Visualise → What is Matplotlib → Architecture → Interface → Chart Selection → Hands-on</p>
 <hr />
-<h3 id="table-of-contents">📋 Table of Contents</h3>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
 <table>
 <thead>
 <tr>
-<th>#</th>
+<th>Part</th>
+<th>Section</th>
 <th>Topic</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><strong>Part 1: Why Matplotlib?</strong></td>
 <td>1</td>
+<td>The Power of Visual Communication in Finance</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>What is Matplotlib? — History &amp; Position</td>
+</tr>
+<tr>
+<td><strong>Part 2: Fundamentals</strong></td>
+<td>3</td>
+<td>The Figure / Axes Architecture</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>Two Interfaces: pyplot vs Object-Oriented</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>Chart Selection Guide</td>
+</tr>
+<tr>
+<td><strong>Part 3: Hands-on</strong></td>
+<td>6</td>
 <td>Installing &amp; Setup</td>
 </tr>
 <tr>
-<td>2</td>
+<td></td>
+<td>7</td>
 <td>Anatomy of a Chart</td>
 </tr>
 <tr>
-<td>3</td>
+<td></td>
+<td>8</td>
 <td>Line Chart — Revenue Trend</td>
 </tr>
 <tr>
-<td>4</td>
+<td></td>
+<td>9</td>
 <td>Bar Chart — Expense Comparison</td>
 </tr>
 <tr>
-<td>5</td>
+<td></td>
+<td>10</td>
 <td>Horizontal Bar Chart</td>
 </tr>
 <tr>
-<td>6</td>
+<td></td>
+<td>11</td>
 <td>Grouped Bar — Budget vs Actual</td>
 </tr>
 <tr>
-<td>7</td>
+<td></td>
+<td>12</td>
 <td>Pie &amp; Donut Chart — Revenue Mix</td>
 </tr>
 <tr>
-<td>8</td>
+<td></td>
+<td>13</td>
 <td>Histogram — Invoice Distribution</td>
 </tr>
 <tr>
-<td>9</td>
+<td></td>
+<td>14</td>
 <td>Scatter Plot — Profit vs Revenue</td>
 </tr>
 <tr>
-<td>10</td>
+<td></td>
+<td>15</td>
 <td>Subplots — Financial Dashboard</td>
 </tr>
 <tr>
-<td>11</td>
+<td></td>
+<td>16</td>
 <td>Styling &amp; Formatting</td>
 </tr>
 <tr>
-<td>12</td>
+<td></td>
+<td>17</td>
 <td>Saving Charts</td>
 </tr>
 <tr>
-<td>13</td>
+<td><strong>Part 4: Practice</strong></td>
+<td>18</td>
 <td>Practice Exercises</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h2>
+<h2 id="part-1-why-matplotlib">Part 1: Why Matplotlib?</h2>
+<h2 id="section-1-the-power-of-visual-communication-in-finance">Section 1: The Power of Visual Communication in Finance</h2>
+<h3 id="your-brain-processes-charts-60000-faster-than-tables">Your brain processes charts 60,000× faster than tables</h3>
+<p>Humans evolved to detect patterns visually. A column of 500 numbers is noise. The same data as a line chart reveals a story — instantly.</p>
+<p>Consider these two ways to present the same information:</p>
+<p><strong>Option A — Table:</strong>
+<div class="highlight"><pre><span></span><code>Apr: ₹12.5L | May: ₹13.8L | Jun: ₹11.2L | Jul: ₹14.5L | Aug: ₹16.2L | Sep: ₹17.8L
+Oct: ₹15.5L | Nov: ₹14.2L | Dec: ₹16.8L | Jan: ₹19.1L | Feb: ₹20.3L | Mar: ₹21.5L
+</code></pre></div></p>
+<p><strong>Option B — Line chart:</strong> A smooth upward curve with a Q1 dip, Q2–Q3 plateau, Q4 surge.</p>
+<p>Option B tells a board of directors in 3 seconds that Q4 was exceptional and Q1 needs attention.</p>
+<h3 id="where-financial-professionals-use-charts">Where financial professionals use charts</h3>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Chart use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Board presentations</td>
+<td>Revenue trend, profit waterfall, budget vs actual</td>
+</tr>
+<tr>
+<td>Audit reports</td>
+<td>Invoice distribution, outlier scatter plots, Benford's Law histogram</td>
+</tr>
+<tr>
+<td>SEBI / RBI filings</td>
+<td>Time-series, ratio trends, comparative bar charts</td>
+</tr>
+<tr>
+<td>CA certificate appendices</td>
+<td>P&amp;L bridge charts, segment mix donut</td>
+</tr>
+<tr>
+<td>Management dashboards</td>
+<td>Multi-panel (Revenue + Expenses + Margin + YTD)</td>
+</tr>
+<tr>
+<td>Tax planning</td>
+<td>Slab-wise liability bar charts, effective rate trends</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-cas-competitive-advantage">The CA's competitive advantage</h3>
+<p>A CA who can create a professional chart in 10 lines of Python — rather than manually formatting an Excel chart for 30 minutes — has a significant efficiency advantage. More importantly, a Python chart can be <strong>regenerated instantly</strong> when the data changes, with no manual reformatting.</p>
+<blockquote>
+<p><strong>The goal of this module:</strong> Build every chart type you need for CA practice, with full control over formatting, labels, and export.</p>
+</blockquote>
+<h2 id="section-2-what-is-matplotlib-history-position">Section 2: What is Matplotlib? — History &amp; Position</h2>
+<h3 id="the-origin-story">The Origin Story</h3>
+<p>In <strong>2003</strong>, <strong>John D. Hunter</strong> — a neuroscientist at the University of Chicago — was analysing epilepsy data. He was using MATLAB (a proprietary numerical computing environment that costs thousands of dollars per licence). He wanted to migrate to Python but Python had no charting library.</p>
+<p>So he built one, modelling it closely after MATLAB's plotting interface, and named it <strong>Matplotlib</strong>.</p>
+<blockquote>
+<p><em>"I wrote Matplotlib initially to visualise electrocorticography (ECoG) data from epilepsy patients."</em><br />
+— John D. Hunter, 2012 (Hunter passed away that year; the library is now maintained by NumFOCUS)</p>
+</blockquote>
+<p>Matplotlib was open-sourced immediately and became the standard Python visualization library. Today it has over <strong>40 million downloads per month</strong>.</p>
+<h3 id="where-matplotlib-sits-in-the-python-ecosystem">Where Matplotlib sits in the Python ecosystem</h3>
+<div class="highlight"><pre><span></span><code>                    ┌──────────────────────────────────────────────────────────┐
+  Visualization     │  Seaborn   Plotly   Bokeh   Pandas .plot()  GeoPandas  │
+  libraries         │         (all built on top of Matplotlib or parallel)    │
+                    ├──────────────────────────────────────────────────────────┤
+                    │                   Matplotlib                              │ ← Core viz engine
+                    ├──────────────────────────────────────────────────────────┤
+                    │                     NumPy                                 │ ← Numerical engine
+                    └──────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>Matplotlib is the <strong>foundation</strong>. Seaborn (Module 5) is built on top of Matplotlib and makes statistical charts easier. But Matplotlib gives you <strong>complete control</strong> — which is essential for professional financial charts.</p>
+<h3 id="what-matplotlib-can-produce">What Matplotlib can produce</h3>
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Statistical</td>
+<td>Histograms, box plots, scatter plots, error bars</td>
+</tr>
+<tr>
+<td>Time-series</td>
+<td>Line charts with date axes, candlestick charts</td>
+</tr>
+<tr>
+<td>Categorical</td>
+<td>Bar charts (grouped, stacked, horizontal), pie charts</td>
+</tr>
+<tr>
+<td>Financial</td>
+<td>Waterfall, Gantt, OHLC candlestick</td>
+</tr>
+<tr>
+<td>Scientific</td>
+<td>Heatmaps, contour plots, 3D surfaces</td>
+</tr>
+<tr>
+<td>Dashboards</td>
+<td>Multi-panel figures with subplots</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-2-matplotlib-fundamentals">Part 2: Matplotlib Fundamentals</h2>
+<h2 id="section-3-the-figure-axes-architecture">Section 3: The Figure / Axes Architecture</h2>
+<p>The single most important concept in Matplotlib is its <strong>object hierarchy</strong>: Figure → Axes → Artists.</p>
+<h3 id="the-three-level-hierarchy">The three-level hierarchy</h3>
+<div class="highlight"><pre><span></span><code>┌─────────────────────── Figure (the full canvas — the A4 paper) ─────────────────────────┐
+│                                                                                          │
+│   ┌──────────────────── Axes (one plot area) ────────────────────────────────────────┐  │
+│   │                                                                                  │  │
+│   │   Title                                                                          │  │
+│   │                                                                                  │  │
+│   │   Y-axis   ──── Artist objects ────────────────────────────────────────────      │  │
+│   │   label   (Lines, Bars, Patches, Text, Markers, Grid lines, Tick marks…)         │  │
+│   │                                                                                  │  │
+│   │                          X-axis label                                            │  │
+│   └──────────────────────────────────────────────────────────────────────────────────┘  │
+│                                   Legend (attached to Figure or Axes)                    │
+└──────────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="level-1-figure">Level 1: Figure</h3>
+<p>The <strong>Figure</strong> is the entire window or page. Think of it as the blank A4 sheet of paper.</p>
+<ul>
+<li>Created with: <code>fig = plt.figure()</code> or <code>fig, ax = plt.subplots()</code></li>
+<li>Controls: overall size (<code>figsize</code>), resolution (<code>dpi</code>), background colour</li>
+<li>A Figure can contain <strong>multiple Axes</strong> (subplots — this is why we call <code>plt.subplots()</code>)</li>
+</ul>
+<h3 id="level-2-axes">Level 2: Axes</h3>
+<p>The <strong>Axes</strong> is the actual chart area — the space where data is plotted.</p>
+<ul>
+<li>One Figure → one or more Axes</li>
+<li>Each Axes has its own X-axis, Y-axis, title, legend</li>
+<li>Created with: <code>fig, ax = plt.subplots()</code> (one Axes) or <code>fig, axes = plt.subplots(2, 2)</code> (grid)</li>
+</ul>
+<h3 id="level-3-artists">Level 3: Artists</h3>
+<p><strong>Artists</strong> are everything you can see on the Axes:
+- Lines (<code>Line2D</code>): <code>ax.plot()</code>
+- Rectangles (<code>Rectangle</code>): <code>ax.bar()</code>
+- Text (<code>Text</code>): <code>ax.set_title()</code>, <code>ax.annotate()</code>
+- Markers, tick labels, grid lines, spines — all Artists</p>
+<blockquote>
+<p><strong>Why this matters:</strong> Once you understand Figure → Axes → Artists, every Matplotlib command makes sense. <code>ax.set_title()</code> sets the title of the Axes. <code>fig.suptitle()</code> sets the title of the Figure. <code>fig.set_size_inches()</code> resizes the canvas.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># --- Demonstrating the Figure/Axes hierarchy ---</span>
+
+<span class="c1"># 1. Single Axes on one Figure</span>
+<span class="n">fig1</span><span class="p">,</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">25</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;This is the Axes title (ax.set_title)&#39;</span><span class="p">)</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;This is the Figure title (fig.suptitle)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X-axis label (ax.set_xlabel)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y-axis label (ax.set_ylabel)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 2. Multiple Axes on one Figure (2 columns)</span>
+<span class="n">fig2</span><span class="p">,</span> <span class="p">(</span><span class="n">ax_left</span><span class="p">,</span> <span class="n">ax_right</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="n">ax_left</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span><span class="s1">&#39;Q2&#39;</span><span class="p">,</span><span class="s1">&#39;Q3&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">3750</span><span class="p">,</span> <span class="mi">4850</span><span class="p">,</span> <span class="mi">4650</span><span class="p">,</span> <span class="mi">6090</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="n">ax_left</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quarterly Revenue (left Axes)&#39;</span><span class="p">)</span>
+
+<span class="n">ax_right</span><span class="o">.</span><span class="n">pie</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span><span class="s1">&#39;Q2&#39;</span><span class="p">,</span><span class="s1">&#39;Q3&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">],</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.0f%%</span><span class="s1">&#39;</span><span class="p">,</span>
+             <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#4472C4&#39;</span><span class="p">,</span><span class="s1">&#39;#ED7D31&#39;</span><span class="p">,</span><span class="s1">&#39;#A9D18E&#39;</span><span class="p">,</span><span class="s1">&#39;#FF5757&#39;</span><span class="p">])</span>
+<span class="n">ax_right</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue Mix (right Axes)&#39;</span><span class="p">)</span>
+
+<span class="n">fig2</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;One Figure — Two Axes&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Key insight: fig controls the canvas; ax controls the chart.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fig type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fig2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ax type:  </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ax_left</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="section-4-two-interfaces-pyplot-vs-object-oriented">Section 4: Two Interfaces — pyplot vs Object-Oriented</h2>
+<p>Matplotlib has two ways to create charts. Understanding the difference prevents confusion.</p>
+<h3 id="interface-1-pyplot-implicit-state-machine">Interface 1: pyplot (implicit state machine)</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;My Chart&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>Simple, looks like MATLAB</li>
+<li>Works fine for single, simple charts</li>
+<li><strong>Problem:</strong> With subplots, <code>plt.title()</code> doesn't know WHICH subplot to title — ambiguous</li>
+</ul>
+<h3 id="interface-2-object-oriented-explicit-professional">Interface 2: Object-Oriented (explicit, professional)</h3>
+<div class="highlight"><pre><span></span><code><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;My Chart&#39;</span><span class="p">)</span>         <span class="c1"># clearly targets THIS axes</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<ul>
+<li>Explicit: you control exactly which Figure and Axes you're working with</li>
+<li>Scales perfectly to subplots (just use <code>ax1</code>, <code>ax2</code>, <code>ax3</code>…)</li>
+<li>Professional standard — used in all production code, tutorials, and documentation</li>
+</ul>
+<h3 id="the-rule-always-use-object-oriented">The rule: always use Object-Oriented</h3>
+<table>
+<thead>
+<tr>
+<th>pyplot</th>
+<th>Object-Oriented (OO)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plt.plot(...)</code></td>
+<td><code>ax.plot(...)</code></td>
+</tr>
+<tr>
+<td><code>plt.bar(...)</code></td>
+<td><code>ax.bar(...)</code></td>
+</tr>
+<tr>
+<td><code>plt.title('...')</code></td>
+<td><code>ax.set_title('...')</code></td>
+</tr>
+<tr>
+<td><code>plt.xlabel('...')</code></td>
+<td><code>ax.set_xlabel('...')</code></td>
+</tr>
+<tr>
+<td><code>plt.ylabel('...')</code></td>
+<td><code>ax.set_ylabel('...')</code></td>
+</tr>
+<tr>
+<td><code>plt.xlim(0, 100)</code></td>
+<td><code>ax.set_xlim(0, 100)</code></td>
+</tr>
+<tr>
+<td><code>plt.legend()</code></td>
+<td><code>ax.legend()</code></td>
+</tr>
+<tr>
+<td><code>plt.savefig('f.png')</code></td>
+<td><code>fig.savefig('f.png')</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>In this entire module, we use the OO interface exclusively.</strong> Every chart starts with <code>fig, ax = plt.subplots()</code>.</p>
+</blockquote>
+<h2 id="section-5-chart-selection-guide">Section 5: Chart Selection Guide</h2>
+<p>The hardest skill in data visualization is choosing the right chart. Here is a practical guide for CA professionals:</p>
+<h3 id="the-decision-framework">The decision framework</h3>
+<p><strong>Ask: "What relationship am I showing?"</strong></p>
+<table>
+<thead>
+<tr>
+<th>Relationship</th>
+<th>Best chart</th>
+<th>Finance use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Change over time</strong></td>
+<td>Line chart</td>
+<td>Revenue trend, stock price, ratio history</td>
+</tr>
+<tr>
+<td><strong>Comparison of categories</strong></td>
+<td>Bar chart (vertical)</td>
+<td>Expense by head, client revenue</td>
+</tr>
+<tr>
+<td><strong>Comparison (long labels)</strong></td>
+<td>Horizontal bar</td>
+<td>Account-wise balances, party-wise sales</td>
+</tr>
+<tr>
+<td><strong>Multiple series, same time</strong></td>
+<td>Grouped bar</td>
+<td>Budget vs Actual, Q1 vs Q2</td>
+</tr>
+<tr>
+<td><strong>Composition over time</strong></td>
+<td>Stacked bar</td>
+<td>Cost structure by quarter</td>
+</tr>
+<tr>
+<td><strong>Part-to-whole (static)</strong></td>
+<td>Pie / Donut</td>
+<td>Revenue mix, expense breakdown</td>
+</tr>
+<tr>
+<td><strong>Distribution / spread</strong></td>
+<td>Histogram</td>
+<td>Invoice amounts, salary ranges</td>
+</tr>
+<tr>
+<td><strong>Relationship between 2 vars</strong></td>
+<td>Scatter plot</td>
+<td>Revenue vs profit, leverage vs ROE</td>
+</tr>
+<tr>
+<td><strong>Cumulative flow / bridge</strong></td>
+<td>Waterfall</td>
+<td>P&amp;L bridge, cash flow waterfall</td>
+</tr>
+<tr>
+<td><strong>Multiple metrics at once</strong></td>
+<td>Subplots dashboard</td>
+<td>Management report</td>
+</tr>
+<tr>
+<td><strong>Correlation matrix</strong></td>
+<td>Heatmap (Seaborn)</td>
+<td>Ratio correlation, risk matrix</td>
+</tr>
+</tbody>
+</table>
+<h3 id="common-mistakes-to-avoid">Common mistakes to avoid</h3>
+<table>
+<thead>
+<tr>
+<th>Mistake</th>
+<th>Better approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Using 3D pie charts</td>
+<td>Flat pie or horizontal bar — 3D distorts proportions</td>
+</tr>
+<tr>
+<td>Too many colours</td>
+<td>Stick to 2–4 colours; use intensity not rainbow</td>
+</tr>
+<tr>
+<td>Starting Y-axis at non-zero to exaggerate</td>
+<td>Start at 0 for bars; label clearly for lines</td>
+</tr>
+<tr>
+<td>Dual Y-axes</td>
+<td>Two separate subplots — dual Y is almost always misleading</td>
+</tr>
+<tr>
+<td>Pie chart with &gt; 6 slices</td>
+<td>Use "Other" category or switch to horizontal bar</td>
+</tr>
+<tr>
+<td>No labels on bars</td>
+<td>Always label bar values for financial charts</td>
+</tr>
+</tbody>
+</table>
+<h3 id="colour-conventions-for-finance">Colour conventions for finance</h3>
+<table>
+<thead>
+<tr>
+<th>Colour</th>
+<th>Convention</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Green</td>
+<td>Positive variance, profit, growth</td>
+</tr>
+<tr>
+<td>Red</td>
+<td>Negative variance, loss, risk</td>
+</tr>
+<tr>
+<td>Blue</td>
+<td>Revenue, primary metric</td>
+</tr>
+<tr>
+<td>Orange</td>
+<td>Secondary metric, budget</td>
+</tr>
+<tr>
+<td>Grey</td>
+<td>Historical / reference data</td>
+</tr>
+</tbody>
+</table>
+<p>These conventions match what board members and auditors expect — don't break them.</p>
+<h2 id="part-3-hands-on-with-matplotlib">Part 3: Hands-on with Matplotlib</h2>
+<h2 id="section-6-installing-setup">Section 6: Installing &amp; Setup</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install if needed</span>
 <span class="c1"># !pip install matplotlib pandas numpy</span>
 
@@ -283,7 +721,7 @@ Ready!
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Data loaded. Amounts are in ₹ Thousands.
 </code></pre></div>
-<h2 id="section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</h2>
+<h2 id="section-7-anatomy-of-a-matplotlib-chart">Section 7: Anatomy of a Matplotlib Chart</h2>
 <div class="highlight"><pre><span></span><code>┌─────────────────────────── Figure (the whole canvas) ─────────────────────────────┐
 │                                                                                    │
 │   ┌──────────────────────── Axes (the plot area) ──────────────────────────────┐  │
@@ -301,7 +739,7 @@ Ready!
 1. <strong>Create</strong> the figure and axes: <code>fig, ax = plt.subplots()</code>
 2. <strong>Draw</strong> on the axes: <code>ax.plot(...)</code>, <code>ax.bar(...)</code>, etc.
 3. <strong>Show</strong> the chart: <code>plt.show()</code></p>
-<h2 id="section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</h2>
+<h2 id="section-8-line-chart-revenue-trend">Section 8: Line Chart — Revenue Trend</h2>
 <p>Line charts are ideal for showing <strong>data over time</strong> — revenue trends, price movements, cumulative returns.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Basic Line Chart</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -329,7 +767,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_7_0.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_16_0.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Year-on-Year Comparison Line Chart</span>
 <span class="n">fy24_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">980</span><span class="p">,</span> <span class="mi">1050</span><span class="p">,</span> <span class="mi">890</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="mi">1560</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">1820</span><span class="p">]</span>
 <span class="n">fy25_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1450</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">1780</span><span class="p">,</span> <span class="mi">1550</span><span class="p">,</span> <span class="mi">1420</span><span class="p">,</span> <span class="mi">1680</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2150</span><span class="p">]</span>
@@ -353,8 +791,8 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_8_0.png" /></p>
-<h2 id="section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_17_0.png" /></p>
+<h2 id="section-9-bar-chart-expense-comparison">Section 9: Bar Chart — Expense Comparison</h2>
 <p>Bar charts are ideal for <strong>comparing categories</strong> — expense heads, client revenues, department budgets.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Vertical Bar Chart — Annual Expenses by Category</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#2196F3&#39;</span><span class="p">,</span> <span class="s1">&#39;#F44336&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF9800&#39;</span><span class="p">,</span> <span class="s1">&#39;#4CAF50&#39;</span><span class="p">,</span> <span class="s1">&#39;#9C27B0&#39;</span><span class="p">,</span> <span class="s1">&#39;#795548&#39;</span><span class="p">,</span> <span class="s1">&#39;#607D8B&#39;</span><span class="p">]</span>
@@ -379,8 +817,8 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_10_0.png" /></p>
-<h2 id="section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_19_0.png" /></p>
+<h2 id="section-10-horizontal-bar-chart">Section 10: Horizontal Bar Chart</h2>
 <p>Horizontal bars work better when category names are long — like account names or client names.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Horizontal Bar — Client Revenue Contribution</span>
 <span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tata Consultancy Svc&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys Limited&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro Technologies&#39;</span><span class="p">,</span>
@@ -411,8 +849,8 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_12_0.png" /></p>
-<h2 id="section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_21_0.png" /></p>
+<h2 id="section-11-grouped-bar-chart-budget-vs-actual">Section 11: Grouped Bar Chart — Budget vs Actual</h2>
 <p>Grouped bars are perfect for <strong>comparing two or more related series side by side</strong> — like Budget vs Actual, or FY24 vs FY25 per department.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Budget vs Actual by Quarter</span>
 <span class="n">quarters</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
@@ -456,8 +894,8 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_14_0.png" /></p>
-<h2 id="section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_23_0.png" /></p>
+<h2 id="section-12-pie-donut-chart-revenue-or-expense-mix">Section 12: Pie &amp; Donut Chart — Revenue or Expense Mix</h2>
 <p>Pie charts show <strong>part-to-whole relationships</strong> — revenue by business segment, expenses by head.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pie Chart — Revenue by Business Segment</span>
 <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Products&#39;</span><span class="p">,</span> <span class="s1">&#39;Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Consulting&#39;</span><span class="p">,</span> <span class="s1">&#39;Exports&#39;</span><span class="p">]</span>
@@ -497,8 +935,8 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_16_0.png" /></p>
-<h2 id="section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_25_0.png" /></p>
+<h2 id="section-13-histogram-invoice-amount-distribution">Section 13: Histogram — Invoice Amount Distribution</h2>
 <p>Histograms show the <strong>distribution / frequency</strong> of numerical data. Useful in audit for:
 - Understanding the spread of invoice values
 - Identifying concentration around suspicious thresholds
@@ -546,11 +984,11 @@ Ready!
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;80th percentile: ₹</span><span class="si">{</span><span class="n">p80</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invoices above ₹</span><span class="si">{</span><span class="n">p80</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">above_p80</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">above_p80</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%) — these form the audit focus&#39;</span><span class="p">)</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_18_0.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_27_0.png" /></p>
 <div class="highlight"><pre><span></span><code>80th percentile: ₹212,208
 Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 </code></pre></div>
-<h2 id="section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</h2>
+<h2 id="section-14-scatter-plot-profit-vs-revenue-relationship">Section 14: Scatter Plot — Profit vs Revenue Relationship</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Scatter plot — Monthly Revenue vs Profit</span>
 <span class="n">revenue_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span>
 <span class="n">profit_arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
@@ -586,8 +1024,8 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_20_0.png" /></p>
-<h2 id="section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_29_0.png" /></p>
+<h2 id="section-15-subplots-building-a-financial-dashboard">Section 15: Subplots — Building a Financial Dashboard</h2>
 <p>Subplots let you display <strong>multiple charts on one page</strong> — like a management dashboard.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 2×2 Financial Dashboard</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -635,8 +1073,8 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_22_0.png" /></p>
-<h2 id="section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_31_0.png" /></p>
+<h2 id="section-16-styling-formatting-tips">Section 16: Styling &amp; Formatting Tips</h2>
 <p>Good chart design communicates faster. Here are key formatting techniques:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Using a built-in style for a more professional look</span>
 <span class="n">available_styles</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span>
@@ -667,8 +1105,8 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 /Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_24_2.png" /></p>
-<h2 id="section-12-saving-charts">Section 12: Saving Charts</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_2.png" /></p>
+<h2 id="section-17-saving-charts">Section 17: Saving Charts</h2>
 <p>Save charts as PNG, PDF, or SVG for reports and presentations.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a chart and save it</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -694,8 +1132,8 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
   revenue_trend.png  (300 DPI — for presentations)
   revenue_trend.pdf  (vector — for print/reports)
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_26_1.png" /></p>
-<h2 id="section-13-practice-exercises">Section 13: Practice Exercises</h2>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_35_1.png" /></p>
+<h2 id="section-18-practice-exercises">Section 18: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</h4>
 <p>Create a <strong>stacked bar chart</strong> showing quarterly expense breakdown across 4 categories:
@@ -773,7 +1211,7 @@ Requirements: Add a title, legend, value labels on each segment, and y-axis labe
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_32_0.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_41_0.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Waterfall / P&amp;L Bridge Chart</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -832,7 +1270,7 @@ Requirements: Add a title, legend, value labels on each segment, and y-axis labe
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_0.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_42_0.png" /></p>
 <hr />
 <h2 id="module-4-complete">🎉 Module 4 Complete!</h2>
 <h3 id="what-youve-learned">What you've learned</h3>

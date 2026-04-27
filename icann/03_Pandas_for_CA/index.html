@@ -43,24 +43,73 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../02_NumPy_for_CA/">Numpy</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Pandas</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Pandas</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-pandas">What is Pandas?</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-importing-pandas">Section 1: Installing &amp; Importing Pandas</a>
+    <li class="toctree-l2"><a class="reference internal" href="#part-1-why-pandas">Part 1: Why Pandas?</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-2-series-a-single-column">Section 2: Series — A Single Column</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-the-limits-of-numpy-what-it-cannot-handle">Section 1: The Limits of NumPy — What It Cannot Handle</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-numpy-wall-a-concrete-example">The NumPy wall — a concrete example</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-what-is-pandas-history-design-philosophy">Section 2: What is Pandas? — History &amp; Design Philosophy</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-origin-story">The Origin Story</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-does-the-name-mean">What does the name mean?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#where-pandas-fits-in-the-python-ecosystem">Where Pandas fits in the Python ecosystem</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#who-uses-pandas-today">Who uses Pandas today?</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part-2-pandas-fundamentals">Part 2: Pandas Fundamentals</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-the-index-pandas-core-innovation">Section 3: The Index — Pandas' Core Innovation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-is-an-index">What is an Index?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#why-does-this-matter-for-finance">Why does this matter for finance?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#types-of-index">Types of Index</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-pandas-data-types-dtype">Section 4: Pandas Data Types (dtype)</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#the-pandas-dtype-table">The Pandas dtype table</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-most-common-mistake-in-financial-data">The most common mistake in financial data</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-category-dtype-a-hidden-gem">The category dtype — a hidden gem</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-series-dataframe-architecture">Section 5: Series &amp; DataFrame Architecture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#series-a-labeled-column">Series: A Labeled Column</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#dataframe-a-labeled-table">DataFrame: A Labeled Table</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#the-ca-analogy">The CA Analogy</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#part-3-hands-on-with-pandas">Part 3: Hands-on with Pandas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-installing-importing-pandas">Section 6: Installing &amp; Importing Pandas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-series-a-single-column">Section 7: Series — A Single Column</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#section-3-4-dataframe-the-full-spreadsheet">Section 3 &amp; 4: DataFrame — The Full Spreadsheet</a>
         <ul>
@@ -68,31 +117,31 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-5-exploring-your-data">Section 5: Exploring Your Data</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-exploring-your-data">Section 10: Exploring Your Data</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-6-selecting-columns-rows">Section 6: Selecting Columns &amp; Rows</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-selecting-columns-rows">Section 11: Selecting Columns &amp; Rows</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#selecting-columns">Selecting columns</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-7-filtering-data-like-excel-autofilter">Section 7: Filtering Data — Like Excel AutoFilter</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-filtering-data-like-excel-autofilter">Section 12: Filtering Data — Like Excel AutoFilter</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-8-sorting-data">Section 8: Sorting Data</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-13-sorting-data">Section 13: Sorting Data</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-9-adding-calculated-columns">Section 9: Adding Calculated Columns</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-14-adding-calculated-columns">Section 14: Adding Calculated Columns</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-10-groupby-like-a-pivot-table">Section 10: GroupBy — Like a Pivot Table</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-15-groupby-like-a-pivot-table">Section 15: GroupBy — Like a Pivot Table</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-11-handling-missing-values">Section 11: Handling Missing Values</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-16-handling-missing-values">Section 16: Handling Missing Values</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-12-merging-dataframes-like-vlookup">Section 12: Merging DataFrames — Like VLOOKUP</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-17-merging-dataframes-like-vlookup">Section 17: Merging DataFrames — Like VLOOKUP</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-13-reading-writing-excel-csv-files">Section 13: Reading &amp; Writing Excel / CSV Files</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-18-reading-writing-excel-csv-files">Section 18: Reading &amp; Writing Excel / CSV Files</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-14-string-operations-on-columns">Section 14: String Operations on Columns</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-19-string-operations-on-columns">Section 19: String Operations on Columns</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-15-practice-exercises">Section 15: Practice Exercises</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-20-practice-exercises">Section 20: Practice Exercises</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#exercise-1-gst-gstr-1-summary">🏋️ Exercise 1 — GST GSTR-1 Summary</a>
     </li>
@@ -109,15 +158,11 @@
         </ul>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../04_Matplotlib_for_CA/">Matplotlib</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -133,6 +178,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Basics</li>
       <li class="breadcrumb-item active">Pandas</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -143,129 +189,509 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="pandas-for-ca-professionals">🐼 Pandas for CA Professionals</h1>
-<p><strong>Python's Excel — Supercharged</strong></p>
+<p><strong>From Raw Data to Financial Insight</strong></p>
 <hr />
-<p><strong>Pre-requisite:</strong> Module 1 (Python Basics), Module 2 (NumPy)<br />
-<strong>Estimated time:</strong> 4–5 hours</p>
-<h3 id="what-is-pandas">What is Pandas?</h3>
-<p><strong>Pandas</strong> is Python's most important library for working with <strong>tabular data</strong> — the kind of data you deal with every day: trial balances, ledgers, GST returns, payroll sheets, bank statements.</p>
+<p><strong>Pre-requisite:</strong> Module 2 (NumPy)<br />
+<strong>Estimated time:</strong> 5–6 hours<br />
+<strong>Session structure:</strong> Why Pandas → What is Pandas → Core Concepts → Hands-on Practice → Applications</p>
+<hr />
+<h2 id="table-of-contents">📋 Table of Contents</h2>
 <table>
 <thead>
 <tr>
-<th>Excel</th>
-<th>Pandas Equivalent</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Spreadsheet</td>
-<td>DataFrame</td>
-</tr>
-<tr>
-<td>Column</td>
-<td>Series</td>
-</tr>
-<tr>
-<td>VLOOKUP</td>
-<td><code>merge()</code></td>
-</tr>
-<tr>
-<td>Pivot Table</td>
-<td><code>groupby()</code></td>
-</tr>
-<tr>
-<td>AutoFilter</td>
-<td>Boolean indexing</td>
-</tr>
-<tr>
-<td>SUMIF</td>
-<td><code>groupby().sum()</code></td>
-</tr>
-<tr>
-<td>Sort</td>
-<td><code>sort_values()</code></td>
-</tr>
-<tr>
-<td>Find &amp; Replace</td>
-<td><code>str.replace()</code></td>
-</tr>
-</tbody>
-</table>
-<p>The key difference: Pandas can handle <strong>millions of rows</strong> in seconds, automate repeated tasks, and process multiple files without manual effort.</p>
-<hr />
-<h3 id="table-of-contents">📋 Table of Contents</h3>
-<table>
-<thead>
-<tr>
-<th>#</th>
+<th>Part</th>
+<th>Section</th>
 <th>Topic</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><strong>Part 1: Why Pandas?</strong></td>
 <td>1</td>
+<td>The Limits of NumPy — What It Cannot Handle</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>What is Pandas? — History &amp; Design Philosophy</td>
+</tr>
+<tr>
+<td><strong>Part 2: Fundamentals</strong></td>
+<td>3</td>
+<td>The Index — Pandas' Core Innovation</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>Pandas Data Types (dtype)</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>Series &amp; DataFrame Architecture</td>
+</tr>
+<tr>
+<td><strong>Part 3: Hands-on</strong></td>
+<td>6</td>
 <td>Installing &amp; Importing Pandas</td>
 </tr>
 <tr>
-<td>2</td>
+<td></td>
+<td>7</td>
 <td>Series — A Single Column</td>
 </tr>
 <tr>
-<td>3</td>
+<td></td>
+<td>8</td>
 <td>DataFrame — The Full Spreadsheet</td>
 </tr>
 <tr>
-<td>4</td>
-<td>Creating DataFrames</td>
-</tr>
-<tr>
-<td>5</td>
+<td></td>
+<td>9</td>
 <td>Exploring Your Data</td>
 </tr>
 <tr>
-<td>6</td>
+<td></td>
+<td>10</td>
 <td>Selecting Columns &amp; Rows</td>
 </tr>
 <tr>
-<td>7</td>
-<td>Filtering Data (Like AutoFilter)</td>
+<td></td>
+<td>11</td>
+<td>Filtering Data</td>
 </tr>
 <tr>
-<td>8</td>
+<td></td>
+<td>12</td>
 <td>Sorting Data</td>
 </tr>
 <tr>
-<td>9</td>
-<td>Adding Calculated Columns</td>
+<td></td>
+<td>13</td>
+<td>Calculated Columns</td>
 </tr>
 <tr>
-<td>10</td>
-<td>GroupBy — Like a Pivot Table</td>
+<td></td>
+<td>14</td>
+<td>GroupBy — Pivot Tables</td>
 </tr>
 <tr>
-<td>11</td>
+<td></td>
+<td>15</td>
 <td>Handling Missing Values</td>
 </tr>
 <tr>
-<td>12</td>
-<td>Merging DataFrames (Like VLOOKUP)</td>
+<td></td>
+<td>16</td>
+<td>Merging DataFrames (VLOOKUP)</td>
 </tr>
 <tr>
-<td>13</td>
-<td>Reading &amp; Writing Excel / CSV Files</td>
+<td></td>
+<td>17</td>
+<td>Reading &amp; Writing Excel / CSV</td>
 </tr>
 <tr>
-<td>14</td>
-<td>String Operations on Columns</td>
+<td></td>
+<td>18</td>
+<td>String Operations</td>
 </tr>
 <tr>
-<td>15</td>
+<td><strong>Part 4: Practice</strong></td>
+<td>19</td>
 <td>Practice Exercises</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="section-1-installing-importing-pandas">Section 1: Installing &amp; Importing Pandas</h2>
+<h2 id="part-1-why-pandas">Part 1: Why Pandas?</h2>
+<h2 id="section-1-the-limits-of-numpy-what-it-cannot-handle">Section 1: The Limits of NumPy — What It Cannot Handle</h2>
+<p>You have already learned NumPy — Python's fast numerical engine. So why do we need another library?</p>
+<p>NumPy is outstanding for <strong>pure mathematical computation</strong>, but real-world financial data is messy:</p>
+<table>
+<thead>
+<tr>
+<th>What real data looks like</th>
+<th>NumPy's limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A ledger has dates, names, amounts, GST codes</td>
+<td>NumPy arrays are <strong>homogeneous</strong> — one data type per array</td>
+</tr>
+<tr>
+<td>You want to say <code>ledger['Apr']</code></td>
+<td>NumPy uses only <strong>positional</strong> indexing — <code>array[3]</code></td>
+</tr>
+<tr>
+<td>Bank statements have blank cells</td>
+<td>NumPy has no native <strong>missing value</strong> handling</td>
+</tr>
+<tr>
+<td>GSTR-1 has column headers (GSTIN, HSN, Rate…)</td>
+<td>2-D NumPy arrays have <strong>no column names</strong></td>
+</tr>
+<tr>
+<td>You need to join two tables (like VLOOKUP)</td>
+<td>NumPy has <strong>no built-in merge / join</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-numpy-wall-a-concrete-example">The NumPy wall — a concrete example</h3>
+<p>Imagine you receive a trial balance as a CSV with 500 rows and 8 columns:<br />
+<code>Account | Type | Opening Dr | Opening Cr | Transactions Dr | Transactions Cr | Closing Dr | Closing Cr</code></p>
+<p>In NumPy you can only store this if you:
+- Convert all text to numbers (losing meaning), OR
+- Use a structured array (complex, rarely used in practice)</p>
+<p>In <strong>Pandas</strong>, you simply call <code>pd.read_csv('trial_balance.csv')</code> — and you're done.</p>
+<blockquote>
+<p><strong>The rule of thumb:</strong> Use NumPy when you have pure numbers and need maximum speed.<br />
+Use Pandas when you have real-world tabular data with mixed types, labels, and missing values.</p>
+</blockquote>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># --- NumPy approach: storing a simple transaction table ---</span>
+<span class="c1"># NumPy can only hold ONE data type. Mixing strings + numbers forces &#39;object&#39; dtype</span>
+<span class="c1"># and you lose ALL numeric speed advantages.</span>
+
+<span class="n">np_attempt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+    <span class="p">[</span><span class="s1">&#39;INV-001&#39;</span><span class="p">,</span> <span class="s1">&#39;Alpha Ltd&#39;</span><span class="p">,</span>   <span class="s1">&#39;85000&#39;</span><span class="p">,</span> <span class="s1">&#39;18&#39;</span><span class="p">,</span> <span class="s1">&#39;Paid&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;INV-002&#39;</span><span class="p">,</span> <span class="s1">&#39;Beta Corp&#39;</span><span class="p">,</span>   <span class="s1">&#39;42000&#39;</span><span class="p">,</span> <span class="s1">&#39;12&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;INV-003&#39;</span><span class="p">,</span> <span class="s1">&#39;Gamma Inc&#39;</span><span class="p">,</span>  <span class="s1">&#39;120000&#39;</span><span class="p">,</span>  <span class="s1">&#39;5&#39;</span><span class="p">,</span> <span class="s1">&#39;Paid&#39;</span><span class="p">],</span>
+<span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy mixed array dtype:&quot;</span><span class="p">,</span> <span class="n">np_attempt</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>   <span class="c1"># object — all converted to string!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Can we sum the Amount column?&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">np_attempt</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>   <span class="c1"># string concat, not addition!</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error:&quot;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="c1"># --- Pandas approach: same data, zero effort ---</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Invoice&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;INV-001&#39;</span><span class="p">,</span> <span class="s1">&#39;INV-002&#39;</span><span class="p">,</span> <span class="s1">&#39;INV-003&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Party&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="s1">&#39;Alpha Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;Beta Corp&#39;</span><span class="p">,</span> <span class="s1">&#39;Gamma Inc&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Amount&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="mi">85000</span><span class="p">,</span> <span class="mi">42000</span><span class="p">,</span> <span class="mi">120000</span><span class="p">],</span>          <span class="c1"># stored as int64</span>
+    <span class="s1">&#39;Rate&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>                      <span class="c1"># stored as int64</span>
+    <span class="s1">&#39;Status&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="s1">&#39;Paid&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">,</span> <span class="s1">&#39;Paid&#39;</span><span class="p">],</span>      <span class="c1"># stored as object (string)</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Pandas dtypes:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total amount:&quot;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>    <span class="c1"># Works perfectly!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pending invoices:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Status&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Pending&#39;</span><span class="p">][[</span><span class="s1">&#39;Invoice&#39;</span><span class="p">,</span> <span class="s1">&#39;Party&#39;</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">]])</span>
+</code></pre></div>
+<h2 id="section-2-what-is-pandas-history-design-philosophy">Section 2: What is Pandas? — History &amp; Design Philosophy</h2>
+<h3 id="the-origin-story">The Origin Story</h3>
+<p>In <strong>2008</strong>, Wes McKinney was working at <strong>AQR Capital Management</strong> — a quantitative hedge fund in Greenwich, Connecticut managing billions of dollars. His job was to analyse financial time-series data: stock prices, returns, correlations.</p>
+<p>Excel was too slow for millions of rows. R's data frames were close, but Python had nothing.<br />
+So he built one.</p>
+<blockquote>
+<p><em>"I started pandas because I was frustrated"</em> — Wes McKinney, 2012</p>
+</blockquote>
+<p>He open-sourced Pandas in <strong>2009</strong>. Today it has over <strong>200 million downloads per month</strong> and is the backbone of financial data analysis worldwide.</p>
+<h3 id="what-does-the-name-mean">What does the name mean?</h3>
+<p><strong>Pandas = Pan-el Data + Python</strong></p>
+<p>"Panel data" is an economics term for data that tracks multiple subjects over time — like a company's quarterly financials across multiple years. That is exactly the kind of data Pandas was designed to handle.</p>
+<h3 id="where-pandas-fits-in-the-python-ecosystem">Where Pandas fits in the Python ecosystem</h3>
+<div class="highlight"><pre><span></span><code>                    ┌─────────────────────────────────────────┐
+   Your Python      │  Pandas   Matplotlib   Seaborn  Plotly  │  ← Analysis &amp; Viz
+   Analysis Stack   │           (all built on top of NumPy)   │
+                    ├─────────────────────────────────────────┤
+                    │               NumPy                      │  ← Numerical Engine
+                    ├─────────────────────────────────────────┤
+                    │            CPython / C                   │  ← Runtime
+                    └─────────────────────────────────────────┘
+</code></pre></div>
+<h3 id="who-uses-pandas-today">Who uses Pandas today?</h3>
+<table>
+<thead>
+<tr>
+<th>Sector</th>
+<th>Use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Accounting &amp; Audit</td>
+<td>Trial balance analysis, GSTR reconciliation, variance reports</td>
+</tr>
+<tr>
+<td>Investment Banking</td>
+<td>Financial modelling, M&amp;A data rooms</td>
+</tr>
+<tr>
+<td>Central Banks</td>
+<td>Monetary data aggregation, policy analysis</td>
+</tr>
+<tr>
+<td>Big Four firms</td>
+<td>Automated data extraction from ERP systems</td>
+</tr>
+<tr>
+<td>Regulators (SEBI, RBI)</td>
+<td>Market surveillance, filing analysis</td>
+</tr>
+</tbody>
+</table>
+<p>For a <strong>CA professional</strong>, Pandas is arguably the single most valuable Python library to learn.</p>
+<h2 id="part-2-pandas-fundamentals">Part 2: Pandas Fundamentals</h2>
+<h2 id="section-3-the-index-pandas-core-innovation">Section 3: The Index — Pandas' Core Innovation</h2>
+<p>The single most important concept in Pandas — and the feature that makes it superior to plain NumPy for financial data — is <strong>the Index</strong>.</p>
+<h3 id="what-is-an-index">What is an Index?</h3>
+<p>Every Pandas object (Series or DataFrame) has an <strong>Index</strong>: a set of labels attached to its rows.</p>
+<table>
+<thead>
+<tr>
+<th>In Excel</th>
+<th>In NumPy</th>
+<th>In Pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Row 3 (position)</td>
+<td><code>array[2]</code> (position)</td>
+<td><code>df.loc['Apr']</code> <strong>(label)</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Think of the Index as a <strong>register</strong> — like a ledger folio number that lets you find any entry by name, not just by page count.</p>
+<h3 id="why-does-this-matter-for-finance">Why does this matter for finance?</h3>
+<ul>
+<li>Access monthly P&amp;L data by <strong>month name</strong> (<code>'Apr'</code>, <code>'Mar'</code>) rather than position (0, 11)</li>
+<li>Work with <strong>date-indexed</strong> time series (stock prices, daily cash flow)</li>
+<li><strong>Align</strong> two datasets automatically on their index — Pandas lines them up even if the rows are in different orders</li>
+<li>Perform <strong>time-based resampling</strong> (daily → monthly → quarterly) using the DatetimeIndex</li>
+</ul>
+<h3 id="types-of-index">Types of Index</h3>
+<table>
+<thead>
+<tr>
+<th>Index type</th>
+<th>Example</th>
+<th>Finance use case</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RangeIndex (default)</td>
+<td>0, 1, 2, 3…</td>
+<td>General tabular data</td>
+</tr>
+<tr>
+<td>StringIndex</td>
+<td>'Apr', 'May'…</td>
+<td>Monthly reports</td>
+</tr>
+<tr>
+<td>DatetimeIndex</td>
+<td>2025-04-01, 2025-04-02…</td>
+<td>Daily price/transaction data</td>
+</tr>
+<tr>
+<td>IntegerIndex</td>
+<td>1001, 1002, 1003…</td>
+<td>Voucher numbers, GL codes</td>
+</tr>
+<tr>
+<td>MultiIndex</td>
+<td>(Q1, Apr), (Q1, May)…</td>
+<td>Hierarchical financial statements</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># --- Default RangeIndex (0, 1, 2...) ---</span>
+<span class="n">revenue_default</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default index:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue_default</span><span class="p">)</span>
+
+<span class="c1"># --- Custom StringIndex: access by month name ---</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">data</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
+             <span class="mi">1550000</span><span class="p">,</span> <span class="mi">1420000</span><span class="p">,</span> <span class="mi">1680000</span><span class="p">,</span> <span class="mi">1910000</span><span class="p">,</span> <span class="mi">2030000</span><span class="p">,</span> <span class="mi">2150000</span><span class="p">],</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">,</span><span class="s1">&#39;Jul&#39;</span><span class="p">,</span><span class="s1">&#39;Aug&#39;</span><span class="p">,</span><span class="s1">&#39;Sep&#39;</span><span class="p">,</span><span class="s1">&#39;Oct&#39;</span><span class="p">,</span><span class="s1">&#39;Nov&#39;</span><span class="p">,</span><span class="s1">&#39;Dec&#39;</span><span class="p">,</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">],</span>
+    <span class="n">name</span>  <span class="o">=</span> <span class="s1">&#39;Revenue (₹)&#39;</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Named index — access by month:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;April:&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">])</span>          <span class="c1"># label-based</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last month:&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># still works positionally too</span>
+
+<span class="c1"># --- Automatic alignment by index (NumPy cannot do this!) ---</span>
+<span class="n">revenue_fy25</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">])</span>
+<span class="n">revenue_fy26</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1450000</span><span class="p">,</span> <span class="mi">1650000</span><span class="p">,</span> <span class="mi">1210000</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">])</span>
+
+<span class="c1"># Pandas aligns on the shared index automatically — NaN for unmatched months</span>
+<span class="n">growth</span> <span class="o">=</span> <span class="n">revenue_fy26</span> <span class="o">-</span> <span class="n">revenue_fy25</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Growth (auto-aligned by month name):&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">growth</span><span class="p">)</span>  <span class="c1"># Apr=NaN (no FY26 Apr), May/Jun=difference, Jul=NaN (no FY25 Jul)</span>
+</code></pre></div>
+<h2 id="section-4-pandas-data-types-dtype">Section 4: Pandas Data Types (dtype)</h2>
+<p>Every column in a Pandas DataFrame has a <strong>dtype</strong> — the type of data it stores. Understanding dtypes is essential because:</p>
+<ol>
+<li>Wrong dtype → wrong results (e.g., amounts stored as text can't be summed)</li>
+<li>Right dtype → better memory efficiency and faster operations</li>
+<li>Pandas operations behave differently depending on dtype</li>
+</ol>
+<h3 id="the-pandas-dtype-table">The Pandas dtype table</h3>
+<table>
+<thead>
+<tr>
+<th>dtype</th>
+<th>What it stores</th>
+<th>Memory</th>
+<th>Finance example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int64</code></td>
+<td>Whole numbers</td>
+<td>8 bytes</td>
+<td>Voucher numbers, quantities</td>
+</tr>
+<tr>
+<td><code>float64</code></td>
+<td>Decimal numbers</td>
+<td>8 bytes</td>
+<td>Amounts, GST rates, percentages</td>
+</tr>
+<tr>
+<td><code>object</code></td>
+<td>Strings / mixed</td>
+<td>Variable</td>
+<td>Party names, account codes, GSTIN</td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>True / False</td>
+<td>1 byte</td>
+<td>Paid? Audited? Flagged?</td>
+</tr>
+<tr>
+<td><code>datetime64[ns]</code></td>
+<td>Dates and times</td>
+<td>8 bytes</td>
+<td>Invoice dates, due dates, FY periods</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>Fixed set of values</td>
+<td>Low</td>
+<td>GST slabs, account types, quarters</td>
+</tr>
+</tbody>
+</table>
+<h3 id="the-most-common-mistake-in-financial-data">The most common mistake in financial data</h3>
+<p>When you import a CSV from Tally or SAP, amounts are often read as <strong><code>object</code></strong> (string) because of formatting:<br />
+<code>"₹1,25,000"</code> → Pandas cannot sum this until you clean and cast it to <code>float64</code>.</p>
+<h3 id="the-category-dtype-a-hidden-gem">The <code>category</code> dtype — a hidden gem</h3>
+<p>If a column has only a few repeating values ('Q1','Q2','Q3','Q4' or 'Asset','Liability','Income','Expense'), store it as <code>category</code>:
+- Uses <strong>5–10× less memory</strong> than <code>object</code>
+- Sorting respects the <strong>logical order</strong> you define (Apr before May, not alphabetical)</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># --- Checking dtypes ---</span>
+<span class="n">trial_balance</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Account&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="s1">&#39;Cash&#39;</span><span class="p">,</span><span class="s1">&#39;Trade Debtors&#39;</span><span class="p">,</span><span class="s1">&#39;Fixed Assets&#39;</span><span class="p">,</span><span class="s1">&#39;Creditors&#39;</span><span class="p">,</span><span class="s1">&#39;Sales&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Type&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;Asset&#39;</span><span class="p">,</span><span class="s1">&#39;Asset&#39;</span><span class="p">,</span><span class="s1">&#39;Asset&#39;</span><span class="p">,</span><span class="s1">&#39;Liability&#39;</span><span class="p">,</span><span class="s1">&#39;Income&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Quarter&#39;</span><span class="p">:</span>   <span class="p">[</span><span class="s1">&#39;Q4&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">,</span><span class="s1">&#39;Q4&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Debit&#39;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">485000</span><span class="p">,</span> <span class="mi">1250000</span><span class="p">,</span> <span class="mi">8500000</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;Credit&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">980000</span><span class="p">,</span> <span class="mi">5200000</span><span class="p">],</span>
+    <span class="s1">&#39;Date&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;2025-03-31&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">5</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default dtypes after DataFrame creation:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trial_balance</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+
+<span class="c1"># --- Type conversion ---</span>
+<span class="c1"># Convert Date string → datetime64</span>
+<span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+
+<span class="c1"># Convert Type and Quarter → category (saves memory, enables proper sorting)</span>
+<span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Quarter&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">trial_balance</span><span class="p">[</span><span class="s1">&#39;Quarter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">After conversion:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trial_balance</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
+
+<span class="c1"># --- Memory comparison ---</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">50000</span>  <span class="c1"># simulate a large ledger</span>
+<span class="n">large_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Asset&#39;</span><span class="p">,</span><span class="s1">&#39;Liability&#39;</span><span class="p">,</span><span class="s1">&#39;Income&#39;</span><span class="p">,</span><span class="s1">&#39;Expense&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">)})</span>
+<span class="n">mem_object</span>   <span class="o">=</span> <span class="n">large_df</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;object&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mem_category</span> <span class="o">=</span> <span class="n">large_df</span><span class="p">[</span><span class="s1">&#39;Type&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">memory_usage</span><span class="p">(</span><span class="n">deep</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Memory for 50,000 account-type rows:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  object dtype:   </span><span class="si">{</span><span class="n">mem_object</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> bytes&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  category dtype: </span><span class="si">{</span><span class="n">mem_category</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> bytes  (</span><span class="si">{</span><span class="n">mem_object</span><span class="o">/</span><span class="n">mem_category</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">x smaller!)&quot;</span><span class="p">)</span>
+
+<span class="c1"># --- The common import problem: amount as string ---</span>
+<span class="n">messy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="s1">&#39;1,25,000&#39;</span><span class="p">,</span> <span class="s1">&#39;₹82,000&#39;</span><span class="p">,</span> <span class="s1">&#39;45000&#39;</span><span class="p">,</span> <span class="s1">&#39;1,20,000&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Amount column as imported (object):&quot;</span><span class="p">,</span> <span class="n">messy</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="n">cleaned</span> <span class="o">=</span> <span class="n">messy</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;[₹,]&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;After cleaning (float64):&quot;</span><span class="p">,</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum:&quot;</span><span class="p">,</span> <span class="n">cleaned</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<h2 id="section-5-series-dataframe-architecture">Section 5: Series &amp; DataFrame Architecture</h2>
+<p>Before we dive into hands-on work, let's understand exactly what a <strong>Series</strong> and a <strong>DataFrame</strong> are — structurally.</p>
+<h3 id="series-a-labeled-column">Series: A Labeled Column</h3>
+<p>A <strong>Series</strong> is a one-dimensional labeled array. Think of it as a <strong>single column from a ledger</strong> — with row labels (the Index) and values.</p>
+<div class="highlight"><pre><span></span><code>  Index  │  Values
+─────────┼──────────
+   Apr   │  1,250,000   ←── one row
+   May   │  1,380,000
+   Jun   │  1,120,000
+         │
+   name: Revenue (₹)
+   dtype: int64
+</code></pre></div>
+<p>A Series has exactly two attributes that define it: <strong>index</strong> + <strong>values</strong> (+ a name).</p>
+<h3 id="dataframe-a-labeled-table">DataFrame: A Labeled Table</h3>
+<p>A <strong>DataFrame</strong> is a collection of <strong>Series that share the same Index</strong>. Think of it as a <strong>complete spreadsheet</strong> — rows identified by the Index, columns identified by column names.</p>
+<div class="highlight"><pre><span></span><code>  Index  │  Month │  Revenue  │  COGS   │  Net_Profit
+─────────┼────────┼───────────┼─────────┼───────────
+    0    │  Apr   │ 1,250,000 │ 750,000 │   197,000
+    1    │  May   │ 1,380,000 │ 828,000 │   229,000
+    2    │  Jun   │ 1,120,000 │ 672,000 │   185,000
+         │        │           │         │
+         │ object │   int64   │  int64  │    int64    ←── each column has its own dtype
+</code></pre></div>
+<p><strong>Key relationships:</strong>
+- <code>df['Revenue']</code> → returns a <strong>Series</strong> (one column)
+- <code>df[['Revenue', 'COGS']]</code> → returns a <strong>DataFrame</strong> (subset of columns)
+- <code>df.loc[0]</code> → returns a <strong>Series</strong> (one row)</p>
+<h3 id="the-ca-analogy">The CA Analogy</h3>
+<table>
+<thead>
+<tr>
+<th>Pandas object</th>
+<th>CA equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Index</td>
+<td>Folio / Row reference number</td>
+</tr>
+<tr>
+<td>Series</td>
+<td>A single column in a ledger (e.g., "Credit" column)</td>
+</tr>
+<tr>
+<td>DataFrame</td>
+<td>The complete ledger / trial balance / GSTR-1 table</td>
+</tr>
+<tr>
+<td>Column dtype</td>
+<td>The data validation rule for that column</td>
+</tr>
+</tbody>
+</table>
+<p>With this foundation, every operation you do in Pandas — filtering, grouping, merging — makes intuitive sense. You are always working with <strong>labeled rows and columns</strong>.</p>
+<h2 id="part-3-hands-on-with-pandas">Part 3: Hands-on with Pandas</h2>
+<h2 id="section-6-installing-importing-pandas">Section 6: Installing &amp; Importing Pandas</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install if needed (run once)</span>
 <span class="c1"># !pip install pandas openpyxl</span>
 
@@ -278,7 +704,7 @@
 <div class="highlight"><pre><span></span><code>Pandas version: 2.3.2
 Ready!
 </code></pre></div>
-<h2 id="section-2-series-a-single-column">Section 2: Series — A Single Column</h2>
+<h2 id="section-7-series-a-single-column">Section 7: Series — A Single Column</h2>
 <p>A <strong>Series</strong> is the simplest Pandas object — it's like <strong>one column</strong> of a spreadsheet.<br />
 It has an <strong>index</strong> (row label) and <strong>values</strong> (the data).</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Creating a Series — monthly revenue</span>
@@ -376,7 +802,7 @@ It has rows (indexed), columns (named), and can hold different data types in dif
 6  15-Apr-2025     PV-104    Vendor Payment  Expense   95000       0
 7  18-Apr-2025     SV-004  Sales - Client D  Revenue       0  275000
 </code></pre></div>
-<h2 id="section-5-exploring-your-data">Section 5: Exploring Your Data</h2>
+<h2 id="section-10-exploring-your-data">Section 10: Exploring Your Data</h2>
 <p>When you receive a financial data file, the first step is always to <strong>understand what's in it</strong>.<br />
 Pandas has several built-in functions for this.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a larger sample dataset — Monthly P&amp;L for a company</span>
@@ -478,7 +904,7 @@ min    1120000.00   672000.00     448000.00   185000.00       15.76
 75%    1812500.00  1087500.00     725000.00   324500.00       17.87
 max    2150000.00  1290000.00     860000.00   392000.00       18.23
 </code></pre></div>
-<h2 id="section-6-selecting-columns-rows">Section 6: Selecting Columns &amp; Rows</h2>
+<h2 id="section-11-selecting-columns-rows">Section 11: Selecting Columns &amp; Rows</h2>
 <h3 id="selecting-columns">Selecting columns</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Select a single column — returns a Series</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Revenue column:&#39;</span><span class="p">)</span>
@@ -566,7 +992,7 @@ Net_Profit       392000
 Margin_Pct        18.23
 Name: 11, dtype: object
 </code></pre></div>
-<h2 id="section-7-filtering-data-like-excel-autofilter">Section 7: Filtering Data — Like Excel AutoFilter</h2>
+<h2 id="section-12-filtering-data-like-excel-autofilter">Section 12: Filtering Data — Like Excel AutoFilter</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Filter rows where Revenue &gt; ₹15 lakhs</span>
 <span class="n">high_revenue</span> <span class="o">=</span> <span class="n">pl_df</span><span class="p">[</span><span class="n">pl_df</span><span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1500000</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Months with revenue &gt; ₹15L:&#39;</span><span class="p">)</span>
@@ -624,7 +1050,7 @@ Month Quarter  Revenue
   Feb      Q4  2030000
   Mar      Q4  2150000
 </code></pre></div>
-<h2 id="section-8-sorting-data">Section 8: Sorting Data</h2>
+<h2 id="section-13-sorting-data">Section 13: Sorting Data</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Sort by a column</span>
 <span class="n">sorted_by_revenue</span> <span class="o">=</span> <span class="n">pl_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Revenue&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Months ranked by Revenue (highest first):&#39;</span><span class="p">)</span>
@@ -672,7 +1098,7 @@ Month  Revenue  Net_Profit  Margin_Pct
   T009 28-May Sunrise Ltd     Sale  127000        18    Paid     22860.0 149860.0
   T010 03-Jun   Gamma Inc     Sale   65000         5 Pending      3250.0  68250.0
 </code></pre></div>
-<h2 id="section-9-adding-calculated-columns">Section 9: Adding Calculated Columns</h2>
+<h2 id="section-14-adding-calculated-columns">Section 14: Adding Calculated Columns</h2>
 <p>Just like adding a formula column in Excel — but applied to the entire column instantly.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Add new computed columns</span>
 <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;Effective_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;GST_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -705,7 +1131,7 @@ Month  Revenue  Net_Profit  Margin_Pct
   T009 Sunrise Ltd  127000    Paid High Value   Cleared
   T010   Gamma Inc   65000 Pending     Normal Follow-up
 </code></pre></div>
-<h2 id="section-10-groupby-like-a-pivot-table">Section 10: GroupBy — Like a Pivot Table</h2>
+<h2 id="section-15-groupby-like-a-pivot-table">Section 15: GroupBy — Like a Pivot Table</h2>
 <p><code>groupby()</code> is one of Pandas' most powerful features. It is the equivalent of Excel's <strong>Pivot Table</strong>.</p>
 <p><strong>Concept:</strong> Split the data into groups → Apply a function to each group → Combine results</p>
 <p>Think: <em>"Total sales by party"</em>, <em>"Average invoice by GST rate"</em>, <em>"Count of pending vs paid"</em></p>
@@ -812,7 +1238,7 @@ Q4             6090000         1175000           1102000       18.09            
 
 Full Year Net Profit: ₹3,365,000
 </code></pre></div>
-<h2 id="section-11-handling-missing-values">Section 11: Handling Missing Values</h2>
+<h2 id="section-16-handling-missing-values">Section 16: Handling Missing Values</h2>
 <p>Real-world financial data is almost always incomplete — missing values are a fact of life.<br />
 Pandas uses <code>NaN</code> (Not a Number) to represent missing data.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a DataFrame with missing values (typical in imported data)</span>
@@ -880,7 +1306,7 @@ Any missing values? True
 
 Missing values remaining: 0
 </code></pre></div>
-<h2 id="section-12-merging-dataframes-like-vlookup">Section 12: Merging DataFrames — Like VLOOKUP</h2>
+<h2 id="section-17-merging-dataframes-like-vlookup">Section 17: Merging DataFrames — Like VLOOKUP</h2>
 <p><strong>VLOOKUP</strong> in Excel pulls data from one table into another using a matching key.<br />
 In Pandas, <code>merge()</code> does the same — and handles millions of rows instantly.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Table 1: Invoice Register</span>
@@ -938,7 +1364,7 @@ Invoice_No           Client_Name      City  Amount  GST_Rate  GST_Amount    Tota
    INV-004 Sunrise Manufacturing    Mumbai   67000        18     12060.0  79060.0
    INV-005        Tech Solutions Bengaluru   95000        18     17100.0 112100.0
 </code></pre></div>
-<h2 id="section-13-reading-writing-excel-csv-files">Section 13: Reading &amp; Writing Excel / CSV Files</h2>
+<h2 id="section-18-reading-writing-excel-csv-files">Section 18: Reading &amp; Writing Excel / CSV Files</h2>
 <p>In practice, you will almost always <strong>import data from Excel or CSV</strong> rather than typing it manually.<br />
 Pandas makes this effortless.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># First, let&#39;s save our DataFrame to files</span>
@@ -1006,7 +1432,7 @@ Read from Excel — shape: (12, 10)
 <div class="highlight"><pre><span></span><code>Common read options demonstrated above (commented out).
 Uncomment and adapt for your actual files.
 </code></pre></div>
-<h2 id="section-14-string-operations-on-columns">Section 14: String Operations on Columns</h2>
+<h2 id="section-19-string-operations-on-columns">Section 19: String Operations on Columns</h2>
 <p>Pandas has powerful text processing via <code>.str</code> accessor — extremely useful for cleaning imported data.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Simulating messy imported data (very common in practice)</span>
 <span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1074,7 +1500,7 @@ First word of each name:
 
 Name lengths: [29, 17, 19, 15, 25]
 </code></pre></div>
-<h2 id="section-15-practice-exercises">Section 15: Practice Exercises</h2>
+<h2 id="section-20-practice-exercises">Section 20: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-gst-gstr-1-summary">🏋️ Exercise 1 — GST GSTR-1 Summary</h4>
 <p>You have an invoice register. Create a GSTR-1 style summary showing:

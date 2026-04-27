@@ -43,44 +43,49 @@
                 <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
-                </li>
-              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Numpy</a>
+                  <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Numpy</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#what-is-numpy">What is NumPy?</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#why-ca-professionals-need-numpy">Why CA professionals need NumPy</a>
-    </li>
     <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-importing-numpy">Section 1: Installing &amp; Importing NumPy</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-18-gst-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-18-gst-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do mathematical operations on large datasets.Consider a real scenario: you have 10,000 invoice amounts and need to apply 18% GST to all of them.The Python list approach:- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 18% GST, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operationsThe NumPy approach:- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the entire block at once using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; "The difference is like processing salary slips one-by-one vs running a payroll batch."### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-2-creating-numpy-arrays">Section 2: Creating NumPy Arrays</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-what-is-numpy-a-brief-historynumpy-numerical-python-was-created-by-travis-oliphant-in-2005-by-merging-two-earlier-libraries-numeric-and-numarray-it-has-since-become-the-foundation-of-virtually-every-scientific-and-financial-computing-tool-in-pythonpython-ecosystem-simplified-your-code-pandas-matplotlib-seaborn-scikit-learn-numpy-c-fortran-blas-lapackeverything-in-data-science-and-finance-analytics-sits-on-top-of-numpy-when-you-do-dfamount-118-in-pandas-pandas-calls-numpy-internally-where-numpy-fits-in-your-workflow-task-tool-clean-query-tabular-data-pandas-built-on-numpy-visualise-data-matplotlib-seaborn-built-on-numpy-statistical-modelling-scipy-built-on-numpy-machine-learning-scikit-learn-built-on-numpy-raw-numerical-computation-numpy-directly-portfolio-maths-npv-irr-numpy-directly-batch-calculations-on-arrays-numpy-directly-you-will-use-numpy-directly-for-financial-math-and-indirectly-through-pandas-for-data-analysis">Section 2: What is NumPy?### A brief historyNumPy (Numerical Python) was created by Travis Oliphant in 2005 by merging two earlier libraries — Numeric and Numarray. It has since become the foundation of virtually every scientific and financial computing tool in Python.Python Ecosystem (simplified)───────────────────────────────────────────────────── Your Code │ Pandas ──── Matplotlib ──── Seaborn ──── scikit-learn │ │ │ └──────── NumPy ──────────────────────────── │ C / Fortran (BLAS, LAPACK)─────────────────────────────────────────────────────Everything in data science and finance analytics sits on top of NumPy. When you do df['Amount'] * 1.18 in Pandas, Pandas calls NumPy internally.### Where NumPy fits in your workflow| Task | Tool ||------|------|| Clean &amp; query tabular data | Pandas (built on NumPy) || Visualise data | Matplotlib / Seaborn (built on NumPy) || Statistical modelling | SciPy (built on NumPy) || Machine learning | scikit-learn (built on NumPy) || Raw numerical computation | NumPy directly || Portfolio maths, NPV, IRR | NumPy directly || Batch calculations on arrays | NumPy directly |You will use NumPy directly for financial math, and indirectly through Pandas for data analysis.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-the-ndarray-numpys-core-object-what-is-an-ndarrayndarray-stands-for-n-dimensional-array-it-is-the-fundamental-building-block-of-numpy-everything-numpy-does-revolves-around-this-objectthink-of-it-this-way-dimension-also-called-finance-analogy-1d-array-vector-a-single-column-of-invoice-amounts-2d-array-matrix-a-table-rows-months-columns-departments-3d-array-tensor-multiple-tables-one-per-financial-year-what-makes-ndarray-special1-homogeneous-all-elements-are-the-same-data-type-unlike-python-lists-2-fixed-size-size-is-set-at-creation-memory-is-pre-allocated-3-contiguous-memory-elements-sit-next-to-each-other-in-ram-fast-access-4-vectorized-mathematical-operations-work-on-the-whole-array-at-once-key-properties-every-ndarray-hasarrayshape-dimensions-as-a-tuple-rows-columnsarrayndim-number-of-dimensions-1d-2d-3darraysize-total-number-of-elementsarraydtype-data-type-of-elements-int64-float64-bool-etcarrayitemsize-bytes-each-element-uses-in-memoryarraynbytes-total-bytes-used-size-itemsize">Section 3: The ndarray — NumPy's Core Object### What is an ndarray?ndarray stands for N-Dimensional Array. It is the fundamental building block of NumPy — everything NumPy does revolves around this object.Think of it this way:| Dimension | Also called | Finance analogy ||-----------|-------------|-----------------|| 1D array | Vector | A single column of invoice amounts || 2D array | Matrix | A table: rows = months, columns = departments || 3D array | Tensor | Multiple tables: one per financial year |### What makes ndarray special?1. Homogeneous — all elements are the same data type (unlike Python lists) 2. Fixed size — size is set at creation (memory is pre-allocated) 3. Contiguous memory — elements sit next to each other in RAM (fast access) 4. Vectorized — mathematical operations work on the whole array at once### Key properties every ndarray hasarray.shape → Dimensions as a tuple — (rows, columns)array.ndim → Number of dimensions — 1D, 2D, 3Darray.size → Total number of elementsarray.dtype → Data type of elements — int64, float64, bool, etc.array.itemsize → Bytes each element uses in memoryarray.nbytes → Total bytes used (size × itemsize)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-numpy-data-types-dtype-why-dtype-mattersunlike-python-lists-which-hold-mixed-types-every-element-in-a-numpy-array-is-the-same-type-this-is-what-enables-the-speed-advantage-numpy-knows-exactly-how-many-bytes-each-element-needs-and-can-process-them-all-with-a-single-c-level-loopchoosing-the-right-dtype-can-also-save-significant-memory-important-when-working-with-millions-of-rows-common-dtypes-in-financial-work-dtype-size-range-precision-use-case-int32-4-bytes-21-billion-invoice-counts-quantities-int64-8-bytes-92-1018-amounts-in-paise-large-float32-4-bytes-7-decimal-digits-ratios-percentages-float64-8-bytes-15-decimal-digits-monetary-values-rates-bool-1-byte-true-false-flags-audit-status-for-monetary-calculations-always-use-float64-the-default-float32-can-introduce-rounding-errors-in-financial-calculations-memory-impact-a-real-examplea-dataset-of-1-million-invoice-amounts-float64-8-mb-float32-4-mb-half-the-memory-but-less-precision-int32-4-mb-if-amounts-are-whole-rupees">Section 4: NumPy Data Types (dtype)### Why dtype mattersUnlike Python lists (which hold mixed types), every element in a NumPy array is the same type. This is what enables the speed advantage — NumPy knows exactly how many bytes each element needs and can process them all with a single C-level loop.Choosing the right dtype can also save significant memory — important when working with millions of rows.### Common dtypes in financial work| dtype | Size | Range / Precision | Use case ||-------|------|-------------------|----------|| int32 | 4 bytes | ±2.1 billion | Invoice counts, quantities || int64 | 8 bytes | ±9.2 × 10¹⁸ | Amounts in paise (large) || float32 | 4 bytes | ~7 decimal digits | Ratios, percentages || float64 | 8 bytes | ~15 decimal digits | Monetary values, rates || bool | 1 byte | True / False | Flags, audit status |&gt; ⚠️ For monetary calculations, always use float64 (the default). float32 can introduce rounding errors in financial calculations.### Memory impact — a real exampleA dataset of 1 million invoice amounts:- float64 → 8 MB- float32 → 4 MB (half the memory, but less precision)- int32 → 4 MB (if amounts are whole rupees)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-creating-arrays-6-methodsbefore-you-can-analyse-data-with-numpy-you-need-to-get-your-data-into-an-ndarray-there-are-several-ways-to-do-this-depending-on-where-your-data-comes-from-method-use-when-nparraylist-you-already-have-a-python-list-npzerosn-initialising-a-blank-result-container-nponesn-setting-up-a-uniform-weights-array-nparangestart-stop-step-generating-a-sequence-like-excels-sequence-nplinspacestart-stop-n-evenly-spaced-values-between-two-numbers-npfullshape-value-filling-an-array-with-a-constant-these-are-the-foundations-in-practice-youll-most-often-load-data-via-pandas-module-3-which-stores-its-columns-as-numpy-arrays-internally">Section 5: Creating Arrays — 6 MethodsBefore you can analyse data with NumPy, you need to get your data into an ndarray. There are several ways to do this depending on where your data comes from.| Method | Use when... ||--------|-------------|| np.array(list) | You already have a Python list || np.zeros(n) | Initialising a blank result container || np.ones(n) | Setting up a uniform weights array || np.arange(start, stop, step) | Generating a sequence (like Excel's SEQUENCE) || np.linspace(start, stop, n) | Evenly spaced values between two numbers || np.full(shape, value) | Filling an array with a constant |These are the foundations — in practice you'll most often load data via Pandas (Module 3), which stores its columns as NumPy arrays internally.</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-installing-importing-numpy">Section 6: Installing &amp; Importing NumPy</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-creating-numpy-arrays">Section 7: Creating NumPy Arrays</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#ways-to-create-arrays">Ways to create arrays</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-3-array-vs-python-list-why-numpy-is-faster">Section 3: Array vs Python List — Why NumPy is Faster</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-array-vs-python-list-why-numpy-is-faster">Section 8: Array vs Python List — Why NumPy is Faster</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-4-array-operations-vectorized-financial-math">Section 4: Array Operations — Vectorized Financial Math</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-array-operations-vectorized-financial-math">Section 9: Array Operations — Vectorized Financial Math</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-5-array-indexing-slicing">Section 5: Array Indexing &amp; Slicing</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-array-indexing-slicing">Section 10: Array Indexing &amp; Slicing</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-6-statistical-functions">Section 6: Statistical Functions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-statistical-functions">Section 11: Statistical Functions</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-7-boolean-indexing-filtering-transactions">Section 7: Boolean Indexing — Filtering Transactions</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-boolean-indexing-filtering-transactions">Section 12: Boolean Indexing — Filtering Transactions</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-8-2d-arrays-financial-matrices">Section 8: 2D Arrays — Financial Matrices</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-13-2d-arrays-financial-matrices">Section 13: 2D Arrays — Financial Matrices</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-9-financial-applications-returns-portfolio">Section 9: Financial Applications — Returns &amp; Portfolio</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-14-financial-applications-returns-portfolio">Section 14: Financial Applications — Returns &amp; Portfolio</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-10-npv-irr-calculations">Section 10: NPV &amp; IRR Calculations</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-15-npv-irr-calculations">Section 15: NPV &amp; IRR Calculations</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-11-practice-exercises">Section 11: Practice Exercises</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-16-practice-exercises">Section 16: Practice Exercises</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#exercise-1-payroll-processing">🏋️ Exercise 1 — Payroll Processing</a>
     </li>
@@ -97,19 +102,13 @@
         </ul>
     </li>
     </ul>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../03_Pandas_for_CA/">Pandas</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../04_Matplotlib_for_CA/">Matplotlib</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
-                </li>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -125,6 +124,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Basics</li>
       <li class="breadcrumb-item active">Numpy</li>
     <li class="wy-breadcrumbs-aside">
     </li>
@@ -134,83 +134,114 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="numpy-for-ca-professionals">🔢 NumPy for CA Professionals</h1>
-<p><strong>Fast Financial Math with Arrays</strong></p>
-<hr />
-<p><strong>Pre-requisite:</strong> Module 1 — Python Basics<br />
-<strong>Estimated time:</strong> 2–3 hours</p>
-<h3 id="what-is-numpy">What is NumPy?</h3>
-<p>NumPy (<strong>Num</strong>erical <strong>Py</strong>thon) is a library that makes working with <strong>large sets of numbers</strong> extremely fast.</p>
-<p><strong>The problem with plain Python lists:</strong>
-- You have 10,000 invoices. You want to apply 18% GST to each.
-- With a plain Python list, you'd need a loop — running 10,000 iterations.
-- With NumPy, you apply the operation to the <strong>entire dataset in one line</strong> — and it's 100x faster.</p>
-<p><strong>Think of NumPy arrays like Excel columns</strong> — but capable of handling millions of rows instantly.</p>
-<h3 id="why-ca-professionals-need-numpy">Why CA professionals need NumPy</h3>
-<ul>
-<li>Calculate returns, ratios, and statistics on large datasets</li>
-<li>Build financial models (NPV, IRR, portfolio analysis)</li>
-<li>Process payroll, invoices, or ledger data at scale</li>
-<li>Foundation for Pandas (next module) — Pandas is built on NumPy</li>
-</ul>
-<hr />
-<h3 id="table-of-contents">📋 Table of Contents</h3>
+                <h1 id="numpy-for-ca-professionalsfast-large-scale-numerical-computing-in-python-pre-requisite-module-1-python-basics-session-duration-36-hours-approach-concept-fundamentals-hands-on-practice-">🔢 NumPy for CA Professionals<strong>Fast, Large-Scale Numerical Computing in Python</strong>---<strong>Pre-requisite:</strong> Module 1 — Python Basics  <strong>Session Duration:</strong> 3–6 hours  <strong>Approach:</strong> Concept → Fundamentals → Hands-on Practice---</h1>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
 <table>
 <thead>
 <tr>
-<th>#</th>
+<th>Part</th>
+<th>Section</th>
 <th>Topic</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td><strong>Part 1: Why NumPy?</strong></td>
 <td>1</td>
+<td>The Problem with Plain Python for Numbers</td>
+</tr>
+<tr>
+<td></td>
+<td>2</td>
+<td>What is NumPy? — History &amp; Ecosystem</td>
+</tr>
+<tr>
+<td><strong>Part 2: Fundamentals</strong></td>
+<td>3</td>
+<td>The ndarray — NumPy's Core Object</td>
+</tr>
+<tr>
+<td></td>
+<td>4</td>
+<td>NumPy Data Types (dtype)</td>
+</tr>
+<tr>
+<td></td>
+<td>5</td>
+<td>Creating Arrays — 6 Methods</td>
+</tr>
+<tr>
+<td><strong>Part 3: Hands-on</strong></td>
+<td>6</td>
 <td>Installing &amp; Importing NumPy</td>
 </tr>
 <tr>
-<td>2</td>
-<td>Creating Arrays</td>
+<td></td>
+<td>7</td>
+<td>Creating NumPy Arrays</td>
 </tr>
 <tr>
-<td>3</td>
-<td>Array vs Python List — Speed &amp; Power</td>
+<td></td>
+<td>8</td>
+<td>Array vs Python List — Speed Comparison</td>
 </tr>
 <tr>
-<td>4</td>
-<td>Array Operations (Vectorized Math)</td>
+<td></td>
+<td>9</td>
+<td>Vectorized Financial Math</td>
 </tr>
 <tr>
-<td>5</td>
+<td></td>
+<td>10</td>
 <td>Array Indexing &amp; Slicing</td>
 </tr>
 <tr>
-<td>6</td>
+<td></td>
+<td>11</td>
 <td>Statistical Functions</td>
 </tr>
 <tr>
-<td>7</td>
-<td>Boolean Indexing — Filtering Transactions</td>
+<td></td>
+<td>12</td>
+<td>Boolean Indexing — Filtering</td>
 </tr>
 <tr>
-<td>8</td>
+<td></td>
+<td>13</td>
 <td>2D Arrays — Financial Matrices</td>
 </tr>
 <tr>
-<td>9</td>
-<td>Financial Applications: Returns &amp; Portfolio</td>
+<td><strong>Part 4: Finance Applications</strong></td>
+<td>14</td>
+<td>Returns &amp; Portfolio Analysis</td>
 </tr>
 <tr>
-<td>10</td>
+<td></td>
+<td>15</td>
 <td>NPV &amp; IRR Calculations</td>
 </tr>
 <tr>
-<td>11</td>
+<td><strong>Part 5: Practice</strong></td>
+<td>16</td>
 <td>Practice Exercises</td>
 </tr>
 </tbody>
 </table>
 <hr />
-<h2 id="section-1-installing-importing-numpy">Section 1: Installing &amp; Importing NumPy</h2>
+<p>---## Part 1: Why NumPy?---</p>
+<h2 id="section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-18-gst-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-18-gst-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do <strong>mathematical operations on large datasets</strong>.Consider a real scenario: you have <strong>10,000 invoice amounts</strong> and need to apply 18% GST to all of them.<strong>The Python list approach:</strong>- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 18% GST, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operations<strong>The NumPy approach:</strong>- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the <strong>entire block at once</strong> using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; <em>"The difference is like processing salary slips one-by-one vs running a payroll batch."</em>### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="c1"># Compare: calculate GST on 100,000 invoicesn = 100_000amounts_list  = list(range(1000, n + 1000))   # Python listimport numpy as npamounts_array = np.arange(1000, n + 1000)      # NumPy array# Python list — needs a loopstart = time.time()gst_list = [x * 0.18 for x in amounts_list]time_list = time.time() - start# NumPy — no loop, vectorizedstart = time.time()gst_array = amounts_array * 0.18time_numpy = time.time() - startprint(f&#39;Dataset size:      {n:,} invoices&#39;)print(f&#39;Python list time:  {time_list*1000:.2f} ms&#39;)print(f&#39;NumPy array time:  {time_numpy*1000:.4f} ms&#39;)print(f&#39;NumPy is {time_list/time_numpy:.0f}× faster&#39;)print()print(&#39;Result check (first 5):&#39;)print(&#39;  List :&#39;, gst_list[:5])print(&#39;  NumPy:&#39;, gst_array[:5])</span>
+</code></pre></div>
+<h2 id="section-2-what-is-numpy-a-brief-historynumpy-numerical-python-was-created-by-travis-oliphant-in-2005-by-merging-two-earlier-libraries-numeric-and-numarray-it-has-since-become-the-foundation-of-virtually-every-scientific-and-financial-computing-tool-in-pythonpython-ecosystem-simplified-your-code-pandas-matplotlib-seaborn-scikit-learn-numpy-c-fortran-blas-lapackeverything-in-data-science-and-finance-analytics-sits-on-top-of-numpy-when-you-do-dfamount-118-in-pandas-pandas-calls-numpy-internally-where-numpy-fits-in-your-workflow-task-tool-clean-query-tabular-data-pandas-built-on-numpy-visualise-data-matplotlib-seaborn-built-on-numpy-statistical-modelling-scipy-built-on-numpy-machine-learning-scikit-learn-built-on-numpy-raw-numerical-computation-numpy-directly-portfolio-maths-npv-irr-numpy-directly-batch-calculations-on-arrays-numpy-directly-you-will-use-numpy-directly-for-financial-math-and-indirectly-through-pandas-for-data-analysis">Section 2: What is NumPy?### A brief historyNumPy (<strong>Num</strong>erical <strong>Py</strong>thon) was created by <strong>Travis Oliphant</strong> in 2005 by merging two earlier libraries — <code>Numeric</code> and <code>Numarray</code>. It has since become the <strong>foundation of virtually every scientific and financial computing tool in Python</strong>.<code>Python Ecosystem (simplified)─────────────────────────────────────────────────────  Your Code      │  Pandas ──── Matplotlib ──── Seaborn ──── scikit-learn      │              │                          │      └──────── NumPy ────────────────────────────                    │              C / Fortran (BLAS, LAPACK)─────────────────────────────────────────────────────</code>Everything in data science and finance analytics sits on top of NumPy. When you do <code>df['Amount'] * 1.18</code> in Pandas, Pandas calls NumPy internally.### Where NumPy fits in your workflow| Task | Tool ||------|------|| Clean &amp; query tabular data | Pandas (built on NumPy) || Visualise data | Matplotlib / Seaborn (built on NumPy) || Statistical modelling | SciPy (built on NumPy) || Machine learning | scikit-learn (built on NumPy) || <strong>Raw numerical computation</strong> | <strong>NumPy directly</strong> || Portfolio maths, NPV, IRR | NumPy directly || Batch calculations on arrays | NumPy directly |You will use NumPy directly for financial math, and indirectly through Pandas for data analysis.</h2>
+<p>---## Part 2: NumPy Fundamentals---</p>
+<h2 id="section-3-the-ndarray-numpys-core-object-what-is-an-ndarrayndarray-stands-for-n-dimensional-array-it-is-the-fundamental-building-block-of-numpy-everything-numpy-does-revolves-around-this-objectthink-of-it-this-way-dimension-also-called-finance-analogy-1d-array-vector-a-single-column-of-invoice-amounts-2d-array-matrix-a-table-rows-months-columns-departments-3d-array-tensor-multiple-tables-one-per-financial-year-what-makes-ndarray-special1-homogeneous-all-elements-are-the-same-data-type-unlike-python-lists-2-fixed-size-size-is-set-at-creation-memory-is-pre-allocated-3-contiguous-memory-elements-sit-next-to-each-other-in-ram-fast-access-4-vectorized-mathematical-operations-work-on-the-whole-array-at-once-key-properties-every-ndarray-hasarrayshape-dimensions-as-a-tuple-rows-columnsarrayndim-number-of-dimensions-1d-2d-3darraysize-total-number-of-elementsarraydtype-data-type-of-elements-int64-float64-bool-etcarrayitemsize-bytes-each-element-uses-in-memoryarraynbytes-total-bytes-used-size-itemsize">Section 3: The <code>ndarray</code> — NumPy's Core Object### What is an ndarray?<code>ndarray</code> stands for <strong>N-Dimensional Array</strong>. It is the fundamental building block of NumPy — everything NumPy does revolves around this object.Think of it this way:| Dimension | Also called | Finance analogy ||-----------|-------------|-----------------|| 1D array | Vector | A single column of invoice amounts || 2D array | Matrix | A table: rows = months, columns = departments || 3D array | Tensor | Multiple tables: one per financial year |### What makes ndarray special?<strong>1. Homogeneous</strong> — all elements are the same data type (unlike Python lists)  <strong>2. Fixed size</strong> — size is set at creation (memory is pre-allocated)  <strong>3. Contiguous memory</strong> — elements sit next to each other in RAM (fast access)  <strong>4. Vectorized</strong> — mathematical operations work on the whole array at once### Key properties every ndarray has<code>array.shape     → Dimensions as a tuple — (rows, columns)array.ndim      → Number of dimensions — 1D, 2D, 3Darray.size      → Total number of elementsarray.dtype     → Data type of elements — int64, float64, bool, etc.array.itemsize  → Bytes each element uses in memoryarray.nbytes    → Total bytes used (size × itemsize)</code></h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="c1"># 1D array — one column of datamonthly_revenue = np.array([1250000, 1380000, 1120000, 1450000,                             1620000, 1780000, 1550000, 1420000,                             1680000, 1910000, 2030000, 2150000])print(&#39;=== 1D Array Properties ===&#39;)print(f&#39;Data:       {monthly_revenue}&#39;)print(f&#39;shape:      {monthly_revenue.shape}    ← (12,) means 1D with 12 elements&#39;)print(f&#39;ndim:       {monthly_revenue.ndim}       ← 1 dimension&#39;)print(f&#39;size:       {monthly_revenue.size}      ← 12 elements total&#39;)print(f&#39;dtype:      {monthly_revenue.dtype}   ← 64-bit integer&#39;)print(f&#39;itemsize:   {monthly_revenue.itemsize} bytes per element&#39;)print(f&#39;nbytes:     {monthly_revenue.nbytes}  bytes total in memory&#39;)print()# 2D array — a table: 4 quarters × 4 departmentsdept_revenue = np.array([    [500000, 350000, 120000, 180000],    [520000, 360000, 125000, 195000],    [480000, 340000, 118000, 185000],    [560000, 390000, 132000, 210000],])print(&#39;=== 2D Array Properties ===&#39;)print(f&#39;shape:  {dept_revenue.shape}  ← 4 rows (quarters), 4 columns (departments)&#39;)print(f&#39;ndim:   {dept_revenue.ndim}           ← 2 dimensions&#39;)print(f&#39;size:   {dept_revenue.size}          ← 16 elements total (4×4)&#39;)</span>
+</code></pre></div>
+<h2 id="section-4-numpy-data-types-dtype-why-dtype-mattersunlike-python-lists-which-hold-mixed-types-every-element-in-a-numpy-array-is-the-same-type-this-is-what-enables-the-speed-advantage-numpy-knows-exactly-how-many-bytes-each-element-needs-and-can-process-them-all-with-a-single-c-level-loopchoosing-the-right-dtype-can-also-save-significant-memory-important-when-working-with-millions-of-rows-common-dtypes-in-financial-work-dtype-size-range-precision-use-case-int32-4-bytes-21-billion-invoice-counts-quantities-int64-8-bytes-92-1018-amounts-in-paise-large-float32-4-bytes-7-decimal-digits-ratios-percentages-float64-8-bytes-15-decimal-digits-monetary-values-rates-bool-1-byte-true-false-flags-audit-status-for-monetary-calculations-always-use-float64-the-default-float32-can-introduce-rounding-errors-in-financial-calculations-memory-impact-a-real-examplea-dataset-of-1-million-invoice-amounts-float64-8-mb-float32-4-mb-half-the-memory-but-less-precision-int32-4-mb-if-amounts-are-whole-rupees">Section 4: NumPy Data Types (<code>dtype</code>)### Why dtype mattersUnlike Python lists (which hold mixed types), every element in a NumPy array is the <strong>same type</strong>. This is what enables the speed advantage — NumPy knows exactly how many bytes each element needs and can process them all with a single C-level loop.Choosing the right dtype can also <strong>save significant memory</strong> — important when working with millions of rows.### Common dtypes in financial work| dtype | Size | Range / Precision | Use case ||-------|------|-------------------|----------|| <code>int32</code> | 4 bytes | ±2.1 billion | Invoice counts, quantities || <code>int64</code> | 8 bytes | ±9.2 × 10¹⁸ | Amounts in paise (large) || <code>float32</code> | 4 bytes | ~7 decimal digits | Ratios, percentages || <code>float64</code> | 8 bytes | ~15 decimal digits | Monetary values, rates || <code>bool</code> | 1 byte | True / False | Flags, audit status |&gt; ⚠️ <strong>For monetary calculations, always use <code>float64</code> (the default).</strong> <code>float32</code> can introduce rounding errors in financial calculations.### Memory impact — a real exampleA dataset of 1 million invoice amounts:- <code>float64</code> → 8 MB- <code>float32</code> → 4 MB (half the memory, but less precision)- <code>int32</code>   → 4 MB (if amounts are whole rupees)</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="c1"># Default dtype inferencea = np.array([45000, 82000, 31500])      # Python ints → int64 by defaultb = np.array([18.5, 12.0, 5.0])          # Python floats → float64 by defaultc = np.array([True, False, True])         # Python bools → boolprint(&#39;Integer array dtype:&#39;, a.dtype)print(&#39;Float array dtype:  &#39;, b.dtype)print(&#39;Bool array dtype:   &#39;, c.dtype)print()# Explicit dtype — control precision and memoryamounts_f64 = np.array([45000.75, 82000.50, 31500.25], dtype=np.float64)amounts_f32 = np.array([45000.75, 82000.50, 31500.25], dtype=np.float32)print(&#39;float64 precision:&#39;, amounts_f64)print(&#39;float32 precision:&#39;, amounts_f32)  # Note subtle roundingprint()print(&#39;Memory — float64:&#39;, amounts_f64.nbytes, &#39;bytes&#39;)print(&#39;Memory — float32:&#39;, amounts_f32.nbytes, &#39;bytes&#39;)print()# Type conversion (casting)invoice_ids = np.array([1001, 1002, 1003, 1004], dtype=np.int32)print(&#39;Invoice IDs (int32):&#39;, invoice_ids, &#39;| dtype:&#39;, invoice_ids.dtype)as_float = invoice_ids.astype(np.float64)print(&#39;Converted (float64):&#39;, as_float, &#39;| dtype:&#39;, as_float.dtype)</span>
+</code></pre></div>
+<h2 id="section-5-creating-arrays-6-methodsbefore-you-can-analyse-data-with-numpy-you-need-to-get-your-data-into-an-ndarray-there-are-several-ways-to-do-this-depending-on-where-your-data-comes-from-method-use-when-nparraylist-you-already-have-a-python-list-npzerosn-initialising-a-blank-result-container-nponesn-setting-up-a-uniform-weights-array-nparangestart-stop-step-generating-a-sequence-like-excels-sequence-nplinspacestart-stop-n-evenly-spaced-values-between-two-numbers-npfullshape-value-filling-an-array-with-a-constant-these-are-the-foundations-in-practice-youll-most-often-load-data-via-pandas-module-3-which-stores-its-columns-as-numpy-arrays-internally">Section 5: Creating Arrays — 6 MethodsBefore you can analyse data with NumPy, you need to get your data into an <code>ndarray</code>. There are several ways to do this depending on where your data comes from.| Method | Use when... ||--------|-------------|| <code>np.array(list)</code> | You already have a Python list || <code>np.zeros(n)</code> | Initialising a blank result container || <code>np.ones(n)</code> | Setting up a uniform weights array || <code>np.arange(start, stop, step)</code> | Generating a sequence (like Excel's SEQUENCE) || <code>np.linspace(start, stop, n)</code> | Evenly spaced values between two numbers || <code>np.full(shape, value)</code> | Filling an array with a constant |These are the foundations — in practice you'll most often load data via Pandas (Module 3), which stores its columns as NumPy arrays internally.</h2>
+<h2 id="section-6-installing-importing-numpy">Section 6: Installing &amp; Importing NumPy</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Run this cell ONCE to install NumPy (if not already installed)</span>
 <span class="c1"># !pip install numpy</span>
 
@@ -223,7 +254,7 @@
 <div class="highlight"><pre><span></span><code>NumPy version: 2.2.6
 NumPy imported successfully!
 </code></pre></div>
-<h2 id="section-2-creating-numpy-arrays">Section 2: Creating NumPy Arrays</h2>
+<h2 id="section-7-creating-numpy-arrays">Section 7: Creating NumPy Arrays</h2>
 <p>A NumPy <strong>array</strong> is like an Excel column — it holds a sequence of numbers (all of the same type).<br />
 Unlike Python lists, NumPy arrays are designed for <strong>mathematical operations</strong>.</p>
 <h3 id="ways-to-create-arrays">Ways to create arrays</h3>
@@ -277,7 +308,7 @@ Interest rate range: [ 6.   7.5  9.  10.5 12. ] %
 <div class="highlight"><pre><span></span><code>Revenue data loaded: 12 months
 Shape: (12,)
 </code></pre></div>
-<h2 id="section-3-array-vs-python-list-why-numpy-is-faster">Section 3: Array vs Python List — Why NumPy is Faster</h2>
+<h2 id="section-8-array-vs-python-list-why-numpy-is-faster">Section 8: Array vs Python List — Why NumPy is Faster</h2>
 <p>The key difference: with Python lists, operations happen <strong>one item at a time</strong>.<br />
 With NumPy arrays, operations happen on <strong>the entire array at once</strong> (vectorization).</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Python list — calculating GST (you need a loop)</span>
@@ -300,7 +331,7 @@ With NumPy arrays, operations happen on <strong>the entire array at once</strong
 GST (NumPy method): [ 8100. 14760.  5670. 17460.  9720.]
 Total with GST: [ 53100.  96760.  37170. 114460.  63720.]
 </code></pre></div>
-<h2 id="section-4-array-operations-vectorized-financial-math">Section 4: Array Operations — Vectorized Financial Math</h2>
+<h2 id="section-9-array-operations-vectorized-financial-math">Section 9: Array Operations — Vectorized Financial Math</h2>
 <p>With NumPy, you can do <strong>arithmetic on entire columns of data</strong> without writing a single loop.<br />
 This is called <strong>vectorization</strong> — operations are applied element-by-element automatically.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Monthly P&amp;L calculated from arrays</span>
@@ -377,7 +408,7 @@ Jan    ₹ 1,560,000 ₹ 1,910,000 ↑  22.4%
 Feb    ₹ 1,700,000 ₹ 2,030,000 ↑  19.4%
 Mar    ₹ 1,820,000 ₹ 2,150,000 ↑  18.1%
 </code></pre></div>
-<h2 id="section-5-array-indexing-slicing">Section 5: Array Indexing &amp; Slicing</h2>
+<h2 id="section-10-array-indexing-slicing">Section 10: Array Indexing &amp; Slicing</h2>
 <p>Accessing specific elements or ranges from a NumPy array — same logic as Python lists, but more powerful.</p>
 <div class="highlight"><pre><span></span><code><span class="n">monthly_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
@@ -413,7 +444,7 @@ Q2 (Jul-Sep): ₹4,850,000
 Q3 (Oct-Dec): ₹4,650,000
 Q4 (Jan-Mar): ₹6,090,000
 </code></pre></div>
-<h2 id="section-6-statistical-functions">Section 6: Statistical Functions</h2>
+<h2 id="section-11-statistical-functions">Section 11: Statistical Functions</h2>
 <p>NumPy has built-in functions for all common statistical measures — essential for financial analysis.</p>
 <div class="highlight"><pre><span></span><code><span class="n">monthly_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
@@ -485,7 +516,7 @@ Jan   ₹      590,000 ₹    4,280,000
 Feb   ₹      620,000 ₹    4,900,000
 Mar   ₹      660,000 ₹    5,560,000
 </code></pre></div>
-<h2 id="section-7-boolean-indexing-filtering-transactions">Section 7: Boolean Indexing — Filtering Transactions</h2>
+<h2 id="section-12-boolean-indexing-filtering-transactions">Section 12: Boolean Indexing — Filtering Transactions</h2>
 <p>One of NumPy's most powerful features — filter data using conditions, without writing a loop.<br />
 This is like <strong>AutoFilter in Excel</strong>, but applied instantly to millions of rows.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Invoice data</span>
@@ -542,7 +573,7 @@ Risk Classification:
   ₹  88,000  →  Normal
   ₹ 410,000  →  HIGH RISK
 </code></pre></div>
-<h2 id="section-8-2d-arrays-financial-matrices">Section 8: 2D Arrays — Financial Matrices</h2>
+<h2 id="section-13-2d-arrays-financial-matrices">Section 13: 2D Arrays — Financial Matrices</h2>
 <p>NumPy arrays can be <strong>2-dimensional</strong> — like a table with rows and columns.<br />
 Think of a 2D array as an entire Excel sheet (rows = time periods, columns = items).</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 2D array — Quarterly data for 4 departments</span>
@@ -617,7 +648,7 @@ Total Budget by Quarter:
 
 Grand Total: ₹4,765,000
 </code></pre></div>
-<h2 id="section-9-financial-applications-returns-portfolio">Section 9: Financial Applications — Returns &amp; Portfolio</h2>
+<h2 id="section-14-financial-applications-returns-portfolio">Section 14: Financial Applications — Returns &amp; Portfolio</h2>
 <p>NumPy is widely used in finance for <strong>investment analysis</strong>. Here we calculate stock returns and basic portfolio statistics.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Calculate daily/monthly returns from price data</span>
 <span class="c1"># Simple return = (Price_today - Price_yesterday) / Price_yesterday</span>
@@ -700,7 +731,7 @@ HDFC Bank    ₹   200,000    20.0%    14.8% ₹ 29,600.00
 --------------------------------------------------------
 TOTAL        ₹ 1,000,000   100.0%   18.90% ₹189,000.00
 </code></pre></div>
-<h2 id="section-10-npv-irr-calculations">Section 10: NPV &amp; IRR Calculations</h2>
+<h2 id="section-15-npv-irr-calculations">Section 15: NPV &amp; IRR Calculations</h2>
 <p><strong>Net Present Value (NPV)</strong> and <strong>Internal Rate of Return (IRR)</strong> are fundamental to capital budgeting.<br />
 NumPy provides ready-to-use functions for both — no more manual discounting!</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># NPV Calculation</span>
@@ -799,7 +830,7 @@ Project B (Software): IRR = 29.47%   ✓ Accept
 
 Recommendation: Project B has the higher IRR
 </code></pre></div>
-<h2 id="section-11-practice-exercises">Section 11: Practice Exercises</h2>
+<h2 id="section-16-practice-exercises">Section 16: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-payroll-processing">🏋️ Exercise 1 — Payroll Processing</h4>
 <p>You have the following employee salary data (annual CTC in ₹):
