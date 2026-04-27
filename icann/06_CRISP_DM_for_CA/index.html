@@ -1074,6 +1074,9 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Libraries ready.&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Analysis date: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> %B %Y&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Libraries ready.
+Analysis date: 27 April 2026
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Build a realistic invoice / payment dataset ──────────────────────────────</span>
 <span class="c1"># Simulating 2 years of invoice history for 320 clients (800 invoices)</span>
 
@@ -1150,6 +1153,32 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Dataset shape: (800, 12)
+
+Late payers: 254 (31.8%)
+On-time:      546 (68.2%)
+
+  Invoice_ID Client_ID       Industry  Invoice_Amount  Credit_Limit  \
+0  INV-00001    CL0103  Manufacturing          730000       2028000   
+1  INV-00002    CL0271    IT Services          116000        408000   
+2  INV-00003    CL0107    IT Services          387000        629000   
+3  INV-00004    CL0072    IT Services          280000        842000   
+4  INV-00005    CL0189  Manufacturing          664000       2335000
+
+   Tenure_Years Invoice_Date   Due_Date Payment_Date  Prev_Late_Count  \
+0           2.1   2024-11-01 2024-12-01   2025-05-10                3   
+1           4.6   2023-04-26 2023-06-10   2023-11-14                1   
+2           7.8   2024-05-30 2024-07-14   2024-07-19                1   
+3           1.6   2025-03-27 2025-05-11   2025-05-23                0   
+4           7.6   2024-12-15 2025-01-14   2025-01-28                1
+
+   Days_Delayed  Is_Late  
+0           160        1  
+1           157        1  
+2             5        0  
+3            12        0  
+4            14        0
+</code></pre></div>
 <h2 id="section-12-phase-1-in-python-documenting-the-problem-charter">Section 12: Phase 1 in Python — Documenting the Problem Charter</h2>
 <p>Before touching the data, we document the business problem in code. This becomes part of your project's audit trail.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Project Charter — Python documentation ────────────────────────────────────</span>
@@ -1211,6 +1240,53 @@ Not "analyse sales data." Instead:<br />
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">v</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>=================================================================
+  PROJECT CHARTER: Late Payment Risk Scoring — Meridian Advisory Services
+=================================================================
+
+ANALYST:
+  Finance Analytics Team
+
+DATE:
+  27 April 2026
+
+VERSION:
+  1.0
+
+BUSINESS QUESTION:
+  Which clients with open invoices are most likely to delay payment beyond 60 days, so that the collections team can prioritise follow-ups?
+
+WHY IT MATTERS:
+  Rs 1.8 Crores overdue beyond 60 days. Working capital pressure affects payroll and vendor payments.
+
+SUCCESS CRITERIA:
+  [primary] Recall &gt;= 75% (catch at least 75% of actual late payers)
+  [secondary] Precision &gt;= 50% (half of flagged clients should truly be late)
+  [business] Reduce overdue receivables by 20% within 2 months of deployment
+
+DATA SOURCES:
+  • ERP invoice register (last 2 years)
+  • Client master file (industry, tenure, credit limit)
+  • Payment log with actual payment dates
+
+TARGET VARIABLE:
+  Is_Late (1 = paid more than 60 days after due date)
+
+OUTPUT:
+  Monthly Excel report: client list ranked by risk score with recommended action
+
+TIMELINE:
+  2-week prototype; month-end full deployment
+
+STAKEHOLDER:
+  CFO — monthly delivery by 3rd of each month
+
+CONSTRAINTS:
+  • Data stays on internal servers
+  • Output must be Excel-readable
+
+=================================================================
+</code></pre></div>
 <h2 id="section-13-phase-2-in-python-data-profiling">Section 13: Phase 2 in Python — Data Profiling</h2>
 <p>The first task in Data Understanding: get a complete picture of the data before doing anything else.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Data Profiling — the standard Phase 2 opening ────────────────────────────</span>
@@ -1248,6 +1324,56 @@ Not "analyse sales data." Instead:<br />
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">📊 NUMERIC SUMMARY&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">invoices</span><span class="p">[[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Credit_Limit&#39;</span><span class="p">,</span><span class="s1">&#39;Tenure_Years&#39;</span><span class="p">,</span><span class="s1">&#39;Prev_Late_Count&#39;</span><span class="p">,</span><span class="s1">&#39;Days_Delayed&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DATA PROFILE REPORT
+  Dataset: Invoice &amp; Payment History
+  Generated: 27 Apr 2026 22:31
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📐 DIMENSIONS
+  Rows (invoices): 800
+  Columns:         12
+
+📅 DATE RANGE
+  Invoice dates: 2023-04-01 → 2025-03-29
+  Payment dates: 2023-05-11 → 2025-11-07
+
+🏷️ COLUMN TYPES
+Invoice_ID                 object
+Client_ID                  object
+Industry                   object
+Invoice_Amount              int64
+Credit_Limit                int64
+Tenure_Years              float64
+Invoice_Date       datetime64[ns]
+Due_Date           datetime64[ns]
+Payment_Date       datetime64[ns]
+Prev_Late_Count             int64
+Days_Delayed                int64
+Is_Late                     int64
+
+🔍 MISSING VALUES
+  None ✓
+
+🔄 DUPLICATE ROWS
+  Exact duplicates: 0
+
+🔑 UNIQUE VALUES (categorical columns)
+  Industry: 8 unique → [&#39;Manufacturing&#39; &#39;IT Services&#39; &#39;Construction&#39; &#39;Healthcare&#39; &#39;Real Estate&#39;
+ &#39;Retail&#39;]
+  Is_Late: 2 unique → [1 0]
+
+📊 NUMERIC SUMMARY
+       Invoice_Amount  Credit_Limit  Tenure_Years  Prev_Late_Count  Days_Delayed
+count          800.00        800.00        800.00           800.00        800.00
+mean        382588.75    1057330.00          4.26             1.56         42.23
+std         260797.07     811524.27          2.14             1.16         55.64
+min          34000.00      70000.00          0.50             0.00          0.00
+25%         188500.00     498000.00          2.50             1.00          5.00
+50%         320500.00     825000.00          4.30             1.00         10.50
+75%         487750.00    1364500.00          6.00             2.00         83.00
+max        1321000.00    4884000.00          8.00             5.00        179.00
 </code></pre></div>
 <h2 id="section-14-phase-2-in-python-data-quality-assessment">Section 14: Phase 2 in Python — Data Quality Assessment</h2>
 <p>After profiling, assess each quality dimension systematically.</p>
@@ -1312,6 +1438,33 @@ Not "analyse sales data." Instead:<br />
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  [</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">issue</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="ow">not</span> <span class="n">issues_found</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  None major — data is suitable for analysis.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  DATA QUALITY ASSESSMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+1. COMPLETENESS
+   Overall completeness: 100.0%
+   Missing cells: 0
+
+2. ACCURACY (logic checks)
+   Invoices with non-positive amount: 0
+   Payments before invoice date:      0
+   Invoices exceeding credit limit:   0 (0.0%) ← investigate
+
+3. CONSISTENCY
+   Days_Delayed column vs computed: 0 mismatches (should be 0)
+   Prev_Late_Count in [0–5]:        ✓ OK
+
+4. UNIQUENESS
+   Duplicate Invoice IDs: 0
+
+5. TIMELINESS
+   Most recent invoice: 2025-03-29 (394 days ago)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+QUALITY ISSUES FOUND: 0
+  None major — data is suitable for analysis.
 </code></pre></div>
 <h2 id="section-15-phase-2-in-python-univariate-analysis">Section 15: Phase 2 in Python — Univariate Analysis</h2>
 <p>Examine each variable individually. Understand distributions before looking at relationships.</p>
@@ -1382,6 +1535,17 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Class imbalance: </span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Is_Late&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">% late — model must handle this&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • </span><span class="si">{</span><span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Prev_Late_Count&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">% of records have 3+ previous late payments — strong signal&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/1498040349.py:59: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_26_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Key observations:
+  • Invoice amounts range: ₹0.3L – ₹13.2L
+  • Class imbalance: 32% late — model must handle this
+  • 21% of records have 3+ previous late payments — strong signal
+</code></pre></div>
 <h2 id="section-16-phase-2-in-python-bivariate-analysis">Section 16: Phase 2 in Python — Bivariate Analysis</h2>
 <p>Now examine how each input variable relates to the target variable <code>Is_Late</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Bivariate Analysis — each variable vs Is_Late ────────────────────────────</span>
@@ -1390,10 +1554,7 @@ Not "analyse sales data." Instead:<br />
              <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 
 <span class="c1"># 1. Invoice Amount vs Is_Late</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span>
-            <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
-            <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span>
-            <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount by Payment Status&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;On Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Late &gt;60d&#39;</span><span class="p">])</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
@@ -1401,15 +1562,16 @@ Not "analyse sales data." Instead:<br />
     <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
 
 <span class="c1"># 2. Late rate by Industry</span>
-<span class="n">industry_late</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Industry&#39;</span><span class="p">)[</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">industry_late</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
+    <span class="s1">&#39;Industry&#39;</span><span class="p">)[</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;tomato&#39;</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mf">0.3</span> <span class="k">else</span> <span class="s1">&#39;steelblue&#39;</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">industry_late</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">industry_late</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">industry_late</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span>
                    <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Overall avg&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">industry_late</span><span class="o">.</span><span class="n">values</span> <span class="o">*</span> <span class="mi">100</span><span class="p">):</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">v</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Late Payment Rate by Industry</span>
-<span class="p">(</span><span class="n">Red</span> <span class="o">=</span> <span class="n">high</span> <span class="n">risk</span><span class="p">)</span><span class="s1">&#39;, fontweight=&#39;</span><span class="n">bold</span><span class="s1">&#39;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s1">&#39;Late Payment Rate by Industry(Red = high risk)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% La</span><span class="s1">te Payers&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -1417,7 +1579,8 @@ Not "analyse sales data." Instead:<br />
 <span class="n">prev_late_rate</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Prev_Late_Count&#39;</span><span class="p">)[</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span>
 <span class="n">bars</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">prev_late_rate</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">prev_late_rate</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
                       <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prev_late_rate</span><span class="p">)))</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Late Rate by Previous Late Payment History&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s1">&#39;Late Rate by Previous Late Payment History&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Previous Late Payments (out of 5)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">% Li</span><span class="s1">kely to Pay Late&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">prev_late_rate</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
@@ -1426,31 +1589,33 @@ Not "analyse sales data." Instead:<br />
 
 <span class="c1"># 4. Tenure vs Is_Late</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Tenure_Years&#39;</span><span class="p">,</span>
-               <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
+               <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
                <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Client Tenure by Payment Status&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;On Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Late &gt;60d&#39;</span><span class="p">])</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tenure (Years)&#39;</span><span class="p">)</span>
 
 <span class="c1"># 5. Invoice/Credit ratio vs Is_Late</span>
-<span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Credit_Limit&#39;</span><span class="p">]</span>
+<span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> \
+    <span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Credit_Limit&#39;</span><span class="p">]</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">,</span>
-            <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
+            <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
             <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice/Credit Limit Ratio</span>
-<span class="n">by</span> <span class="n">Payment</span> <span class="n">Status</span><span class="s1">&#39;, fontweight=&#39;</span><span class="n">bold</span><span class="s1">&#39;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span>
+    <span class="s1">&#39;Invoice/Credit Limit Ratio by Payment Status&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;On Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Late &gt;60d&#39;</span><span class="p">])</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount / Credit Limit&#39;</span><span class="p">)</span>
 
 <span class="c1"># 6. Correlation heatmap</span>
 <span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Credit_Limit&#39;</span><span class="p">,</span> <span class="s1">&#39;Tenure_Years&#39;</span><span class="p">,</span>
-                           <span class="s1">&#39;Prev_Late_Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;Is_Late&#39;</span><span class="p">]]</span>
+                         <span class="s1">&#39;Prev_Late_Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">,</span> <span class="s1">&#39;Is_Late&#39;</span><span class="p">]]</span>
 <span class="n">corr</span> <span class="o">=</span> <span class="n">numeric_cols</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
             <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
             <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Correlation&#39;</span><span class="p">})</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Correlation Matrix&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -1462,6 +1627,40 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Shorter-tenured clients are more likely to pay late&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice/Credit ratio: late payers use a higher % of their credit limit&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice_Amount alone has weak correlation with Is_Late&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:7: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Amount&#39;, palette={&#39;0&#39;: &#39;seagreen&#39;, &#39;1&#39;: &#39;tomato&#39;}, ax=axes[0, 0], width=0.45, flierprops=dict(marker=&#39;o&#39;, markersize=3, alpha=0.4))
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:9: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  axes[0, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:41: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.violinplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Tenure_Years&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:45: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  axes[1, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:51: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Credit_Ratio&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:56: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+  axes[1, 1].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.draw()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_28_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Key findings from bivariate analysis:
+  • Construction &amp; Real Estate have highest late rates
+  • Prev_Late_Count is the strongest predictor — monotonic relationship
+  • Shorter-tenured clients are more likely to pay late
+  • Invoice/Credit ratio: late payers use a higher % of their credit limit
+  • Invoice_Amount alone has weak correlation with Is_Late
 </code></pre></div>
 <h2 id="section-17-phase-3-preview-what-data-preparation-will-look-like">Section 17: Phase 3 Preview — What Data Preparation Will Look Like</h2>
 <p>We have identified the issues and patterns. Phase 3 (covered in Module 07) will handle:</p>
@@ -1478,30 +1677,24 @@ Not "analyse sales data." Instead:<br />
      <span class="s1">&#39;Investigate, then cap at 1.0 or add binary flag&#39;</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;STEP 3&#39;</span><span class="p">,</span> <span class="s1">&#39;Engineer new features&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;• invoice_to_credit_ratio (already done)</span>
-<span class="s1">&#39;</span>
-     <span class="s1">&#39;  • credit_utilisation_flag = 1 if ratio &gt; 0.8</span>
-<span class="s1">&#39;</span>
-     <span class="s1">&#39;  • invoice_month (seasonality)</span>
-<span class="s1">&#39;</span>
-     <span class="s1">&#39;  • invoice_quarter</span>
-<span class="s1">&#39;</span>
+     <span class="s1">&#39;• invoice_to_credit_ratio (already done)</span><span class="se">\n</span><span class="s1">&#39;</span>
+     <span class="s1">&#39;  • credit_utilisation_flag = 1 if ratio &gt; 0.8</span><span class="se">\n</span><span class="s1">&#39;</span>
+     <span class="s1">&#39;  • invoice_month (seasonality)</span><span class="se">\n</span><span class="s1">&#39;</span>
+     <span class="s1">&#39;  • invoice_quarter</span><span class="se">\n</span><span class="s1">&#39;</span>
      <span class="s1">&#39;  • high_risk_industry flag&#39;</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;STEP 4&#39;</span><span class="p">,</span> <span class="s1">&#39;Encode categorical variables&#39;</span><span class="p">,</span>
      <span class="s1">&#39;One-hot encode Industry column (8 categories → 8 binary columns)&#39;</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;STEP 5&#39;</span><span class="p">,</span> <span class="s1">&#39;Scale numeric features&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;StandardScaler on Invoice_Amount, Credit_Limit, Tenure_Years</span>
-<span class="s1">&#39;</span>
+     <span class="s1">&#39;StandardScaler on Invoice_Amount, Credit_Limit, Tenure_Years&#39;</span>
      <span class="s1">&#39;  (needed for models like Logistic Regression, KNN, SVM)&#39;</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;STEP 6&#39;</span><span class="p">,</span> <span class="s1">&#39;Handle class imbalance&#39;</span><span class="p">,</span>
      <span class="s1">&#39;Is_Late is ~30% — may need SMOTE or class_weight=&quot;balanced&quot;&#39;</span><span class="p">),</span>
 
     <span class="p">(</span><span class="s1">&#39;STEP 7&#39;</span><span class="p">,</span> <span class="s1">&#39;Train/Test split&#39;</span><span class="p">,</span>
-     <span class="s1">&#39;80% training (640 rows) / 20% test (160 rows)</span>
-<span class="s1">&#39;</span>
+     <span class="s1">&#39;80% training (640 rows) / 20% test (160 rows)&#39;</span>
      <span class="s1">&#39;  Use stratify=Is_Late to preserve class ratio&#39;</span><span class="p">),</span>
 <span class="p">]</span>
 
@@ -1526,6 +1719,99 @@ Not "analyse sales data." Instead:<br />
                 <span class="s1">&#39;Prev_Late_Count&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Credit_Ratio&#39;</span><span class="p">,</span>
                 <span class="s1">&#39;High_Risk_Industry&#39;</span><span class="p">,</span> <span class="s1">&#39;Invoice_Month&#39;</span><span class="p">,</span> <span class="s1">&#39;Is_Late&#39;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">prep_preview</span><span class="p">[</span><span class="n">feature_cols</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>DATA PREPARATION PLAN (to be executed in Module 07)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  STEP 1: Select relevant columns
+    Drop Invoice_ID, Invoice_Date, Payment_Date (leakage risk)
+
+  STEP 2: Handle over-credit-limit records
+    Investigate, then cap at 1.0 or add binary flag
+
+  STEP 3: Engineer new features
+    • invoice_to_credit_ratio (already done)
+      • credit_utilisation_flag = 1 if ratio &gt; 0.8
+      • invoice_month (seasonality)
+      • invoice_quarter
+      • high_risk_industry flag
+
+  STEP 4: Encode categorical variables
+    One-hot encode Industry column (8 categories → 8 binary columns)
+
+  STEP 5: Scale numeric features
+    StandardScaler on Invoice_Amount, Credit_Limit, Tenure_Years  (needed for models like Logistic Regression, KNN, SVM)
+
+  STEP 6: Handle class imbalance
+    Is_Late is ~30% — may need SMOTE or class_weight=&quot;balanced&quot;
+
+  STEP 7: Train/Test split
+    80% training (640 rows) / 20% test (160 rows)  Use stratify=Is_Late to preserve class ratio
+
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+━
+
+Preview of what the analysis-ready dataset will look like:
+ Invoice_Amount  Credit_Limit  Tenure_Years  Prev_Late_Count  Invoice_Credit_Ratio  High_Risk_Industry  Invoice_Month  Is_Late
+         730000       2028000           2.1                3                 0.360                   0             11        1
+         116000        408000           4.6                1                 0.284                   0              4        1
+         387000        629000           7.8                1                 0.615                   0              5        0
+         280000        842000           1.6                0                 0.333                   0              3        0
+         664000       2335000           7.6                1                 0.284                   0             12        0
+         327000        619000           1.9                2                 0.528                   1              4        1
 </code></pre></div>
 <h2 id="section-18-phases-46-preview-modelling-beyond">Section 18: Phases 4–6 Preview — Modelling &amp; Beyond</h2>
 <p>After data preparation (Module 07) and feature engineering (Module 08), the remaining CRISP-DM phases proceed as follows:</p>
@@ -1585,6 +1871,41 @@ Not "analyse sales data." Instead:<br />
 
 <span class="nb">print</span><span class="p">(</span><span class="n">output_preview</span><span class="p">[[</span><span class="s1">&#39;Client_ID&#39;</span><span class="p">,</span><span class="s1">&#39;Industry&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Amount_Lakh&#39;</span><span class="p">,</span>
                        <span class="s1">&#39;Risk_Score&#39;</span><span class="p">,</span><span class="s1">&#39;Risk_Category&#39;</span><span class="p">,</span><span class="s1">&#39;Recommended_Action&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>CRISP-DM PHASES 4–6 — COMING IN MODULES 09–11
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Phase 4: Modelling (Module 09 &amp; 10)
+    ✓ Split data: 80% train / 20% test
+    ✓ Baseline model: Logistic Regression (interpretable)
+    ✓ Improved model: Decision Tree / Random Forest
+    ✓ Predict probability of Is_Late for each client
+
+  Phase 5: Evaluation (Modules 09 &amp; 10)
+    ✓ Confusion matrix: True Positives, False Positives, etc.
+    ✓ Recall: did we catch &gt;= 75% of actual late payers? (our KPI)
+    ✓ Precision: how many flagged clients are truly late?
+    ✓ AUC-ROC: overall ranking ability of the model
+    ✓ Compare vs Phase 1 success criteria
+
+  Phase 6: Deployment (End of Module 10)
+    ✓ Score new invoices: predict late-payment risk for open invoices
+    ✓ Rank clients by risk score (highest risk first)
+    ✓ Export to Excel: client name, invoice, risk score, action
+    ✓ Schedule monthly refresh with new ERP data
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+PREVIEW: What the final output report will look like:
+Client_ID     Industry  Invoice_Amount_Lakh  Risk_Score Risk_Category                                       Recommended_Action
+   CL0268 Construction                  4.7       0.879          High Call client 2 weeks before due date; review credit terms
+   CL0233 Construction                  3.4       0.843          High Call client 2 weeks before due date; review credit terms
+   CL0060 Construction                  5.0       0.806          High Call client 2 weeks before due date; review credit terms
+   CL0220  Real Estate                 11.7       0.798          High Call client 2 weeks before due date; review credit terms
+   CL0158 Construction                 11.1       0.798          High Call client 2 weeks before due date; review credit terms
+   CL0003 Construction                  4.5       0.784          High Call client 2 weeks before due date; review credit terms
+   CL0246  Real Estate                 10.4       0.783          High Call client 2 weeks before due date; review credit terms
+   CL0278 Construction                 10.8       0.771          High Call client 2 weeks before due date; review credit terms
 </code></pre></div>
 <h2 id="section-19-practice-exercises">Section 19: Practice Exercises</h2>
 <hr />
@@ -1667,6 +1988,57 @@ Not "analyse sales data." Instead:<br />
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">profile_dataframe</span><span class="p">(</span><span class="n">invoices</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>============================================================
+DATA PROFILE — 800 rows × 13 columns
+============================================================
+
+COLUMN TYPES &amp; MISSING VALUES:
+                                Type  Non-Null  Missing  Missing%
+Invoice_ID                    object       800        0       0.0
+Client_ID                     object       800        0       0.0
+Industry                      object       800        0       0.0
+Invoice_Amount                 int64       800        0       0.0
+Credit_Limit                   int64       800        0       0.0
+Tenure_Years                 float64       800        0       0.0
+Invoice_Date          datetime64[ns]       800        0       0.0
+Due_Date              datetime64[ns]       800        0       0.0
+Payment_Date          datetime64[ns]       800        0       0.0
+Prev_Late_Count                int64       800        0       0.0
+Days_Delayed                   int64       800        0       0.0
+Is_Late                        int64       800        0       0.0
+Invoice_Credit_Ratio         float64       800        0       0.0
+
+CATEGORICAL COLUMNS — Top 5 values:
+  Invoice_ID:
+    INV-00001                     1 (0.1%)
+    INV-00538                     1 (0.1%)
+    INV-00528                     1 (0.1%)
+    INV-00529                     1 (0.1%)
+    INV-00530                     1 (0.1%)
+  Client_ID:
+    CL0099                        9 (1.1%)
+    CL0144                        7 (0.9%)
+    CL0192                        7 (0.9%)
+    CL0160                        7 (0.9%)
+    CL0252                        7 (0.9%)
+  Industry:
+    Manufacturing               170 (21.2%)
+    IT Services                 140 (17.5%)
+    Trading                     111 (13.9%)
+    Healthcare                   97 (12.1%)
+    Real Estate                  84 (10.5%)
+
+NUMERIC SUMMARY:
+       Invoice_Amount  Credit_Limit  Tenure_Years  Prev_Late_Count  Days_Delayed  Is_Late  Invoice_Credit_Ratio
+count          800.00        800.00        800.00           800.00        800.00   800.00                800.00
+mean        382588.75    1057330.00          4.26             1.56         42.23     0.32                  0.39
+std         260797.07     811524.27          2.14             1.16         55.64     0.47                  0.11
+min          34000.00      70000.00          0.50             0.00          0.00     0.00                  0.25
+25%         188500.00     498000.00          2.50             1.00          5.00     0.00                  0.29
+50%         320500.00     825000.00          4.30             1.00         10.50     0.00                  0.36
+75%         487750.00    1364500.00          6.00             2.00         83.00     1.00                  0.46
+max        1321000.00    4884000.00          8.00             5.00        179.00     1.00                  0.66
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 3: Bivariate Exploration</span>
 
 <span class="c1"># Q1: Average invoice amount by payment status</span>
@@ -1706,6 +2078,34 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">→ Highest: </span><span class="si">{</span><span class="n">top_var</span><span class="si">}</span><span class="s1"> (r = </span><span class="si">{</span><span class="n">corr_with_target</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Meaning: clients with more previous late payments are far more likely to pay late again.&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  This variable should be a key input feature for the predictive model.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Q1 — Invoice Amount by Payment Status:
+               mean    median  count
+On Time    368247.0  311500.0    546
+Late &gt;60d  413417.0  344500.0    254
+
+Q2 — Late Rate by Industry (ascending):
+  Finance            13.8%
+  Healthcare         15.5%
+  IT Services        17.1%
+  Manufacturing      34.1%
+  Trading            37.8%
+  Real Estate        40.5%
+  Retail             45.7%
+  Construction       58.6%
+  → Lowest: Finance (13.8%)
+</code></pre></div>
+<p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_39_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Q4 — Correlation with Is_Late:
+Prev_Late_Count         0.098
+Invoice_Amount          0.081
+Credit_Limit            0.071
+Invoice_Credit_Ratio   -0.016
+Tenure_Years           -0.011
+
+→ Highest: Prev_Late_Count (r = 0.098)
+  Meaning: clients with more previous late payments are far more likely to pay late again.
+  This variable should be a key input feature for the predictive model.
 </code></pre></div>
 <hr />
 <h2 id="module-06-complete">🎉 Module 06 Complete!</h2>

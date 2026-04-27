@@ -734,6 +734,16 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">First 5 rows:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Raw dataset loaded: 880 rows × 13 columns
+
+First 5 rows:
+  Invoice_ID Client_ID    Client_Name      Industry Invoice_Amount GST_Rate  Credit_Limit  Tenure_Years Invoice_Date   Due_Date Payment_Date  Prev_Late_Count  Is_Late
+0  INV-00001    CL0130  Client CL0130  Construction         410000      18%       1580000           7.7   2025-03-18 2025-04-17   2025-04-22                1        0
+1  INV-00002    CL0036  Client CL0036   IT Services         163000     None        423000           4.7   2024-02-02 2024-04-02   2024-04-08                1        0
+2  INV-00003    CL0186  Client CL0186   IT Services          81000     None        210000           0.8   2023-11-12 2023-12-27   2024-05-01                2        1
+3  INV-00004    CL0169  Client CL0169   Real Estate           None      18%        579000           2.3   2024-05-20 2024-06-19   2024-10-23                2        1
+4  INV-00005    CL0202  Client CL0202        Retail         163000      18%        294000           3.1   2024-04-30 2024-06-29   2024-07-08                2        0
+</code></pre></div>
 <h3 id="quick-initial-assessment-what-are-we-dealing-with">Quick initial assessment — what are we dealing with?</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Initial quality scan before any cleaning</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;━&#39;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
@@ -761,6 +771,45 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Client_Name variants for CL0042:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">&#39;Client_ID&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;CL0042&#39;</span><span class="p">][</span><span class="s1">&#39;Client_Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  INITIAL DATA QUALITY SCAN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Shape: 880 rows × 13 columns
+
+Data types:
+Invoice_ID                 object
+Client_ID                  object
+Client_Name                object
+Industry                   object
+Invoice_Amount             object
+GST_Rate                   object
+Credit_Limit                int64
+Tenure_Years              float64
+Invoice_Date       datetime64[ns]
+Due_Date           datetime64[ns]
+Payment_Date       datetime64[ns]
+Prev_Late_Count             int64
+Is_Late                     int64
+
+Missing values:
+                Missing    %
+Industry             19  2.2
+Invoice_Amount       26  3.0
+GST_Rate             13  1.5
+Tenure_Years         41  4.7
+
+Duplicate rows: 30
+
+Sample of Invoice_Amount column (raw):
+[&#39;410000&#39;, &#39;163000&#39;, &#39;81000&#39;, None, &#39;163000&#39;, &#39;336000&#39;, None, &#39;64000&#39;, &#39;101000&#39;, &#39;346000&#39;]
+
+Sample of GST_Rate column (raw):
+[&#39;18%&#39;, None, None, &#39;18%&#39;, &#39;18%&#39;, &#39;5%&#39;, &#39;18%&#39;, &#39;18%&#39;, &#39;18%&#39;, &#39;12%&#39;]
+
+Client_Name variants for CL0042:
+[np.str_(&#39;ALPHA MANUFACTURING LTD&#39;)]
 </code></pre></div>
 <h2 id="section-6-fixing-data-types">Section 6: Fixing Data Types</h2>
 <p><strong>Rule:</strong> Fix data types FIRST — many other cleaning steps depend on correct types (you cannot compute the median of a string column, or compare dates stored as strings).</p>
@@ -806,6 +855,13 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Successfully parsed: </span><span class="si">{</span><span class="n">n_converted</span><span class="si">}</span><span class="s1"> / </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sample:&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Before: Invoice_Amount dtype = object
+Sample: [&#39;410000&#39;, &#39;163000&#39;, &#39;81000&#39;, &#39;163000&#39;, &#39;336000&#39;, &#39;64000&#39;, &#39;101000&#39;, &#39;346000&#39;]
+
+After: dtype = float64
+Successfully parsed: 854 / 880 rows
+Sample: [410000.0, 163000.0, 81000.0, 163000.0, 336000.0]
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── FIX 2: GST_Rate — &quot;18%&quot; string → int ─────────────────────────────────────</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before: GST_Rate sample =&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()[:</span><span class="mi">8</span><span class="p">])</span>
 
@@ -846,6 +902,34 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Data types after all type fixes:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Before: GST_Rate sample = [&#39;18%&#39; &#39;5%&#39; &#39;12%&#39; &#39;28%&#39; &#39;18&#39; &#39;5&#39; &#39;12&#39; &#39;28&#39;]
+After: GST_Rate dtype = float64
+Unique values: [np.float64(5.0), np.float64(12.0), np.float64(18.0), np.float64(28.0)]
+
+Date column types:
+Invoice_Date    datetime64[ns]
+Due_Date        datetime64[ns]
+Payment_Date    datetime64[ns]
+dtype: object
+
+Is_Late dtype: int64 | Unique: [0 1]
+
+Data types after all type fixes:
+Invoice_ID                 object
+Client_ID                  object
+Client_Name                object
+Industry                   object
+Invoice_Amount            float64
+GST_Rate                  float64
+Credit_Limit                int64
+Tenure_Years              float64
+Invoice_Date       datetime64[ns]
+Due_Date           datetime64[ns]
+Payment_Date       datetime64[ns]
+Prev_Late_Count             int64
+Is_Late                     int64
+dtype: object
+</code></pre></div>
 <h2 id="section-7-handling-missing-values">Section 7: Handling Missing Values</h2>
 <p>After type fixes, numeric columns have <code>NaN</code> wherever values were missing OR where string parsing failed. Now handle each column deliberately.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Current missing value status ─────────────────────────────────────────────</span>
@@ -876,6 +960,26 @@
     <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">n_fixed</span><span class="p">,</span>
 <span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invoice_Amount: filled </span><span class="si">{</span><span class="n">n_fixed</span><span class="si">}</span><span class="s1"> missing values with industry median&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Missing values after type fixes:
+                Missing    %
+Industry             19  2.2
+Invoice_Amount       26  3.0
+GST_Rate             13  1.5
+Tenure_Years         41  4.7
+
+Industry medians for Invoice_Amount imputation:
+Industry
+Construction     ₹5.3L
+Finance          ₹2.6L
+Healthcare       ₹3.9L
+IT Services      ₹3.1L
+Manufacturing    ₹4.3L
+Real Estate      ₹8.8L
+Retail           ₹1.3L
+Trading          ₹1.9L
+
+Invoice_Amount: filled 26 missing values with industry median
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Handle remaining missing columns ─────────────────────────────────────────</span>
 
@@ -918,6 +1022,13 @@
 <span class="k">if</span> <span class="n">remaining_missing</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✓ No missing values.&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>GST_Rate: filled 13 missing with mode (18%)
+Industry: filled 19 missing with mode (Manufacturing)
+Tenure_Years: filled 41 missing with median (4.2 years)
+
+Total missing values remaining: 0
+✓ No missing values.
+</code></pre></div>
 <h3 id="visualising-missing-value-patterns-before-and-after">Visualising missing value patterns — before and after</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Missing value heatmap — before vs after</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -945,6 +1056,12 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/1226850125.py:24: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_20_1.png" /></p>
 <h2 id="section-8-removing-duplicates">Section 8: Removing Duplicates</h2>
 <p>Two types to handle:
 1. <strong>Exact duplicates</strong> — every column is identical (safe to drop)
@@ -986,6 +1103,19 @@
     <span class="p">})</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Resolved by keeping higher-amount record. Rows remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Exact duplicate rows: 30
+
+Sample duplicates:
+    Invoice_ID Client_ID  Invoice_Amount Invoice_Date
+191  INV-00192    CL0134        190000.0   2024-04-11
+874  INV-00192    CL0134        190000.0   2024-04-11
+192  INV-00193    CL0199        255000.0   2025-01-28
+871  INV-00193    CL0199        255000.0   2025-01-28
+
+Dropped 30 exact duplicates. Rows remaining: 850
+
+Invoice IDs with multiple records: 0
+</code></pre></div>
 <h2 id="section-9-standardising-text-categories">Section 9: Standardising Text &amp; Categories</h2>
 <p>Text inconsistencies create phantom entities in GroupBy operations — the same client appears as 3 separate rows in a pivot table.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Client name standardisation ───────────────────────────────────────────────</span>
@@ -1021,6 +1151,37 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Client_Name variants after cleaning:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Client_Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Client_Name variants before cleaning:
+Client_Name
+Client CL0187    11
+Client CL0150     9
+Client CL0284     8
+Client CL0166     8
+Client CL0040     8
+Client CL0160     7
+Client CL0152     7
+Client CL0121     7
+Client CL0032     7
+Client CL0046     7
+Client CL0096     7
+Client CL0115     6
+Client CL0239     6
+Client CL0319     6
+Client CL0217     6
+
+Client_Name variants after cleaning:
+Client_Name
+Client Cl0187    11
+Client Cl0150     9
+Client Cl0284     8
+Client Cl0166     8
+Client Cl0040     8
+Client Cl0096     7
+Client Cl0152     7
+Client Cl0121     7
+Client Cl0160     7
+Client Cl0032     7
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Industry — validate against allowed values ────────────────────────────────</span>
 <span class="n">valid_industries</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Manufacturing&#39;</span><span class="p">,</span> <span class="s1">&#39;IT Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Trading&#39;</span><span class="p">,</span> <span class="s1">&#39;Healthcare&#39;</span><span class="p">,</span>
@@ -1064,6 +1225,32 @@
     <span class="p">})</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After fix:&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Industry values in dataset:
+Industry
+Manufacturing    187
+IT Services      150
+Trading          139
+Healthcare       105
+Retail            81
+Real Estate       76
+Construction      64
+Finance           48
+
+Rows with invalid Industry: 0
+
+Invalid industries remaining: 150
+Industry
+Manufacturing    187
+Unknown          150
+Trading          139
+Healthcare       105
+Retail            81
+Real Estate       76
+Construction      64
+Finance           48
+
+Invalid GST rates: 0
+</code></pre></div>
 <h2 id="section-10-detecting-handling-outliers">Section 10: Detecting &amp; Handling Outliers</h2>
 <p>Outliers in financial data can be:
 - <strong>Data errors</strong> (typo: ₹950 instead of ₹9,50,000)
@@ -1101,8 +1288,7 @@
                 <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Lower fence: ₹</span><span class="si">{</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
                 <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Upper fence: ₹</span><span class="si">{</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount — Box Plot</span>
-<span class="p">(</span><span class="n">Red</span> <span class="n">dots</span> <span class="o">=</span> <span class="n">outliers</span><span class="p">)</span><span class="s1">&#39;, fontweight=&#39;</span><span class="n">bold</span><span class="s1">&#39;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount — Box Plot(Red dots = outliers)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -1111,14 +1297,30 @@
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;IQR fences&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution</span>
-<span class="p">(</span><span class="n">Fences</span> <span class="n">shown</span><span class="p">)</span><span class="s1">&#39;, fontweight=&#39;</span><span class="n">bold</span><span class="s1">&#39;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution</span><span class="se">\n</span><span class="s1">(Fences shown)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Invoice_Amount statistics:
+  Q1:           ₹1.83L
+  Q3:           ₹4.79L
+  IQR:          ₹2.96L
+  Lower fence:  ₹-2.61L
+  Upper fence:  ₹9.22L
+
+Outliers below lower fence: 0
+Outliers above upper fence: 49
+
+
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/2452851524.py:45: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_27_2.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Investigate extreme outliers ──────────────────────────────────────────────</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Extremely low amounts (possible typos):&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_fence</span><span class="p">][[</span><span class="s1">&#39;Invoice_ID&#39;</span><span class="p">,</span><span class="s1">&#39;Client_ID&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Industry&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
@@ -1152,6 +1354,31 @@
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invoice_Amount range after capping:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Min: ₹</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Max: ₹</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Extremely low amounts (possible typos):
+Empty DataFrame
+Columns: [Invoice_ID, Client_ID, Invoice_Amount, Industry]
+Index: []
+
+Extremely high amounts (possible typos or large deals):
+    Invoice_ID Client_ID  Invoice_Amount       Industry
+815  INV-00816    CL0276      16250000.0        Trading
+47   INV-00048    CL0115       9650000.0  Manufacturing
+216  INV-00217    CL0017       4100000.0         Retail
+483  INV-00484    CL0221       1800000.0         Retail
+100  INV-00101    CL0079       1342000.0    Real Estate
+791  INV-00792    CL0291       1318000.0    Real Estate
+427  INV-00428    CL0163       1296000.0    Real Estate
+613  INV-00614    CL0156       1291000.0    Real Estate
+637  INV-00638    CL0186       1285000.0    Real Estate
+684  INV-00685    CL0187       1281000.0    Real Estate
+
+Capped 0 low outliers and 49 high outliers.
+Amount_Outlier_Flag column added (49 flagged rows).
+
+Invoice_Amount range after capping:
+  Min: ₹0.00L
+  Max: ₹9.22L
 </code></pre></div>
 <h2 id="section-11-business-rule-validation">Section 11: Business Rule Validation</h2>
 <p>After technical cleaning, validate the data against the rules that make sense for the domain — the audit equivalent of "does this make business sense?".</p>
@@ -1214,6 +1441,27 @@
 <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">validation_results</span><span class="p">:</span>
     <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;✓ PASS&#39;</span> <span class="k">if</span> <span class="n">r</span><span class="p">[</span><span class="s1">&#39;violations&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;✗ </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;violations&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1"> violations&#39;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  [</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;severity&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">6</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s2">&quot;rule&quot;</span><span class="p">]</span><span class="si">:</span><span class="s1">&lt;35</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>BUSINESS RULE VALIDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Rule 1 | Payment ≥ Invoice date | Violations: 0
+
+Rule 2 | Invoice Amount &gt; 0 | Violations: 0
+
+Rule 3 | GST rate valid slab | Violations: 0
+
+Rule 4 | Prev_Late_Count in [0–5] | Violations: 0
+
+Rule 5 | Is_Late recomputed from dates (authoritative source)
+  Late payers: 228 (26.8%)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+VALIDATION SUMMARY:
+  [HIGH  ] Payment_Date &gt;= Invoice_Date        ✓ PASS
+  [HIGH  ] Invoice_Amount &gt; 0                  ✓ PASS
+  [MEDIUM] GST_Rate ∈ {0,5,12,18,28}           ✓ PASS
+  [LOW   ] Prev_Late_Count ∈ [0,5]             ✓ PASS
 </code></pre></div>
 <h2 id="section-12-building-a-reusable-cleaning-pipeline">Section 12: Building a Reusable Cleaning Pipeline</h2>
 <p>Instead of a series of ad-hoc fixes, package all cleaning steps into a <strong>function</strong> that can be called on any new monthly export. This is the "Deployment" mindset from CRISP-DM Phase 6.</p>
@@ -1313,6 +1561,19 @@
 <span class="c1"># ── Test the pipeline on the raw data ────────────────────────────────────────</span>
 <span class="n">cleaned_df</span><span class="p">,</span> <span class="n">pipe_log</span> <span class="o">=</span> <span class="n">clean_invoice_data</span><span class="p">(</span><span class="n">raw_backup</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Starting cleaning pipeline...
+  ✓ Type — Invoice_Amount: Parsed string amounts to float64 (854 rows)
+  ✓ Type — GST_Rate: Removed % suffix, converted to numeric (867 rows)
+  ✓ Type — Dates: Confirmed datetime64 (3 rows)
+  ✓ Missing values: Imputed Amount/GST/Industry/Tenure (99 rows)
+  ✓ Duplicates: Dropped exact &amp; key duplicates (30 rows)
+  ✓ Text: Standardised Client_Name and Industry (850 rows)
+  ✓ Category: GST_Rate mapped to nearest valid slab (850 rows)
+  ✓ Outliers: Winsorised Invoice_Amount at IQR fences (49 rows)
+  ✓ Business rules: Fixed payment dates, zero amounts, clipped counts (0 rows)
+
+Pipeline complete. Output: 850 rows × 15 columns
+</code></pre></div>
 <h2 id="section-13-before-vs-after-data-quality-report">Section 13: Before vs After — Data Quality Report</h2>
 <p>Professional practice: always produce a <strong>before/after summary</strong> to document what changed and confirm the data is now fit for analysis.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Before vs After Quality Report ───────────────────────────────────────────</span>
@@ -1331,8 +1592,7 @@
     <span class="s1">&#39;Outliers flagged&#39;</span><span class="p">:</span>      <span class="p">(</span><span class="s1">&#39;—&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">cleaned_df</span><span class="p">[</span><span class="s1">&#39;Amount_Outlier_Flag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())),</span>
 <span class="p">}</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span>
-<span class="p">{</span><span class="s2">&quot;Metric&quot;</span><span class="p">:</span><span class="o">&lt;</span><span class="mi">30</span><span class="p">}</span> <span class="p">{</span><span class="s2">&quot;Before&quot;</span><span class="p">:</span><span class="o">&gt;</span><span class="mi">15</span><span class="p">}</span> <span class="p">{</span><span class="s2">&quot;After&quot;</span><span class="p">:</span><span class="o">&gt;</span><span class="mi">15</span><span class="p">}</span><span class="s1">&#39;)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Metric&quot;</span><span class="si">:</span><span class="s1">&lt;30</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Before&quot;</span><span class="si">:</span><span class="s1">&gt;15</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;After&quot;</span><span class="si">:</span><span class="s1">&gt;15</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;─&#39;</span> <span class="o">*</span> <span class="mi">62</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="p">(</span><span class="n">before</span><span class="p">,</span> <span class="n">after</span><span class="p">)</span> <span class="ow">in</span> <span class="n">metrics</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;✓&#39;</span> <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">after</span><span class="p">)</span> <span class="ow">in</span> <span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;float64&#39;</span><span class="p">,</span><span class="s1">&#39;int64&#39;</span><span class="p">}</span> <span class="ow">or</span> <span class="n">after</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;→&#39;</span>
@@ -1372,6 +1632,42 @@
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>=================================================================
+  DATA CLEANING REPORT — Meridian Advisory Services
+  Generated: 27 April 2026 22:32
+=================================================================
+Metric                                  Before           After
+──────────────────────────────────────────────────────────────
+Rows                                       880             850  →
+Columns                                     13              15  →
+Missing values                              99               0  ✓
+Duplicate rows                              30               0  ✓
+Invoice_Amount dtype                    object         float64  ✓
+Logic violations                            15               0  ✓
+Outliers flagged                             —              49  →
+
+──────────────────────────────────────────────────────────────
+
+CLEANING LOG:
+  [01] Type — Invoice_Amount          Parsed string amounts to float64
+  [02] Type — GST_Rate                Removed % suffix, converted to numeric
+  [03] Type — Dates                   Confirmed datetime64
+  [04] Missing values                 Imputed Amount/GST/Industry/Tenure
+  [05] Duplicates                     Dropped exact &amp; key duplicates
+  [06] Text                           Standardised Client_Name and Industry
+  [07] Category                       GST_Rate mapped to nearest valid slab
+  [08] Outliers                       Winsorised Invoice_Amount at IQR fences
+  [09] Business rules                 Fixed payment dates, zero amounts, clipped counts
+
+=================================================================
+
+
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/1306054305.py:54: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_34_2.png" /></p>
 <h2 id="section-14-practice-exercises">Section 14: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-identify-and-fix-missing-values">🏋️ Exercise 1 — Identify and Fix Missing Values</h4>
@@ -1488,6 +1784,32 @@
 <span class="nb">print</span><span class="p">(</span><span class="n">payroll</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Missing values remaining: </span><span class="si">{</span><span class="n">payroll</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Before:
+Emp_ID        0
+Name          1
+Department    1
+Salary        2
+Grade         0
+Joining_Dt    1
+            Count     %
+Emp_ID          0   0.0
+Name            1  16.7
+Department      1  16.7
+Salary          2  33.3
+Grade           0   0.0
+Joining_Dt      1  16.7
+
+After:
+  Emp_ID         Name Department   Salary   Grade Joining_Dt
+0   E001  Amit Sharma    Finance  75000.0  Senior 2019-04-01
+1   E002   Priya Nair         HR  62000.0     Mid 2021-07-15
+2   E003      Unknown         IT  55000.0  Junior 2022-01-10
+3   E004    Rohan Das    Finance  88000.0  Senior 2021-07-15
+4   E005      Sneha K    Finance  55000.0  Junior 2023-03-01
+5   E006     Vikram B         IT  62000.0     Mid 2020-09-01
+
+Missing values remaining: 0
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Z-score outlier detection</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="o">,</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="o">,</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">scipy</span><span class="w"> </span><span class="kn">import</span> <span class="n">stats</span>
@@ -1531,6 +1853,23 @@
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  1. Removes distortion without losing rows (important for class balance)&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  2. High-value invoices may be genuine and correlated with late payment&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  3. Dropping them would bias the model toward smaller-invoice behaviour&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Outliers detected:
+  Z-score (|Z|&gt;3):      0
+  IQR (1.5×IQR fence):  0
+  Difference: IQR is more sensitive for skewed financial data
+
+
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/2446049920.py:37: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_41_2.png" /></p>
+<div class="highlight"><pre><span></span><code>Recommendation: Capping (Winsorisation) is preferred over removal because:
+  1. Removes distortion without losing rows (important for class balance)
+  2. High-value invoices may be genuine and correlated with late payment
+  3. Dropping them would bias the model toward smaller-invoice behaviour
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 3: GSTR-2 cleaning pipeline</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1586,6 +1925,22 @@
 <span class="n">clean_df</span> <span class="o">=</span> <span class="n">clean_gstr2</span><span class="p">(</span><span class="n">gstr2_raw</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Cleaned GSTR-2:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">clean_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>GSTR-2 Cleaning Summary:
+  [1] Party_Name: stripped, title-cased, collapsed spaces
+  [2] GSTIN: uppercased | 3 invalid (≠15 chars)
+  [3] Taxable_Value: removed INR prefix, commas; converted to float
+  [4] GST_Rate: removed spaces and %, converted to int
+  [5] Removed 1 zero-value rows
+
+Output: 4 rows × 6 columns
+
+Cleaned GSTR-2:
+   Party_Name           GSTIN  Taxable_Value  GST_Rate Invoice_No  GSTIN_Valid
+Alpha Traders 27AABCT0001A1Z5        45000.0        18    PUR-001         True
+ Beta Pvt Ltd   MHBBB0002B1Z4        82000.0        12    PUR-002        False
+   Gamma Inc. 29CCCCC0003C1Z1       120000.0         5    PUR-003         True
+      Zeta Co    33EEEEE0005E        67500.0        28    PUR-005        False
 </code></pre></div>
 <hr />
 <h2 id="module-07-complete">🎉 Module 07 Complete!</h2>
