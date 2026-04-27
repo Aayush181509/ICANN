@@ -40,6 +40,10 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
                 </li>
               </ul>
@@ -54,15 +58,51 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Matplotlib</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#turning-financial-data-into-powerful-charts">Turning Financial Data into Powerful Charts</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-matplotlib">What is Matplotlib?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-matplotlib">What is Matplotlib?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#why-visualise-financial-data">Why visualise financial data?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#why-visualise-financial-data">Why visualise financial data?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-setup">Section 1: Installing &amp; Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-saving-charts">Section 12: Saving Charts</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-13-practice-exercises">Section 13: Practice Exercises</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-waterfall-chart-pl-bridge">🏋️ Exercise 2 — Waterfall Chart: P&amp;L Bridge</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#solutions">💡 Solutions</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    <li class="toctree-l2"><a class="reference internal" href="#module-4-complete">🎉 Module 4 Complete!</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-youve-learned">What you've learned</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -95,7 +135,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="matplotlib-for-ca-professionals">📊 Matplotlib for CA Professionals</h1>
-<h2 id="turning-financial-data-into-powerful-charts">Turning Financial Data into Powerful Charts</h2>
+<p><strong>Turning Financial Data into Powerful Charts</strong></p>
 <hr />
 <p><strong>Pre-requisite:</strong> Module 3 — Pandas<br />
 <strong>Estimated time:</strong> 2–3 hours</p>
@@ -144,7 +184,7 @@
 </tbody>
 </table>
 <hr />
-<h2 id="table-of-contents">📋 Table of Contents</h2>
+<h3 id="table-of-contents">📋 Table of Contents</h3>
 <table>
 <thead>
 <tr>
@@ -208,7 +248,7 @@
 </tbody>
 </table>
 <hr />
-<h1 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h1>
+<h2 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install if needed</span>
 <span class="c1"># !pip install matplotlib pandas numpy</span>
 
@@ -243,7 +283,7 @@ Ready!
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Data loaded. Amounts are in ₹ Thousands.
 </code></pre></div>
-<h1 id="section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</h1>
+<h2 id="section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</h2>
 <div class="highlight"><pre><span></span><code>┌─────────────────────────── Figure (the whole canvas) ─────────────────────────────┐
 │                                                                                    │
 │   ┌──────────────────────── Axes (the plot area) ──────────────────────────────┐  │
@@ -261,7 +301,7 @@ Ready!
 1. <strong>Create</strong> the figure and axes: <code>fig, ax = plt.subplots()</code>
 2. <strong>Draw</strong> on the axes: <code>ax.plot(...)</code>, <code>ax.bar(...)</code>, etc.
 3. <strong>Show</strong> the chart: <code>plt.show()</code></p>
-<h1 id="section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</h1>
+<h2 id="section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</h2>
 <p>Line charts are ideal for showing <strong>data over time</strong> — revenue trends, price movements, cumulative returns.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Basic Line Chart</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -314,7 +354,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_8_0.png" /></p>
-<h1 id="section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</h1>
+<h2 id="section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</h2>
 <p>Bar charts are ideal for <strong>comparing categories</strong> — expense heads, client revenues, department budgets.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Vertical Bar Chart — Annual Expenses by Category</span>
 <span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#2196F3&#39;</span><span class="p">,</span> <span class="s1">&#39;#F44336&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF9800&#39;</span><span class="p">,</span> <span class="s1">&#39;#4CAF50&#39;</span><span class="p">,</span> <span class="s1">&#39;#9C27B0&#39;</span><span class="p">,</span> <span class="s1">&#39;#795548&#39;</span><span class="p">,</span> <span class="s1">&#39;#607D8B&#39;</span><span class="p">]</span>
@@ -340,7 +380,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_10_0.png" /></p>
-<h1 id="section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</h1>
+<h2 id="section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</h2>
 <p>Horizontal bars work better when category names are long — like account names or client names.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Horizontal Bar — Client Revenue Contribution</span>
 <span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tata Consultancy Svc&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys Limited&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro Technologies&#39;</span><span class="p">,</span>
@@ -372,7 +412,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_12_0.png" /></p>
-<h1 id="section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</h1>
+<h2 id="section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</h2>
 <p>Grouped bars are perfect for <strong>comparing two or more related series side by side</strong> — like Budget vs Actual, or FY24 vs FY25 per department.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Budget vs Actual by Quarter</span>
 <span class="n">quarters</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
@@ -417,7 +457,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_14_0.png" /></p>
-<h1 id="section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</h1>
+<h2 id="section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</h2>
 <p>Pie charts show <strong>part-to-whole relationships</strong> — revenue by business segment, expenses by head.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pie Chart — Revenue by Business Segment</span>
 <span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Products&#39;</span><span class="p">,</span> <span class="s1">&#39;Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Consulting&#39;</span><span class="p">,</span> <span class="s1">&#39;Exports&#39;</span><span class="p">]</span>
@@ -458,7 +498,7 @@ Ready!
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_16_0.png" /></p>
-<h1 id="section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</h1>
+<h2 id="section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</h2>
 <p>Histograms show the <strong>distribution / frequency</strong> of numerical data. Useful in audit for:
 - Understanding the spread of invoice values
 - Identifying concentration around suspicious thresholds
@@ -510,7 +550,7 @@ Ready!
 <div class="highlight"><pre><span></span><code>80th percentile: ₹212,208
 Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 </code></pre></div>
-<h1 id="section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</h1>
+<h2 id="section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Scatter plot — Monthly Revenue vs Profit</span>
 <span class="n">revenue_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span>
 <span class="n">profit_arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
@@ -547,7 +587,7 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_20_0.png" /></p>
-<h1 id="section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</h1>
+<h2 id="section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</h2>
 <p>Subplots let you display <strong>multiple charts on one page</strong> — like a management dashboard.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># 2×2 Financial Dashboard</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
@@ -596,7 +636,7 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_22_0.png" /></p>
-<h1 id="section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</h1>
+<h2 id="section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</h2>
 <p>Good chart design communicates faster. Here are key formatting techniques:</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Using a built-in style for a more professional look</span>
 <span class="n">available_styles</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span>
@@ -628,7 +668,7 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_24_2.png" /></p>
-<h1 id="section-12-saving-charts">Section 12: Saving Charts</h1>
+<h2 id="section-12-saving-charts">Section 12: Saving Charts</h2>
 <p>Save charts as PNG, PDF, or SVG for reports and presentations.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a chart and save it</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -655,9 +695,9 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
   revenue_trend.pdf  (vector — for print/reports)
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_26_1.png" /></p>
-<h1 id="section-13-practice-exercises">Section 13: Practice Exercises</h1>
+<h2 id="section-13-practice-exercises">Section 13: Practice Exercises</h2>
 <hr />
-<h3 id="exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</h3>
+<h4 id="exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</h4>
 <p>Create a <strong>stacked bar chart</strong> showing quarterly expense breakdown across 4 categories:
 <div class="highlight"><pre><span></span><code><span class="n">quarters</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
 <span class="n">salaries</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1350</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
@@ -678,7 +718,7 @@ Requirements: Add a title, legend, value labels on each segment, and y-axis labe
 <span class="c1"># Hint: Use ax.bar(..., bottom=...) to stack bars</span>
 <span class="c1"># Each subsequent bar&#39;s bottom = sum of all previous categories</span>
 </code></pre></div>
-<h3 id="exercise-2-waterfall-chart-pl-bridge">🏋️ Exercise 2 — Waterfall Chart: P&amp;L Bridge</h3>
+<h4 id="exercise-2-waterfall-chart-pl-bridge">🏋️ Exercise 2 — Waterfall Chart: P&amp;L Bridge</h4>
 <p>A waterfall chart shows how you get from Revenue to Net Profit — extremely common in management presentations and earnings calls.</p>
 <p>Build one using bar charts with this data:
 - Revenue: ₹18,000K
@@ -700,7 +740,7 @@ Requirements: Add a title, legend, value labels on each segment, and y-axis labe
 <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10800</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="o">-</span><span class="mi">3300</span><span class="p">,</span> <span class="o">-</span><span class="mi">420</span><span class="p">,</span> <span class="o">-</span><span class="mi">216</span><span class="p">,</span> <span class="mi">3264</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
 </code></pre></div>
 <hr />
-<h2 id="solutions">💡 Solutions</h2>
+<h3 id="solutions">💡 Solutions</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: Stacked Bar Chart</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -794,8 +834,8 @@ Requirements: Add a title, legend, value labels on each segment, and y-axis labe
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_0.png" /></p>
 <hr />
-<h1 id="module-4-complete">🎉 Module 4 Complete!</h1>
-<h2 id="what-youve-learned">What you've learned</h2>
+<h2 id="module-4-complete">🎉 Module 4 Complete!</h2>
+<h3 id="what-youve-learned">What you've learned</h3>
 <table>
 <thead>
 <tr>

@@ -40,6 +40,10 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
                 </li>
               </ul>
@@ -50,13 +54,59 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Pandas</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#pythons-excel-supercharged">Python's Excel — Supercharged</a>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-pandas">What is Pandas?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-importing-pandas">Section 1: Installing &amp; Importing Pandas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-series-a-single-column">Section 2: Series — A Single Column</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-4-dataframe-the-full-spreadsheet">Section 3 &amp; 4: DataFrame — The Full Spreadsheet</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-pandas">What is Pandas?</a>
+    <li class="toctree-l3"><a class="reference internal" href="#creating-a-dataframe">Creating a DataFrame</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-exploring-your-data">Section 5: Exploring Your Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-selecting-columns-rows">Section 6: Selecting Columns &amp; Rows</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#selecting-columns">Selecting columns</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-filtering-data-like-excel-autofilter">Section 7: Filtering Data — Like Excel AutoFilter</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-sorting-data">Section 8: Sorting Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-adding-calculated-columns">Section 9: Adding Calculated Columns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-groupby-like-a-pivot-table">Section 10: GroupBy — Like a Pivot Table</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-handling-missing-values">Section 11: Handling Missing Values</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-merging-dataframes-like-vlookup">Section 12: Merging DataFrames — Like VLOOKUP</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-13-reading-writing-excel-csv-files">Section 13: Reading &amp; Writing Excel / CSV Files</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-14-string-operations-on-columns">Section 14: String Operations on Columns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-15-practice-exercises">Section 15: Practice Exercises</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-gst-gstr-1-summary">🏋️ Exercise 1 — GST GSTR-1 Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-trial-balance-validation">🏋️ Exercise 2 — Trial Balance Validation</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#solutions">💡 Solutions</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#module-3-complete">🎉 Module 3 Complete!</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-youve-learned">What you've learned</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -93,7 +143,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="pandas-for-ca-professionals">🐼 Pandas for CA Professionals</h1>
-<h2 id="pythons-excel-supercharged">Python's Excel — Supercharged</h2>
+<p><strong>Python's Excel — Supercharged</strong></p>
 <hr />
 <p><strong>Pre-requisite:</strong> Module 1 (Python Basics), Module 2 (NumPy)<br />
 <strong>Estimated time:</strong> 4–5 hours</p>
@@ -143,7 +193,7 @@
 </table>
 <p>The key difference: Pandas can handle <strong>millions of rows</strong> in seconds, automate repeated tasks, and process multiple files without manual effort.</p>
 <hr />
-<h2 id="table-of-contents">📋 Table of Contents</h2>
+<h3 id="table-of-contents">📋 Table of Contents</h3>
 <table>
 <thead>
 <tr>
@@ -215,7 +265,7 @@
 </tbody>
 </table>
 <hr />
-<h1 id="section-1-installing-importing-pandas">Section 1: Installing &amp; Importing Pandas</h1>
+<h2 id="section-1-installing-importing-pandas">Section 1: Installing &amp; Importing Pandas</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install if needed (run once)</span>
 <span class="c1"># !pip install pandas openpyxl</span>
 
@@ -228,7 +278,7 @@
 <div class="highlight"><pre><span></span><code>Pandas version: 2.3.2
 Ready!
 </code></pre></div>
-<h1 id="section-2-series-a-single-column">Section 2: Series — A Single Column</h1>
+<h2 id="section-2-series-a-single-column">Section 2: Series — A Single Column</h2>
 <p>A <strong>Series</strong> is the simplest Pandas object — it's like <strong>one column</strong> of a spreadsheet.<br />
 It has an <strong>index</strong> (row label) and <strong>values</strong> (the data).</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Creating a Series — monthly revenue</span>
@@ -294,10 +344,10 @@ Feb    2030000
 Mar    2150000
 Name: Revenue (₹), dtype: int64
 </code></pre></div>
-<h1 id="section-3-4-dataframe-the-full-spreadsheet">Section 3 &amp; 4: DataFrame — The Full Spreadsheet</h1>
+<h2 id="section-3-4-dataframe-the-full-spreadsheet">Section 3 &amp; 4: DataFrame — The Full Spreadsheet</h2>
 <p>A <strong>DataFrame</strong> is Pandas' main object — think of it as a <strong>complete Excel worksheet</strong>.<br />
 It has rows (indexed), columns (named), and can hold different data types in different columns.</p>
-<h2 id="creating-a-dataframe">Creating a DataFrame</h2>
+<h3 id="creating-a-dataframe">Creating a DataFrame</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Method 1: From a dictionary (most common)</span>
 <span class="c1"># Each key = column name, each value = list of column data</span>
 
@@ -326,7 +376,7 @@ It has rows (indexed), columns (named), and can hold different data types in dif
 6  15-Apr-2025     PV-104    Vendor Payment  Expense   95000       0
 7  18-Apr-2025     SV-004  Sales - Client D  Revenue       0  275000
 </code></pre></div>
-<h1 id="section-5-exploring-your-data">Section 5: Exploring Your Data</h1>
+<h2 id="section-5-exploring-your-data">Section 5: Exploring Your Data</h2>
 <p>When you receive a financial data file, the first step is always to <strong>understand what's in it</strong>.<br />
 Pandas has several built-in functions for this.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a larger sample dataset — Monthly P&amp;L for a company</span>
@@ -428,8 +478,8 @@ min    1120000.00   672000.00     448000.00   185000.00       15.76
 75%    1812500.00  1087500.00     725000.00   324500.00       17.87
 max    2150000.00  1290000.00     860000.00   392000.00       18.23
 </code></pre></div>
-<h1 id="section-6-selecting-columns-rows">Section 6: Selecting Columns &amp; Rows</h1>
-<h2 id="selecting-columns">Selecting columns</h2>
+<h2 id="section-6-selecting-columns-rows">Section 6: Selecting Columns &amp; Rows</h2>
+<h3 id="selecting-columns">Selecting columns</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># Select a single column — returns a Series</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Revenue column:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">pl_df</span><span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">])</span>
@@ -516,7 +566,7 @@ Net_Profit       392000
 Margin_Pct        18.23
 Name: 11, dtype: object
 </code></pre></div>
-<h1 id="section-7-filtering-data-like-excel-autofilter">Section 7: Filtering Data — Like Excel AutoFilter</h1>
+<h2 id="section-7-filtering-data-like-excel-autofilter">Section 7: Filtering Data — Like Excel AutoFilter</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Filter rows where Revenue &gt; ₹15 lakhs</span>
 <span class="n">high_revenue</span> <span class="o">=</span> <span class="n">pl_df</span><span class="p">[</span><span class="n">pl_df</span><span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1500000</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Months with revenue &gt; ₹15L:&#39;</span><span class="p">)</span>
@@ -574,7 +624,7 @@ Month Quarter  Revenue
   Feb      Q4  2030000
   Mar      Q4  2150000
 </code></pre></div>
-<h1 id="section-8-sorting-data">Section 8: Sorting Data</h1>
+<h2 id="section-8-sorting-data">Section 8: Sorting Data</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Sort by a column</span>
 <span class="n">sorted_by_revenue</span> <span class="o">=</span> <span class="n">pl_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;Revenue&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Months ranked by Revenue (highest first):&#39;</span><span class="p">)</span>
@@ -622,7 +672,7 @@ Month  Revenue  Net_Profit  Margin_Pct
   T009 28-May Sunrise Ltd     Sale  127000        18    Paid     22860.0 149860.0
   T010 03-Jun   Gamma Inc     Sale   65000         5 Pending      3250.0  68250.0
 </code></pre></div>
-<h1 id="section-9-adding-calculated-columns">Section 9: Adding Calculated Columns</h1>
+<h2 id="section-9-adding-calculated-columns">Section 9: Adding Calculated Columns</h2>
 <p>Just like adding a formula column in Excel — but applied to the entire column instantly.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Add new computed columns</span>
 <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;Effective_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;GST_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">transactions</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -655,7 +705,7 @@ Month  Revenue  Net_Profit  Margin_Pct
   T009 Sunrise Ltd  127000    Paid High Value   Cleared
   T010   Gamma Inc   65000 Pending     Normal Follow-up
 </code></pre></div>
-<h1 id="section-10-groupby-like-a-pivot-table">Section 10: GroupBy — Like a Pivot Table</h1>
+<h2 id="section-10-groupby-like-a-pivot-table">Section 10: GroupBy — Like a Pivot Table</h2>
 <p><code>groupby()</code> is one of Pandas' most powerful features. It is the equivalent of Excel's <strong>Pivot Table</strong>.</p>
 <p><strong>Concept:</strong> Split the data into groups → Apply a function to each group → Combine results</p>
 <p>Think: <em>"Total sales by party"</em>, <em>"Average invoice by GST rate"</em>, <em>"Count of pending vs paid"</em></p>
@@ -762,7 +812,7 @@ Q4             6090000         1175000           1102000       18.09            
 
 Full Year Net Profit: ₹3,365,000
 </code></pre></div>
-<h1 id="section-11-handling-missing-values">Section 11: Handling Missing Values</h1>
+<h2 id="section-11-handling-missing-values">Section 11: Handling Missing Values</h2>
 <p>Real-world financial data is almost always incomplete — missing values are a fact of life.<br />
 Pandas uses <code>NaN</code> (Not a Number) to represent missing data.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a DataFrame with missing values (typical in imported data)</span>
@@ -830,7 +880,7 @@ Any missing values? True
 
 Missing values remaining: 0
 </code></pre></div>
-<h1 id="section-12-merging-dataframes-like-vlookup">Section 12: Merging DataFrames — Like VLOOKUP</h1>
+<h2 id="section-12-merging-dataframes-like-vlookup">Section 12: Merging DataFrames — Like VLOOKUP</h2>
 <p><strong>VLOOKUP</strong> in Excel pulls data from one table into another using a matching key.<br />
 In Pandas, <code>merge()</code> does the same — and handles millions of rows instantly.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Table 1: Invoice Register</span>
@@ -888,7 +938,7 @@ Invoice_No           Client_Name      City  Amount  GST_Rate  GST_Amount    Tota
    INV-004 Sunrise Manufacturing    Mumbai   67000        18     12060.0  79060.0
    INV-005        Tech Solutions Bengaluru   95000        18     17100.0 112100.0
 </code></pre></div>
-<h1 id="section-13-reading-writing-excel-csv-files">Section 13: Reading &amp; Writing Excel / CSV Files</h1>
+<h2 id="section-13-reading-writing-excel-csv-files">Section 13: Reading &amp; Writing Excel / CSV Files</h2>
 <p>In practice, you will almost always <strong>import data from Excel or CSV</strong> rather than typing it manually.<br />
 Pandas makes this effortless.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># First, let&#39;s save our DataFrame to files</span>
@@ -956,7 +1006,7 @@ Read from Excel — shape: (12, 10)
 <div class="highlight"><pre><span></span><code>Common read options demonstrated above (commented out).
 Uncomment and adapt for your actual files.
 </code></pre></div>
-<h1 id="section-14-string-operations-on-columns">Section 14: String Operations on Columns</h1>
+<h2 id="section-14-string-operations-on-columns">Section 14: String Operations on Columns</h2>
 <p>Pandas has powerful text processing via <code>.str</code> accessor — extremely useful for cleaning imported data.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Simulating messy imported data (very common in practice)</span>
 <span class="n">raw_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
@@ -1024,9 +1074,9 @@ First word of each name:
 
 Name lengths: [29, 17, 19, 15, 25]
 </code></pre></div>
-<h1 id="section-15-practice-exercises">Section 15: Practice Exercises</h1>
+<h2 id="section-15-practice-exercises">Section 15: Practice Exercises</h2>
 <hr />
-<h3 id="exercise-1-gst-gstr-1-summary">🏋️ Exercise 1 — GST GSTR-1 Summary</h3>
+<h4 id="exercise-1-gst-gstr-1-summary">🏋️ Exercise 1 — GST GSTR-1 Summary</h4>
 <p>You have an invoice register. Create a GSTR-1 style summary showing:
 - Total taxable value, CGST, SGST, and total invoice value by GST rate slab
 - The top 3 clients by invoice value
@@ -1050,7 +1100,7 @@ Name lengths: [29, 17, 19, 15, 25]
 
 <span class="c1"># Write your GSTR-1 analysis here</span>
 </code></pre></div>
-<h3 id="exercise-2-trial-balance-validation">🏋️ Exercise 2 — Trial Balance Validation</h3>
+<h4 id="exercise-2-trial-balance-validation">🏋️ Exercise 2 — Trial Balance Validation</h4>
 <p>A trial balance should always balance: <strong>Total Debits = Total Credits</strong>.</p>
 <p>From the data below:
 1. Check if the trial balance is balanced
@@ -1077,7 +1127,7 @@ Name lengths: [29, 17, 19, 15, 25]
 <span class="c1"># Write your trial balance analysis here</span>
 </code></pre></div>
 <hr />
-<h2 id="solutions">💡 Solutions</h2>
+<h3 id="solutions">💡 Solutions</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: GSTR-1 Summary</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1199,8 +1249,8 @@ Liability         0  9130000
 Exported to trial_balance_clean.xlsx
 </code></pre></div>
 <hr />
-<h1 id="module-3-complete">🎉 Module 3 Complete!</h1>
-<h2 id="what-youve-learned">What you've learned</h2>
+<h2 id="module-3-complete">🎉 Module 3 Complete!</h2>
+<h3 id="what-youve-learned">What you've learned</h3>
 <table>
 <thead>
 <tr>

@@ -40,6 +40,10 @@
 
       <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../01_Python_for_CA_Beginners/">Python Basics</a>
                 </li>
               </ul>
@@ -58,15 +62,53 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Seaborn</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#beautiful-statistical-charts-with-minimal-code">Beautiful Statistical Charts with Minimal Code</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-seaborn">What is Seaborn?</a>
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-seaborn">What is Seaborn?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#seaborns-strengths-for-financial-analysis">Seaborn's strengths for financial analysis</a>
+    <li class="toctree-l2"><a class="reference internal" href="#seaborns-strengths-for-financial-analysis">Seaborn's strengths for financial analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-installing-setup">Section 1: Installing &amp; Setup</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-2-seaborn-themes">Section 2: Seaborn Themes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-3-distribution-plots-histplot-kdeplot">Section 3: Distribution Plots — histplot &amp; kdeplot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-4-box-plot-outlier-detection">Section 4: Box Plot — Outlier Detection</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-5-violin-plot-distribution-shape-by-category">Section 5: Violin Plot — Distribution Shape by Category</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-6-bar-count-plots-category-analysis">Section 6: Bar &amp; Count Plots — Category Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-7-heatmap-correlation-matrix">Section 7: Heatmap — Correlation Matrix</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-8-pair-plot-multi-variable-exploration">Section 8: Pair Plot — Multi-variable Exploration</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-9-scatter-with-regression-relationships-in-data">Section 9: Scatter with Regression — Relationships in Data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-10-facetgrid-charts-by-category">Section 10: FacetGrid — Charts by Category</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-11-seaborn-matplotlib-together">Section 11: Seaborn + Matplotlib Together</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#section-12-practice-exercises">Section 12: Practice Exercises</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-invoice-outlier-analysis">🏋️ Exercise 1 — Invoice Outlier Analysis</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-department-wise-financial-dashboard">🏋️ Exercise 2 — Department-wise Financial Dashboard</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#solutions">💡 Solutions</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
+    <li class="toctree-l2"><a class="reference internal" href="#module-5-complete-and-thats-the-full-series">🎉 Module 5 Complete — And That's the Full Series!</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#what-youve-learned-in-this-module">What you've learned in this module</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#full-course-summary">🏆 Full Course Summary</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's Next?</a>
+    </li>
+        </ul>
     </li>
     </ul>
                 </li>
@@ -95,7 +137,7 @@
             <div class="section" itemprop="articleBody">
               
                 <h1 id="seaborn-for-ca-professionals">🎨 Seaborn for CA Professionals</h1>
-<h2 id="beautiful-statistical-charts-with-minimal-code">Beautiful Statistical Charts with Minimal Code</h2>
+<p><strong>Beautiful Statistical Charts with Minimal Code</strong></p>
 <hr />
 <p><strong>Pre-requisite:</strong> Module 3 (Pandas), Module 4 (Matplotlib)<br />
 <strong>Estimated time:</strong> 2–3 hours</p>
@@ -146,7 +188,7 @@
 <li><strong>Regression</strong> — understanding relationships between financial drivers</li>
 </ul>
 <hr />
-<h2 id="table-of-contents">📋 Table of Contents</h2>
+<h3 id="table-of-contents">📋 Table of Contents</h3>
 <table>
 <thead>
 <tr>
@@ -206,7 +248,7 @@
 </tbody>
 </table>
 <hr />
-<h1 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h1>
+<h2 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Install if needed</span>
 <span class="c1"># !pip install seaborn matplotlib pandas numpy</span>
 
@@ -287,7 +329,7 @@ Invoice dataset:  300 records
 3     133878  
 4      92247
 </code></pre></div>
-<h1 id="section-2-seaborn-themes">Section 2: Seaborn Themes</h1>
+<h2 id="section-2-seaborn-themes">Section 2: Seaborn Themes</h2>
 <p>Seaborn gives you ready-made, professional themes. Just one line changes the look of all your charts.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Available themes: darkgrid, whitegrid, dark, white, ticks</span>
 <span class="c1"># Available palettes: deep, muted, bright, pastel, dark, colorblind, Blues, rocket, etc.</span>
@@ -316,7 +358,7 @@ Invoice dataset:  300 records
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_6_0.png" /></p>
 <div class="highlight"><pre><span></span><code>Default theme set to &#39;whitegrid&#39; with &#39;deep&#39; palette
 </code></pre></div>
-<h1 id="section-3-distribution-plots-histplot-kdeplot">Section 3: Distribution Plots — histplot &amp; kdeplot</h1>
+<h2 id="section-3-distribution-plots-histplot-kdeplot">Section 3: Distribution Plots — histplot &amp; kdeplot</h2>
 <p>Distribution plots answer: <em>"How are my values spread?"</em>  </p>
 <p>For CA professionals: <em>"Are most invoices small, or are large invoices common?"</em><br />
 <em>"Are salaries concentrated in one band or spread across many?"</em></p>
@@ -379,7 +421,7 @@ Senior    ₹11.3 Lakhs
 Lead      ₹16.5 Lakhs
 Name: Annual_CTC, dtype: object
 </code></pre></div>
-<h1 id="section-4-box-plot-outlier-detection">Section 4: Box Plot — Outlier Detection</h1>
+<h2 id="section-4-box-plot-outlier-detection">Section 4: Box Plot — Outlier Detection</h2>
 <p>Box plots are <strong>one of the most important charts for auditors</strong>.<br />
 They show the spread of data and immediately highlight <strong>outliers</strong> — unusual values that may warrant investigation.</p>
 <p><strong>Reading a box plot:</strong>
@@ -471,7 +513,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_12_1.png" /></p>
-<h1 id="section-5-violin-plot-distribution-shape-by-category">Section 5: Violin Plot — Distribution Shape by Category</h1>
+<h2 id="section-5-violin-plot-distribution-shape-by-category">Section 5: Violin Plot — Distribution Shape by Category</h2>
 <p>A <strong>violin plot</strong> combines a box plot with a KDE — it shows both summary statistics AND the full distribution shape.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Violin plot — salary distribution by department</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -500,7 +542,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_14_1.png" /></p>
-<h1 id="section-6-bar-count-plots-category-analysis">Section 6: Bar &amp; Count Plots — Category Analysis</h1>
+<h2 id="section-6-bar-count-plots-category-analysis">Section 6: Bar &amp; Count Plots — Category Analysis</h2>
 <p><code>sns.barplot()</code> automatically calculates and displays <strong>mean + confidence interval</strong> for each category — more insightful than plain bar charts.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># barplot — Average salary by Department (with confidence interval)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -577,7 +619,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   sns.countplot(data=invoice_df, x=&#39;Status&#39;,
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_17_1.png" /></p>
-<h1 id="section-7-heatmap-correlation-matrix">Section 7: Heatmap — Correlation Matrix</h1>
+<h2 id="section-7-heatmap-correlation-matrix">Section 7: Heatmap — Correlation Matrix</h2>
 <p>A <strong>correlation heatmap</strong> shows how strongly pairs of variables are related.<br />
 In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are salaries correlated with performance?"</em></p>
 <p><strong>Correlation values:</strong>
@@ -661,7 +703,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_20_1.png" /></p>
-<h1 id="section-8-pair-plot-multi-variable-exploration">Section 8: Pair Plot — Multi-variable Exploration</h1>
+<h2 id="section-8-pair-plot-multi-variable-exploration">Section 8: Pair Plot — Multi-variable Exploration</h2>
 <p><code>sns.pairplot()</code> creates a <strong>grid of scatter plots</strong> for all pairs of numeric variables — ideal for initial data exploration. One line of code replaces many separate charts.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pair plot — all relationships in employee data at once</span>
 <span class="c1"># Color-coded by Grade</span>
@@ -681,7 +723,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_22_0.png" /></p>
-<h1 id="section-9-scatter-with-regression-relationships-in-data">Section 9: Scatter with Regression — Relationships in Data</h1>
+<h2 id="section-9-scatter-with-regression-relationships-in-data">Section 9: Scatter with Regression — Relationships in Data</h2>
 <p><code>sns.regplot()</code> and <code>sns.lmplot()</code> draw scatter plots with a <strong>regression line</strong> — shows the trend and whether two variables are truly related.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># regplot — does experience predict salary?</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -751,7 +793,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_25_1.png" /></p>
-<h1 id="section-10-facetgrid-charts-by-category">Section 10: FacetGrid — Charts by Category</h1>
+<h2 id="section-10-facetgrid-charts-by-category">Section 10: FacetGrid — Charts by Category</h2>
 <p><code>FacetGrid</code> creates a grid of the same chart, <strong>split by a categorical variable</strong>. Like applying the same chart to each department, each quarter, etc.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Invoice amount distribution — one histogram per expense category</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span>
@@ -782,7 +824,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_27_1.png" /></p>
-<h1 id="section-11-seaborn-matplotlib-together">Section 11: Seaborn + Matplotlib Together</h1>
+<h2 id="section-11-seaborn-matplotlib-together">Section 11: Seaborn + Matplotlib Together</h2>
 <p>Seaborn and Matplotlib work together seamlessly. Use Seaborn for the chart, Matplotlib for fine-tuning.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Comprehensive HR Analytics Dashboard</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
@@ -850,9 +892,9 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
   fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_29_1.png" /></p>
-<h1 id="section-12-practice-exercises">Section 12: Practice Exercises</h1>
+<h2 id="section-12-practice-exercises">Section 12: Practice Exercises</h2>
 <hr />
-<h3 id="exercise-1-invoice-outlier-analysis">🏋️ Exercise 1 — Invoice Outlier Analysis</h3>
+<h4 id="exercise-1-invoice-outlier-analysis">🏋️ Exercise 1 — Invoice Outlier Analysis</h4>
 <p>Using the <code>invoice_df</code> dataset:
 1. Create a box plot showing invoice amounts for each GST rate (5%, 12%, 18%, 28%)
 2. Identify and print the invoices that are statistical outliers (above Q3 + 1.5×IQR)
@@ -866,7 +908,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 
 <span class="c1"># Write your analysis here</span>
 </code></pre></div>
-<h3 id="exercise-2-department-wise-financial-dashboard">🏋️ Exercise 2 — Department-wise Financial Dashboard</h3>
+<h4 id="exercise-2-department-wise-financial-dashboard">🏋️ Exercise 2 — Department-wise Financial Dashboard</h4>
 <p>Using the <code>employees</code> dataset, create a <strong>2×2 subplot dashboard</strong> with:
 1. <strong>Top-left</strong>: Violin plot of salary by department
 2. <strong>Top-right</strong>: Bar plot of average performance score by department
@@ -876,7 +918,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <div class="highlight"><pre><span></span><code><span class="c1"># Write your dashboard here</span>
 </code></pre></div>
 <hr />
-<h2 id="solutions">💡 Solutions</h2>
+<h3 id="solutions">💡 Solutions</h3>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: Invoice Outlier Analysis</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -1027,8 +1069,8 @@ TypeError: DataFrame.pivot_table() got an unexpected keyword argument &#39;colum
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_36_3.png" /></p>
 <hr />
-<h1 id="module-5-complete-and-thats-the-full-series">🎉 Module 5 Complete — And That's the Full Series!</h1>
-<h2 id="what-youve-learned-in-this-module">What you've learned in this module</h2>
+<h2 id="module-5-complete-and-thats-the-full-series">🎉 Module 5 Complete — And That's the Full Series!</h2>
+<h3 id="what-youve-learned-in-this-module">What you've learned in this module</h3>
 <table>
 <thead>
 <tr>
@@ -1076,7 +1118,7 @@ TypeError: DataFrame.pivot_table() got an unexpected keyword argument &#39;colum
 </tbody>
 </table>
 <hr />
-<h2 id="full-course-summary">🏆 Full Course Summary</h2>
+<h3 id="full-course-summary">🏆 Full Course Summary</h3>
 <table>
 <thead>
 <tr>
@@ -1114,7 +1156,7 @@ TypeError: DataFrame.pivot_table() got an unexpected keyword argument &#39;colum
 </tbody>
 </table>
 <hr />
-<h2 id="whats-next">What's Next?</h2>
+<h3 id="whats-next">What's Next?</h3>
 <ol>
 <li><strong>Real project</strong>: Apply these skills to your own firm's data</li>
 <li><strong>openpyxl / xlsxwriter</strong>: Create formatted Excel reports from Python</li>
