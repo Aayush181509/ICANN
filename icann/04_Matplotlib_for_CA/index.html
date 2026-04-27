@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>📊 Matplotlib for CA Professionals - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83d\udcca Matplotlib for CA Professionals";
+        var mkdocs_page_input_path = "icann/04_Matplotlib_for_CA.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.md">Python Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00a_numpy_basics.md">Numpy Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00b_pandas_basics.md">Pandas Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00c_matplotlib_basics.md">Matplotlib Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00d_seaborn_basics.md">Seaborn Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../01_numpy_for_finance.md">Numpy for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../02_pandas_fundamentals.md">Pandas for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../03_financial_statement_analysis.md">Financial Statement Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../04_audit_data_analysis.md">Audit Data Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../06_fraud_detection.md">Fraud Detection</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">📊 Matplotlib for CA Professionals</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="matplotlib-for-ca-professionals">📊 Matplotlib for CA Professionals</h1>
+<h2 id="turning-financial-data-into-powerful-charts">Turning Financial Data into Powerful Charts</h2>
+<hr />
+<p><strong>Pre-requisite:</strong> Module 3 — Pandas<br />
+<strong>Estimated time:</strong> 2–3 hours</p>
+<h3 id="what-is-matplotlib">What is Matplotlib?</h3>
+<p><strong>Matplotlib</strong> is Python's foundational charting library. It gives you complete control over every element of a chart — exactly like customising a chart in Excel, but with code.</p>
+<h3 id="why-visualise-financial-data">Why visualise financial data?</h3>
+<blockquote>
+<p><em>"A chart that shows revenue falling for 6 months straight is more convincing than a table of 72 numbers."</em></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Best Chart</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revenue trend over time</td>
+<td>Line Chart</td>
+</tr>
+<tr>
+<td>Expense comparison by category</td>
+<td>Bar Chart</td>
+</tr>
+<tr>
+<td>Revenue contribution by segment</td>
+<td>Pie / Donut</td>
+</tr>
+<tr>
+<td>Distribution of invoice amounts</td>
+<td>Histogram</td>
+</tr>
+<tr>
+<td>Budget vs Actual</td>
+<td>Grouped Bar</td>
+</tr>
+<tr>
+<td>Multi-metric dashboard</td>
+<td>Subplots</td>
+</tr>
+<tr>
+<td>Profit vs Revenue relationship</td>
+<td>Scatter Plot</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Installing &amp; Setup</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Anatomy of a Chart</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Line Chart — Revenue Trend</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Bar Chart — Expense Comparison</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Horizontal Bar Chart</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Grouped Bar — Budget vs Actual</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Pie &amp; Donut Chart — Revenue Mix</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Histogram — Invoice Distribution</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Scatter Plot — Profit vs Revenue</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Subplots — Financial Dashboard</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Styling &amp; Formatting</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Saving Charts</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Practice Exercises</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h1>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install if needed</span>
+<span class="c1"># !pip install matplotlib pandas numpy</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>   <span class="c1"># plt is the universal shorthand</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># This makes charts appear inline in the notebook</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># Make charts look cleaner at higher resolution</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Matplotlib version:&#39;</span><span class="p">,</span> <span class="n">plt</span><span class="o">.</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ready!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Matplotlib version: 3.10.6
+Ready!
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ==== Shared data used throughout this notebook ====</span>
+
+<span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span> <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+
+<span class="n">revenue</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1450</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">1780</span><span class="p">,</span> <span class="mi">1550</span><span class="p">,</span> <span class="mi">1420</span><span class="p">,</span> <span class="mi">1680</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2150</span><span class="p">]</span>  <span class="c1"># in ₹ thousands</span>
+<span class="n">expenses</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">920</span><span class="p">,</span>  <span class="mi">980</span><span class="p">,</span>  <span class="mi">870</span><span class="p">,</span> <span class="mi">1050</span><span class="p">,</span> <span class="mi">1180</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1020</span><span class="p">,</span> <span class="mi">1190</span><span class="p">,</span> <span class="mi">1320</span><span class="p">,</span> <span class="mi">1410</span><span class="p">,</span> <span class="mi">1490</span><span class="p">]</span>
+<span class="n">profit</span>   <span class="o">=</span> <span class="p">[</span><span class="n">r</span> <span class="o">-</span> <span class="n">e</span> <span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">revenue</span><span class="p">,</span> <span class="n">expenses</span><span class="p">)]</span>
+
+<span class="n">expense_categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Salaries&#39;</span><span class="p">,</span> <span class="s1">&#39;Raw Materials&#39;</span><span class="p">,</span> <span class="s1">&#39;Marketing&#39;</span><span class="p">,</span> <span class="s1">&#39;Rent&#39;</span><span class="p">,</span> <span class="s1">&#39;Utilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Depreciation&#39;</span><span class="p">,</span> <span class="s1">&#39;Others&#39;</span><span class="p">]</span>
+<span class="n">expense_values</span>     <span class="o">=</span> <span class="p">[</span><span class="mi">4200</span><span class="p">,</span> <span class="mi">2800</span><span class="p">,</span> <span class="mi">1500</span><span class="p">,</span> <span class="mi">1080</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">420</span><span class="p">,</span> <span class="mi">320</span><span class="p">]</span>   <span class="c1"># Annual, in ₹ thousands</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data loaded. Amounts are in ₹ Thousands.&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Data loaded. Amounts are in ₹ Thousands.
+</code></pre></div>
+<h1 id="section-2-anatomy-of-a-matplotlib-chart">Section 2: Anatomy of a Matplotlib Chart</h1>
+<div class="highlight"><pre><span></span><code>┌─────────────────────────── Figure (the whole canvas) ─────────────────────────────┐
+│                                                                                    │
+│   ┌──────────────────────── Axes (the plot area) ──────────────────────────────┐  │
+│   │   Title                                                                    │  │
+│   │                                                                            │  │
+│   │   Y-axis label                                                             │  │
+│   │   │                         ← Plot (lines, bars, etc.) →                  │  │
+│   │   │                                                                        │  │
+│   │   └──────────────────────── X-axis label ─────────────────────────────    │  │
+│   └────────────────────────────────────────────────────────────────────────────┘  │
+│                                    Legend                                          │
+└────────────────────────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+<p>Every Matplotlib chart follows this two-step pattern:
+1. <strong>Create</strong> the figure and axes: <code>fig, ax = plt.subplots()</code>
+2. <strong>Draw</strong> on the axes: <code>ax.plot(...)</code>, <code>ax.bar(...)</code>, etc.
+3. <strong>Show</strong> the chart: <code>plt.show()</code></p>
+<h1 id="section-3-line-chart-revenue-trend">Section 3: Line Chart — Revenue Trend</h1>
+<p>Line charts are ideal for showing <strong>data over time</strong> — revenue trends, price movements, cumulative returns.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic Line Chart</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Revenue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">expenses</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>   <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expenses&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">profit</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">,</span>    <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;^&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Profit&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+
+<span class="c1"># Labels and title</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monthly P&amp;L Trend — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amount (₹ Thousands)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># Legend and grid</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="c1"># Format y-axis to show ₹ symbol</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+
+<span class="c1"># Add shaded region to highlight Q4</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.08</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gold&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Q4&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="s1">&#39;Best Quarter ↑&#39;</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2030</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;goldenrod&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_7_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Year-on-Year Comparison Line Chart</span>
+<span class="n">fy24_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">980</span><span class="p">,</span> <span class="mi">1050</span><span class="p">,</span> <span class="mi">890</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1200</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="mi">1560</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">1820</span><span class="p">]</span>
+<span class="n">fy25_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1450</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">1780</span><span class="p">,</span> <span class="mi">1550</span><span class="p">,</span> <span class="mi">1420</span><span class="p">,</span> <span class="mi">1680</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2150</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">fy24_revenue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;slategray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;FY 2023-24&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">fy25_revenue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;FY 2024-25&#39;</span><span class="p">)</span>
+
+<span class="c1"># Fill area between lines to highlight growth</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">fy24_revenue</span><span class="p">,</span> <span class="n">fy25_revenue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;YoY Growth&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue: Year-on-Year Comparison&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Month&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Revenue (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_8_0.png" /></p>
+<h1 id="section-4-bar-chart-expense-comparison">Section 4: Bar Chart — Expense Comparison</h1>
+<p>Bar charts are ideal for <strong>comparing categories</strong> — expense heads, client revenues, department budgets.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Vertical Bar Chart — Annual Expenses by Category</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#2196F3&#39;</span><span class="p">,</span> <span class="s1">&#39;#F44336&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF9800&#39;</span><span class="p">,</span> <span class="s1">&#39;#4CAF50&#39;</span><span class="p">,</span> <span class="s1">&#39;#9C27B0&#39;</span><span class="p">,</span> <span class="s1">&#39;#795548&#39;</span><span class="p">,</span> <span class="s1">&#39;#607D8B&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">expense_categories</span><span class="p">,</span> <span class="n">expense_values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="c1"># Add value labels on top of each bar</span>
+<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">expense_values</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Annual Expense Breakdown — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Expense Category&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Amount (₹ Thousands)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">expense_values</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.18</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_10_0.png" /></p>
+<h1 id="section-5-horizontal-bar-chart">Section 5: Horizontal Bar Chart</h1>
+<p>Horizontal bars work better when category names are long — like account names or client names.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Horizontal Bar — Client Revenue Contribution</span>
+<span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Tata Consultancy Svc&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys Limited&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro Technologies&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;HCL Technologies&#39;</span><span class="p">,</span> <span class="s1">&#39;Tech Mahindra&#39;</span><span class="p">,</span> <span class="s1">&#39;Mphasis Ltd&#39;</span><span class="p">]</span>
+<span class="n">client_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3850</span><span class="p">,</span> <span class="mi">2960</span><span class="p">,</span> <span class="mi">2480</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">980</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
+
+<span class="c1"># Sort for better visual</span>
+<span class="n">sorted_pairs</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">client_revenue</span><span class="p">,</span> <span class="n">clients</span><span class="p">))</span>
+<span class="n">client_revenue_s</span><span class="p">,</span> <span class="n">clients_s</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">sorted_pairs</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">clients_s</span><span class="p">,</span> <span class="n">client_revenue_s</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues_r</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">clients_s</span><span class="p">))),</span>
+               <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">client_revenue_s</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span> <span class="o">+</span> <span class="mi">30</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_y</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Client-wise Revenue — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Revenue (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">client_revenue_s</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.2</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_12_0.png" /></p>
+<h1 id="section-6-grouped-bar-chart-budget-vs-actual">Section 6: Grouped Bar Chart — Budget vs Actual</h1>
+<p>Grouped bars are perfect for <strong>comparing two or more related series side by side</strong> — like Budget vs Actual, or FY24 vs FY25 per department.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Budget vs Actual by Quarter</span>
+<span class="n">quarters</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">budget_qtly</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">3800</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4500</span><span class="p">,</span> <span class="mi">5100</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
+<span class="n">actual_qtly</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">3750</span><span class="p">,</span> <span class="mi">4850</span><span class="p">,</span> <span class="mi">4650</span><span class="p">,</span> <span class="mi">6090</span><span class="p">]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">quarters</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">bars1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">budget_qtly</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Budget&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">bars2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">actual_qtly</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Actual&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+
+<span class="c1"># Labels</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars1</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">bar</span> <span class="ow">in</span> <span class="n">bars2</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;coral&#39;</span><span class="p">)</span>
+
+<span class="c1"># Variance annotation</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">budget_qtly</span><span class="p">,</span> <span class="n">actual_qtly</span><span class="p">)):</span>
+    <span class="n">variance</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span> <span class="k">if</span> <span class="n">variance</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;red&#39;</span>
+    <span class="n">sign</span>  <span class="o">=</span> <span class="s1">&#39;+&#39;</span> <span class="k">if</span> <span class="n">variance</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">250</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Var: </span><span class="si">{</span><span class="n">sign</span><span class="si">}{</span><span class="n">variance</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Budget vs Actual Revenue by Quarter&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Revenue (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">quarters</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">actual_qtly</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.25</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_14_0.png" /></p>
+<h1 id="section-7-pie-donut-chart-revenue-or-expense-mix">Section 7: Pie &amp; Donut Chart — Revenue or Expense Mix</h1>
+<p>Pie charts show <strong>part-to-whole relationships</strong> — revenue by business segment, expenses by head.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pie Chart — Revenue by Business Segment</span>
+<span class="n">segments</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Products&#39;</span><span class="p">,</span> <span class="s1">&#39;Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Consulting&#39;</span><span class="p">,</span> <span class="s1">&#39;Exports&#39;</span><span class="p">]</span>
+<span class="n">seg_vals</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">6800</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">2900</span><span class="p">,</span> <span class="mi">1900</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
+<span class="n">colors</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#4472C4&#39;</span><span class="p">,</span> <span class="s1">&#39;#ED7D31&#39;</span><span class="p">,</span> <span class="s1">&#39;#A9D18E&#39;</span><span class="p">,</span> <span class="s1">&#39;#FF5757&#39;</span><span class="p">]</span>
+<span class="n">explode</span>   <span class="o">=</span> <span class="p">[</span><span class="mf">0.05</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>   <span class="c1"># Slightly separate the largest segment</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># --- Pie Chart ---</span>
+<span class="n">wedges</span><span class="p">,</span> <span class="n">texts</span><span class="p">,</span> <span class="n">autotexts</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+    <span class="n">seg_vals</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">segments</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">explode</span><span class="o">=</span><span class="n">explode</span><span class="p">,</span>
+    <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pctdistance</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
+    <span class="n">wedgeprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">autotexts</span><span class="p">:</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">set_fontweight</span><span class="p">(</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue by Segment</span><span class="se">\n</span><span class="s1">(Pie Chart)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># --- Donut Chart (Pie with a hole) ---</span>
+<span class="n">wedges2</span><span class="p">,</span> <span class="n">texts2</span><span class="p">,</span> <span class="n">autotexts2</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span>
+    <span class="n">seg_vals</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">segments</span><span class="p">,</span> <span class="n">colors</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span>
+    <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.1f%%</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pctdistance</span><span class="o">=</span><span class="mf">0.80</span><span class="p">,</span>
+    <span class="n">wedgeprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>   <span class="c1"># width &lt; 1 creates donut</span>
+<span class="p">)</span>
+<span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">autotexts2</span><span class="p">:</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+    <span class="n">text</span><span class="o">.</span><span class="n">set_fontweight</span><span class="p">(</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">seg_vals</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K</span><span class="se">\n</span><span class="s1">Total&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgray&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue by Segment</span><span class="se">\n</span><span class="s1">(Donut Chart)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Revenue Mix — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_16_0.png" /></p>
+<h1 id="section-8-histogram-invoice-amount-distribution">Section 8: Histogram — Invoice Amount Distribution</h1>
+<p>Histograms show the <strong>distribution / frequency</strong> of numerical data. Useful in audit for:
+- Understanding the spread of invoice values
+- Identifying concentration around suspicious thresholds
+- Detecting Benford's Law anomalies</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simulate 200 invoice amounts</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">invoice_amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="n">scale</span><span class="o">=</span><span class="mi">50000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">160</span><span class="p">),</span>   <span class="c1"># Most invoices: small-medium</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="mi">500000</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>       <span class="c1"># Some large invoices</span>
+<span class="p">])</span>
+<span class="n">invoice_amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">500000</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Histogram</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">invoice_amounts</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+             <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Mean: ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median: ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Distribution of Invoice Amounts&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency (No. of Invoices)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="c1"># Cumulative histogram — shows what % of invoices are below a value</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">invoice_amounts</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">cumulative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+             <span class="n">color</span><span class="o">=</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.85</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;80th Percentile&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cumulative Distribution (CDF)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Cumulative Fraction&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">y</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Analysis — Audit Sampling View&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">p80</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+<span class="n">above_p80</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">invoice_amounts</span> <span class="o">&gt;</span> <span class="n">p80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;80th percentile: ₹</span><span class="si">{</span><span class="n">p80</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invoices above ₹</span><span class="si">{</span><span class="n">p80</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">above_p80</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">above_p80</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%) — these form the audit focus&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_18_0.png" /></p>
+<div class="highlight"><pre><span></span><code>80th percentile: ₹212,208
+Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
+</code></pre></div>
+<h1 id="section-9-scatter-plot-profit-vs-revenue-relationship">Section 9: Scatter Plot — Profit vs Revenue Relationship</h1>
+<div class="highlight"><pre><span></span><code><span class="c1"># Scatter plot — Monthly Revenue vs Profit</span>
+<span class="n">revenue_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span>
+<span class="n">profit_arr</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">scatter</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">revenue_arr</span><span class="p">,</span> <span class="n">profit_arr</span><span class="p">,</span>
+                     <span class="n">c</span><span class="o">=</span><span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="c1"># Label each point with month name</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">months</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="p">(</span><span class="n">revenue_arr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">profit_arr</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="c1"># Add trend line</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">revenue_arr</span><span class="p">,</span> <span class="n">profit_arr</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">poly1d</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">revenue_arr</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">revenue_arr</span><span class="p">),</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_line</span><span class="p">,</span> <span class="n">p</span><span class="p">(</span><span class="n">x_line</span><span class="p">),</span> <span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Trend&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">scatter</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Month (Apr=0 → Mar=11)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue vs Profit — Monthly Correlation&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Monthly Revenue (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Monthly Profit (₹ Thousands)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="n">corr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">revenue_arr</span><span class="p">,</span> <span class="n">profit_arr</span><span class="p">)[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Correlation: </span><span class="si">{</span><span class="n">corr</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+        <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;top&#39;</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_20_0.png" /></p>
+<h1 id="section-10-subplots-building-a-financial-dashboard">Section 10: Subplots — Building a Financial Dashboard</h1>
+<p>Subplots let you display <strong>multiple charts on one page</strong> — like a management dashboard.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 2×2 Financial Dashboard</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Management Dashboard — FY 2024-25</span><span class="se">\n</span><span class="s1">ABC Enterprises Ltd.&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+
+<span class="c1"># ── Chart 1 (top-left): Revenue &amp; Expense trend ──</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Revenue&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">expenses</span><span class="p">,</span> <span class="s1">&#39;tomato&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expenses&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">expenses</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue vs Expenses Trend&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># ── Chart 2 (top-right): Monthly Profit bars ──</span>
+<span class="n">bar_colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;green&#39;</span> <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;red&#39;</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">profit</span><span class="p">]</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">profit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">bar_colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">profit</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
+                    <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Avg: ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monthly Net Profit&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="c1"># ── Chart 3 (bottom-left): Expense mix donut ──</span>
+<span class="n">colors_pie</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#4472C4&#39;</span><span class="p">,</span><span class="s1">&#39;#ED7D31&#39;</span><span class="p">,</span><span class="s1">&#39;#A9D18E&#39;</span><span class="p">,</span><span class="s1">&#39;#FF5757&#39;</span><span class="p">,</span><span class="s1">&#39;#9B59B6&#39;</span><span class="p">,</span><span class="s1">&#39;#E74C3C&#39;</span><span class="p">,</span><span class="s1">&#39;#1ABC9C&#39;</span><span class="p">]</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="o">+</span><span class="mi">2</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>  <span class="c1"># placeholder to maintain comment alignment</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">expense_values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">expense_categories</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%1.0f%%</span><span class="s1">&#39;</span><span class="p">,</span>
+               <span class="n">colors</span><span class="o">=</span><span class="n">colors_pie</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">pctdistance</span><span class="o">=</span><span class="mf">0.82</span><span class="p">,</span>
+               <span class="n">wedgeprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.55</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Expense Mix (Donut)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># ── Chart 4 (bottom-right): Cumulative profit ──</span>
+<span class="n">cum_profit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">profit</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">cum_profit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">cum_profit</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Cumulative Profit (YTD)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_22_0.png" /></p>
+<h1 id="section-11-styling-formatting-tips">Section 11: Styling &amp; Formatting Tips</h1>
+<p>Good chart design communicates faster. Here are key formatting techniques:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Using a built-in style for a more professional look</span>
+<span class="n">available_styles</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">available</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Available styles (first 10):&#39;</span><span class="p">,</span> <span class="n">available_styles</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+
+<span class="c1"># Use &#39;seaborn-v0_8-whitegrid&#39; for clean, publication-ready charts</span>
+<span class="k">with</span> <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">context</span><span class="p">(</span><span class="s1">&#39;seaborn-v0_8-whitegrid&#39;</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2196F3&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#2196F3&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Add data labels on each point</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">)):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">r</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s1">&#39;offset points&#39;</span><span class="p">,</span>
+                    <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">8.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#1565C0&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Revenue Trend — FY 2024-25</span><span class="se">\n</span><span class="s1">(Seaborn Whitegrid Style)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span> <span class="mi">2400</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Available styles (first 10): [&#39;Solarize_Light2&#39;, &#39;_classic_test_patch&#39;, &#39;_mpl-gallery&#39;, &#39;_mpl-gallery-nogrid&#39;, &#39;bmh&#39;, &#39;classic&#39;, &#39;dark_background&#39;, &#39;fast&#39;, &#39;fivethirtyeight&#39;, &#39;ggplot&#39;]
+
+
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_31281/936812922.py:19: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_24_2.png" /></p>
+<h1 id="section-12-saving-charts">Section 12: Saving Charts</h1>
+<p>Save charts as PNG, PDF, or SVG for reports and presentations.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a chart and save it</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">revenue</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Revenue&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">expenses</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>   <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Expenses&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monthly P&amp;L Trend — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="c1"># Save options:</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;revenue_trend.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>       <span class="c1"># High-res PNG</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;revenue_trend.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>                 <span class="c1"># PDF (vector)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Charts saved:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  revenue_trend.png  (300 DPI — for presentations)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  revenue_trend.pdf  (vector — for print/reports)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Charts saved:
+  revenue_trend.png  (300 DPI — for presentations)
+  revenue_trend.pdf  (vector — for print/reports)
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_26_1.png" /></p>
+<h1 id="section-13-practice-exercises">Section 13: Practice Exercises</h1>
+<hr />
+<h3 id="exercise-1-stacked-bar-quarterly-cost-structure">🏋️ Exercise 1 — Stacked Bar: Quarterly Cost Structure</h3>
+<p>Create a <strong>stacked bar chart</strong> showing quarterly expense breakdown across 4 categories:
+<div class="highlight"><pre><span></span><code><span class="n">quarters</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">salaries</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1350</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
+<span class="n">materials</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">800</span><span class="p">,</span>  <span class="mi">950</span><span class="p">,</span>  <span class="mi">880</span><span class="p">,</span>  <span class="mi">1050</span><span class="p">]</span>
+<span class="n">overheads</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">320</span><span class="p">,</span>  <span class="mi">345</span><span class="p">,</span>  <span class="mi">330</span><span class="p">,</span>  <span class="mi">380</span><span class="p">]</span>
+<span class="n">marketing</span>   <span class="o">=</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span>  <span class="mi">210</span><span class="p">,</span>  <span class="mi">195</span><span class="p">,</span>  <span class="mi">260</span><span class="p">]</span>
+</code></pre></div>
+Requirements: Add a title, legend, value labels on each segment, and y-axis label.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">quarters</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">salaries</span>  <span class="o">=</span> <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1350</span><span class="p">]</span>
+<span class="n">materials</span> <span class="o">=</span> <span class="p">[</span><span class="mi">800</span><span class="p">,</span>  <span class="mi">950</span><span class="p">,</span>  <span class="mi">880</span><span class="p">,</span> <span class="mi">1050</span><span class="p">]</span>
+<span class="n">overheads</span> <span class="o">=</span> <span class="p">[</span><span class="mi">320</span><span class="p">,</span>  <span class="mi">345</span><span class="p">,</span>  <span class="mi">330</span><span class="p">,</span>  <span class="mi">380</span><span class="p">]</span>
+<span class="n">marketing</span> <span class="o">=</span> <span class="p">[</span><span class="mi">180</span><span class="p">,</span>  <span class="mi">210</span><span class="p">,</span>  <span class="mi">195</span><span class="p">,</span>  <span class="mi">260</span><span class="p">]</span>
+
+<span class="c1"># Hint: Use ax.bar(..., bottom=...) to stack bars</span>
+<span class="c1"># Each subsequent bar&#39;s bottom = sum of all previous categories</span>
+</code></pre></div>
+<h3 id="exercise-2-waterfall-chart-pl-bridge">🏋️ Exercise 2 — Waterfall Chart: P&amp;L Bridge</h3>
+<p>A waterfall chart shows how you get from Revenue to Net Profit — extremely common in management presentations and earnings calls.</p>
+<p>Build one using bar charts with this data:
+- Revenue: ₹18,000K
+- Less COGS: ₹10,800K
+- = Gross Profit: ₹7,200K
+- Less Opex: ₹3,300K
+- Less Depreciation: ₹420K
+- Less Finance Cost: ₹216K
+- = Net Profit Before Tax: ₹3,264K</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Hint: For a waterfall chart:</span>
+<span class="c1"># - Positive items (Revenue, Gross Profit, Net Profit) = green/blue bars from 0</span>
+<span class="c1"># - Negative items (COGS, Opex, etc.) = red bars sitting on top of running total</span>
+<span class="c1"># - Use &#39;bottom&#39; parameter in ax.bar() to position bars correctly</span>
+
+<span class="n">items</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">,</span> <span class="s1">&#39;COGS&#39;</span><span class="p">,</span> <span class="s1">&#39;Gross</span><span class="se">\n</span><span class="s1">Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Opex&#39;</span><span class="p">,</span> <span class="s1">&#39;Depreciation&#39;</span><span class="p">,</span> <span class="s1">&#39;Finance</span><span class="se">\n</span><span class="s1">Cost&#39;</span><span class="p">,</span> <span class="s1">&#39;Net Profit</span><span class="se">\n</span><span class="s1">Before Tax&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10800</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="o">-</span><span class="mi">3300</span><span class="p">,</span> <span class="o">-</span><span class="mi">420</span><span class="p">,</span> <span class="o">-</span><span class="mi">216</span><span class="p">,</span> <span class="mi">3264</span><span class="p">]</span>   <span class="c1"># ₹ Thousands</span>
+</code></pre></div>
+<hr />
+<h2 id="solutions">💡 Solutions</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: Stacked Bar Chart</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">quarters</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">salaries</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1250</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1350</span><span class="p">])</span>
+<span class="n">materials</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">800</span><span class="p">,</span>  <span class="mi">950</span><span class="p">,</span>  <span class="mi">880</span><span class="p">,</span> <span class="mi">1050</span><span class="p">])</span>
+<span class="n">overheads</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">320</span><span class="p">,</span>  <span class="mi">345</span><span class="p">,</span>  <span class="mi">330</span><span class="p">,</span>  <span class="mi">380</span><span class="p">])</span>
+<span class="n">marketing</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">180</span><span class="p">,</span>  <span class="mi">210</span><span class="p">,</span>  <span class="mi">195</span><span class="p">,</span>  <span class="mi">260</span><span class="p">])</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">b1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">quarters</span><span class="p">,</span> <span class="n">salaries</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Salaries&#39;</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#4472C4&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">quarters</span><span class="p">,</span> <span class="n">materials</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Materials&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#ED7D31&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">salaries</span><span class="p">)</span>
+<span class="n">b3</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">quarters</span><span class="p">,</span> <span class="n">overheads</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Overheads&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#A9D18E&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">salaries</span><span class="o">+</span><span class="n">materials</span><span class="p">)</span>
+<span class="n">b4</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">quarters</span><span class="p">,</span> <span class="n">marketing</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Marketing&#39;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#FF5757&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="n">salaries</span><span class="o">+</span><span class="n">materials</span><span class="o">+</span><span class="n">overheads</span><span class="p">)</span>
+
+<span class="c1"># Total labels on top</span>
+<span class="n">totals</span> <span class="o">=</span> <span class="n">salaries</span> <span class="o">+</span> <span class="n">materials</span> <span class="o">+</span> <span class="n">overheads</span> <span class="o">+</span> <span class="n">marketing</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">totals</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">total</span> <span class="o">+</span> <span class="mi">30</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Quarterly Cost Structure — Stacked&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">totals</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_32_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Waterfall / P&amp;L Bridge Chart</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">items</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Revenue&#39;</span><span class="p">,</span> <span class="s1">&#39;COGS&#39;</span><span class="p">,</span> <span class="s1">&#39;Gross</span><span class="se">\n</span><span class="s1">Profit&#39;</span><span class="p">,</span> <span class="s1">&#39;Opex&#39;</span><span class="p">,</span> <span class="s1">&#39;Depreciation&#39;</span><span class="p">,</span> <span class="s1">&#39;Finance</span><span class="se">\n</span><span class="s1">Cost&#39;</span><span class="p">,</span> <span class="s1">&#39;Net Profit</span><span class="se">\n</span><span class="s1">Bef. Tax&#39;</span><span class="p">]</span>
+<span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">18000</span><span class="p">,</span> <span class="o">-</span><span class="mi">10800</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="o">-</span><span class="mi">3300</span><span class="p">,</span> <span class="o">-</span><span class="mi">420</span><span class="p">,</span> <span class="o">-</span><span class="mi">216</span><span class="p">,</span> <span class="mi">3264</span><span class="p">]</span>
+
+<span class="c1"># Calculate running totals to position bars</span>
+<span class="n">subtotals</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">18000</span><span class="p">,</span> <span class="mi">18000</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="mi">7200</span><span class="p">,</span> <span class="mi">3900</span><span class="o">-</span><span class="mi">420</span><span class="p">,</span> <span class="mi">3480</span><span class="o">-</span><span class="mi">216</span><span class="p">]</span>
+<span class="c1"># For absolute bars (Revenue, Gross Profit, Net Profit)</span>
+<span class="n">absolute_items</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">}</span>
+
+<span class="n">bottoms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">values</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">absolute_items</span><span class="p">:</span>
+        <span class="n">bottoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">bottoms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">subtotals</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">values</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">absolute_items</span><span class="p">:</span>
+        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;steelblue&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;seagreen&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">colors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;tomato&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="p">[</span><span class="nb">abs</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">values</span><span class="p">],</span> <span class="n">bottom</span><span class="o">=</span><span class="n">bottoms</span><span class="p">,</span>
+              <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.55</span><span class="p">)</span>
+
+<span class="c1"># Value labels</span>
+<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">bot</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">values</span><span class="p">,</span> <span class="n">bottoms</span><span class="p">):</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">K&#39;</span>
+    <span class="n">y_pos</span> <span class="o">=</span> <span class="n">bot</span> <span class="o">+</span> <span class="nb">abs</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">y_pos</span><span class="p">,</span> <span class="n">label</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+
+<span class="c1"># Connector lines</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">absolute_items</span> <span class="ow">and</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">absolute_items</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="mf">0.28</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mf">0.72</span><span class="p">],</span> <span class="p">[</span><span class="n">bottoms</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">bottoms</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]],</span>
+                <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;P&amp;L Bridge — FY 2024-25</span><span class="se">\n</span><span class="s1">(Revenue → Net Profit Before Tax)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;top&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">spines</span><span class="p">[</span><span class="s1">&#39;right&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Patch</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Total&#39;</span><span class="p">),</span>
+                   <span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Reduction&#39;</span><span class="p">),</span>
+                   <span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Addition&#39;</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_0.png" /></p>
+<hr />
+<h1 id="module-4-complete">🎉 Module 4 Complete!</h1>
+<h2 id="what-youve-learned">What you've learned</h2>
+<table>
+<thead>
+<tr>
+<th>Chart Type</th>
+<th>When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Line Chart</td>
+<td>Revenue/profit trends over time</td>
+</tr>
+<tr>
+<td>Bar Chart</td>
+<td>Comparing categories (expenses, clients)</td>
+</tr>
+<tr>
+<td>Horizontal Bar</td>
+<td>Long category names, rankings</td>
+</tr>
+<tr>
+<td>Grouped Bar</td>
+<td>Budget vs Actual, year-on-year</td>
+</tr>
+<tr>
+<td>Stacked Bar</td>
+<td>Cost structure, segment contribution</td>
+</tr>
+<tr>
+<td>Pie / Donut</td>
+<td>Revenue mix, expense breakdown</td>
+</tr>
+<tr>
+<td>Histogram</td>
+<td>Invoice distribution, audit sampling</td>
+</tr>
+<tr>
+<td>Scatter Plot</td>
+<td>Relationships, correlation analysis</td>
+</tr>
+<tr>
+<td>Waterfall</td>
+<td>P&amp;L bridge, variance explanation</td>
+</tr>
+<tr>
+<td>Subplots</td>
+<td>Management dashboards</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Next up → Module 5: Seaborn</strong> — Statistical charts with even less code!</p>
+<hr />
+<p><em>Python for CA Professionals — Module 4: Matplotlib</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

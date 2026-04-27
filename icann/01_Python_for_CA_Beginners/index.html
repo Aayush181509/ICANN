@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>🐍 Python for CA Professionals - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83d\udc0d Python for CA Professionals";
+        var mkdocs_page_input_path = "icann/01_Python_for_CA_Beginners.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.md">Python Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00a_numpy_basics.md">Numpy Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00b_pandas_basics.md">Pandas Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00c_matplotlib_basics.md">Matplotlib Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00d_seaborn_basics.md">Seaborn Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../01_numpy_for_finance.md">Numpy for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../02_pandas_fundamentals.md">Pandas for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../03_financial_statement_analysis.md">Financial Statement Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../04_audit_data_analysis.md">Audit Data Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../06_fraud_detection.md">Fraud Detection</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🐍 Python for CA Professionals</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="python-for-ca-professionals">🐍 Python for CA Professionals</h1>
+<h2 id="a-complete-beginners-guide">A Complete Beginner's Guide</h2>
+<hr />
+<p><strong>Welcome!</strong> You've spent years mastering financial statements, auditing standards, and tax laws.<br />
+Now it's time to add one more powerful tool to your arsenal: <strong>Python</strong>.</p>
+<blockquote>
+<p><em>"Python is the Excel of the future — except it can do in 3 lines what Excel takes 30 clicks to do."</em></p>
+</blockquote>
+<h3 id="who-is-this-notebook-for">Who is this notebook for?</h3>
+<ul>
+<li>CA graduates and finance professionals</li>
+<li>Absolute beginners — <strong>zero coding experience required</strong></li>
+<li>Anyone who wants to automate repetitive financial tasks</li>
+</ul>
+<h3 id="what-will-you-learn">What will you learn?</h3>
+<p>By the end of this notebook, you will be able to:
+- Write your first Python programs
+- Work with numbers, text, and data — just like in Excel but far more powerful
+- Build a simple tax calculator and financial report generator
+- Automate repetitive calculations</p>
+<h3 id="how-to-use-this-notebook">How to use this notebook</h3>
+<ul>
+<li>Each <strong>grey box</strong> below is a <strong>code cell</strong> — it contains Python code you can run</li>
+<li>Click on a code cell and press <strong>Shift + Enter</strong> to run it</li>
+<li><strong>Markdown cells</strong> (like this one) contain explanations — just read them</li>
+<li>Try changing the numbers in code cells and re-run them — experimentation is the best teacher!</li>
+</ul>
+<hr />
+<p>⏱️ <strong>Estimated time:</strong> 3–4 hours (you can go at your own pace)</p>
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+<th>What you'll learn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>What is Python?</td>
+<td>Why Python matters for finance</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Your First Program</td>
+<td><code>print()</code>, comments</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Variables</td>
+<td>Storing values, naming rules</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Data Types</td>
+<td>Numbers, text, True/False</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Python as a Calculator</td>
+<td>Arithmetic, tax &amp; interest calculations</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Making Decisions</td>
+<td><code>if / elif / else</code>, tax brackets</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Working with Text</td>
+<td>Strings, formatting financial reports</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Lists</td>
+<td>Collections of data, expense lists</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Dictionaries</td>
+<td>Key-value data, ledger records</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Loops</td>
+<td>Automating repetitive work</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Functions</td>
+<td>Reusable code, tax calculator</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Practice Exercises</td>
+<td>Test your skills</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="section-1-what-is-python">Section 1: What is Python?</h1>
+<h2 id="think-of-python-as-a-very-smart-assistant">Think of Python as a very smart assistant</h2>
+<p>Imagine you have a new junior staff member who:
+- Does <strong>exactly</strong> what you tell them, every single time
+- Works <strong>24/7</strong> without complaining
+- Can process <strong>thousands of transactions</strong> in seconds
+- <strong>Never makes arithmetic mistakes</strong></p>
+<p>That's Python.</p>
+<h2 id="why-do-ca-professionals-use-python">Why do CA professionals use Python?</h2>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Without Python</th>
+<th>With Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calculate GST on 500 invoices</td>
+<td>30 minutes in Excel</td>
+<td>2 seconds</td>
+</tr>
+<tr>
+<td>Classify expenses into categories</td>
+<td>Manual, error-prone</td>
+<td>Automatic</td>
+</tr>
+<tr>
+<td>Generate financial reports</td>
+<td>Hours of formatting</td>
+<td>Minutes</td>
+</tr>
+<tr>
+<td>Detect anomalies in transactions</td>
+<td>Sampling only</td>
+<td>100% coverage</td>
+</tr>
+<tr>
+<td>Reconcile bank statements</td>
+<td>Tedious VLOOKUP</td>
+<td>One command</td>
+</tr>
+</tbody>
+</table>
+<h2 id="python-in-the-real-world-finance">Python in the real world (Finance)</h2>
+<ul>
+<li><strong>Big 4 firms</strong> use Python for data analytics and audit automation</li>
+<li><strong>Banks</strong> use Python for risk modelling and fraud detection</li>
+<li><strong>Tax authorities</strong> (like CBDT) use Python to analyse return data</li>
+<li><strong>Stock exchanges</strong> use Python for real-time data processing</li>
+</ul>
+<hr />
+<p>💡 <strong>Key insight:</strong> Python does not replace your CA knowledge. It <strong>multiplies</strong> it.</p>
+<h1 id="section-2-your-first-python-program">Section 2: Your First Python Program</h1>
+<h2 id="the-print-function">The <code>print()</code> function</h2>
+<p>The most basic thing Python can do is <strong>display a message on screen</strong>.<br />
+We use the <code>print()</code> function for this.</p>
+<p><strong>Syntax:</strong> <code>print('your message here')</code></p>
+<p>Think of <code>print()</code> as Python's way of <strong>speaking to you</strong>.<br />
+Whatever you put inside the brackets (in quotes) will be displayed.</p>
+<p>Let's run our first program:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello, World!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Hello, World!
+</code></pre></div>
+<p>Congratulations! 🎉 You just wrote your first Python program!</p>
+<p>Now let's try something more relevant to our work:</p>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Welcome to Python for Finance!&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This notebook will help CA professionals automate their work.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Let us get started!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Welcome to Python for Finance!
+This notebook will help CA professionals automate their work.
+Let us get started!
+</code></pre></div>
+<h2 id="comments-notes-to-yourself">Comments — Notes to yourself</h2>
+<p>In your audit working papers, you write notes explaining your work.<br />
+In Python, we do the same using <strong>comments</strong>.</p>
+<p>A comment starts with <code>#</code> (hash symbol). Python <strong>completely ignores</strong> anything after <code>#</code> on that line.<br />
+Comments are for <strong>humans</strong> to read — they help explain what the code is doing.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This is a comment — Python ignores this line</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Financial Year 2024-25&#39;</span><span class="p">)</span>  <span class="c1"># You can also add comments at the end of a line</span>
+
+<span class="c1"># The line below prints the company name</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ABC Enterprises Ltd.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Always write comments to explain WHY you wrote the code, not just WHAT it does</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Financial Year 2024-25
+ABC Enterprises Ltd.
+</code></pre></div>
+<h3 id="mini-exercise-1">✏️ Mini Exercise 1</h3>
+<p>In the cell below, write a Python program that prints:
+1. Your name
+2. Your firm name (or any name)
+3. Today's date</p>
+<p>Add a comment before each print statement explaining what it does.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your code here</span>
+</code></pre></div>
+<h1 id="section-3-variables-storing-information">Section 3: Variables — Storing Information</h1>
+<h2 id="what-is-a-variable">What is a variable?</h2>
+<p>In accounting, you have <strong>ledger accounts</strong> — each account holds a value (like Cash Account = ₹50,000).</p>
+<p>In Python, a <strong>variable</strong> is the same concept — it's a named container that holds a value.</p>
+<div class="highlight"><pre><span></span><code>cash_balance = 50000
+     ↑              ↑
+ account name    account value
+</code></pre></div>
+<p>The <code>=</code> sign means <strong>"store this value in this variable"</strong> (it does NOT mean "equal to" the way it does in maths).</p>
+<p>Once you create a variable, you can use it anywhere in your code.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating variables — storing financial data</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="mi">1500000</span>       <span class="c1"># Total revenue: ₹15,00,000</span>
+<span class="n">expenses</span> <span class="o">=</span> <span class="mi">980000</span>       <span class="c1"># Total expenses: ₹9,80,000</span>
+<span class="n">tax_rate</span> <span class="o">=</span> <span class="mf">0.30</span>         <span class="c1"># Tax rate: 30%</span>
+<span class="n">company_name</span> <span class="o">=</span> <span class="s1">&#39;ABC Enterprises Ltd.&#39;</span>
+
+<span class="c1"># Now we can USE these variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">company_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expenses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tax_rate</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ABC Enterprises Ltd.
+1500000
+980000
+0.3
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Variables can be used in calculations — just like cell references in Excel</span>
+<span class="n">profit</span> <span class="o">=</span> <span class="n">revenue</span> <span class="o">-</span> <span class="n">expenses</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Profit before tax:&#39;</span><span class="p">,</span> <span class="n">profit</span><span class="p">)</span>
+
+<span class="n">tax_payable</span> <span class="o">=</span> <span class="n">profit</span> <span class="o">*</span> <span class="n">tax_rate</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tax payable:&#39;</span><span class="p">,</span> <span class="n">tax_payable</span><span class="p">)</span>
+
+<span class="n">profit_after_tax</span> <span class="o">=</span> <span class="n">profit</span> <span class="o">-</span> <span class="n">tax_payable</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Profit after tax:&#39;</span><span class="p">,</span> <span class="n">profit_after_tax</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Profit before tax: 520000
+Tax payable: 156000.0
+Profit after tax: 364000.0
+</code></pre></div>
+<h2 id="rules-for-naming-variables">Rules for naming variables</h2>
+<p>Just like account names follow conventions in accounting, variable names follow rules in Python:</p>
+<table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Use letters, numbers, underscores only</td>
+<td><code>tax_rate</code>, <code>profit2024</code></td>
+</tr>
+<tr>
+<td>Must start with a letter or underscore</td>
+<td><code>revenue</code> ✅  &nbsp;&nbsp; <code>1revenue</code> ❌</td>
+</tr>
+<tr>
+<td>No spaces — use underscore instead</td>
+<td><code>net_profit</code> ✅  &nbsp;&nbsp; <code>net profit</code> ❌</td>
+</tr>
+<tr>
+<td>Case-sensitive</td>
+<td><code>Revenue</code> and <code>revenue</code> are <strong>different</strong> variables</td>
+</tr>
+<tr>
+<td>Use descriptive names</td>
+<td><code>tax_payable</code> ✅  &nbsp;&nbsp; <code>t</code> ❌</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Convention:</strong> Use lowercase with underscores (this is called <code>snake_case</code> — very common in Python)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Good variable names — descriptive and clear</span>
+<span class="n">gross_salary</span> <span class="o">=</span> <span class="mi">1200000</span>
+<span class="n">standard_deduction</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="n">hra_exemption</span> <span class="o">=</span> <span class="mi">180000</span>
+<span class="n">taxable_income</span> <span class="o">=</span> <span class="n">gross_salary</span> <span class="o">-</span> <span class="n">standard_deduction</span> <span class="o">-</span> <span class="n">hra_exemption</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Taxable Income:&#39;</span><span class="p">,</span> <span class="n">taxable_income</span><span class="p">)</span>
+
+<span class="c1"># Variables can be updated (reassigned)</span>
+<span class="n">gross_salary</span> <span class="o">=</span> <span class="mi">1500000</span>  <span class="c1"># Got a raise!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Updated salary:&#39;</span><span class="p">,</span> <span class="n">gross_salary</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Taxable Income: 970000
+Updated salary: 1500000
+</code></pre></div>
+<h3 id="mini-exercise-2">✏️ Mini Exercise 2</h3>
+<p>Create variables for the following Balance Sheet items and print them:
+- Share Capital: ₹5,00,000
+- Reserves &amp; Surplus: ₹2,50,000
+- Long-term Debt: ₹3,00,000
+- Calculate and print: <strong>Total Equity + Debt</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your code here</span>
+</code></pre></div>
+<h1 id="section-4-data-types-types-of-information">Section 4: Data Types — Types of Information</h1>
+<h2 id="every-piece-of-data-has-a-type">Every piece of data has a type</h2>
+<p>In accounting, data comes in different forms:
+- <strong>Amounts</strong> — ₹50,000 (numbers)
+- <strong>Client names</strong> — "Reliance Industries" (text)
+- <strong>Audit status</strong> — Yes/No (True/False)</p>
+<p>Python has corresponding <strong>data types</strong> for each of these:</p>
+<table>
+<thead>
+<tr>
+<th>Python Type</th>
+<th>What it stores</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>int</code></td>
+<td>Whole numbers</td>
+<td><code>1000</code>, <code>-500</code>, <code>0</code></td>
+</tr>
+<tr>
+<td><code>float</code></td>
+<td>Decimal numbers</td>
+<td><code>18.5</code>, <code>0.30</code>, <code>99.99</code></td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td>Text (string)</td>
+<td><code>'Revenue'</code>, <code>'ABC Ltd'</code></td>
+</tr>
+<tr>
+<td><code>bool</code></td>
+<td>True or False</td>
+<td><code>True</code>, <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<p>You can check the type of any value using the <code>type()</code> function.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># int — whole numbers (no decimal point)</span>
+<span class="n">number_of_invoices</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">number_of_employees</span> <span class="o">=</span> <span class="mi">48</span>
+<span class="n">financial_year</span> <span class="o">=</span> <span class="mi">2025</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of invoices:&#39;</span><span class="p">,</span> <span class="n">number_of_invoices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">number_of_invoices</span><span class="p">))</span>  <span class="c1"># Shows the data type</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Number of invoices: 250
+Type: &lt;class &#39;int&#39;&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># float — numbers with a decimal point</span>
+<span class="n">gst_rate</span> <span class="o">=</span> <span class="mf">18.0</span>          <span class="c1"># 18% GST</span>
+<span class="n">income_tax_rate</span> <span class="o">=</span> <span class="mf">30.0</span>   <span class="c1"># 30% corporate tax</span>
+<span class="n">interest_rate</span> <span class="o">=</span> <span class="mf">8.5</span>      <span class="c1"># 8.5% interest rate</span>
+<span class="n">invoice_amount</span> <span class="o">=</span> <span class="mf">47500.75</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GST Rate:&#39;</span><span class="p">,</span> <span class="n">gst_rate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">gst_rate</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invoice Amount:&#39;</span><span class="p">,</span> <span class="n">invoice_amount</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>GST Rate: 18.0
+Type: &lt;class &#39;float&#39;&gt;
+Invoice Amount: 47500.75
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># str (string) — text data</span>
+<span class="c1"># Strings are ALWAYS enclosed in quotes (single &#39;&#39; or double &quot;&quot;)</span>
+
+<span class="n">client_name</span> <span class="o">=</span> <span class="s1">&#39;Tata Consultancy Services Ltd.&#39;</span>
+<span class="n">audit_period</span> <span class="o">=</span> <span class="s1">&#39;April 2024 to March 2025&#39;</span>
+<span class="n">pan_number</span> <span class="o">=</span> <span class="s1">&#39;AAAAA0000A&#39;</span>   <span class="c1"># Even numbers stored as text when not used for calculation</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Client:&#39;</span><span class="p">,</span> <span class="n">client_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Audit Period:&#39;</span><span class="p">,</span> <span class="n">audit_period</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PAN:&#39;</span><span class="p">,</span> <span class="n">pan_number</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">client_name</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Client: Tata Consultancy Services Ltd.
+Audit Period: April 2024 to March 2025
+PAN: AAAAA0000A
+Type: &lt;class &#39;str&#39;&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># bool — Boolean (True or False only)</span>
+<span class="c1"># Very useful for status checks and decisions</span>
+
+<span class="n">is_audit_complete</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">is_tax_paid</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">is_listed_company</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Audit complete?&#39;</span><span class="p">,</span> <span class="n">is_audit_complete</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Tax paid?&#39;</span><span class="p">,</span> <span class="n">is_tax_paid</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Listed company?&#39;</span><span class="p">,</span> <span class="n">is_listed_company</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Type:&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">is_audit_complete</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Audit complete? True
+Tax paid? False
+Listed company? True
+Type: &lt;class &#39;bool&#39;&gt;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Real-world example: A client record with mixed data types</span>
+<span class="n">client_name</span> <span class="o">=</span> <span class="s1">&#39;Infosys Limited&#39;</span>       <span class="c1"># str</span>
+<span class="n">client_id</span> <span class="o">=</span> <span class="mi">10045</span>                      <span class="c1"># int</span>
+<span class="n">revenue_crores</span> <span class="o">=</span> <span class="mf">146767.0</span>             <span class="c1"># float (Revenue in crores)</span>
+<span class="n">is_fortune500</span> <span class="o">=</span> <span class="kc">True</span>                   <span class="c1"># bool</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Client Profile ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Name:&#39;</span><span class="p">,</span> <span class="n">client_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ID:&#39;</span><span class="p">,</span> <span class="n">client_id</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Revenue (₹ Crores):&#39;</span><span class="p">,</span> <span class="n">revenue_crores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Fortune 500 Company?&#39;</span><span class="p">,</span> <span class="n">is_fortune500</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Client Profile ---
+Name: Infosys Limited
+ID: 10045
+Revenue (₹ Crores): 146767.0
+Fortune 500 Company? True
+</code></pre></div>
+<h2 id="important-numbers-in-quotes-are-not-numbers">⚠️ Important: Numbers in quotes are NOT numbers!</h2>
+<p>This is a very common beginner mistake. Watch carefully:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># This is a NUMBER (int)</span>
+<span class="n">amount1</span> <span class="o">=</span> <span class="mi">50000</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">amount1</span><span class="p">))</span>   <span class="c1"># &lt;class &#39;int&#39;&gt;</span>
+
+<span class="c1"># This is TEXT (str) — the quotes make it text!</span>
+<span class="n">amount2</span> <span class="o">=</span> <span class="s1">&#39;50000&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">amount2</span><span class="p">))</span>   <span class="c1"># &lt;class &#39;str&#39;&gt;</span>
+
+<span class="c1"># What happens when you try to add them?</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">amount1</span> <span class="o">+</span> <span class="n">amount1</span><span class="p">)</span>   <span class="c1"># 100000 — correct! (number + number)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">amount2</span> <span class="o">+</span> <span class="n">amount2</span><span class="p">)</span>   <span class="c1"># &#39;5000050000&#39; — joins text! (text + text)</span>
+
+<span class="c1"># Lesson: Always store amounts as numbers (int or float), not as strings</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>&lt;class &#39;int&#39;&gt;
+&lt;class &#39;str&#39;&gt;
+100000
+5000050000
+</code></pre></div>
+<h1 id="section-5-python-as-your-financial-calculator">Section 5: Python as Your Financial Calculator</h1>
+<h2 id="arithmetic-operators">Arithmetic Operators</h2>
+<p>Python handles all standard arithmetic — and then some:</p>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Operation</th>
+<th>Example</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>+</code></td>
+<td>Addition</td>
+<td><code>100 + 50</code></td>
+<td><code>150</code></td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Subtraction</td>
+<td><code>100 - 30</code></td>
+<td><code>70</code></td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Multiplication</td>
+<td><code>100 * 2</code></td>
+<td><code>200</code></td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Division</td>
+<td><code>100 / 4</code></td>
+<td><code>25.0</code></td>
+</tr>
+<tr>
+<td><code>//</code></td>
+<td>Floor Division (quotient only)</td>
+<td><code>100 // 3</code></td>
+<td><code>33</code></td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Modulo (remainder only)</td>
+<td><code>100 % 3</code></td>
+<td><code>1</code></td>
+</tr>
+<tr>
+<td><code>**</code></td>
+<td>Exponent (power)</td>
+<td><code>2 ** 10</code></td>
+<td><code>1024</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Order of operations</strong> is the same as in mathematics (BODMAS/PEMDAS).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Basic arithmetic</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="mi">2500000</span>
+<span class="n">cost_of_goods</span> <span class="o">=</span> <span class="mi">1600000</span>
+<span class="n">operating_expenses</span> <span class="o">=</span> <span class="mi">350000</span>
+
+<span class="n">gross_profit</span> <span class="o">=</span> <span class="n">revenue</span> <span class="o">-</span> <span class="n">cost_of_goods</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gross Profit:&#39;</span><span class="p">,</span> <span class="n">gross_profit</span><span class="p">)</span>
+
+<span class="n">net_profit</span> <span class="o">=</span> <span class="n">gross_profit</span> <span class="o">-</span> <span class="n">operating_expenses</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Net Profit:&#39;</span><span class="p">,</span> <span class="n">net_profit</span><span class="p">)</span>
+
+<span class="n">gross_margin</span> <span class="o">=</span> <span class="p">(</span><span class="n">gross_profit</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Gross Profit Margin:&#39;</span><span class="p">,</span> <span class="n">gross_margin</span><span class="p">,</span> <span class="s1">&#39;%&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Gross Profit: 900000
+Net Profit: 550000
+Gross Profit Margin: 36.0 %
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># GST Calculation</span>
+<span class="n">invoice_base_amount</span> <span class="o">=</span> <span class="mi">85000</span>   <span class="c1"># Amount before GST</span>
+<span class="n">gst_rate</span> <span class="o">=</span> <span class="mi">18</span>                  <span class="c1"># 18% GST</span>
+
+<span class="n">gst_amount</span> <span class="o">=</span> <span class="n">invoice_base_amount</span> <span class="o">*</span> <span class="p">(</span><span class="n">gst_rate</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">invoice_total</span> <span class="o">=</span> <span class="n">invoice_base_amount</span> <span class="o">+</span> <span class="n">gst_amount</span>
+
+<span class="n">cgst</span> <span class="o">=</span> <span class="n">gst_amount</span> <span class="o">/</span> <span class="mi">2</span>   <span class="c1"># Central GST (half of total GST)</span>
+<span class="n">sgst</span> <span class="o">=</span> <span class="n">gst_amount</span> <span class="o">/</span> <span class="mi">2</span>   <span class="c1"># State GST (half of total GST)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- GST Invoice Summary ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Base Amount:    ₹&#39;</span><span class="p">,</span> <span class="n">invoice_base_amount</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CGST @ 9%:      ₹&#39;</span><span class="p">,</span> <span class="n">cgst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;SGST @ 9%:      ₹&#39;</span><span class="p">,</span> <span class="n">sgst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total GST:      ₹&#39;</span><span class="p">,</span> <span class="n">gst_amount</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Invoice Total:  ₹&#39;</span><span class="p">,</span> <span class="n">invoice_total</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- GST Invoice Summary ---
+Base Amount:    ₹ 85000
+CGST @ 9%:      ₹ 7650.0
+SGST @ 9%:      ₹ 7650.0
+Total GST:      ₹ 15300.0
+Invoice Total:  ₹ 100300.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Compound Interest Calculation</span>
+<span class="c1"># Formula: A = P * (1 + r/n)^(n*t)</span>
+
+<span class="n">principal</span> <span class="o">=</span> <span class="mi">500000</span>    <span class="c1"># ₹5,00,000 initial investment</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="mf">0.12</span>   <span class="c1"># 12% per annum</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span>                 <span class="c1"># Compounded quarterly (4 times a year)</span>
+<span class="n">years</span> <span class="o">=</span> <span class="mi">3</span>             <span class="c1"># Investment period</span>
+
+<span class="c1"># ** is the power operator in Python (same as ^ in Excel/maths)</span>
+<span class="n">amount</span> <span class="o">=</span> <span class="n">principal</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">annual_rate</span> <span class="o">/</span> <span class="n">n</span><span class="p">)</span> <span class="o">**</span> <span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="n">years</span><span class="p">)</span>
+
+<span class="n">interest_earned</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">-</span> <span class="n">principal</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Fixed Deposit Summary ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Principal:        ₹&#39;</span><span class="p">,</span> <span class="n">principal</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rate:             &#39;</span><span class="p">,</span> <span class="n">annual_rate</span> <span class="o">*</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;% per annum&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Period:           &#39;</span><span class="p">,</span> <span class="n">years</span><span class="p">,</span> <span class="s1">&#39;years&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maturity Amount:  ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">amount</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Interest Earned:  ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">interest_earned</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Fixed Deposit Summary ---
+Principal:        ₹ 500000
+Rate:              12.0 % per annum
+Period:            3 years
+Maturity Amount:  ₹ 712880.44
+Interest Earned:  ₹ 212880.44
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># EMI Calculation</span>
+<span class="c1"># Formula: EMI = [P * r * (1+r)^n] / [(1+r)^n - 1]</span>
+
+<span class="n">loan_amount</span> <span class="o">=</span> <span class="mi">2000000</span>    <span class="c1"># ₹20,00,000 home loan</span>
+<span class="n">annual_rate</span> <span class="o">=</span> <span class="mf">8.5</span>        <span class="c1"># 8.5% per annum</span>
+<span class="n">loan_years</span> <span class="o">=</span> <span class="mi">20</span>          <span class="c1"># 20 years</span>
+
+<span class="n">monthly_rate</span> <span class="o">=</span> <span class="p">(</span><span class="n">annual_rate</span> <span class="o">/</span> <span class="mi">100</span><span class="p">)</span> <span class="o">/</span> <span class="mi">12</span>   <span class="c1"># Convert to monthly rate</span>
+<span class="n">n_months</span> <span class="o">=</span> <span class="n">loan_years</span> <span class="o">*</span> <span class="mi">12</span>                 <span class="c1"># Total number of months</span>
+
+<span class="n">emi</span> <span class="o">=</span> <span class="p">(</span><span class="n">loan_amount</span> <span class="o">*</span> <span class="n">monthly_rate</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthly_rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">n_months</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">monthly_rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">n_months</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">total_payment</span> <span class="o">=</span> <span class="n">emi</span> <span class="o">*</span> <span class="n">n_months</span>
+<span class="n">total_interest</span> <span class="o">=</span> <span class="n">total_payment</span> <span class="o">-</span> <span class="n">loan_amount</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Home Loan EMI Calculator ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loan Amount:      ₹&#39;</span><span class="p">,</span> <span class="n">loan_amount</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Interest Rate:    &#39;</span><span class="p">,</span> <span class="n">annual_rate</span><span class="p">,</span> <span class="s1">&#39;% per annum&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loan Tenure:      &#39;</span><span class="p">,</span> <span class="n">loan_years</span><span class="p">,</span> <span class="s1">&#39;years&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly EMI:      ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">emi</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Payment:    ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_payment</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Interest:   ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_interest</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Home Loan EMI Calculator ---
+Loan Amount:      ₹ 2000000
+Interest Rate:     8.5 % per annum
+Loan Tenure:       20 years
+Monthly EMI:      ₹ 17356.46
+Total Payment:    ₹ 4165551.52
+Total Interest:   ₹ 2165551.52
+</code></pre></div>
+<h3 id="mini-exercise-3">✏️ Mini Exercise 3</h3>
+<p>A client has the following P&amp;L data:
+- Net Sales: ₹45,00,000
+- Cost of Goods Sold: ₹28,00,000
+- Administrative Expenses: ₹4,50,000
+- Selling Expenses: ₹2,20,000
+- Tax Rate: 25%</p>
+<p>Calculate and print:
+1. Gross Profit
+2. Net Profit Before Tax
+3. Tax Amount
+4. Net Profit After Tax
+5. Net Profit Margin (%)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your P&amp;L calculator here</span>
+</code></pre></div>
+<h1 id="section-6-making-decisions-if-elif-else">Section 6: Making Decisions — if / elif / else</h1>
+<h2 id="python-can-think">Python can think!</h2>
+<p>In your work, you constantly make decisions based on conditions:
+- <em>"If income exceeds ₹10 lakh, apply the higher tax slab"</em>
+- <em>"If debt-to-equity ratio is above 2, flag as high risk"</em>
+- <em>"If the account balance is negative, send an alert"</em></p>
+<p>Python does this using <code>if / elif / else</code> statements.</p>
+<p><strong>Structure:</strong>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="n">condition</span><span class="p">:</span>
+    <span class="c1"># do this if condition is True</span>
+<span class="k">elif</span> <span class="n">another_condition</span><span class="p">:</span>
+    <span class="c1"># do this if the above is False but this is True</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="c1"># do this if ALL above conditions are False</span>
+</code></pre></div></p>
+<p>⚠️ <strong>Indentation is critical in Python!</strong> The code inside <code>if/elif/else</code> must be indented (4 spaces or 1 Tab). This is how Python knows which code belongs to which block.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simple if/else — Checking if a company is profitable</span>
+<span class="n">net_profit</span> <span class="o">=</span> <span class="mi">250000</span>
+
+<span class="k">if</span> <span class="n">net_profit</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Company is PROFITABLE&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Profit amount: ₹&#39;</span><span class="p">,</span> <span class="n">net_profit</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Company is at a LOSS&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loss amount: ₹&#39;</span><span class="p">,</span> <span class="nb">abs</span><span class="p">(</span><span class="n">net_profit</span><span class="p">))</span>   <span class="c1"># abs() gives absolute (positive) value</span>
+
+<span class="c1"># Try changing net_profit to a negative number and re-run!</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Company is PROFITABLE
+Profit amount: ₹ 250000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comparison operators — used to create conditions</span>
+<span class="c1"># &gt;   greater than</span>
+<span class="c1"># &lt;   less than</span>
+<span class="c1"># &gt;=  greater than or equal to</span>
+<span class="c1"># &lt;=  less than or equal to</span>
+<span class="c1"># ==  equal to (note: TWO equal signs!)</span>
+<span class="c1"># !=  not equal to</span>
+
+<span class="n">revenue</span> <span class="o">=</span> <span class="mi">5000000</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="mi">4000000</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span> <span class="o">&gt;</span> <span class="n">threshold</span><span class="p">)</span>    <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">)</span>    <span class="c1"># False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span> <span class="o">==</span> <span class="n">threshold</span><span class="p">)</span>   <span class="c1"># False (not equal)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span> <span class="o">!=</span> <span class="n">threshold</span><span class="p">)</span>   <span class="c1"># True (they are different)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>True
+False
+False
+True
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Income Tax Slab Calculator (Old Regime - simplified)</span>
+<span class="n">taxable_income</span> <span class="o">=</span> <span class="mi">850000</span>   <span class="c1"># Change this to test different slabs</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Taxable Income: ₹&#39;</span><span class="p">,</span> <span class="n">taxable_income</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">40</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">250000</span><span class="p">:</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">slab</span> <span class="o">=</span> <span class="s1">&#39;Nil (below basic exemption)&#39;</span>
+
+<span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">500000</span><span class="p">:</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">250000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+    <span class="n">slab</span> <span class="o">=</span> <span class="s1">&#39;5</span><span class="si">% s</span><span class="s1">lab (₹2.5L to ₹5L)&#39;</span>
+
+<span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">:</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="p">(</span><span class="mi">250000</span> <span class="o">*</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.20</span>
+    <span class="n">slab</span> <span class="o">=</span> <span class="s1">&#39;20</span><span class="si">% s</span><span class="s1">lab (₹5L to ₹10L)&#39;</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="p">(</span><span class="mi">250000</span> <span class="o">*</span> <span class="mf">0.05</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">500000</span> <span class="o">*</span> <span class="mf">0.20</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.30</span>
+    <span class="n">slab</span> <span class="o">=</span> <span class="s1">&#39;30</span><span class="si">% s</span><span class="s1">lab (above ₹10L)&#39;</span>
+
+<span class="c1"># 4% Health &amp; Education Cess on tax</span>
+<span class="n">cess</span> <span class="o">=</span> <span class="n">tax</span> <span class="o">*</span> <span class="mf">0.04</span>
+<span class="n">total_tax</span> <span class="o">=</span> <span class="n">tax</span> <span class="o">+</span> <span class="n">cess</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Applicable Slab:&#39;</span><span class="p">,</span> <span class="n">slab</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Income Tax:     ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;H&amp;E Cess (4%):  ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">cess</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Tax:      ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_tax</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Net Income:     ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="n">total_tax</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Taxable Income: ₹ 850000
+----------------------------------------
+Applicable Slab: 20% slab (₹5L to ₹10L)
+Income Tax:     ₹ 82500.0
+H&amp;E Cess (4%):  ₹ 3300.0
+Total Tax:      ₹ 85800.0
+Net Income:     ₹ 764200.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Loan Eligibility Check — using &#39;and&#39; / &#39;or&#39; for multiple conditions</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">35</span>
+<span class="n">annual_income</span> <span class="o">=</span> <span class="mi">720000</span>     <span class="c1"># ₹7.2 lakhs</span>
+<span class="n">credit_score</span> <span class="o">=</span> <span class="mi">720</span>
+<span class="n">existing_emi</span> <span class="o">=</span> <span class="mi">8000</span>        <span class="c1"># Monthly existing EMI</span>
+
+<span class="c1"># Monthly income</span>
+<span class="n">monthly_income</span> <span class="o">=</span> <span class="n">annual_income</span> <span class="o">/</span> <span class="mi">12</span>
+
+<span class="c1"># EMI should not exceed 40% of monthly income (FOIR rule)</span>
+<span class="n">max_emi</span> <span class="o">=</span> <span class="n">monthly_income</span> <span class="o">*</span> <span class="mf">0.40</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Loan Eligibility Assessment ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly Income: ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">monthly_income</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Max Allowable EMI (40%): ₹&#39;</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">max_emi</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">21</span> <span class="ow">and</span> <span class="n">age</span> <span class="o">&lt;=</span> <span class="mi">60</span> <span class="ow">and</span> <span class="n">credit_score</span> <span class="o">&gt;=</span> <span class="mi">700</span> <span class="ow">and</span> <span class="n">existing_emi</span> <span class="o">&lt;</span> <span class="n">max_emi</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Result: ELIGIBLE for loan ✓&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">credit_score</span> <span class="o">&lt;</span> <span class="mi">700</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Result: NOT ELIGIBLE — Low credit score&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">existing_emi</span> <span class="o">&gt;=</span> <span class="n">max_emi</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Result: NOT ELIGIBLE — Existing EMI too high&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Result: NOT ELIGIBLE — Age criteria not met&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Loan Eligibility Assessment ---
+Monthly Income: ₹ 60000.0
+Max Allowable EMI (40%): ₹ 24000.0
+
+Result: ELIGIBLE for loan ✓
+</code></pre></div>
+<h3 id="mini-exercise-4">✏️ Mini Exercise 4</h3>
+<p>Write a program that checks a company's <strong>Debt-to-Equity ratio</strong> and classifies it:
+- D/E &lt; 1.0 → "Low Risk — Financially healthy"
+- D/E between 1.0 and 2.0 → "Moderate Risk — Monitor closely"
+- D/E &gt; 2.0 → "High Risk — Caution advised"</p>
+<p>Test it with: Total Debt = ₹45,00,000, Total Equity = ₹30,00,000</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your D/E ratio checker here</span>
+<span class="n">total_debt</span> <span class="o">=</span> <span class="mi">4500000</span>
+<span class="n">total_equity</span> <span class="o">=</span> <span class="mi">3000000</span>
+
+<span class="c1"># Calculate D/E ratio</span>
+
+
+<span class="c1"># Add your if/elif/else here</span>
+</code></pre></div>
+<h1 id="section-7-working-with-text-strings">Section 7: Working with Text — Strings</h1>
+<h2 id="strings-are-everywhere-in-finance">Strings are everywhere in finance</h2>
+<p>Client names, invoice descriptions, report headings, audit observations — all of these are <strong>text (strings)</strong> in Python.</p>
+<p>A string is any text enclosed in <strong>single</strong> <code>'...'</code> or <strong>double</strong> <code>"..."</code> quotes.</p>
+<p>You can do many useful things with strings:
+- Combine them (concatenation)
+- Convert case (upper, lower)
+- Check if something is in the string
+- Format them with variables (f-strings) ← the most useful one!</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># String basics</span>
+<span class="n">company</span> <span class="o">=</span> <span class="s1">&#39;Wipro Limited&#39;</span>
+<span class="n">city</span> <span class="o">=</span> <span class="s1">&#39;Bengaluru&#39;</span>
+
+<span class="c1"># String length — how many characters?</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Company name length:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">company</span><span class="p">))</span>
+
+<span class="c1"># Convert case</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">company</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>       <span class="c1"># WIPRO LIMITED</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">company</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span>       <span class="c1"># wipro limited</span>
+
+<span class="c1"># Combine strings (concatenation) using +</span>
+<span class="n">full_description</span> <span class="o">=</span> <span class="n">company</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">city</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_description</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Company name length: 13
+WIPRO LIMITED
+wipro limited
+Wipro Limited, Bengaluru
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># f-strings — The best way to create formatted text</span>
+<span class="c1"># Put &#39;f&#39; before the opening quote, then use {} to insert variable values</span>
+
+<span class="n">client_name</span> <span class="o">=</span> <span class="s1">&#39;Hindustan Unilever Ltd.&#39;</span>
+<span class="n">audit_year</span> <span class="o">=</span> <span class="mi">2025</span>
+<span class="n">fee</span> <span class="o">=</span> <span class="mi">850000</span>
+<span class="n">audit_status</span> <span class="o">=</span> <span class="s1">&#39;In Progress&#39;</span>
+
+<span class="c1"># Without f-string (old way — clunky)</span>
+<span class="n">message_old</span> <span class="o">=</span> <span class="s1">&#39;Client: &#39;</span> <span class="o">+</span> <span class="n">client_name</span> <span class="o">+</span> <span class="s1">&#39;, Year: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">audit_year</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message_old</span><span class="p">)</span>
+
+<span class="c1"># With f-string (modern way — clean and readable)</span>
+<span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Client: </span><span class="si">{</span><span class="n">client_name</span><span class="si">}</span><span class="s1">, Year: </span><span class="si">{</span><span class="n">audit_year</span><span class="si">}</span><span class="s1">&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+<span class="c1"># You can even do calculations inside {}</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Audit Fee: ₹</span><span class="si">{</span><span class="n">fee</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>        <span class="c1"># {:,} adds comma formatting</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Status: </span><span class="si">{</span><span class="n">audit_status</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Fee in Lakhs: ₹</span><span class="si">{</span><span class="n">fee</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>  <span class="c1"># :.2f means 2 decimal places</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Client: Hindustan Unilever Ltd., Year: 2025
+Client: Hindustan Unilever Ltd., Year: 2025
+Audit Fee: ₹850,000
+Status: In Progress
+Fee in Lakhs: ₹8.50L
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating a formatted financial report header using f-strings</span>
+<span class="n">company_name</span> <span class="o">=</span> <span class="s1">&#39;Mahindra &amp; Mahindra Ltd.&#39;</span>
+<span class="n">report_type</span> <span class="o">=</span> <span class="s1">&#39;Statement of Profit and Loss&#39;</span>
+<span class="n">period</span> <span class="o">=</span> <span class="s1">&#39;Year ended 31st March 2025&#39;</span>
+<span class="n">currency</span> <span class="o">=</span> <span class="s1">&#39;INR (₹ in Lakhs)&#39;</span>
+
+<span class="c1"># Using the * operator to repeat characters — useful for formatting</span>
+<span class="n">separator</span> <span class="o">=</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">55</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">company_name</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">report_type</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">period</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  All figures in: </span><span class="si">{</span><span class="n">currency</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>=======================================================
+  Mahindra &amp; Mahindra Ltd.
+  Statement of Profit and Loss
+  Year ended 31st March 2025
+  All figures in: INR (₹ in Lakhs)
+=======================================================
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Useful string methods for data cleaning (very common in practice!)</span>
+
+<span class="c1"># Often, data imported from Excel/CSV has extra spaces or inconsistent case</span>
+<span class="n">messy_client_name</span> <span class="o">=</span> <span class="s1">&#39;  infosys limited  &#39;</span>  <span class="c1"># Extra spaces</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before cleaning:&#39;</span><span class="p">,</span> <span class="n">messy_client_name</span><span class="p">)</span>
+
+<span class="c1"># .strip() removes leading and trailing spaces</span>
+<span class="n">clean_name</span> <span class="o">=</span> <span class="n">messy_client_name</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After strip():&#39;</span><span class="p">,</span> <span class="n">clean_name</span><span class="p">)</span>
+
+<span class="c1"># .title() makes first letter of each word uppercase</span>
+<span class="n">formatted_name</span> <span class="o">=</span> <span class="n">clean_name</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After title():&#39;</span><span class="p">,</span> <span class="n">formatted_name</span><span class="p">)</span>
+
+<span class="c1"># .replace() — find and replace text</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;Sales Receipts - Cash - 2024&#39;</span>
+<span class="n">updated</span> <span class="o">=</span> <span class="n">description</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;Cash&#39;</span><span class="p">,</span> <span class="s1">&#39;Online&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Updated:&#39;</span><span class="p">,</span> <span class="n">updated</span><span class="p">)</span>
+
+<span class="c1"># Check if a string contains something</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Contains 2024?&#39;</span><span class="p">,</span> <span class="s1">&#39;2024&#39;</span> <span class="ow">in</span> <span class="n">description</span><span class="p">)</span>   <span class="c1"># True</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Contains 2025?&#39;</span><span class="p">,</span> <span class="s1">&#39;2025&#39;</span> <span class="ow">in</span> <span class="n">description</span><span class="p">)</span>   <span class="c1"># False</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Before cleaning:   infosys limited  
+After strip(): infosys limited
+After title(): Infosys Limited
+Updated: Sales Receipts - Online - 2024
+Contains 2024? True
+Contains 2025? False
+</code></pre></div>
+<h1 id="section-8-lists-collections-of-data">Section 8: Lists — Collections of Data</h1>
+<h2 id="from-single-values-to-collections">From single values to collections</h2>
+<p>So far, we've stored <strong>one value</strong> in each variable:<br />
+<code>revenue = 2500000</code></p>
+<p>But what if you have <strong>multiple invoices</strong>, <strong>multiple clients</strong>, or <strong>12 months of data</strong>?</p>
+<p>That's where <strong>Lists</strong> come in. A list stores <strong>multiple values</strong> in a specific order.</p>
+<p>Think of a list like a <strong>column in Excel</strong> — it holds many values, one below the other.</p>
+<p><strong>Syntax:</strong> <code>my_list = [value1, value2, value3, ...]</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Creating lists</span>
+<span class="n">monthly_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">120000</span><span class="p">,</span> <span class="mi">135000</span><span class="p">,</span> <span class="mi">98000</span><span class="p">,</span> <span class="mi">145000</span><span class="p">,</span> <span class="mi">162000</span><span class="p">,</span> <span class="mi">178000</span><span class="p">,</span>
+                   <span class="mi">155000</span><span class="p">,</span> <span class="mi">142000</span><span class="p">,</span> <span class="mi">168000</span><span class="p">,</span> <span class="mi">191000</span><span class="p">,</span> <span class="mi">203000</span><span class="p">,</span> <span class="mi">215000</span><span class="p">]</span>
+
+<span class="n">expense_categories</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Salaries&#39;</span><span class="p">,</span> <span class="s1">&#39;Rent&#39;</span><span class="p">,</span> <span class="s1">&#39;Utilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Marketing&#39;</span><span class="p">,</span> <span class="s1">&#39;Depreciation&#39;</span><span class="p">]</span>
+
+<span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TCS&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro&#39;</span><span class="p">,</span> <span class="s1">&#39;HCL&#39;</span><span class="p">,</span> <span class="s1">&#39;Tech Mahindra&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly Revenue:&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Expense Categories:&#39;</span><span class="p">,</span> <span class="n">expense_categories</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Clients:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of months of data:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">))</span>   <span class="c1"># len() gives length</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of clients:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">clients</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Monthly Revenue: [120000, 135000, 98000, 145000, 162000, 178000, 155000, 142000, 168000, 191000, 203000, 215000]
+Expense Categories: [&#39;Salaries&#39;, &#39;Rent&#39;, &#39;Utilities&#39;, &#39;Marketing&#39;, &#39;Depreciation&#39;]
+Clients: [&#39;TCS&#39;, &#39;Infosys&#39;, &#39;Wipro&#39;, &#39;HCL&#39;, &#39;Tech Mahindra&#39;]
+
+Number of months of data: 12
+Number of clients: 5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Accessing items in a list — indexing</span>
+<span class="c1"># IMPORTANT: Python counts from 0, not 1!</span>
+<span class="c1"># Index:   0       1      2      3       4</span>
+<span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TCS&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro&#39;</span><span class="p">,</span> <span class="s1">&#39;HCL&#39;</span><span class="p">,</span> <span class="s1">&#39;Tech Mahindra&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First client:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># TCS</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Second client:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Infosys</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last client:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>    <span class="c1"># -1 always gives the last item!</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Second last:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Slicing — getting a range of items [start:end] (end is NOT included)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First three clients:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">])</span>   <span class="c1"># TCS, Infosys, Wipro</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Last two clients:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>First client: TCS
+Second client: Infosys
+Last client: Tech Mahindra
+Second last: HCL
+First three clients: [&#39;TCS&#39;, &#39;Infosys&#39;, &#39;Wipro&#39;]
+Last two clients: [&#39;HCL&#39;, &#39;Tech Mahindra&#39;]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Useful list operations for financial data</span>
+<span class="n">monthly_revenue</span> <span class="o">=</span> <span class="p">[</span><span class="mi">120000</span><span class="p">,</span> <span class="mi">135000</span><span class="p">,</span> <span class="mi">98000</span><span class="p">,</span> <span class="mi">145000</span><span class="p">,</span> <span class="mi">162000</span><span class="p">,</span> <span class="mi">178000</span><span class="p">,</span>
+                   <span class="mi">155000</span><span class="p">,</span> <span class="mi">142000</span><span class="p">,</span> <span class="mi">168000</span><span class="p">,</span> <span class="mi">191000</span><span class="p">,</span> <span class="mi">203000</span><span class="p">,</span> <span class="mi">215000</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Revenue Analysis ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total Annual Revenue: ₹&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">))</span>     <span class="c1"># sum() adds all values</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Highest Month:        ₹&#39;</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">))</span>     <span class="c1"># max() finds highest</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lowest Month:         ₹&#39;</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">))</span>     <span class="c1"># min() finds lowest</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average Monthly:      ₹&#39;</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Adding items to a list</span>
+<span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TCS&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro&#39;</span><span class="p">]</span>
+<span class="n">clients</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Accenture&#39;</span><span class="p">)</span>    <span class="c1"># Add to the end</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Updated clients:&#39;</span><span class="p">,</span> <span class="n">clients</span><span class="p">)</span>
+
+<span class="c1"># Sorting</span>
+<span class="n">invoices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">12000</span><span class="p">,</span> <span class="mi">78000</span><span class="p">,</span> <span class="mi">34000</span><span class="p">,</span> <span class="mi">91000</span><span class="p">,</span> <span class="mi">23000</span><span class="p">]</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>                <span class="c1"># Sort in ascending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sorted invoices:&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">)</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>    <span class="c1"># Sort in descending order</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Descending order:&#39;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Revenue Analysis ---
+Total Annual Revenue: ₹ 1912000
+Highest Month:        ₹ 215000
+Lowest Month:         ₹ 98000
+Average Monthly:      ₹ 159333.33333333334
+
+Updated clients: [&#39;TCS&#39;, &#39;Infosys&#39;, &#39;Wipro&#39;, &#39;Accenture&#39;]
+Sorted invoices: [12000, 23000, 34000, 45000, 78000, 91000]
+Descending order: [91000, 78000, 45000, 34000, 23000, 12000]
+</code></pre></div>
+<h1 id="section-9-dictionaries-organized-data-records">Section 9: Dictionaries — Organized Data Records</h1>
+<h2 id="from-lists-to-labelled-data">From lists to labelled data</h2>
+<p>A <strong>List</strong> stores values by position (index 0, 1, 2...).</p>
+<p>But sometimes you want to label your data — like a <strong>ledger entry</strong> where each piece of information has a name.</p>
+<p>A <strong>Dictionary</strong> stores data as <strong>key-value pairs</strong> — just like a real dictionary where each word (key) has a meaning (value).</p>
+<div class="highlight"><pre><span></span><code>Think of it like a mini spreadsheet row:
+Column name  →  Value
+&#39;name&#39;       →  &#39;TCS&#39;
+&#39;revenue&#39;    →  2200000
+&#39;sector&#39;     →  &#39;IT&#39;
+</code></pre></div>
+<p><strong>Syntax:</strong> <code>my_dict = {'key1': value1, 'key2': value2}</code></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># A dictionary — like a client record</span>
+<span class="n">client</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Tata Consultancy Services&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pan&#39;</span><span class="p">:</span> <span class="s1">&#39;AAACT0001A&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;sector&#39;</span><span class="p">:</span> <span class="s1">&#39;Information Technology&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;annual_revenue&#39;</span><span class="p">:</span> <span class="mi">220000000000</span><span class="p">,</span>   <span class="c1"># ₹2.2 lakh crores</span>
+    <span class="s1">&#39;employees&#39;</span><span class="p">:</span> <span class="mi">614000</span><span class="p">,</span>
+    <span class="s1">&#39;is_listed&#39;</span><span class="p">:</span> <span class="kc">True</span>
+<span class="p">}</span>
+
+<span class="c1"># Accessing values using the key (like looking up a column name)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Client Name:&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PAN:&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;pan&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sector:&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;sector&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Listed?&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">[</span><span class="s1">&#39;is_listed&#39;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Client Name: Tata Consultancy Services
+PAN: AAACT0001A
+Sector: Information Technology
+Listed? True
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Adding, updating, and removing from a dictionary</span>
+<span class="n">invoice</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;invoice_no&#39;</span><span class="p">:</span> <span class="s1">&#39;INV-2025-001&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;ABC Pvt Ltd&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;15-Apr-2025&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">250000</span><span class="p">,</span>
+    <span class="s1">&#39;gst_rate&#39;</span><span class="p">:</span> <span class="mi">18</span>
+<span class="p">}</span>
+
+<span class="c1"># Add a new key-value pair</span>
+<span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;gst_amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;gst_rate&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;total&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;gst_amount&#39;</span><span class="p">]</span>
+
+<span class="c1"># Update an existing value</span>
+<span class="n">invoice</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Paid&#39;</span>
+
+<span class="c1"># Print all key-value pairs</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Invoice Details ---&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">invoice</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">key</span><span class="si">:</span><span class="s1">15</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Invoice Details ---
+invoice_no     : INV-2025-001
+client         : ABC Pvt Ltd
+date           : 15-Apr-2025
+amount         : 250000
+gst_rate       : 18
+gst_amount     : 45000.0
+total          : 295000.0
+status         : Paid
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># List of dictionaries — like a table in Excel</span>
+<span class="c1"># Each dictionary is one row, the keys are column names</span>
+
+<span class="n">transactions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;01-Apr-2025&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Sales Revenue&#39;</span><span class="p">,</span>    <span class="s1">&#39;debit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="s1">&#39;credit&#39;</span><span class="p">:</span> <span class="mi">500000</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;03-Apr-2025&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Office Rent&#39;</span><span class="p">,</span>      <span class="s1">&#39;debit&#39;</span><span class="p">:</span> <span class="mi">45000</span><span class="p">,</span>  <span class="s1">&#39;credit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;05-Apr-2025&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Sales Revenue&#39;</span><span class="p">,</span>    <span class="s1">&#39;debit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>      <span class="s1">&#39;credit&#39;</span><span class="p">:</span> <span class="mi">320000</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;10-Apr-2025&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Salaries Paid&#39;</span><span class="p">,</span>    <span class="s1">&#39;debit&#39;</span><span class="p">:</span> <span class="mi">180000</span><span class="p">,</span> <span class="s1">&#39;credit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="s1">&#39;15-Apr-2025&#39;</span><span class="p">,</span> <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;Utility Bill&#39;</span><span class="p">,</span>     <span class="s1">&#39;debit&#39;</span><span class="p">:</span> <span class="mi">12000</span><span class="p">,</span>  <span class="s1">&#39;credit&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Transaction Ledger ---&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;Date&quot;</span><span class="si">:</span><span class="s1">&lt;15</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Description&quot;</span><span class="si">:</span><span class="s1">&lt;20</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Debit&quot;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s2">&quot;Credit&quot;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">62</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">txn</span> <span class="ow">in</span> <span class="n">transactions</span><span class="p">:</span>
+    <span class="n">debit_str</span>  <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;₹</span><span class="si">{</span><span class="n">txn</span><span class="p">[</span><span class="s1">&#39;debit&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">txn</span><span class="p">[</span><span class="s1">&#39;debit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="n">credit_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;₹</span><span class="si">{</span><span class="n">txn</span><span class="p">[</span><span class="s1">&#39;credit&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">txn</span><span class="p">[</span><span class="s1">&#39;credit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">txn</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">txn</span><span class="p">[</span><span class="s1">&#39;description&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">debit_str</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">credit_str</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Transaction Ledger ---
+Date            Description                 Debit       Credit
+--------------------------------------------------------------
+01-Apr-2025     Sales Revenue                      ₹   500,000
+03-Apr-2025     Office Rent           ₹    45,000             
+05-Apr-2025     Sales Revenue                      ₹   320,000
+10-Apr-2025     Salaries Paid         ₹   180,000             
+15-Apr-2025     Utility Bill          ₹    12,000
+</code></pre></div>
+<h1 id="section-10-loops-automating-repetitive-work">Section 10: Loops — Automating Repetitive Work</h1>
+<h2 id="stop-repeating-yourself">Stop repeating yourself!</h2>
+<p>Imagine you need to calculate GST on 100 invoices.<br />
+Writing 100 separate <code>print()</code> statements is clearly not the answer.</p>
+<p><strong>Loops</strong> let you repeat an action multiple times automatically.</p>
+<h2 id="the-for-loop">The <code>for</code> loop</h2>
+<p>Use <code>for</code> when you want to go through a <strong>collection</strong> (list, etc.) one item at a time.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">collection</span><span class="p">:</span>
+    <span class="c1"># do something with item</span>
+</code></pre></div>
+<p>Think of it as: <em>"For each invoice in my invoice list, calculate the GST"</em></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Simple for loop — going through a list</span>
+<span class="n">clients</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;TCS&#39;</span><span class="p">,</span> <span class="s1">&#39;Infosys&#39;</span><span class="p">,</span> <span class="s1">&#39;Wipro&#39;</span><span class="p">,</span> <span class="s1">&#39;HCL&#39;</span><span class="p">,</span> <span class="s1">&#39;Tech Mahindra&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Client List ---&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">client</span> <span class="ow">in</span> <span class="n">clients</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Client:&#39;</span><span class="p">,</span> <span class="n">client</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Client List ---
+Client: TCS
+Client: Infosys
+Client: Wipro
+Client: HCL
+Client: Tech Mahindra
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Batch GST calculation on multiple invoices</span>
+<span class="n">invoice_amounts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">85000</span><span class="p">,</span> <span class="mi">42000</span><span class="p">,</span> <span class="mi">125000</span><span class="p">,</span> <span class="mi">67500</span><span class="p">,</span> <span class="mi">98000</span><span class="p">,</span> <span class="mi">33000</span><span class="p">]</span>
+<span class="n">gst_rate</span> <span class="o">=</span> <span class="mi">18</span>
+
+<span class="n">total_gst_collected</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># We&#39;ll accumulate GST here</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Invoice Amount&#39;</span><span class="si">:</span><span class="s2">&gt;17</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;GST (18%)&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> | </span><span class="si">{</span><span class="s1">&#39;Total Amount&#39;</span><span class="si">:</span><span class="s2">&gt;14</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">invoice_amounts</span><span class="p">:</span>
+    <span class="n">gst</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">*</span> <span class="n">gst_rate</span> <span class="o">/</span> <span class="mi">100</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="n">amount</span> <span class="o">+</span> <span class="n">gst</span>
+    <span class="n">total_gst_collected</span> <span class="o">+=</span> <span class="n">gst</span>   <span class="c1"># Same as: total_gst_collected = total_gst_collected + gst</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1"> | ₹</span><span class="si">{</span><span class="n">gst</span><span class="si">:</span><span class="s1">&gt;11,.2f</span><span class="si">}</span><span class="s1"> | ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;12,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total GST Liability: ₹</span><span class="si">{</span><span class="n">total_gst_collected</span><span class="si">:</span><span class="s1">,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>   Invoice Amount |    GST (18%) |   Total Amount
+--------------------------------------------------
+₹         85,000 | ₹  15,300.00 | ₹  100,300.00
+₹         42,000 | ₹   7,560.00 | ₹   49,560.00
+₹        125,000 | ₹  22,500.00 | ₹  147,500.00
+₹         67,500 | ₹  12,150.00 | ₹   79,650.00
+₹         98,000 | ₹  17,640.00 | ₹  115,640.00
+₹         33,000 | ₹   5,940.00 | ₹   38,940.00
+--------------------------------------------------
+Total GST Liability: ₹81,090.00
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># range() — loop a specific number of times</span>
+<span class="c1"># Useful when you don&#39;t have a list but know how many times to repeat</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quarterly Revenue Projections (10</span><span class="si">% g</span><span class="s1">rowth each year):&#39;</span><span class="p">)</span>
+<span class="n">base_revenue</span> <span class="o">=</span> <span class="mi">1000000</span>   <span class="c1"># ₹10 lakhs starting revenue</span>
+<span class="n">growth_rate</span> <span class="o">=</span> <span class="mf">0.10</span>
+
+<span class="k">for</span> <span class="n">year</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>   <span class="c1"># range(1, 6) gives: 1, 2, 3, 4, 5</span>
+    <span class="n">projected</span> <span class="o">=</span> <span class="n">base_revenue</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">growth_rate</span><span class="p">)</span> <span class="o">**</span> <span class="n">year</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Year </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">: ₹</span><span class="si">{</span><span class="n">projected</span><span class="si">:</span><span class="s1">&gt;12,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Quarterly Revenue Projections (10% growth each year):
+Year 1: ₹1,100,000.00
+Year 2: ₹1,210,000.00
+Year 3: ₹1,331,000.00
+Year 4: ₹1,464,100.00
+Year 5: ₹1,610,510.00
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># while loop — keeps going as long as a condition is True</span>
+<span class="c1"># Use when you don&#39;t know HOW MANY times to repeat</span>
+
+<span class="c1"># How many years to double your investment at 8% per annum? (Rule of 72)</span>
+<span class="n">investment</span> <span class="o">=</span> <span class="mi">100000</span>   <span class="c1"># Starting amount</span>
+<span class="n">target</span> <span class="o">=</span> <span class="mi">200000</span>       <span class="c1"># Double the investment</span>
+<span class="n">rate</span> <span class="o">=</span> <span class="mf">0.08</span>           <span class="c1"># 8% annual return</span>
+<span class="n">year</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Investment Growth at 8% p.a.:&#39;</span><span class="p">)</span>
+<span class="k">while</span> <span class="n">investment</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+    <span class="n">investment</span> <span class="o">=</span> <span class="n">investment</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">rate</span><span class="p">)</span>   <span class="c1"># Grow by 8%</span>
+    <span class="n">year</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># Count the year</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Year </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">: ₹</span><span class="si">{</span><span class="n">investment</span><span class="si">:</span><span class="s1">&gt;12,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Your investment doubled in </span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1"> years!&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;(Rule of 72 predicts: </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="mi">72</span><span class="o">/</span><span class="mi">8</span><span class="p">)</span><span class="si">}</span><span class="s1"> years)&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Investment Growth at 8% p.a.:
+Year 1: ₹  108,000.00
+Year 2: ₹  116,640.00
+Year 3: ₹  125,971.20
+Year 4: ₹  136,048.90
+Year 5: ₹  146,932.81
+Year 6: ₹  158,687.43
+Year 7: ₹  171,382.43
+Year 8: ₹  185,093.02
+Year 9: ₹  199,900.46
+Year 10: ₹  215,892.50
+
+Your investment doubled in 10 years!
+(Rule of 72 predicts: 9 years)
+</code></pre></div>
+<h3 id="mini-exercise-5">✏️ Mini Exercise 5</h3>
+<p>You have a list of 6 employees with their annual salaries:
+<div class="highlight"><pre><span></span><code>salaries = [480000, 720000, 960000, 1200000, 1440000, 2400000]
+</code></pre></div></p>
+<p>Using a <code>for</code> loop, calculate and print for each employee:
+1. Professional Tax (PT): ₹200/month if salary ≤ ₹10L, else ₹2,500/year (Maharashtra slab — simplified)
+2. Provident Fund (PF): 12% of salary (capped at salary of ₹1,80,000)
+3. Net take-home salary</p>
+<p><em>Hint: PF is calculated on salary capped at ₹1,80,000</em></p>
+<div class="highlight"><pre><span></span><code><span class="n">salaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">480000</span><span class="p">,</span> <span class="mi">720000</span><span class="p">,</span> <span class="mi">960000</span><span class="p">,</span> <span class="mi">1200000</span><span class="p">,</span> <span class="mi">1440000</span><span class="p">,</span> <span class="mi">2400000</span><span class="p">]</span>
+
+<span class="c1"># Write your loop here</span>
+</code></pre></div>
+<h1 id="section-11-functions-write-once-use-many-times">Section 11: Functions — Write Once, Use Many Times</h1>
+<h2 id="what-is-a-function">What is a function?</h2>
+<p>Think about the <strong>VLOOKUP formula</strong> in Excel. You write the formula <strong>once</strong>, give it inputs, and it returns an output. You don't need to re-write the logic each time.</p>
+<p>A <strong>function</strong> in Python works exactly the same way:
+- You <strong>define</strong> it once (write the logic)
+- You <strong>call</strong> it many times with different inputs
+- It <strong>returns</strong> the result</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">function_name</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="n">input2</span><span class="p">):</span>
+    <span class="c1"># Do something with the inputs</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">input1</span> <span class="o">+</span> <span class="n">input2</span>
+    <span class="k">return</span> <span class="n">result</span>      <span class="c1"># Send the answer back</span>
+</code></pre></div>
+<p>This eliminates repetition and makes your code <strong>reliable</strong> — fix a bug in one place, it's fixed everywhere.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Defining a simple function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_gst</span><span class="p">(</span><span class="n">base_amount</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">18</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates GST on a given amount.</span>
+<span class="sd">    base_amount: The pre-GST invoice amount</span>
+<span class="sd">    rate: GST rate in % (default is 18%)</span>
+<span class="sd">    Returns: (gst_amount, total_amount)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">gst_amount</span> <span class="o">=</span> <span class="n">base_amount</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">/</span> <span class="mi">100</span>
+    <span class="n">total_amount</span> <span class="o">=</span> <span class="n">base_amount</span> <span class="o">+</span> <span class="n">gst_amount</span>
+    <span class="k">return</span> <span class="n">gst_amount</span><span class="p">,</span> <span class="n">total_amount</span>
+
+<span class="c1"># Calling the function — use it like Excel&#39;s VLOOKUP</span>
+<span class="n">gst</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">calculate_gst</span><span class="p">(</span><span class="mi">85000</span><span class="p">)</span>         <span class="c1"># Uses default 18%</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GST: ₹</span><span class="si">{</span><span class="n">gst</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">  |  Total: ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">gst</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">calculate_gst</span><span class="p">(</span><span class="mi">50000</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>      <span class="c1"># 5% GST</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GST: ₹</span><span class="si">{</span><span class="n">gst</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">  |  Total: ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="n">gst</span><span class="p">,</span> <span class="n">total</span> <span class="o">=</span> <span class="n">calculate_gst</span><span class="p">(</span><span class="mi">200000</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>    <span class="c1"># 28% GST</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GST: ₹</span><span class="si">{</span><span class="n">gst</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">  |  Total: ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>GST: ₹15,300.0  |  Total: ₹100,300.0
+GST: ₹2,500.0  |  Total: ₹52,500.0
+GST: ₹56,000.0  |  Total: ₹256,000.0
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># A complete Income Tax Calculator as a function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_income_tax</span><span class="p">(</span><span class="n">taxable_income</span><span class="p">,</span> <span class="n">regime</span><span class="o">=</span><span class="s1">&#39;old&#39;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate income tax under old or new regime (simplified).&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">regime</span> <span class="o">==</span> <span class="s1">&#39;new&#39;</span><span class="p">:</span>
+        <span class="c1"># New Tax Regime (2024-25)</span>
+        <span class="k">if</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">300000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">700000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">300000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">20000</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">700000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.10</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">1200000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">50000</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.15</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">1500000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">80000</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">1200000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.20</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">140000</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">1500000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.30</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Old Tax Regime</span>
+        <span class="k">if</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">250000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">500000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">250000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.05</span>
+        <span class="k">elif</span> <span class="n">taxable_income</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">12500</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">500000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.20</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tax</span> <span class="o">=</span> <span class="mi">112500</span> <span class="o">+</span> <span class="p">(</span><span class="n">taxable_income</span> <span class="o">-</span> <span class="mi">1000000</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.30</span>
+
+    <span class="n">cess</span> <span class="o">=</span> <span class="n">tax</span> <span class="o">*</span> <span class="mf">0.04</span>
+    <span class="n">total_tax</span> <span class="o">=</span> <span class="n">tax</span> <span class="o">+</span> <span class="n">cess</span>
+    <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">cess</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_tax</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+
+<span class="c1"># Test the function</span>
+<span class="n">income</span> <span class="o">=</span> <span class="mi">1200000</span>
+
+<span class="n">tax_old</span><span class="p">,</span> <span class="n">cess_old</span><span class="p">,</span> <span class="n">total_old</span> <span class="o">=</span> <span class="n">calculate_income_tax</span><span class="p">(</span><span class="n">income</span><span class="p">,</span> <span class="s1">&#39;old&#39;</span><span class="p">)</span>
+<span class="n">tax_new</span><span class="p">,</span> <span class="n">cess_new</span><span class="p">,</span> <span class="n">total_new</span> <span class="o">=</span> <span class="n">calculate_income_tax</span><span class="p">(</span><span class="n">income</span><span class="p">,</span> <span class="s1">&#39;new&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Income: ₹</span><span class="si">{</span><span class="n">income</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s1">&#39;Particulars&#39;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s1">&#39;Old Regime&#39;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="s1">&#39;New Regime&#39;</span><span class="si">:</span><span class="s1">&gt;12</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s1">&#39;Income Tax&#39;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">tax_old</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">tax_new</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s1">&#39;Health &amp; Ed Cess&#39;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">cess_old</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">cess_new</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s1">&#39;Total Tax&#39;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">total_old</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">total_new</span><span class="si">:</span><span class="s1">&gt;11,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">saving</span> <span class="o">=</span> <span class="n">total_old</span> <span class="o">-</span> <span class="n">total_new</span>
+<span class="n">better</span> <span class="o">=</span> <span class="s1">&#39;New Regime&#39;</span> <span class="k">if</span> <span class="n">saving</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;Old Regime&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Better option: </span><span class="si">{</span><span class="n">better</span><span class="si">}</span><span class="s1"> (saves ₹</span><span class="si">{</span><span class="nb">abs</span><span class="p">(</span><span class="n">saving</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  Cell In[41], line 43
+    print(f&#39;{&#39;Particulars&#39;:&lt;25} {&#39;Old Regime&#39;:&gt;12} {&#39;New Regime&#39;:&gt;12}&#39;)
+              ^
+SyntaxError: f-string: expecting &#39;}&#39;
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Financial Ratios Calculator — all ratios in one place</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">financial_ratios</span><span class="p">(</span><span class="n">revenue</span><span class="p">,</span> <span class="n">gross_profit</span><span class="p">,</span> <span class="n">net_profit</span><span class="p">,</span> <span class="n">current_assets</span><span class="p">,</span>
+                     <span class="n">current_liabilities</span><span class="p">,</span> <span class="n">total_debt</span><span class="p">,</span> <span class="n">total_equity</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate key financial ratios and return a summary.&quot;&quot;&quot;</span>
+
+    <span class="n">gross_margin</span>    <span class="o">=</span> <span class="p">(</span><span class="n">gross_profit</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">net_margin</span>      <span class="o">=</span> <span class="p">(</span><span class="n">net_profit</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+    <span class="n">current_ratio</span>   <span class="o">=</span> <span class="n">current_assets</span> <span class="o">/</span> <span class="n">current_liabilities</span>
+    <span class="n">de_ratio</span>        <span class="o">=</span> <span class="n">total_debt</span> <span class="o">/</span> <span class="n">total_equity</span>
+    <span class="n">roe</span>             <span class="o">=</span> <span class="p">(</span><span class="n">net_profit</span> <span class="o">/</span> <span class="n">total_equity</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--- Financial Ratios Analysis ---&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Gross Profit Margin : </span><span class="si">{</span><span class="n">gross_margin</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Net Profit Margin   : </span><span class="si">{</span><span class="n">net_margin</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Current Ratio       : </span><span class="si">{</span><span class="n">current_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Debt-to-Equity      : </span><span class="si">{</span><span class="n">de_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Return on Equity    : </span><span class="si">{</span><span class="n">roe</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Quick health check</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quick Assessment:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Liquidity:&#39;</span><span class="p">,</span> <span class="s1">&#39;Good ✓&#39;</span> <span class="k">if</span> <span class="n">current_ratio</span> <span class="o">&gt;=</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="s1">&#39;Monitor ⚠&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Leverage :&#39;</span><span class="p">,</span> <span class="s1">&#39;Safe ✓&#39;</span> <span class="k">if</span> <span class="n">de_ratio</span> <span class="o">&lt;=</span> <span class="mf">2.0</span> <span class="k">else</span> <span class="s1">&#39;High Risk ✗&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Profit   :&#39;</span><span class="p">,</span> <span class="s1">&#39;Good ✓&#39;</span> <span class="k">if</span> <span class="n">net_margin</span> <span class="o">&gt;=</span> <span class="mi">10</span> <span class="k">else</span> <span class="s1">&#39;Low ⚠&#39;</span><span class="p">)</span>
+
+
+<span class="c1"># Call the function with sample data</span>
+<span class="n">financial_ratios</span><span class="p">(</span>
+    <span class="n">revenue</span>            <span class="o">=</span> <span class="mi">5000000</span><span class="p">,</span>
+    <span class="n">gross_profit</span>       <span class="o">=</span> <span class="mi">1800000</span><span class="p">,</span>
+    <span class="n">net_profit</span>         <span class="o">=</span> <span class="mi">620000</span><span class="p">,</span>
+    <span class="n">current_assets</span>     <span class="o">=</span> <span class="mi">2200000</span><span class="p">,</span>
+    <span class="n">current_liabilities</span><span class="o">=</span> <span class="mi">1100000</span><span class="p">,</span>
+    <span class="n">total_debt</span>         <span class="o">=</span> <span class="mi">1800000</span><span class="p">,</span>
+    <span class="n">total_equity</span>       <span class="o">=</span> <span class="mi">2500000</span>
+<span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- Financial Ratios Analysis ---
+Gross Profit Margin : 36.00%
+Net Profit Margin   : 12.40%
+Current Ratio       : 2.00x
+Debt-to-Equity      : 0.72x
+Return on Equity    : 24.80%
+
+Quick Assessment:
+ Liquidity: Good ✓
+ Leverage : Safe ✓
+ Profit   : Good ✓
+</code></pre></div>
+<h3 id="mini-exercise-6">✏️ Mini Exercise 6</h3>
+<p>Write a function called <code>depreciation_schedule</code> that:
+- Takes: <code>asset_name</code>, <code>cost</code>, <code>salvage_value</code>, <code>useful_life</code> (in years) as inputs
+- Calculates annual depreciation using the <strong>Straight Line Method (SLM)</strong>
+- Prints a year-wise schedule showing: Year, Depreciation, Accumulated Depreciation, Book Value</p>
+<p>Test with: Computer equipment, Cost = ₹1,50,000, Salvage = ₹10,000, Useful Life = 5 years</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your depreciation_schedule function here</span>
+
+
+
+<span class="c1"># Call your function</span>
+<span class="c1"># depreciation_schedule(&#39;Computer Equipment&#39;, 150000, 10000, 5)</span>
+</code></pre></div>
+<h1 id="section-12-putting-it-all-together">Section 12: Putting It All Together</h1>
+<p>Let's combine everything we've learned to build a <strong>mini financial report generator</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Mini Financial Report Generator</span>
+<span class="c1"># Uses: variables, data types, lists, dicts, loops, functions, f-strings, conditionals</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_pl_report</span><span class="p">(</span><span class="n">company_info</span><span class="p">,</span> <span class="n">pl_data</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates a simple Profit &amp; Loss statement.&quot;&quot;&quot;</span>
+
+    <span class="n">separator</span> <span class="o">=</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">55</span>
+    <span class="n">thin_line</span> <span class="o">=</span> <span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">55</span>
+
+    <span class="c1"># Header</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">company_info</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Statement of Profit &amp; Loss&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  For the year ended </span><span class="si">{</span><span class="n">company_info</span><span class="p">[</span><span class="s1">&#39;year_end&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (All amounts in ₹)&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+
+    <span class="c1"># Revenue section</span>
+    <span class="n">total_revenue</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pl_data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;I. REVENUE&#39;</span><span class="si">:}</span><span class="s2">&quot;</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">pl_data</span><span class="p">[</span><span class="s1">&#39;revenue&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s2">&lt;35</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">thin_line</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;Total Revenue&#39;</span><span class="si">:</span><span class="s2">&lt;35</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_revenue</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Expenses section</span>
+    <span class="n">total_expenses</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">pl_data</span><span class="p">[</span><span class="s1">&#39;expenses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  </span><span class="si">{</span><span class="s1">&#39;II. EXPENSES&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>  
+    <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">pl_data</span><span class="p">[</span><span class="s1">&#39;expenses&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s2">&lt;35</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">thin_line</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;     </span><span class="si">{</span><span class="s1">&#39;Total Expenses&#39;</span><span class="si">:</span><span class="s2">&lt;35</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">total_expenses</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Profit calculations</span>
+    <span class="n">pbt</span> <span class="o">=</span> <span class="n">total_revenue</span> <span class="o">-</span> <span class="n">total_expenses</span>
+    <span class="n">tax</span> <span class="o">=</span> <span class="n">pbt</span> <span class="o">*</span> <span class="n">company_info</span><span class="p">[</span><span class="s1">&#39;tax_rate&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="n">pbt</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+    <span class="n">pat</span> <span class="o">=</span> <span class="n">pbt</span> <span class="o">-</span> <span class="n">tax</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">separator</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="s1">&#39;Profit Before Tax&#39;</span><span class="si">:</span><span class="s2">&lt;38</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pbt</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="s1">&#39;Tax @ </span><span class="si">{:.0f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">company_info</span><span class="p">[</span><span class="s1">&#39;tax_rate&#39;</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span><span class="si">:</span><span class="s2">&lt;38</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">tax</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="s1">&#39;PROFIT AFTER TAX&#39;</span><span class="si">:</span><span class="s2">&lt;38</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">pat</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;12,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">separator</span><span class="p">)</span>
+
+    <span class="c1"># Ratios</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Key Ratios:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Net Profit Margin : </span><span class="si">{</span><span class="n">pat</span><span class="o">/</span><span class="n">total_revenue</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Tax Efficiency    : </span><span class="si">{</span><span class="n">pat</span><span class="o">/</span><span class="n">pbt</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span> <span class="k">if</span> <span class="n">pbt</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;Profitable ✓&#39;</span> <span class="k">if</span> <span class="n">pat</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;Loss Making ✗&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Financial Status  : </span><span class="si">{</span><span class="n">status</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="c1"># ---- Data ----</span>
+<span class="n">company_info</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Sunrise Manufacturing Pvt. Ltd.&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;year_end&#39;</span><span class="p">:</span> <span class="s1">&#39;31st March 2025&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;tax_rate&#39;</span><span class="p">:</span> <span class="mf">0.25</span>
+<span class="p">}</span>
+
+<span class="n">pl_data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;revenue&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Revenue from Operations&#39;</span><span class="p">:</span> <span class="mi">8500000</span><span class="p">,</span>
+        <span class="s1">&#39;Other Income&#39;</span><span class="p">:</span>             <span class="mi">125000</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="s1">&#39;expenses&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;Cost of Materials&#39;</span><span class="p">:</span>       <span class="mi">4200000</span><span class="p">,</span>
+        <span class="s1">&#39;Employee Benefits&#39;</span><span class="p">:</span>       <span class="mi">1250000</span><span class="p">,</span>
+        <span class="s1">&#39;Finance Costs&#39;</span><span class="p">:</span>            <span class="mi">185000</span><span class="p">,</span>
+        <span class="s1">&#39;Depreciation&#39;</span><span class="p">:</span>             <span class="mi">320000</span><span class="p">,</span>
+        <span class="s1">&#39;Other Expenses&#39;</span><span class="p">:</span>           <span class="mi">480000</span><span class="p">,</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">generate_pl_report</span><span class="p">(</span><span class="n">company_info</span><span class="p">,</span> <span class="n">pl_data</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>=======================================================
+  Sunrise Manufacturing Pvt. Ltd.
+  Statement of Profit &amp; Loss
+  For the year ended 31st March 2025
+  (All amounts in ₹)
+=======================================================
+
+  I. REVENUE
+     Revenue from Operations                8,500,000
+     Other Income                             125,000
+-------------------------------------------------------
+     Total Revenue                          8,625,000
+
+  II. EXPENSES
+     Cost of Materials                      4,200,000
+     Employee Benefits                      1,250,000
+     Finance Costs                            185,000
+     Depreciation                             320,000
+     Other Expenses                           480,000
+-------------------------------------------------------
+     Total Expenses                         6,435,000
+
+=======================================================
+  Profit Before Tax                         2,190,000
+  Tax @ 25%                                   547,500
+=======================================================
+  PROFIT AFTER TAX                          1,642,500
+=======================================================
+
+  Key Ratios:
+  Net Profit Margin : 19.04%
+  Tax Efficiency    : 75.00%
+  Financial Status  : Profitable ✓
+</code></pre></div>
+<h1 id="section-13-practice-exercises">Section 13: Practice Exercises</h1>
+<p>Now it's your turn! These exercises will test everything you've learned.</p>
+<hr />
+<h3 id="exercise-1-working-capital-analysis">🏋️ Exercise 1 — Working Capital Analysis</h3>
+<p>A company has the following current assets and liabilities:</p>
+<p><strong>Current Assets:</strong> Cash ₹85,000 | Debtors ₹3,20,000 | Inventory ₹4,75,000 | Prepaid Expenses ₹25,000<br />
+<strong>Current Liabilities:</strong> Creditors ₹2,80,000 | Short-term Loans ₹1,50,000 | Accrued Expenses ₹45,000</p>
+<p>Write a program using <strong>lists or dictionaries</strong> to:
+1. Calculate Total Current Assets
+2. Calculate Total Current Liabilities
+3. Calculate Working Capital (CA - CL)
+4. Calculate Current Ratio (CA / CL)
+5. Calculate Quick Ratio ((CA - Inventory) / CL)
+6. Print a formatted summary with assessment (ratios below 1 = warning)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 1 — Working Capital Analysis</span>
+<span class="c1"># Tip: Use a dictionary for assets and liabilities, then loop through them</span>
+</code></pre></div>
+<h3 id="exercise-2-ageing-analysis-of-debtors">🏋️ Exercise 2 — Ageing Analysis of Debtors</h3>
+<p>You have the following list of outstanding invoices with their ages (days overdue):</p>
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Alpha Ltd&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">125000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Beta Corp&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">85000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Gamma Inc&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">210000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Delta Pvt&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">55000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Epsilon Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">175000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Zeta Co&#39;</span><span class="p">,</span>     <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">92000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">130</span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Using a <code>for</code> loop, classify each invoice into:
+- 0–30 days → "Current"
+- 31–60 days → "1–2 Months"
+- 61–90 days → "2–3 Months"
+- 90+ days → "Overdue &gt;3 Months" (flag as high risk)</p>
+<p>Print the ageing report and the total outstanding amount in each bucket.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 2 — Debtors Ageing Analysis</span>
+<span class="n">invoices</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Alpha Ltd&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">125000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Beta Corp&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">85000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Gamma Inc&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">210000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Delta Pvt&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">55000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Epsilon Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">175000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Zeta Co&#39;</span><span class="p">,</span>     <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">92000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">130</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># Write your ageing analysis here</span>
+</code></pre></div>
+<h3 id="exercise-3-hra-exemption-calculator">🏋️ Exercise 3 — HRA Exemption Calculator</h3>
+<p>HRA exemption (under old regime) is the <strong>minimum</strong> of three amounts:
+1. Actual HRA received from employer
+2. 50% of Basic Salary (metro city) or 40% (non-metro)
+3. Actual Rent Paid <strong>minus</strong> 10% of Basic Salary</p>
+<p>Write a <strong>function</strong> called <code>calculate_hra_exemption</code> that takes:
+- <code>basic_salary</code> (annual)
+- <code>hra_received</code> (annual)
+- <code>rent_paid</code> (annual)
+- <code>is_metro</code> (True/False)</p>
+<p>And returns the HRA exemption amount.</p>
+<p>Test with:
+- Basic Salary: ₹6,00,000 | HRA Received: ₹2,40,000 | Rent Paid: ₹2,16,000 | Metro: Yes
+- Basic Salary: ₹4,80,000 | HRA Received: ₹1,44,000 | Rent Paid: ₹1,80,000 | Metro: No</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Exercise 3 — HRA Exemption Calculator</span>
+<span class="c1"># Tip: Use the min() function to find the minimum of three values</span>
+</code></pre></div>
+<hr />
+<h2 id="solutions">💡 Solutions</h2>
+<p>Try the exercises on your own first! Run the cells below <strong>only after you've attempted them.</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: Working Capital Analysis</span>
+
+<span class="n">current_assets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Cash&#39;</span><span class="p">:</span>              <span class="mi">85000</span><span class="p">,</span>
+    <span class="s1">&#39;Debtors&#39;</span><span class="p">:</span>          <span class="mi">320000</span><span class="p">,</span>
+    <span class="s1">&#39;Inventory&#39;</span><span class="p">:</span>        <span class="mi">475000</span><span class="p">,</span>
+    <span class="s1">&#39;Prepaid Expenses&#39;</span><span class="p">:</span>  <span class="mi">25000</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">current_liabilities</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Creditors&#39;</span><span class="p">:</span>        <span class="mi">280000</span><span class="p">,</span>
+    <span class="s1">&#39;Short-term Loans&#39;</span><span class="p">:</span> <span class="mi">150000</span><span class="p">,</span>
+    <span class="s1">&#39;Accrued Expenses&#39;</span><span class="p">:</span>  <span class="mi">45000</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">total_ca</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">current_assets</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">total_cl</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">current_liabilities</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+<span class="n">working_capital</span> <span class="o">=</span> <span class="n">total_ca</span> <span class="o">-</span> <span class="n">total_cl</span>
+<span class="n">current_ratio</span> <span class="o">=</span> <span class="n">total_ca</span> <span class="o">/</span> <span class="n">total_cl</span>
+<span class="n">quick_ratio</span> <span class="o">=</span> <span class="p">(</span><span class="n">total_ca</span> <span class="o">-</span> <span class="n">current_assets</span><span class="p">[</span><span class="s1">&#39;Inventory&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="n">total_cl</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Working Capital Analysis ===&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Current Assets:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="n">current_assets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="s2">&quot;Total Current Assets&quot;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">total_ca</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Current Liabilities:&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="n">current_liabilities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">item</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="s2">&quot;Total Current Liab.&quot;</span><span class="si">:</span><span class="s1">&lt;25</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">total_cl</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Working Capital:  ₹</span><span class="si">{</span><span class="n">working_capital</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Current Ratio:    </span><span class="si">{</span><span class="n">current_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">,</span> <span class="s1">&#39;✓&#39;</span> <span class="k">if</span> <span class="n">current_ratio</span> <span class="o">&gt;=</span> <span class="mf">1.5</span> <span class="k">else</span> <span class="s1">&#39;⚠ Below ideal&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Quick Ratio:      </span><span class="si">{</span><span class="n">quick_ratio</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">x&#39;</span><span class="p">,</span> <span class="s1">&#39;✓&#39;</span> <span class="k">if</span> <span class="n">quick_ratio</span> <span class="o">&gt;=</span> <span class="mf">1.0</span> <span class="k">else</span> <span class="s1">&#39;⚠ Below ideal&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>=== Working Capital Analysis ===
+
+Current Assets:
+  Cash                      ₹    85,000
+  Debtors                   ₹   320,000
+  Inventory                 ₹   475,000
+  Prepaid Expenses          ₹    25,000
+  Total Current Assets      ₹   905,000
+
+Current Liabilities:
+  Creditors                 ₹   280,000
+  Short-term Loans          ₹   150,000
+  Accrued Expenses          ₹    45,000
+  Total Current Liab.       ₹   475,000
+
+Working Capital:  ₹430,000
+Current Ratio:    1.91x ✓
+Quick Ratio:      0.91x ⚠ Below ideal
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Debtors Ageing Analysis</span>
+
+<span class="n">invoices</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Alpha Ltd&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">125000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Beta Corp&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">85000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">65</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Gamma Inc&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">210000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">45</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Delta Pvt&#39;</span><span class="p">,</span>   <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">55000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">95</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Epsilon Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">175000</span><span class="p">,</span> <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">},</span>
+    <span class="p">{</span><span class="s1">&#39;client&#39;</span><span class="p">:</span> <span class="s1">&#39;Zeta Co&#39;</span><span class="p">,</span>     <span class="s1">&#39;amount&#39;</span><span class="p">:</span> <span class="mi">92000</span><span class="p">,</span>  <span class="s1">&#39;days&#39;</span><span class="p">:</span> <span class="mi">130</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">buckets</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Current (0-30 days)&#39;</span><span class="p">:</span>        <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;1-2 Months (31-60 days)&#39;</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;2-3 Months (61-90 days)&#39;</span><span class="p">:</span>    <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;Overdue &gt;3 Months (91+ days)&#39;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Client&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Amount&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Days&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Category&#39;</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">68</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">inv</span> <span class="ow">in</span> <span class="n">invoices</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">inv</span><span class="p">[</span><span class="s1">&#39;days&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">30</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="s1">&#39;Current (0-30 days)&#39;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">elif</span> <span class="n">inv</span><span class="p">[</span><span class="s1">&#39;days&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="s1">&#39;1-2 Months (31-60 days)&#39;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+    <span class="k">elif</span> <span class="n">inv</span><span class="p">[</span><span class="s1">&#39;days&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="s1">&#39;2-3 Months (61-90 days)&#39;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s1">&#39;⚠&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">category</span> <span class="o">=</span> <span class="s1">&#39;Overdue &gt;3 Months (91+ days)&#39;</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="s1">&#39;🔴 HIGH RISK&#39;</span>
+
+    <span class="n">buckets</span><span class="p">[</span><span class="n">category</span><span class="p">]</span> <span class="o">+=</span> <span class="n">inv</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;client&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">inv</span><span class="p">[</span><span class="s1">&#39;days&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">d  </span><span class="si">{</span><span class="n">category</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">flag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">=== Ageing Summary ===&#39;</span><span class="p">)</span>
+<span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">category</span><span class="p">,</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">buckets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">category</span><span class="si">:</span><span class="s1">&lt;35</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">amount</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">total</span> <span class="o">+=</span> <span class="n">amount</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot;TOTAL OUTSTANDING&quot;</span><span class="si">:</span><span class="s1">&lt;35</span><span class="si">}</span><span class="s1"> ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Client                Amount   Days Category                      
+--------------------------------------------------------------------
+Alpha Ltd       ₹    125,000    25d  Current (0-30 days) 
+Beta Corp       ₹     85,000    65d  2-3 Months (61-90 days) ⚠
+Gamma Inc       ₹    210,000    45d  1-2 Months (31-60 days) 
+Delta Pvt       ₹     55,000    95d  Overdue &gt;3 Months (91+ days) 🔴 HIGH RISK
+Epsilon Ltd     ₹    175,000    15d  Current (0-30 days) 
+Zeta Co         ₹     92,000   130d  Overdue &gt;3 Months (91+ days) 🔴 HIGH RISK
+
+=== Ageing Summary ===
+Current (0-30 days)                 ₹   300,000
+1-2 Months (31-60 days)             ₹   210,000
+2-3 Months (61-90 days)             ₹    85,000
+Overdue &gt;3 Months (91+ days)        ₹   147,000
+TOTAL OUTSTANDING                   ₹   742,000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 3: HRA Exemption Calculator</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">calculate_hra_exemption</span><span class="p">(</span><span class="n">basic_salary</span><span class="p">,</span> <span class="n">hra_received</span><span class="p">,</span> <span class="n">rent_paid</span><span class="p">,</span> <span class="n">is_metro</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate HRA exemption under Income Tax (Old Regime).&quot;&quot;&quot;</span>
+
+    <span class="c1"># Method 1: Actual HRA received</span>
+    <span class="n">limit1</span> <span class="o">=</span> <span class="n">hra_received</span>
+
+    <span class="c1"># Method 2: 50% of Basic (metro) or 40% (non-metro)</span>
+    <span class="n">limit2</span> <span class="o">=</span> <span class="n">basic_salary</span> <span class="o">*</span> <span class="mf">0.50</span> <span class="k">if</span> <span class="n">is_metro</span> <span class="k">else</span> <span class="n">basic_salary</span> <span class="o">*</span> <span class="mf">0.40</span>
+
+    <span class="c1"># Method 3: Rent paid minus 10% of Basic</span>
+    <span class="n">limit3</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">rent_paid</span> <span class="o">-</span> <span class="n">basic_salary</span> <span class="o">*</span> <span class="mf">0.10</span><span class="p">)</span>   <span class="c1"># Cannot be negative</span>
+
+    <span class="c1"># Exemption = minimum of all three</span>
+    <span class="n">exemption</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">limit1</span><span class="p">,</span> <span class="n">limit2</span><span class="p">,</span> <span class="n">limit3</span><span class="p">)</span>
+
+    <span class="n">city_type</span> <span class="o">=</span> <span class="s1">&#39;Metro&#39;</span> <span class="k">if</span> <span class="n">is_metro</span> <span class="k">else</span> <span class="s1">&#39;Non-Metro&#39;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;--- HRA Exemption Calculation (</span><span class="si">{</span><span class="n">city_type</span><span class="si">}</span><span class="s1">) ---&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Basic Salary:           ₹</span><span class="si">{</span><span class="n">basic_salary</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HRA Received:           ₹</span><span class="si">{</span><span class="n">hra_received</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Rent Paid:              ₹</span><span class="si">{</span><span class="n">rent_paid</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Limit 1 (Actual HRA):   ₹</span><span class="si">{</span><span class="n">limit1</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Limit 2 (% of Basic):   ₹</span><span class="si">{</span><span class="n">limit2</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Limit 3 (Rent - 10%B):  ₹</span><span class="si">{</span><span class="n">limit3</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HRA Exemption (min):    ₹</span><span class="si">{</span><span class="n">exemption</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;HRA Taxable:            ₹</span><span class="si">{</span><span class="n">hra_received</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">exemption</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">exemption</span>
+
+
+<span class="c1"># Test Case 1</span>
+<span class="n">calculate_hra_exemption</span><span class="p">(</span><span class="mi">600000</span><span class="p">,</span> <span class="mi">240000</span><span class="p">,</span> <span class="mi">216000</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Test Case 2</span>
+<span class="n">calculate_hra_exemption</span><span class="p">(</span><span class="mi">480000</span><span class="p">,</span> <span class="mi">144000</span><span class="p">,</span> <span class="mi">180000</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>--- HRA Exemption Calculation (Metro) ---
+Basic Salary:           ₹   600,000
+HRA Received:           ₹   240,000
+Rent Paid:              ₹   216,000
+
+Limit 1 (Actual HRA):   ₹   240,000
+Limit 2 (% of Basic):   ₹ 300,000.0
+Limit 3 (Rent - 10%B):  ₹ 156,000.0
+HRA Exemption (min):    ₹ 156,000.0
+HRA Taxable:            ₹  84,000.0
+
+--- HRA Exemption Calculation (Non-Metro) ---
+Basic Salary:           ₹   480,000
+HRA Received:           ₹   144,000
+Rent Paid:              ₹   180,000
+
+Limit 1 (Actual HRA):   ₹   144,000
+Limit 2 (% of Basic):   ₹ 192,000.0
+Limit 3 (Rent - 10%B):  ₹ 132,000.0
+HRA Exemption (min):    ₹ 132,000.0
+HRA Taxable:            ₹  12,000.0
+
+
+
+
+
+
+132000.0
+</code></pre></div>
+<hr />
+<h1 id="congratulations">🎉 Congratulations!</h1>
+<p>You have completed the <strong>Python for CA Professionals</strong> introductory notebook.</p>
+<h2 id="what-youve-learned-today">What you've learned today</h2>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>What you can do now</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>print()</code> &amp; comments</td>
+<td>Display output, document your code</td>
+</tr>
+<tr>
+<td>Variables</td>
+<td>Store and reuse financial data</td>
+</tr>
+<tr>
+<td>Data Types</td>
+<td>Work with numbers, text, and True/False</td>
+</tr>
+<tr>
+<td>Arithmetic</td>
+<td>Build calculators (GST, EMI, compound interest)</td>
+</tr>
+<tr>
+<td><code>if/elif/else</code></td>
+<td>Automate decisions (tax slabs, risk classification)</td>
+</tr>
+<tr>
+<td>Strings &amp; f-strings</td>
+<td>Generate formatted financial reports</td>
+</tr>
+<tr>
+<td>Lists</td>
+<td>Manage collections of invoices, clients, transactions</td>
+</tr>
+<tr>
+<td>Dictionaries</td>
+<td>Create structured records like ledger entries</td>
+</tr>
+<tr>
+<td>Loops</td>
+<td>Process hundreds of transactions automatically</td>
+</tr>
+<tr>
+<td>Functions</td>
+<td>Build reusable tools (tax calculator, ratios)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="whats-next">What's Next?</h2>
+<p>You're ready for the next module:</p>
+<ol>
+<li><strong>pandas</strong> — Work with Excel files, large datasets, and financial data</li>
+<li><strong>matplotlib / seaborn</strong> — Create charts and visualisations</li>
+<li><strong>openpyxl</strong> — Read and write Excel files with Python</li>
+<li><strong>NumPy</strong> — Advanced financial mathematics</li>
+<li><strong>Automation</strong> — Schedule and automate reports</li>
+</ol>
+<hr />
+<blockquote>
+<p><strong>Remember:</strong> Every expert was once a beginner.<br />
+The best way to learn Python is to <strong>experiment</strong> — change the numbers, break things, fix them.<br />
+Your CA training has already given you the analytical mindset. Python is just the tool.</p>
+</blockquote>
+<hr />
+<p><em>Python for CA Professionals — Module 1: Python Basics</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

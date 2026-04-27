@@ -1,0 +1,1179 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>🎨 Seaborn for CA Professionals - ICANN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "\ud83c\udfa8 Seaborn for CA Professionals";
+        var mkdocs_page_input_path = "icann/05_Seaborn_for_CA.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICANN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="" href="../../index.md">Python Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00a_numpy_basics.md">Numpy Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00b_pandas_basics.md">Pandas Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00c_matplotlib_basics.md">Matplotlib Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../00d_seaborn_basics.md">Seaborn Basics</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../01_numpy_for_finance.md">Numpy for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../02_pandas_fundamentals.md">Pandas for Finance</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../03_financial_statement_analysis.md">Financial Statement Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../04_audit_data_analysis.md">Audit Data Analysis</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="" href="../06_fraud_detection.md">Fraud Detection</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICANN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">🎨 Seaborn for CA Professionals</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="seaborn-for-ca-professionals">🎨 Seaborn for CA Professionals</h1>
+<h2 id="beautiful-statistical-charts-with-minimal-code">Beautiful Statistical Charts with Minimal Code</h2>
+<hr />
+<p><strong>Pre-requisite:</strong> Module 3 (Pandas), Module 4 (Matplotlib)<br />
+<strong>Estimated time:</strong> 2–3 hours</p>
+<h3 id="what-is-seaborn">What is Seaborn?</h3>
+<p><strong>Seaborn</strong> is built on top of Matplotlib and makes it dramatically easier to create <strong>statistical and analytical charts</strong>. Where Matplotlib is like building furniture from scratch, Seaborn is like buying flat-pack — assembled in far fewer steps, and it looks great by default.</p>
+<table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Matplotlib</th>
+<th>Seaborn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Box plot</td>
+<td>~15 lines</td>
+<td>1 line</td>
+</tr>
+<tr>
+<td>Correlation heatmap</td>
+<td>~20 lines</td>
+<td>2 lines</td>
+</tr>
+<tr>
+<td>Distribution with KDE</td>
+<td>~10 lines</td>
+<td>1 line</td>
+</tr>
+<tr>
+<td>Regression plot</td>
+<td>~15 lines</td>
+<td>1 line</td>
+</tr>
+<tr>
+<td>Pair plot</td>
+<td>~30 lines</td>
+<td>1 line</td>
+</tr>
+</tbody>
+</table>
+<h3 id="seaborns-strengths-for-financial-analysis">Seaborn's strengths for financial analysis</h3>
+<ul>
+<li><strong>Distribution analysis</strong> — understanding how invoice amounts, salaries, or returns are spread</li>
+<li><strong>Outlier detection</strong> — box plots to flag suspicious transactions</li>
+<li><strong>Correlation analysis</strong> — which financial variables move together</li>
+<li><strong>Category comparison</strong> — comparing metrics across business units</li>
+<li><strong>Regression</strong> — understanding relationships between financial drivers</li>
+</ul>
+<hr />
+<h2 id="table-of-contents">📋 Table of Contents</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Topic</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Installing &amp; Setup</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Seaborn Themes</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Distribution Plots — histplot &amp; kdeplot</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Box Plot — Outlier Detection</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Violin Plot — Distribution by Category</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Bar &amp; Count Plots — Category Analysis</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Heatmap — Correlation Matrix</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Pair Plot — Multi-variable Exploration</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Scatter with Regression — lineplot &amp; regplot</td>
+</tr>
+<tr>
+<td>10</td>
+<td>FacetGrid — Charts by Category</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Seaborn + Matplotlib Together</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Practice Exercises</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h1 id="section-1-installing-setup">Section 1: Installing &amp; Setup</h1>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install if needed</span>
+<span class="c1"># !pip install seaborn matplotlib pandas numpy</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Seaborn version:&#39;</span><span class="p">,</span> <span class="n">sns</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ready!&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Seaborn version: 0.13.2
+Ready!
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ==== Build a rich financial dataset for this notebook ====</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>   <span class="c1"># 200 employee records</span>
+
+<span class="n">departments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span> <span class="s1">&#39;Operations&#39;</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">,</span> <span class="s1">&#39;IT&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span>
+                                <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">])</span>
+<span class="n">grades</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">])</span>
+
+<span class="n">base_salary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Junior&#39;</span><span class="p">:</span> <span class="mi">480000</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">:</span> <span class="mi">720000</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">:</span> <span class="mi">1080000</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">:</span> <span class="mi">1560000</span><span class="p">}</span>
+<span class="n">salaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">base_salary</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">])</span>
+
+<span class="n">experience</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([{</span><span class="s1">&#39;Junior&#39;</span><span class="p">:</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">:</span> <span class="mf">4.0</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">:</span> <span class="mf">12.0</span><span class="p">}[</span><span class="n">g</span><span class="p">]</span> <span class="o">+</span>
+                         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">])</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">performance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bonus_pct</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">performance</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bonus_amt</span>   <span class="o">=</span> <span class="n">salaries</span> <span class="o">*</span> <span class="n">bonus_pct</span> <span class="o">/</span> <span class="mi">100</span>
+
+<span class="n">employees</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Department&#39;</span><span class="p">:</span> <span class="n">departments</span><span class="p">,</span>
+    <span class="s1">&#39;Grade&#39;</span><span class="p">:</span>      <span class="n">grades</span><span class="p">,</span>
+    <span class="s1">&#39;Annual_CTC&#39;</span><span class="p">:</span> <span class="n">salaries</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+    <span class="s1">&#39;Experience&#39;</span><span class="p">:</span> <span class="n">experience</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+    <span class="s1">&#39;Perf_Score&#39;</span><span class="p">:</span> <span class="n">performance</span><span class="p">,</span>
+    <span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">:</span>  <span class="n">bonus_pct</span><span class="p">,</span>
+    <span class="s1">&#39;Bonus_Amt&#39;</span><span class="p">:</span>  <span class="n">bonus_amt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+<span class="p">})</span>
+
+<span class="c1"># Invoice dataset</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">invoice_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Amount&#39;</span><span class="p">:</span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mi">75000</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">600000</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+    <span class="s1">&#39;Category&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Materials&#39;</span><span class="p">,</span> <span class="s1">&#39;Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Utilities&#39;</span><span class="p">,</span> <span class="s1">&#39;Travel&#39;</span><span class="p">,</span> <span class="s1">&#39;Misc&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span>
+                                    <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.30</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.20</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">]),</span>
+    <span class="s1">&#39;Month&#39;</span><span class="p">:</span>     <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span><span class="s1">&#39;May&#39;</span><span class="p">,</span><span class="s1">&#39;Jun&#39;</span><span class="p">,</span><span class="s1">&#39;Jul&#39;</span><span class="p">,</span><span class="s1">&#39;Aug&#39;</span><span class="p">,</span><span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
+                                    <span class="s1">&#39;Oct&#39;</span><span class="p">,</span><span class="s1">&#39;Nov&#39;</span><span class="p">,</span><span class="s1">&#39;Dec&#39;</span><span class="p">,</span><span class="s1">&#39;Jan&#39;</span><span class="p">,</span><span class="s1">&#39;Feb&#39;</span><span class="p">,</span><span class="s1">&#39;Mar&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">),</span>
+    <span class="s1">&#39;GST_Rate&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]),</span>
+    <span class="s1">&#39;Status&#39;</span><span class="p">:</span>    <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Paid&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">,</span> <span class="s1">&#39;Overdue&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">]),</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Employee dataset: </span><span class="si">{</span><span class="n">employees</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invoice dataset:  </span><span class="si">{</span><span class="n">invoice_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1"> records&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Employee dataset: 200 records
+Invoice dataset:  300 records
+
+   Department   Grade  Annual_CTC  Experience  Perf_Score  Bonus_Pct  \
+0  Operations     Mid      641700         3.5         2.6        9.2   
+1          IT  Junior      581290         1.3         3.6       11.0   
+2       Sales  Junior      505008         1.0         4.7       14.7   
+3       Sales  Senior     1275030         7.3         4.3       10.5   
+4     Finance     Mid      704174         3.4         4.5       13.1
+
+   Bonus_Amt  
+0      59036  
+1      63942  
+2      74236  
+3     133878  
+4      92247
+</code></pre></div>
+<h1 id="section-2-seaborn-themes">Section 2: Seaborn Themes</h1>
+<p>Seaborn gives you ready-made, professional themes. Just one line changes the look of all your charts.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Available themes: darkgrid, whitegrid, dark, white, ticks</span>
+<span class="c1"># Available palettes: deep, muted, bright, pastel, dark, colorblind, Blues, rocket, etc.</span>
+
+<span class="n">themes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;darkgrid&#39;</span><span class="p">,</span> <span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="s1">&#39;ticks&#39;</span><span class="p">]</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Seaborn Theme Comparison&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">sample_x</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Q1&#39;</span><span class="p">,</span> <span class="s1">&#39;Q2&#39;</span><span class="p">,</span> <span class="s1">&#39;Q3&#39;</span><span class="p">,</span> <span class="s1">&#39;Q4&#39;</span><span class="p">]</span>
+<span class="n">sample_y</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3800</span><span class="p">,</span> <span class="mi">4200</span><span class="p">,</span> <span class="mi">4650</span><span class="p">,</span> <span class="mi">6090</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">theme</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">themes</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">sns</span><span class="o">.</span><span class="n">axes_style</span><span class="p">(</span><span class="n">theme</span><span class="p">):</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">sample_x</span><span class="p">,</span> <span class="n">sample_y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;Blues_d&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;style=&#39;</span><span class="si">{</span><span class="n">theme</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;₹ Thousands&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Set a default theme for the rest of this notebook</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;whitegrid&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;deep&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Default theme set to &#39;whitegrid&#39; with &#39;deep&#39; palette&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_6_0.png" /></p>
+<div class="highlight"><pre><span></span><code>Default theme set to &#39;whitegrid&#39; with &#39;deep&#39; palette
+</code></pre></div>
+<h1 id="section-3-distribution-plots-histplot-kdeplot">Section 3: Distribution Plots — histplot &amp; kdeplot</h1>
+<p>Distribution plots answer: <em>"How are my values spread?"</em>  </p>
+<p>For CA professionals: <em>"Are most invoices small, or are large invoices common?"</em><br />
+<em>"Are salaries concentrated in one band or spread across many?"</em></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># histplot — distribution of invoice amounts</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Simple histogram</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span>
+             <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution</span><span class="se">\n</span><span class="s1">(Histogram + KDE)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+
+<span class="c1"># Histogram by Category</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+             <span class="n">multiple</span><span class="o">=</span><span class="s1">&#39;stack&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount by Category</span><span class="se">\n</span><span class="s1">(Stacked Histogram)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/803326696.py:18: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_8_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># kdeplot — Salary distribution by Grade (smooth density curves)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">grade</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">]:</span>
+    <span class="n">subset</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Grade&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">grade</span><span class="p">][</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">subset</span> <span class="o">/</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">grade</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary Distribution by Grade Level&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Density&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average CTC by Grade:&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Grade&#39;</span><span class="p">)[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> Lakhs&#39;</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/2691951554.py:14: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_9_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Average CTC by Grade:
+Grade
+Junior     ₹5.2 Lakhs
+Mid        ₹7.5 Lakhs
+Senior    ₹11.3 Lakhs
+Lead      ₹16.5 Lakhs
+Name: Annual_CTC, dtype: object
+</code></pre></div>
+<h1 id="section-4-box-plot-outlier-detection">Section 4: Box Plot — Outlier Detection</h1>
+<p>Box plots are <strong>one of the most important charts for auditors</strong>.<br />
+They show the spread of data and immediately highlight <strong>outliers</strong> — unusual values that may warrant investigation.</p>
+<p><strong>Reading a box plot:</strong>
+<div class="highlight"><pre><span></span><code>         Outlier ●
+              |
+   Whisker ───┤ Upper fence (Q3 + 1.5×IQR)
+              │
+   Q3    ┌────┤ 75th percentile
+         │    │
+   Median├────┤ 50th percentile (orange line)
+         │    │
+   Q1    └────┤ 25th percentile
+              │
+   Whisker ───┤ Lower fence (Q1 - 1.5×IQR)
+              |
+         Outlier ●
+</code></pre></div></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Box plot — Invoice amounts by category (flags outliers automatically)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Invoice amounts by expense category</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amounts by Category</span><span class="se">\n</span><span class="s1">(Red dots = Outliers)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="c1"># Employee salary by department</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+            <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;husl&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary by Department</span><span class="se">\n</span><span class="s1">(Diamond = Outliers)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:5: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=invoice_df, x=&#39;Category&#39;, y=&#39;Amount&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:15: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:24: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_11_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Box plot with stripplot overlaid — shows individual data points</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span>
+            <span class="n">palette</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#AED6F1&#39;</span><span class="p">,</span><span class="s1">&#39;#85C1E9&#39;</span><span class="p">,</span><span class="s1">&#39;#5DADE2&#39;</span><span class="p">,</span><span class="s1">&#39;#2E86C1&#39;</span><span class="p">],</span>
+            <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+              <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span>
+              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;dimgray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">jitter</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary Distribution by Grade</span><span class="se">\n</span><span class="s1">(Box + Individual Data Points)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Employee Grade&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4043011023.py:4: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=employees, x=&#39;Grade&#39;, y=&#39;Annual_CTC&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4043011023.py:19: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_12_1.png" /></p>
+<h1 id="section-5-violin-plot-distribution-shape-by-category">Section 5: Violin Plot — Distribution Shape by Category</h1>
+<p>A <strong>violin plot</strong> combines a box plot with a KDE — it shows both summary statistics AND the full distribution shape.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Violin plot — salary distribution by department</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+               <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+               <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span> <span class="s1">&#39;IT&#39;</span><span class="p">,</span> <span class="s1">&#39;Operations&#39;</span><span class="p">,</span> <span class="s1">&#39;Sales&#39;</span><span class="p">,</span> <span class="s1">&#39;HR&#39;</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary Distribution by Department</span><span class="se">\n</span><span class="s1">(Width = Density of employees at that salary level)&#39;</span><span class="p">,</span>
+             <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Department&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/568692105.py:4: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.violinplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/568692105.py:14: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_14_1.png" /></p>
+<h1 id="section-6-bar-count-plots-category-analysis">Section 6: Bar &amp; Count Plots — Category Analysis</h1>
+<p><code>sns.barplot()</code> automatically calculates and displays <strong>mean + confidence interval</strong> for each category — more insightful than plain bar charts.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># barplot — Average salary by Department (with confidence interval)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Average CTC by department</span>
+<span class="n">dept_order</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Department&#39;</span><span class="p">)[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">dept_order</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Blues_d&#39;</span><span class="p">,</span>
+            <span class="n">estimator</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="s1">&#39;ci&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Average Salary by Department</span><span class="se">\n</span><span class="s1">(Error bars = 95% Confidence Interval)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Average Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="c1"># Average bonus by Grade</span>
+<span class="n">grade_order</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">]</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">grade_order</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Oranges_d&#39;</span><span class="p">,</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">errorbar</span><span class="o">=</span><span class="s1">&#39;sd&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Average Bonus % by Grade</span><span class="se">\n</span><span class="s1">(Error bars = Std Deviation)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bonus (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:6: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:16: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=employees, x=&#39;Grade&#39;, y=&#39;Bonus_Pct&#39;,
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:23: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_16_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># countplot — how many invoices by status and category?</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Count of invoices by status</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Status&#39;</span><span class="p">,</span>
+              <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Paid&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">:</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="s1">&#39;Overdue&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
+              <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Paid&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">,</span> <span class="s1">&#39;Overdue&#39;</span><span class="p">],</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Count by Status&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Invoices&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">patches</span><span class="p">:</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">())</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">p</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span>
+                     <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Count by category and status (hue)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Status&#39;</span><span class="p">,</span>
+              <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Paid&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;Pending&#39;</span><span class="p">:</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="s1">&#39;Overdue&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span>
+              <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Count by Category &amp; Status&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Invoices&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Status&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4118093210.py:5: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.countplot(data=invoice_df, x=&#39;Status&#39;,
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_17_1.png" /></p>
+<h1 id="section-7-heatmap-correlation-matrix">Section 7: Heatmap — Correlation Matrix</h1>
+<p>A <strong>correlation heatmap</strong> shows how strongly pairs of variables are related.<br />
+In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are salaries correlated with performance?"</em></p>
+<p><strong>Correlation values:</strong>
+- <code>+1.0</code> = Perfect positive relationship (as one rises, the other rises)
+- <code>0.0</code>  = No relationship
+- <code>-1.0</code> = Perfect negative relationship (as one rises, the other falls)</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Correlation heatmap for employee data</span>
+<span class="n">numeric_cols</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Experience&#39;</span><span class="p">,</span> <span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus_Amt&#39;</span><span class="p">]]</span>
+<span class="n">corr_matrix</span>  <span class="o">=</span> <span class="n">numeric_cols</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span>
+    <span class="n">corr_matrix</span><span class="p">,</span>
+    <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>           <span class="c1"># Show correlation values in each cell</span>
+    <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.2f&#39;</span><span class="p">,</span>            <span class="c1"># 2 decimal places</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdYlGn&#39;</span><span class="p">,</span>        <span class="c1"># Red (negative) → Yellow (zero) → Green (positive)</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>             <span class="c1"># Centre the colour scale at 0</span>
+    <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">linewidths</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+    <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Correlation Coefficient&#39;</span><span class="p">}</span>
+<span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Correlation Matrix — Employee Metrics&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Key insights</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Key Insights from Correlation Matrix:&#39;</span><span class="p">)</span>
+<span class="n">r_exp</span>   <span class="o">=</span> <span class="n">corr_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Experience&#39;</span><span class="p">]</span>
+<span class="n">r_perf</span>  <span class="o">=</span> <span class="n">corr_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span>
+<span class="n">r_bns</span>   <span class="o">=</span> <span class="n">corr_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span>  <span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span>
+<span class="n">lbl_exp</span>  <span class="o">=</span> <span class="s1">&#39;Strong +ve&#39;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r_exp</span><span class="p">)</span>  <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s1">&#39;Moderate&#39;</span>
+<span class="n">lbl_perf</span> <span class="o">=</span> <span class="s1">&#39;Strong +ve&#39;</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r_perf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="s1">&#39;Moderate&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  CTC vs Experience:  </span><span class="si">{</span><span class="n">r_exp</span><span class="si">}</span><span class="s1">  — </span><span class="si">{</span><span class="n">lbl_exp</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Bonus% vs Perf:     </span><span class="si">{</span><span class="n">corr_matrix</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s2">&quot;Bonus_Pct&quot;</span><span class="p">,</span><span class="s2">&quot;Perf_Score&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">  — Performance drives bonus&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_19_0.png" /></p>
+<div class="highlight"><pre><span></span><code>Key Insights from Correlation Matrix:
+  CTC vs Experience:  0.93  — Strong +ve
+  Bonus% vs Perf:     0.79  — Performance drives bonus
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Monthly revenue heatmap — very common in business analysis</span>
+<span class="c1"># Simulate 3 years of monthly revenue data</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">years</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">2024</span><span class="p">,</span> <span class="mi">2025</span><span class="p">]</span>
+<span class="n">months_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span> <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+
+<span class="n">base</span>    <span class="o">=</span> <span class="mi">1200</span>
+<span class="n">trend</span>   <span class="o">=</span> <span class="mi">80</span>    <span class="c1"># ~80K growth per month over years</span>
+<span class="n">monthly_rev</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">2023</span><span class="p">:</span> <span class="p">[</span><span class="mi">1050</span><span class="p">,</span> <span class="mi">1100</span><span class="p">,</span> <span class="mi">900</span><span class="p">,</span> <span class="mi">1150</span><span class="p">,</span> <span class="mi">1280</span><span class="p">,</span> <span class="mi">1400</span><span class="p">,</span> <span class="mi">1220</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1580</span><span class="p">,</span> <span class="mi">1720</span><span class="p">,</span> <span class="mi">1850</span><span class="p">],</span>
+    <span class="mi">2024</span><span class="p">:</span> <span class="p">[</span><span class="mi">1250</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span> <span class="mi">1120</span><span class="p">,</span> <span class="mi">1450</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">1780</span><span class="p">,</span> <span class="mi">1550</span><span class="p">,</span> <span class="mi">1420</span><span class="p">,</span> <span class="mi">1680</span><span class="p">,</span> <span class="mi">1910</span><span class="p">,</span> <span class="mi">2030</span><span class="p">,</span> <span class="mi">2150</span><span class="p">],</span>
+    <span class="mi">2025</span><span class="p">:</span> <span class="p">[</span><span class="mi">1480</span><span class="p">,</span> <span class="mi">1590</span><span class="p">,</span> <span class="mi">1350</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">1850</span><span class="p">,</span> <span class="mi">1980</span><span class="p">,</span> <span class="mi">1820</span><span class="p">,</span> <span class="mi">1700</span><span class="p">,</span> <span class="mi">1950</span><span class="p">,</span> <span class="mi">2200</span><span class="p">,</span> <span class="mi">2350</span><span class="p">,</span> <span class="mi">2480</span><span class="p">],</span>
+<span class="p">}</span>
+
+<span class="n">rev_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">monthly_rev</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">months_list</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">rev_df</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;,.0f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span>
+            <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;₹ Thousands&#39;</span><span class="p">})</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Monthly Revenue Heatmap — 3 Year Trend</span><span class="se">\n</span><span class="s1">(₹ Thousands)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Financial Year&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Month (Apr = FY Start)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.draw()
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/135067131.py:27: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_20_1.png" /></p>
+<h1 id="section-8-pair-plot-multi-variable-exploration">Section 8: Pair Plot — Multi-variable Exploration</h1>
+<p><code>sns.pairplot()</code> creates a <strong>grid of scatter plots</strong> for all pairs of numeric variables — ideal for initial data exploration. One line of code replaces many separate charts.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pair plot — all relationships in employee data at once</span>
+<span class="c1"># Color-coded by Grade</span>
+<span class="n">pair_data</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Experience&#39;</span><span class="p">,</span> <span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span> <span class="s1">&#39;Grade&#39;</span><span class="p">]]</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span>
+    <span class="n">pair_data</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span>
+    <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set1&#39;</span><span class="p">,</span>
+    <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">,</span>     <span class="c1"># Diagonal = KDE distribution</span>
+    <span class="n">plot_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="n">corner</span><span class="o">=</span><span class="kc">True</span>          <span class="c1"># Only lower triangle (avoids duplication)</span>
+<span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Employee Metrics — Pair Plot by Grade&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_22_0.png" /></p>
+<h1 id="section-9-scatter-with-regression-relationships-in-data">Section 9: Scatter with Regression — Relationships in Data</h1>
+<p><code>sns.regplot()</code> and <code>sns.lmplot()</code> draw scatter plots with a <strong>regression line</strong> — shows the trend and whether two variables are truly related.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># regplot — does experience predict salary?</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Plot 1: Experience vs CTC</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Experience&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">},</span>
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Experience vs Salary</span><span class="se">\n</span><span class="s1">(Does experience predict CTC?)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years of Experience&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="n">corr_exp_ctc</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[[</span><span class="s1">&#39;Experience&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Correlation: </span><span class="si">{</span><span class="n">corr_exp_ctc</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+             <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">))</span>
+
+<span class="c1"># Plot 2: Performance Score vs Bonus %</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;coral&#39;</span><span class="p">},</span>
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;darkred&#39;</span><span class="p">,</span> <span class="s1">&#39;linewidth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+            <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Performance Score vs Bonus %</span><span class="se">\n</span><span class="s1">(Is bonus linked to performance?)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Performance Score (1–5)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bonus (%)&#39;</span><span class="p">)</span>
+
+<span class="n">corr_perf_bonus</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[[</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.92</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;Correlation: </span><span class="si">{</span><span class="n">corr_perf_bonus</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+             <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;lightyellow&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1591439558.py:31: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_24_1.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="c1"># lmplot — regression by subgroup (Grade)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span>
+    <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Experience&#39;</span><span class="p">,</span>
+    <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+    <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span>
+    <span class="n">hue_order</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span> <span class="s1">&#39;Mid&#39;</span><span class="p">,</span> <span class="s1">&#39;Senior&#39;</span><span class="p">,</span> <span class="s1">&#39;Lead&#39;</span><span class="p">],</span>
+    <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set1&#39;</span><span class="p">,</span>
+    <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">},</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mf">1.5</span>
+<span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Years of Experience&#39;</span><span class="p">,</span> <span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Experience vs Salary by Grade</span><span class="se">\n</span><span class="s1">(Regression lines show within-grade trends)&#39;</span><span class="p">,</span>
+               <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Format y-axis</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/308541801.py:21: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_25_1.png" /></p>
+<h1 id="section-10-facetgrid-charts-by-category">Section 10: FacetGrid — Charts by Category</h1>
+<p><code>FacetGrid</code> creates a grid of the same chart, <strong>split by a categorical variable</strong>. Like applying the same chart to each department, each quarter, etc.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Invoice amount distribution — one histogram per expense category</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">FacetGrid</span><span class="p">(</span>
+    <span class="n">invoice_df</span><span class="p">,</span>
+    <span class="n">col</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span>
+    <span class="n">col_wrap</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>          <span class="c1"># 3 charts per row</span>
+    <span class="n">height</span><span class="o">=</span><span class="mf">3.5</span><span class="p">,</span>
+    <span class="n">aspect</span><span class="o">=</span><span class="mf">1.2</span><span class="p">,</span>
+    <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span>         <span class="c1"># Allow different y-axis scales per chart</span>
+<span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">,</span> <span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">flat</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="n">g</span><span class="o">.</span><span class="n">set_axis_labels</span><span class="p">(</span><span class="s1">&#39;Invoice Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">set_titles</span><span class="p">(</span><span class="n">col_template</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">{col_name}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">g</span><span class="o">.</span><span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution by Expense Category&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1895315369.py:21: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  plt.tight_layout()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_27_1.png" /></p>
+<h1 id="section-11-seaborn-matplotlib-together">Section 11: Seaborn + Matplotlib Together</h1>
+<p>Seaborn and Matplotlib work together seamlessly. Use Seaborn for the chart, Matplotlib for fine-tuning.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comprehensive HR Analytics Dashboard</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;HR Analytics Dashboard — FY 2024-25&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.98</span><span class="p">)</span>
+
+<span class="c1"># Layout using gridspec</span>
+<span class="n">gs</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_gridspec</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+
+<span class="c1"># Chart 1: Salary by Department (box plot)</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">dept_order</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Department&#39;</span><span class="p">)[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">index</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span>
+            <span class="n">order</span><span class="o">=</span><span class="n">dept_order</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;Set2&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary Distribution by Department&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="c1"># Chart 2: Headcount by Grade (count plot)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">grade_counts</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Grade&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">reindex</span><span class="p">([</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span><span class="s1">&#39;Mid&#39;</span><span class="p">,</span><span class="s1">&#39;Senior&#39;</span><span class="p">,</span><span class="s1">&#39;Lead&#39;</span><span class="p">])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">grade_counts</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">grade_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;Blues_d&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">grade_counts</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">v</span> <span class="o">+</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Headcount by Grade&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Number of Employees&#39;</span><span class="p">)</span>
+
+<span class="c1"># Chart 3: Performance distribution</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;coral&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Mean: </span><span class="si">{</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Performance Score Distribution&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Performance Score (1–5)&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># Chart 4: Bonus % vs Perf regression</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">,</span>
+            <span class="n">scatter_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span> <span class="s1">&#39;s&#39;</span><span class="p">:</span> <span class="mi">25</span><span class="p">,</span> <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;steelblue&#39;</span><span class="p">},</span>
+            <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;navy&#39;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Performance vs Bonus %&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Performance Score&#39;</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bonus (%)&#39;</span><span class="p">)</span>
+
+<span class="c1"># Chart 5: Dept cost breakdown (stacked bar)</span>
+<span class="n">ax5</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="n">dept_cost</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Department&#39;</span><span class="p">)[[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus_Amt&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1e7</span>  <span class="c1"># In ₹ Crores</span>
+<span class="n">dept_cost</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;barh&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax5</span><span class="p">,</span>
+               <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="s1">&#39;coral&#39;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Total Cost by Department</span><span class="se">\n</span><span class="s1">(₹ Crores)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;₹ Crores&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Base CTC&#39;</span><span class="p">,</span> <span class="s1">&#39;Bonus&#39;</span><span class="p">],</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/787677977.py:11: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_29_1.png" /></p>
+<h1 id="section-12-practice-exercises">Section 12: Practice Exercises</h1>
+<hr />
+<h3 id="exercise-1-invoice-outlier-analysis">🏋️ Exercise 1 — Invoice Outlier Analysis</h3>
+<p>Using the <code>invoice_df</code> dataset:
+1. Create a box plot showing invoice amounts for each GST rate (5%, 12%, 18%, 28%)
+2. Identify and print the invoices that are statistical outliers (above Q3 + 1.5×IQR)
+3. Create a heatmap showing average invoice amount by Category and Status</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (Re-run the data setup cell at the top if invoice_df is not available)</span>
+
+<span class="c1"># Write your analysis here</span>
+</code></pre></div>
+<h3 id="exercise-2-department-wise-financial-dashboard">🏋️ Exercise 2 — Department-wise Financial Dashboard</h3>
+<p>Using the <code>employees</code> dataset, create a <strong>2×2 subplot dashboard</strong> with:
+1. <strong>Top-left</strong>: Violin plot of salary by department
+2. <strong>Top-right</strong>: Bar plot of average performance score by department
+3. <strong>Bottom-left</strong>: Scatter of Experience vs Bonus Amount, coloured by Department
+4. <strong>Bottom-right</strong>: Heatmap of average salary by Department and Grade</p>
+<p>Add appropriate titles and axis labels.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Write your dashboard here</span>
+</code></pre></div>
+<hr />
+<h2 id="solutions">💡 Solutions</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 1: Invoice Outlier Analysis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># (Rebuild dataset if needed)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">300</span>
+<span class="n">invoice_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Amount&#39;</span><span class="p">:</span>   <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">exponential</span><span class="p">(</span><span class="mi">75000</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">600000</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+    <span class="s1">&#39;Category&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Materials&#39;</span><span class="p">,</span><span class="s1">&#39;Services&#39;</span><span class="p">,</span><span class="s1">&#39;Utilities&#39;</span><span class="p">,</span><span class="s1">&#39;Travel&#39;</span><span class="p">,</span><span class="s1">&#39;Misc&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.30</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.15</span><span class="p">,</span><span class="mf">0.20</span><span class="p">,</span><span class="mf">0.10</span><span class="p">]),</span>
+    <span class="s1">&#39;GST_Rate&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">]),</span>
+    <span class="s1">&#39;Status&#39;</span><span class="p">:</span>   <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Paid&#39;</span><span class="p">,</span><span class="s1">&#39;Pending&#39;</span><span class="p">,</span><span class="s1">&#39;Overdue&#39;</span><span class="p">],</span> <span class="n">m</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.10</span><span class="p">]),</span>
+<span class="p">})</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Box plot by GST rate</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoice_df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amounts by GST Rate Slab</span><span class="se">\n</span><span class="s1">(Red = Outliers)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;GST Rate (%)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">1000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">K&#39;</span><span class="p">))</span>
+
+<span class="c1"># Heatmap: Avg Amount by Category &amp; Status</span>
+<span class="n">pivot</span> <span class="o">=</span> <span class="n">invoice_df</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Amount&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Status&#39;</span><span class="p">,</span> <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">pivot</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;,.0f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Avg Invoice Amount (₹)&#39;</span><span class="p">})</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Avg Invoice Amount</span><span class="se">\n</span><span class="s1">by Category &amp; Status&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Identify outliers</span>
+<span class="n">Q1</span><span class="p">,</span> <span class="n">Q3</span> <span class="o">=</span> <span class="n">invoice_df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">])</span>
+<span class="n">IQR</span>    <span class="o">=</span> <span class="n">Q3</span> <span class="o">-</span> <span class="n">Q1</span>
+<span class="n">upper</span>  <span class="o">=</span> <span class="n">Q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">IQR</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">invoice_df</span><span class="p">[</span><span class="n">invoice_df</span><span class="p">[</span><span class="s1">&#39;Amount&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outlier threshold: ₹</span><span class="si">{</span><span class="n">upper</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outlier count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">invoice_df</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% of invoices)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total outlier value: ₹</span><span class="si">{</span><span class="n">outliers</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/2447621650.py:20: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=invoice_df, x=&#39;GST_Rate&#39;, y=&#39;Amount&#39;, palette=&#39;coolwarm&#39;, ax=axes[0],
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.draw()
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_35_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Outlier threshold: ₹231,375
+Outlier count: 11 (3.7% of invoices)
+Total outlier value: ₹3,075,000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Department-wise Dashboard</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="o">,</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Rebuild employees if needed (copy from data setup cell)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">departments</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Finance&#39;</span><span class="p">,</span><span class="s1">&#39;Operations&#39;</span><span class="p">,</span><span class="s1">&#39;Sales&#39;</span><span class="p">,</span><span class="s1">&#39;HR&#39;</span><span class="p">,</span><span class="s1">&#39;IT&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.20</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.30</span><span class="p">,</span><span class="mf">0.10</span><span class="p">,</span><span class="mf">0.15</span><span class="p">])</span>
+<span class="n">grades</span>      <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span><span class="s1">&#39;Mid&#39;</span><span class="p">,</span><span class="s1">&#39;Senior&#39;</span><span class="p">,</span><span class="s1">&#39;Lead&#39;</span><span class="p">],</span> <span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="p">[</span><span class="mf">0.35</span><span class="p">,</span><span class="mf">0.30</span><span class="p">,</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.10</span><span class="p">])</span>
+<span class="n">base_salary</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Junior&#39;</span><span class="p">:</span><span class="mi">480000</span><span class="p">,</span><span class="s1">&#39;Mid&#39;</span><span class="p">:</span><span class="mi">720000</span><span class="p">,</span><span class="s1">&#39;Senior&#39;</span><span class="p">:</span><span class="mi">1080000</span><span class="p">,</span><span class="s1">&#39;Lead&#39;</span><span class="p">:</span><span class="mi">1560000</span><span class="p">}</span>
+<span class="n">salaries</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">base_salary</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">])</span>
+<span class="n">experience</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([{</span><span class="s1">&#39;Junior&#39;</span><span class="p">:</span><span class="mf">1.5</span><span class="p">,</span><span class="s1">&#39;Mid&#39;</span><span class="p">:</span><span class="mf">4.0</span><span class="p">,</span><span class="s1">&#39;Senior&#39;</span><span class="p">:</span><span class="mf">8.0</span><span class="p">,</span><span class="s1">&#39;Lead&#39;</span><span class="p">:</span><span class="mf">12.0</span><span class="p">}[</span><span class="n">g</span><span class="p">]</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">grades</span><span class="p">])</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">performance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">3.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bonus_pct</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">performance</span><span class="o">*</span><span class="mf">2.5</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="n">n</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">bonus_amt</span>   <span class="o">=</span> <span class="n">salaries</span> <span class="o">*</span> <span class="n">bonus_pct</span> <span class="o">/</span> <span class="mi">100</span>
+<span class="n">employees</span>   <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Department&#39;</span><span class="p">:</span><span class="n">departments</span><span class="p">,</span><span class="s1">&#39;Grade&#39;</span><span class="p">:</span><span class="n">grades</span><span class="p">,</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">:</span><span class="n">salaries</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">),</span>
+                             <span class="s1">&#39;Experience&#39;</span><span class="p">:</span><span class="n">experience</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">:</span><span class="n">performance</span><span class="p">,</span>
+                             <span class="s1">&#39;Bonus_Pct&#39;</span><span class="p">:</span><span class="n">bonus_pct</span><span class="p">,</span><span class="s1">&#39;Bonus_Amt&#39;</span><span class="p">:</span><span class="n">bonus_amt</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)})</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;HR Dashboard — Department-wise Analysis&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># 1. Violin — salary by department</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">violinplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;pastel&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">inner</span><span class="o">=</span><span class="s1">&#39;quartile&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Salary Distribution by Department&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Annual CTC (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span><span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+
+<span class="c1"># 2. Bar — avg performance score by dept</span>
+<span class="n">dept_perf</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Department&#39;</span><span class="p">)[</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">dept_perf</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dept_perf</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s1">&#39;Greens_d&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">dept_perf</span><span class="p">)))</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Perf_Score&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Overall Avg&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Avg Performance Score by Department&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Performance Score&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+
+<span class="c1"># 3. Scatter — Experience vs Bonus</span>
+<span class="k">for</span> <span class="n">dept</span> <span class="ow">in</span> <span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Department&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">sub</span> <span class="o">=</span> <span class="n">employees</span><span class="p">[</span><span class="n">employees</span><span class="p">[</span><span class="s1">&#39;Department&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">dept</span><span class="p">]</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Experience&#39;</span><span class="p">],</span> <span class="n">sub</span><span class="p">[</span><span class="s1">&#39;Bonus_Amt&#39;</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">dept</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Experience vs Bonus Amount by Department&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Years of Experience&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Bonus Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">markerscale</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+
+<span class="c1"># 4. Heatmap — avg salary by Dept × Grade</span>
+<span class="n">heat_data</span> <span class="o">=</span> <span class="n">employees</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">values</span><span class="o">=</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="s1">&#39;Department&#39;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">&#39;Grade&#39;</span><span class="p">,</span>
+                                   <span class="n">columns_sort</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">aggfunc</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">reindex</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Junior&#39;</span><span class="p">,</span><span class="s1">&#39;Mid&#39;</span><span class="p">,</span><span class="s1">&#39;Senior&#39;</span><span class="p">,</span><span class="s1">&#39;Lead&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">100000</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">heat_data</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;YlOrRd&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Avg CTC (₹ Lakhs)&#39;</span><span class="p">},</span> <span class="n">linewidths</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Avg Salary (₹L) by Dept × Grade&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1449637435.py:23: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.violinplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;, palette=&#39;pastel&#39;, ax=axes[0,0], inner=&#39;quartile&#39;)
+
+
+
+---------------------------------------------------------------------------
+
+TypeError                                 Traceback (most recent call last)
+
+Cell In[21], line 48
+     45 axes[1,0].legend(fontsize=8, markerscale=1.5)
+     47 # 4. Heatmap — avg salary by Dept × Grade
+---&gt; 48 heat_data = employees.pivot_table(values=&#39;Annual_CTC&#39;, index=&#39;Department&#39;, columns=&#39;Grade&#39;,
+     49                                    columns_sort=False,
+     50                                    aggfunc=&#39;mean&#39;).reindex(columns=[&#39;Junior&#39;,&#39;Mid&#39;,&#39;Senior&#39;,&#39;Lead&#39;]) / 100000
+     51 sns.heatmap(heat_data.round(1), annot=True, fmt=&#39;.1f&#39;, cmap=&#39;YlOrRd&#39;, ax=axes[1,1],
+     52             cbar_kws={&#39;label&#39;: &#39;Avg CTC (₹ Lakhs)&#39;}, linewidths=0.5)
+     53 axes[1,1].set_title(&#39;Avg Salary (₹L) by Dept × Grade&#39;, fontweight=&#39;bold&#39;)
+
+
+TypeError: DataFrame.pivot_table() got an unexpected keyword argument &#39;columns_sort&#39;
+
+
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/events.py:82: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  func(*args, **kwargs)
+/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
+  fig.canvas.print_figure(bytes_io, **kw)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_36_3.png" /></p>
+<hr />
+<h1 id="module-5-complete-and-thats-the-full-series">🎉 Module 5 Complete — And That's the Full Series!</h1>
+<h2 id="what-youve-learned-in-this-module">What you've learned in this module</h2>
+<table>
+<thead>
+<tr>
+<th>Chart</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>histplot</code> / <code>kdeplot</code></td>
+<td>Distribution of invoices, salaries, returns</td>
+</tr>
+<tr>
+<td><code>boxplot</code></td>
+<td>Outlier detection, salary ranges, audit flags</td>
+</tr>
+<tr>
+<td><code>violinplot</code></td>
+<td>Distribution shape by category</td>
+</tr>
+<tr>
+<td><code>barplot</code></td>
+<td>Mean comparison with confidence intervals</td>
+</tr>
+<tr>
+<td><code>countplot</code></td>
+<td>Frequency analysis by category</td>
+</tr>
+<tr>
+<td><code>heatmap</code></td>
+<td>Correlation, monthly trends, segment × category analysis</td>
+</tr>
+<tr>
+<td><code>pairplot</code></td>
+<td>Multi-variable exploration in one chart</td>
+</tr>
+<tr>
+<td><code>regplot</code> / <code>lmplot</code></td>
+<td>Trend and regression by group</td>
+</tr>
+<tr>
+<td><code>FacetGrid</code></td>
+<td>Same chart repeated by category</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="full-course-summary">🏆 Full Course Summary</h2>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Library</th>
+<th>Key Skills</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Python</td>
+<td>Variables, data types, loops, functions</td>
+</tr>
+<tr>
+<td>2</td>
+<td>NumPy</td>
+<td>Arrays, vectorized math, NPV/IRR</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Pandas</td>
+<td>DataFrames, GroupBy, merge, Excel I/O</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Matplotlib</td>
+<td>Line, bar, pie, histogram, dashboard</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Seaborn</td>
+<td>Statistical charts, heatmaps, outlier detection</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="whats-next">What's Next?</h2>
+<ol>
+<li><strong>Real project</strong>: Apply these skills to your own firm's data</li>
+<li><strong>openpyxl / xlsxwriter</strong>: Create formatted Excel reports from Python</li>
+<li><strong>reportlab / fpdf</strong>: Generate professional PDF reports automatically</li>
+<li><strong>scikit-learn</strong>: Machine learning for fraud detection and risk scoring</li>
+<li><strong>Streamlit / Dash</strong>: Build interactive financial dashboards</li>
+</ol>
+<blockquote>
+<p><em>"Data is the new audit trail. Python is the new working paper."</em></p>
+</blockquote>
+<hr />
+<p><em>Python for CA Professionals — Module 5: Seaborn</em><br />
+<em>End of Introductory Series</em></p>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
