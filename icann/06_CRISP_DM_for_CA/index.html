@@ -677,7 +677,7 @@ Not "analyse sales data." Instead:<br />
 </tr>
 <tr>
 <td><strong>Why it matters</strong></td>
-<td>₹1.2 Cr currently overdue; cash flow pressure on payroll</td>
+<td>NPR 1.2 Cr currently overdue; cash flow pressure on payroll</td>
 </tr>
 <tr>
 <td><strong>Success Metric</strong></td>
@@ -741,7 +741,7 @@ Not "analyse sales data." Instead:<br />
 <p>Phase 2 is where you <strong>meet your data for the first time</strong>. Your job is to understand it deeply before touching it — like an auditor reading through a set of accounts before designing substantive tests.</p>
 <h3 id="four-activities-in-data-understanding">Four activities in Data Understanding</h3>
 <p><strong>1. Data Collection &amp; Inventory</strong>
-- What data sources exist? (ERP, CRM, Excel files, bank statements, GST portal exports)
+- What data sources exist? (ERP, CRM, Excel files, bank statements, IRD VAT portal exports)
 - What is the format? (CSV, Excel, SQL database, API)
 - What time period does it cover?
 - How was it collected? (Manual entry? Automated system? Both?)</p>
@@ -782,11 +782,11 @@ Not "analyse sales data." Instead:<br />
 - Missing values (cells not filled)
 - Errors (negative age, future invoice dates, duplicate records)
 - Inconsistencies (same client with 4 different name spellings)
-- Wrong types (amount stored as "₹1,20,000" text instead of a number)
+- Wrong types (amount stored as "NPR 1,20,000" text instead of a number)
 - Irrelevant columns (dozens of columns that add no predictive value)</p>
 <h3 id="the-five-tasks-of-data-preparation">The five tasks of Data Preparation</h3>
 <p><strong>1. Data Selection</strong>
-- Which rows do we need? (Only FY 2023-24? Only settled invoices?)
+- Which rows do we need? (Only FY 2080-81 BS? Only settled invoices?)
 - Which columns are relevant to the business question?
 - Remove columns with too many missing values or near-zero variance</p>
 <p><strong>2. Data Cleaning</strong>
@@ -893,7 +893,7 @@ Not "analyse sales data." Instead:<br />
 <tr>
 <td>Regression</td>
 <td>RMSE</td>
-<td>Average error in the predicted unit (₹)</td>
+<td>Average error in the predicted unit (NPR )</td>
 </tr>
 <tr>
 <td>Regression</td>
@@ -958,7 +958,7 @@ Not "analyse sales data." Instead:<br />
 <tbody>
 <tr>
 <td><strong>Automated report</strong></td>
-<td>Recurring analysis (monthly GSTR reconciliation, debtors ageing)</td>
+<td>Recurring analysis (monthly VAT Return reconciliation, debtors ageing)</td>
 <td>Python + openpyxl / reportlab</td>
 </tr>
 <tr>
@@ -1011,9 +1011,9 @@ Not "analyse sales data." Instead:<br />
 <h2 id="part-4-hands-on-case-study">Part 4: Hands-on Case Study</h2>
 <h2 id="section-11-the-business-problem-late-payment-prediction">Section 11: The Business Problem — Late Payment Prediction</h2>
 <h3 id="scenario">Scenario</h3>
-<p>You work in the finance team of <strong>Meridian Advisory Services Pvt Ltd</strong>, a mid-sized consulting firm with 320 active clients. The CFO has raised a concern:</p>
+<p>You work in the finance team of <strong>Himalayan Advisory Services Pvt Ltd</strong>, a mid-sized consulting firm with 320 active clients. The CFO has raised a concern:</p>
 <blockquote>
-<p><em>"We have ₹1.8 crores in receivables overdue beyond 60 days. I want to know BEFORE an invoice is due whether a client is likely to pay late — so we can follow up proactively."</em></p>
+<p><em>"We have NPR 1.8 crores in receivables overdue beyond 60 days. I want to know BEFORE an invoice is due whether a client is likely to pay late — so we can follow up proactively."</em></p>
 </blockquote>
 <h3 id="phase-1-business-understanding-completed">Phase 1 — Business Understanding (completed)</h3>
 <p>You have already had a 30-minute discussion with the CFO. Here is the Project Charter:</p>
@@ -1031,7 +1031,7 @@ Not "analyse sales data." Instead:<br />
 </tr>
 <tr>
 <td><strong>Why it matters</strong></td>
-<td>₹1.8 Cr overdue; working capital strain; payroll pressure</td>
+<td>NPR 22 million overdue; working capital strain; payroll pressure</td>
 </tr>
 <tr>
 <td><strong>Success Metric</strong></td>
@@ -1079,7 +1079,7 @@ Not "analyse sales data." Instead:<br />
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Analysis date: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> %B %Y&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Libraries ready.
-Analysis date: 27 April 2026
+Analysis date: 28 April 2026
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Build a realistic invoice / payment dataset ──────────────────────────────</span>
 <span class="c1"># Simulating 2 years of invoice history for 320 clients (800 invoices)</span>
@@ -1190,7 +1190,7 @@ On-time:      546 (68.2%)
 <span class="c1"># It should be the FIRST code cell in any analytics project.</span>
 
 <span class="n">PROJECT_CHARTER</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;project_name&#39;</span><span class="p">:</span>     <span class="s1">&#39;Late Payment Risk Scoring — Meridian Advisory Services&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;project_name&#39;</span><span class="p">:</span>     <span class="s1">&#39;Late Payment Risk Scoring — Himalayan Advisory Services&#39;</span><span class="p">,</span>
     <span class="s1">&#39;analyst&#39;</span><span class="p">:</span>          <span class="s1">&#39;Finance Analytics Team&#39;</span><span class="p">,</span>
     <span class="s1">&#39;date&#39;</span><span class="p">:</span>             <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> %B %Y&#39;</span><span class="p">),</span>
     <span class="s1">&#39;version&#39;</span><span class="p">:</span>          <span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
@@ -1201,7 +1201,7 @@ On-time:      546 (68.2%)
     <span class="p">),</span>
 
     <span class="s1">&#39;why_it_matters&#39;</span><span class="p">:</span> <span class="p">(</span>
-        <span class="s1">&#39;Rs 1.8 Crores overdue beyond 60 days. Working capital pressure &#39;</span>
+        <span class="s1">&#39;NPR 22 millionores overdue beyond 60 days. Working capital pressure &#39;</span>
         <span class="s1">&#39;affects payroll and vendor payments.&#39;</span>
     <span class="p">),</span>
 
@@ -1245,14 +1245,14 @@ On-time:      546 (68.2%)
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>=================================================================
-  PROJECT CHARTER: Late Payment Risk Scoring — Meridian Advisory Services
+  PROJECT CHARTER: Late Payment Risk Scoring — Himalayan Advisory Services
 =================================================================
 
 ANALYST:
   Finance Analytics Team
 
 DATE:
-  27 April 2026
+  28 April 2026
 
 VERSION:
   1.0
@@ -1261,7 +1261,7 @@ BUSINESS QUESTION:
   Which clients with open invoices are most likely to delay payment beyond 60 days, so that the collections team can prioritise follow-ups?
 
 WHY IT MATTERS:
-  Rs 1.8 Crores overdue beyond 60 days. Working capital pressure affects payroll and vendor payments.
+  NPR 22 millionores overdue beyond 60 days. Working capital pressure affects payroll and vendor payments.
 
 SUCCESS CRITERIA:
   [primary] Recall &gt;= 75% (catch at least 75% of actual late payers)
@@ -1332,7 +1332,7 @@ CONSTRAINTS:
 <div class="highlight"><pre><span></span><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DATA PROFILE REPORT
   Dataset: Invoice &amp; Payment History
-  Generated: 27 Apr 2026 22:31
+  Generated: 28 Apr 2026 07:41
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📐 DIMENSIONS
@@ -1464,7 +1464,7 @@ max        1321000.00    4884000.00          8.00             5.00        179.00
    Duplicate Invoice IDs: 0
 
 5. TIMELINESS
-   Most recent invoice: 2025-03-29 (394 days ago)
+   Most recent invoice: 2025-03-29 (395 days ago)
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 QUALITY ISSUES FOUND: 0
@@ -1480,11 +1480,11 @@ QUALITY ISSUES FOUND: 0
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="mi">100000</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
 <span class="n">median_amt</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span> <span class="o">/</span> <span class="mi">100000</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">median_amt</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
-                   <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median: ₹</span><span class="si">{</span><span class="n">median_amt</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+                   <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Median: NPR </span><span class="si">{</span><span class="n">median_amt</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># 2. Industry distribution</span>
@@ -1535,18 +1535,13 @@ QUALITY ISSUES FOUND: 0
 
 <span class="c1"># Key observations</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Key observations:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice amounts range: ₹</span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Invoice_Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L – ₹</span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Invoice_Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice amounts range: NPR </span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Invoice_Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L – NPR </span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Invoice_Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Class imbalance: </span><span class="si">{</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Is_Late&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">% late — model must handle this&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • </span><span class="si">{</span><span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Prev_Late_Count&quot;</span><span class="p">]</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">% of records have 3+ previous late payments — strong signal&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/1498040349.py:59: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_26_1.png" /></p>
+<p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_26_0.png" /></p>
 <div class="highlight"><pre><span></span><code>Key observations:
-  • Invoice amounts range: ₹0.3L – ₹13.2L
+  • Invoice amounts range: NPR 0.3L – NPR 13.2L
   • Class imbalance: 32% late — model must handle this
   • 21% of records have 3+ previous late payments — strong signal
 </code></pre></div>
@@ -1561,9 +1556,9 @@ QUALITY ISSUES FOUND: 0
 <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Is_Late&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;0&#39;</span><span class="p">:</span> <span class="s1">&#39;seagreen&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">:</span> <span class="s1">&#39;tomato&#39;</span><span class="p">},</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.45</span><span class="p">,</span> <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">))</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount by Payment Status&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;On Time&#39;</span><span class="p">,</span> <span class="s1">&#39;Late &gt;60d&#39;</span><span class="p">])</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR )&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">y</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;NPR </span><span class="si">{</span><span class="n">y</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">))</span>
 
 <span class="c1"># 2. Late rate by Industry</span>
 <span class="n">industry_late</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span>
@@ -1632,31 +1627,27 @@ QUALITY ISSUES FOUND: 0
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice/Credit ratio: late payers use a higher % of their credit limit&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice_Amount alone has weak correlation with Is_Late&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:7: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:7: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Amount&#39;, palette={&#39;0&#39;: &#39;seagreen&#39;, &#39;1&#39;: &#39;tomato&#39;}, ax=axes[0, 0], width=0.45, flierprops=dict(marker=&#39;o&#39;, markersize=3, alpha=0.4))
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:9: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:9: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[0, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:41: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:41: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.violinplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Tenure_Years&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:45: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:45: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[1, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:51: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:51: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Credit_Ratio&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83433/2803408673.py:56: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:56: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[1, 1].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.draw()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_28_1.png" /></p>
 <div class="highlight"><pre><span></span><code>Key findings from bivariate analysis:

@@ -51,7 +51,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#table-of-contents">📋 Table of Contents</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-18-gst-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-18-gst-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do mathematical operations on large datasets.Consider a real scenario: you have 10,000 invoice amounts and need to apply 18% GST to all of them.The Python list approach:- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 18% GST, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operationsThe NumPy approach:- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the entire block at once using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; "The difference is like processing salary slips one-by-one vs running a payroll batch."### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</a>
+    <li class="toctree-l2"><a class="reference internal" href="#section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-13-vat-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-13-vat-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do mathematical operations on large datasets.Consider a real scenario: you have 10,000 invoice amounts and need to apply 13% VAT to all of them.The Python list approach:- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 13% VAT, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operationsThe NumPy approach:- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the entire block at once using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; "The difference is like processing salary slips one-by-one vs running a payroll batch."### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#section-2-what-is-numpy-a-brief-historynumpy-numerical-python-was-created-by-travis-oliphant-in-2005-by-merging-two-earlier-libraries-numeric-and-numarray-it-has-since-become-the-foundation-of-virtually-every-scientific-and-financial-computing-tool-in-pythonpython-ecosystem-simplified-your-code-pandas-matplotlib-seaborn-scikit-learn-numpy-c-fortran-blas-lapackeverything-in-data-science-and-finance-analytics-sits-on-top-of-numpy-when-you-do-dfamount-118-in-pandas-pandas-calls-numpy-internally-where-numpy-fits-in-your-workflow-task-tool-clean-query-tabular-data-pandas-built-on-numpy-visualise-data-matplotlib-seaborn-built-on-numpy-statistical-modelling-scipy-built-on-numpy-machine-learning-scikit-learn-built-on-numpy-raw-numerical-computation-numpy-directly-portfolio-maths-npv-irr-numpy-directly-batch-calculations-on-arrays-numpy-directly-you-will-use-numpy-directly-for-financial-math-and-indirectly-through-pandas-for-data-analysis">Section 2: What is NumPy?### A brief historyNumPy (Numerical Python) was created by Travis Oliphant in 2005 by merging two earlier libraries — Numeric and Numarray. It has since become the foundation of virtually every scientific and financial computing tool in Python.Python Ecosystem (simplified)───────────────────────────────────────────────────── Your Code │ Pandas ──── Matplotlib ──── Seaborn ──── scikit-learn │ │ │ └──────── NumPy ──────────────────────────── │ C / Fortran (BLAS, LAPACK)─────────────────────────────────────────────────────Everything in data science and finance analytics sits on top of NumPy. When you do df['Amount'] * 1.18 in Pandas, Pandas calls NumPy internally.### Where NumPy fits in your workflow| Task | Tool ||------|------|| Clean &amp; query tabular data | Pandas (built on NumPy) || Visualise data | Matplotlib / Seaborn (built on NumPy) || Statistical modelling | SciPy (built on NumPy) || Machine learning | scikit-learn (built on NumPy) || Raw numerical computation | NumPy directly || Portfolio maths, NPV, IRR | NumPy directly || Batch calculations on arrays | NumPy directly |You will use NumPy directly for financial math, and indirectly through Pandas for data analysis.</a>
     </li>
@@ -240,8 +240,8 @@
 </table>
 <hr />
 <p>---## Part 1: Why NumPy?---</p>
-<h2 id="section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-18-gst-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-18-gst-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do <strong>mathematical operations on large datasets</strong>.Consider a real scenario: you have <strong>10,000 invoice amounts</strong> and need to apply 18% GST to all of them.<strong>The Python list approach:</strong>- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 18% GST, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operations<strong>The NumPy approach:</strong>- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the <strong>entire block at once</strong> using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; <em>"The difference is like processing salary slips one-by-one vs running a payroll batch."</em>### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="c1"># Compare: calculate GST on 100,000 invoicesn = 100_000amounts_list  = list(range(1000, n + 1000))   # Python listimport numpy as npamounts_array = np.arange(1000, n + 1000)      # NumPy array# Python list — needs a loopstart = time.time()gst_list = [x * 0.18 for x in amounts_list]time_list = time.time() - start# NumPy — no loop, vectorizedstart = time.time()gst_array = amounts_array * 0.18time_numpy = time.time() - startprint(f&#39;Dataset size:      {n:,} invoices&#39;)print(f&#39;Python list time:  {time_list*1000:.2f} ms&#39;)print(f&#39;NumPy array time:  {time_numpy*1000:.4f} ms&#39;)print(f&#39;NumPy is {time_list/time_numpy:.0f}× faster&#39;)print()print(&#39;Result check (first 5):&#39;)print(&#39;  List :&#39;, gst_list[:5])print(&#39;  NumPy:&#39;, gst_array[:5])</span>
+<h2 id="section-1-the-problem-with-plain-python-for-numbers-python-lists-are-general-purpose-and-thats-the-problempython-lists-are-incredibly-flexible-they-can-hold-strings-integers-floats-even-other-lists-all-in-the-same-list-but-that-flexibility-comes-at-a-cost-when-you-need-to-do-mathematical-operations-on-large-datasetsconsider-a-real-scenario-you-have-10000-invoice-amounts-and-need-to-apply-13-vat-to-all-of-themthe-python-list-approach-python-stores-each-number-as-a-full-python-object-with-type-info-reference-counts-etc-each-object-sits-at-a-different-memory-location-to-add-13-vat-python-must-loop-through-each-element-one-by-one-for-10000-invoices-10000-separate-operationsthe-numpy-approach-numbers-are-stored-as-raw-c-level-data-in-a-single-contiguous-block-of-memory-operations-apply-to-the-entire-block-at-once-using-optimised-cfortran-code-for-10000-invoices-1-operation-the-difference-is-like-processing-salary-slips-one-by-one-vs-running-a-payroll-batch-why-does-this-matter-for-ca-professionals-scenario-records-python-list-numpy-array-gst-on-invoices-10000-50-ms-01-ms-500-faster-payroll-calculations-50000-250-ms-05-ms-stock-return-analysis-1000000-5-sec-10-ms-trial-balance-ratios-500-accounts-instant-instant-the-gap-widens-dramatically-as-data-grows-this-is-why-every-serious-financial-analytics-tool-is-built-on-numpy">Section 1: The Problem with Plain Python for Numbers### Python lists are general-purpose — and that's the problemPython lists are incredibly flexible. They can hold strings, integers, floats, even other lists — all in the same list. But that flexibility comes at a cost when you need to do <strong>mathematical operations on large datasets</strong>.Consider a real scenario: you have <strong>10,000 invoice amounts</strong> and need to apply 13% VAT to all of them.<strong>The Python list approach:</strong>- Python stores each number as a full Python object (with type info, reference counts, etc.)- Each object sits at a different memory location- To add 13% VAT, Python must loop through each element one-by-one- For 10,000 invoices → 10,000 separate operations<strong>The NumPy approach:</strong>- Numbers are stored as raw C-level data in a single contiguous block of memory- Operations apply to the <strong>entire block at once</strong> using optimised C/Fortran code- For 10,000 invoices → 1 operation&gt; <em>"The difference is like processing salary slips one-by-one vs running a payroll batch."</em>### Why does this matter for CA professionals?| Scenario | Records | Python List | NumPy Array ||----------|---------|-------------|-------------|| GST on invoices | 10,000 | ~50 ms | ~0.1 ms (500× faster) || Payroll calculations | 50,000 | ~250 ms | ~0.5 ms || Stock return analysis | 1,000,000 | ~5 sec | ~10 ms || Trial balance ratios | 500 accounts | instant | instant |The gap widens dramatically as data grows. This is why every serious financial analytics tool is built on NumPy.</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">time</span><span class="c1"># Compare: calculate GST on 100,000 invoicesn = 100_000amounts_list  = list(range(1000, n + 1000))   # Python listimport numpy as npamounts_array = np.arange(1000, n + 1000)      # NumPy array# Python list — needs a loopstart = time.time()gst_list = [x * 0.13 for x in amounts_list]time_list = time.time() - start# NumPy — no loop, vectorizedstart = time.time()vat_array = amounts_array * 0.13time_numpy = time.time() - startprint(f&#39;Dataset size:      {n:,} invoices&#39;)print(f&#39;Python list time:  {time_list*1000:.2f} ms&#39;)print(f&#39;NumPy array time:  {time_numpy*1000:.4f} ms&#39;)print(f&#39;NumPy is {time_list/time_numpy:.0f}× faster&#39;)print()print(&#39;Result check (first 5):&#39;)print(&#39;  List :&#39;, gst_list[:5])print(&#39;  NumPy:&#39;, vat_array[:5])</span>
 </code></pre></div>
 <h2 id="section-2-what-is-numpy-a-brief-historynumpy-numerical-python-was-created-by-travis-oliphant-in-2005-by-merging-two-earlier-libraries-numeric-and-numarray-it-has-since-become-the-foundation-of-virtually-every-scientific-and-financial-computing-tool-in-pythonpython-ecosystem-simplified-your-code-pandas-matplotlib-seaborn-scikit-learn-numpy-c-fortran-blas-lapackeverything-in-data-science-and-finance-analytics-sits-on-top-of-numpy-when-you-do-dfamount-118-in-pandas-pandas-calls-numpy-internally-where-numpy-fits-in-your-workflow-task-tool-clean-query-tabular-data-pandas-built-on-numpy-visualise-data-matplotlib-seaborn-built-on-numpy-statistical-modelling-scipy-built-on-numpy-machine-learning-scikit-learn-built-on-numpy-raw-numerical-computation-numpy-directly-portfolio-maths-npv-irr-numpy-directly-batch-calculations-on-arrays-numpy-directly-you-will-use-numpy-directly-for-financial-math-and-indirectly-through-pandas-for-data-analysis">Section 2: What is NumPy?### A brief historyNumPy (<strong>Num</strong>erical <strong>Py</strong>thon) was created by <strong>Travis Oliphant</strong> in 2005 by merging two earlier libraries — <code>Numeric</code> and <code>Numarray</code>. It has since become the <strong>foundation of virtually every scientific and financial computing tool in Python</strong>.<code>Python Ecosystem (simplified)─────────────────────────────────────────────────────  Your Code      │  Pandas ──── Matplotlib ──── Seaborn ──── scikit-learn      │              │                          │      └──────── NumPy ────────────────────────────                    │              C / Fortran (BLAS, LAPACK)─────────────────────────────────────────────────────</code>Everything in data science and finance analytics sits on top of NumPy. When you do <code>df['Amount'] * 1.18</code> in Pandas, Pandas calls NumPy internally.### Where NumPy fits in your workflow| Task | Tool ||------|------|| Clean &amp; query tabular data | Pandas (built on NumPy) || Visualise data | Matplotlib / Seaborn (built on NumPy) || Statistical modelling | SciPy (built on NumPy) || Machine learning | scikit-learn (built on NumPy) || <strong>Raw numerical computation</strong> | <strong>NumPy directly</strong> || Portfolio maths, NPV, IRR | NumPy directly || Batch calculations on arrays | NumPy directly |You will use NumPy directly for financial math, and indirectly through Pandas for data analysis.</h2>
 <p>---## Part 2: NumPy Fundamentals---</p>
@@ -299,9 +299,8 @@ Number of invoices: 7
 Months: [ 1  2  3  4  5  6  7  8  9 10 11 12]
 Interest rate range: [ 6.   7.5  9.  10.5 12. ] %
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># Monthly revenue data for FY 2024-25 (April to March)</span>
-<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># Monthly revenue data for FY 2081-82 BS (April to March)</span>
+<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Shrawan&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhadra&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashwin&#39;</span><span class="p">,</span> <span class="s1">&#39;Kartik&#39;</span><span class="p">,</span> <span class="s1">&#39;Mangsir&#39;</span><span class="p">,</span> <span class="s1">&#39;Poush&#39;</span><span class="p">,</span> <span class="s1">&#39;Magh&#39;</span><span class="p">,</span> <span class="s1">&#39;Falgun&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaitra&#39;</span><span class="p">,</span> <span class="s1">&#39;Baishakh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jestha&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashadh&#39;</span><span class="p">]</span>
 
 <span class="n">monthly_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
     <span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
@@ -326,21 +325,21 @@ With NumPy arrays, operations happen on <strong>the entire array at once</strong
 <span class="n">amounts_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">82000</span><span class="p">,</span> <span class="mi">31500</span><span class="p">,</span> <span class="mi">97000</span><span class="p">,</span> <span class="mi">54000</span><span class="p">]</span>
 <span class="n">gst_list</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">amount</span> <span class="ow">in</span> <span class="n">amounts_list</span><span class="p">:</span>
-    <span class="n">gst_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mf">0.18</span><span class="p">)</span>
+    <span class="n">gst_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">amount</span> <span class="o">*</span> <span class="mf">0.13</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GST (list method):&#39;</span><span class="p">,</span> <span class="n">gst_list</span><span class="p">)</span>
 
 <span class="c1"># NumPy array — same operation, NO loop needed!</span>
 <span class="n">amounts_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">82000</span><span class="p">,</span> <span class="mi">31500</span><span class="p">,</span> <span class="mi">97000</span><span class="p">,</span> <span class="mi">54000</span><span class="p">])</span>
-<span class="n">gst_array</span> <span class="o">=</span> <span class="n">amounts_array</span> <span class="o">*</span> <span class="mf">0.18</span>    <span class="c1"># Applies to ALL elements at once</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GST (NumPy method):&#39;</span><span class="p">,</span> <span class="n">gst_array</span><span class="p">)</span>
+<span class="n">vat_array</span> <span class="o">=</span> <span class="n">amounts_array</span> <span class="o">*</span> <span class="mf">0.13</span>    <span class="c1"># Applies to ALL elements at once</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GST (NumPy method):&#39;</span><span class="p">,</span> <span class="n">vat_array</span><span class="p">)</span>
 
 <span class="c1"># With NumPy you can also do element-wise operations between two arrays</span>
-<span class="n">total_with_gst</span> <span class="o">=</span> <span class="n">amounts_array</span> <span class="o">+</span> <span class="n">gst_array</span>
+<span class="n">total_with_gst</span> <span class="o">=</span> <span class="n">amounts_array</span> <span class="o">+</span> <span class="n">vat_array</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total with GST:&#39;</span><span class="p">,</span> <span class="n">total_with_gst</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>GST (list method): [8100.0, 14760.0, 5670.0, 17460.0, 9720.0]
-GST (NumPy method): [ 8100. 14760.  5670. 17460.  9720.]
-Total with GST: [ 53100.  96760.  37170. 114460.  63720.]
+<div class="highlight"><pre><span></span><code>GST (list method): [5850.0, 10660.0, 4095.0, 12610.0, 7020.0]
+GST (NumPy method): [ 5850. 10660.  4095. 12610.  7020.]
+Total with GST: [ 50850.  92660.  35595. 109610.  61020.]
 </code></pre></div>
 <h2 id="section-9-array-operations-vectorized-financial-math">Section 9: Array Operations — Vectorized Financial Math</h2>
 <p>With NumPy, you can do <strong>arithmetic on entire columns of data</strong> without writing a single loop.<br />
@@ -355,34 +354,33 @@ This is called <strong>vectorization</strong> — operations are applied element
     <span class="mi">1100000</span><span class="p">,</span> <span class="mi">1020000</span><span class="p">,</span> <span class="mi">1190000</span><span class="p">,</span> <span class="mi">1320000</span><span class="p">,</span> <span class="mi">1410000</span><span class="p">,</span> <span class="mi">1490000</span>
 <span class="p">])</span>
 
-<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Shrawan&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhadra&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashwin&#39;</span><span class="p">,</span> <span class="s1">&#39;Kartik&#39;</span><span class="p">,</span> <span class="s1">&#39;Mangsir&#39;</span><span class="p">,</span> <span class="s1">&#39;Poush&#39;</span><span class="p">,</span> <span class="s1">&#39;Magh&#39;</span><span class="p">,</span> <span class="s1">&#39;Falgun&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaitra&#39;</span><span class="p">,</span> <span class="s1">&#39;Baishakh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jestha&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashadh&#39;</span><span class="p">]</span>
 
 <span class="c1"># All these are vectorized — no loop needed!</span>
 <span class="n">monthly_profit</span> <span class="o">=</span> <span class="n">monthly_revenue</span> <span class="o">-</span> <span class="n">monthly_expenses</span>
 <span class="n">profit_margin</span>  <span class="o">=</span> <span class="p">(</span><span class="n">monthly_profit</span> <span class="o">/</span> <span class="n">monthly_revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">gst_collected</span>  <span class="o">=</span> <span class="n">monthly_revenue</span> <span class="o">*</span> <span class="mf">0.18</span>
+<span class="n">gst_collected</span>  <span class="o">=</span> <span class="n">monthly_revenue</span> <span class="o">*</span> <span class="mf">0.13</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Month&#39;</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Revenue&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Expenses&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Profit&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Margin&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">54</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">month_names</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">monthly_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">monthly_expenses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> &quot;</span>
-          <span class="sa">f</span><span class="s2">&quot;₹</span><span class="si">{</span><span class="n">monthly_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">profit_margin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">monthly_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">monthly_expenses</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;NPR </span><span class="si">{</span><span class="n">monthly_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">profit_margin</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Month       Revenue     Expenses       Profit   Margin
 ------------------------------------------------------
-Apr    ₹ 1,250,000 ₹   920,000 ₹   330,000    26.4%
-May    ₹ 1,380,000 ₹   980,000 ₹   400,000    29.0%
-Jun    ₹ 1,120,000 ₹   870,000 ₹   250,000    22.3%
-Jul    ₹ 1,450,000 ₹ 1,050,000 ₹   400,000    27.6%
-Aug    ₹ 1,620,000 ₹ 1,180,000 ₹   440,000    27.2%
-Sep    ₹ 1,780,000 ₹ 1,250,000 ₹   530,000    29.8%
-Oct    ₹ 1,550,000 ₹ 1,100,000 ₹   450,000    29.0%
-Nov    ₹ 1,420,000 ₹ 1,020,000 ₹   400,000    28.2%
-Dec    ₹ 1,680,000 ₹ 1,190,000 ₹   490,000    29.2%
-Jan    ₹ 1,910,000 ₹ 1,320,000 ₹   590,000    30.9%
-Feb    ₹ 2,030,000 ₹ 1,410,000 ₹   620,000    30.5%
-Mar    ₹ 2,150,000 ₹ 1,490,000 ₹   660,000    30.7%
+Shrawan NPR  1,250,000 NPR    920,000 NPR    330,000    26.4%
+Bhadra NPR  1,380,000 NPR    980,000 NPR    400,000    29.0%
+Ashwin NPR  1,120,000 NPR    870,000 NPR    250,000    22.3%
+Kartik NPR  1,450,000 NPR  1,050,000 NPR    400,000    27.6%
+Mangsir NPR  1,620,000 NPR  1,180,000 NPR    440,000    27.2%
+Poush  NPR  1,780,000 NPR  1,250,000 NPR    530,000    29.8%
+Magh   NPR  1,550,000 NPR  1,100,000 NPR    450,000    29.0%
+Falgun NPR  1,420,000 NPR  1,020,000 NPR    400,000    28.2%
+Chaitra NPR  1,680,000 NPR  1,190,000 NPR    490,000    29.2%
+Baishakh NPR  1,910,000 NPR  1,320,000 NPR    590,000    30.9%
+Jestha NPR  2,030,000 NPR  1,410,000 NPR    620,000    30.5%
+Ashadh NPR  2,150,000 NPR  1,490,000 NPR    660,000    30.7%
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Year-on-year growth calculation</span>
 <span class="n">fy2024_revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">980000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">890000</span><span class="p">,</span> <span class="mi">1100000</span><span class="p">,</span> <span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span>
@@ -393,31 +391,30 @@ Mar    ₹ 2,150,000 ₹ 1,490,000 ₹   660,000    30.7%
 <span class="c1"># Growth rate — calculated for ALL 12 months at once</span>
 <span class="n">growth_pct</span> <span class="o">=</span> <span class="p">((</span><span class="n">fy2025_revenue</span> <span class="o">-</span> <span class="n">fy2024_revenue</span><span class="p">)</span> <span class="o">/</span> <span class="n">fy2024_revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
-<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Shrawan&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhadra&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashwin&#39;</span><span class="p">,</span> <span class="s1">&#39;Kartik&#39;</span><span class="p">,</span> <span class="s1">&#39;Mangsir&#39;</span><span class="p">,</span> <span class="s1">&#39;Poush&#39;</span><span class="p">,</span> <span class="s1">&#39;Magh&#39;</span><span class="p">,</span> <span class="s1">&#39;Falgun&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaitra&#39;</span><span class="p">,</span> <span class="s1">&#39;Baishakh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jestha&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashadh&#39;</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Month-wise Year-on-Year Revenue Growth&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Month&#39;</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;FY24&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;FY25&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Growth&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Month&#39;</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;FY 2081 BS&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;FY 2082 BS&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Growth&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">42</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">month_names</span><span class="p">):</span>
     <span class="n">arrow</span> <span class="o">=</span> <span class="s1">&#39;↑&#39;</span> <span class="k">if</span> <span class="n">growth_pct</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;↓&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">fy2024_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">fy2025_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">arrow</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">growth_pct</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s2">&gt;6.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">fy2024_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">fy2025_revenue</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">arrow</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">growth_pct</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s2">&gt;6.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Month-wise Year-on-Year Revenue Growth
-Month          FY24         FY25   Growth
+Month    FY 2081 BS   FY 2082 BS   Growth
 ------------------------------------------
-Apr    ₹   980,000 ₹ 1,250,000 ↑  27.6%
-May    ₹ 1,050,000 ₹ 1,380,000 ↑  31.4%
-Jun    ₹   890,000 ₹ 1,120,000 ↑  25.8%
-Jul    ₹ 1,100,000 ₹ 1,450,000 ↑  31.8%
-Aug    ₹ 1,250,000 ₹ 1,620,000 ↑  29.6%
-Sep    ₹ 1,380,000 ₹ 1,780,000 ↑  29.0%
-Oct    ₹ 1,200,000 ₹ 1,550,000 ↑  29.2%
-Nov    ₹ 1,100,000 ₹ 1,420,000 ↑  29.1%
-Dec    ₹ 1,350,000 ₹ 1,680,000 ↑  24.4%
-Jan    ₹ 1,560,000 ₹ 1,910,000 ↑  22.4%
-Feb    ₹ 1,700,000 ₹ 2,030,000 ↑  19.4%
-Mar    ₹ 1,820,000 ₹ 2,150,000 ↑  18.1%
+Shrawan NPR    980,000 NPR  1,250,000 ↑  27.6%
+Bhadra NPR  1,050,000 NPR  1,380,000 ↑  31.4%
+Ashwin NPR    890,000 NPR  1,120,000 ↑  25.8%
+Kartik NPR  1,100,000 NPR  1,450,000 ↑  31.8%
+Mangsir NPR  1,250,000 NPR  1,620,000 ↑  29.6%
+Poush  NPR  1,380,000 NPR  1,780,000 ↑  29.0%
+Magh   NPR  1,200,000 NPR  1,550,000 ↑  29.2%
+Falgun NPR  1,100,000 NPR  1,420,000 ↑  29.1%
+Chaitra NPR  1,350,000 NPR  1,680,000 ↑  24.4%
+Baishakh NPR  1,560,000 NPR  1,910,000 ↑  22.4%
+Jestha NPR  1,700,000 NPR  2,030,000 ↑  19.4%
+Ashadh NPR  1,820,000 NPR  2,150,000 ↑  18.1%
 </code></pre></div>
 <h2 id="section-10-array-indexing-slicing">Section 10: Array Indexing &amp; Slicing</h2>
 <p>Accessing specific elements or ranges from a NumPy array — same logic as Python lists, but more powerful.</p>
@@ -429,9 +426,9 @@ Mar    ₹ 1,820,000 ₹ 2,150,000 ↑  18.1%
 <span class="c1">#              6        7        8        9       10       11</span>
 
 <span class="c1"># Single element</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;April revenue:     ₹&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># First month</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;March revenue:     ₹&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Last month</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;December revenue:  ₹&#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>    <span class="c1"># 9th element (index 8)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;April revenue:     NPR &#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>    <span class="c1"># First month</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;March revenue:     NPR &#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>   <span class="c1"># Last month</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;December revenue:  NPR &#39;</span><span class="p">,</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">8</span><span class="p">])</span>    <span class="c1"># 9th element (index 8)</span>
 
 <span class="c1"># Slicing — ranges</span>
 <span class="n">q1</span> <span class="o">=</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>   <span class="c1"># Apr, May, Jun (Q1)</span>
@@ -440,20 +437,20 @@ Mar    ₹ 1,820,000 ₹ 2,150,000 ↑  18.1%
 <span class="n">q4</span> <span class="o">=</span> <span class="n">monthly_revenue</span><span class="p">[</span><span class="mi">9</span><span class="p">:]</span>    <span class="c1"># Jan, Feb, Mar (Q4)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Quarterly Revenue:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q1 (Apr-Jun): ₹</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q2 (Jul-Sep): ₹</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q3 (Oct-Dec): ₹</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q4 (Jan-Mar): ₹</span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q1 (Apr-Jun): NPR </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q2 (Jul-Sep): NPR </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q2</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q3 (Oct-Dec): NPR </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q3</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Q4 (Jan-Mar): NPR </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>April revenue:     ₹ 1250000
-March revenue:     ₹ 2150000
-December revenue:  ₹ 1680000
+<div class="highlight"><pre><span></span><code>April revenue:     NPR  1250000
+March revenue:     NPR  2150000
+December revenue:  NPR  1680000
 
 Quarterly Revenue:
-Q1 (Apr-Jun): ₹3,750,000
-Q2 (Jul-Sep): ₹4,850,000
-Q3 (Oct-Dec): ₹4,650,000
-Q4 (Jan-Mar): ₹6,090,000
+Q1 (Apr-Jun): NPR 3,750,000
+Q2 (Jul-Sep): NPR 4,850,000
+Q3 (Oct-Dec): NPR 4,650,000
+Q4 (Jan-Mar): NPR 6,090,000
 </code></pre></div>
 <h2 id="section-11-statistical-functions">Section 11: Statistical Functions</h2>
 <p>NumPy has built-in functions for all common statistical measures — essential for financial analysis.</p>
@@ -462,14 +459,14 @@ Q4 (Jan-Mar): ₹6,090,000
     <span class="mi">1550000</span><span class="p">,</span> <span class="mi">1420000</span><span class="p">,</span> <span class="mi">1680000</span><span class="p">,</span> <span class="mi">1910000</span><span class="p">,</span> <span class="mi">2030000</span><span class="p">,</span> <span class="mi">2150000</span>
 <span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Revenue Statistical Summary (FY 2024-25) ===&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total Annual Revenue:   ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Average Monthly:        ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Median Monthly:         ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best Month:             ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Worst Month:            ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Std Deviation:          ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variance:               ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=== Revenue Statistical Summary (FY 2081-82 BS) ===&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total Annual Revenue:   NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Average Monthly:        NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Median Monthly:         NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best Month:             NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Worst Month:            NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Std Deviation:          NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Variance:               NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Best month index:       Month </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1"> (March)&#39;</span><span class="p">)</span>  
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Worst month index:      Month </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s1"> (June)&#39;</span><span class="p">)</span>
@@ -477,31 +474,30 @@ Q4 (Jan-Mar): ₹6,090,000
 <span class="c1"># Percentile — useful for bonus calculations or risk thresholds</span>
 <span class="n">p25</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
 <span class="n">p75</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">monthly_revenue</span><span class="p">,</span> <span class="mi">75</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">25th Percentile:        ₹</span><span class="si">{</span><span class="n">p25</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;75th Percentile:        ₹</span><span class="si">{</span><span class="n">p75</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Interquartile Range:    ₹</span><span class="si">{</span><span class="n">p75</span><span class="o">-</span><span class="n">p25</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">  (measure of spread)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">25th Percentile:        NPR </span><span class="si">{</span><span class="n">p25</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;75th Percentile:        NPR </span><span class="si">{</span><span class="n">p75</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Interquartile Range:    NPR </span><span class="si">{</span><span class="n">p75</span><span class="o">-</span><span class="n">p25</span><span class="si">:</span><span class="s1">&gt;15,.2f</span><span class="si">}</span><span class="s1">  (measure of spread)&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>=== Revenue Statistical Summary (FY 2024-25) ===
-Total Annual Revenue:   ₹     19,340,000
-Average Monthly:        ₹   1,611,666.67
-Median Monthly:         ₹   1,585,000.00
-Best Month:             ₹      2,150,000
-Worst Month:            ₹      1,120,000
-Std Deviation:          ₹     299,967.59
-Variance:               ₹89,980,555,555.56
+<div class="highlight"><pre><span></span><code>=== Revenue Statistical Summary (FY 2081-82 BS) ===
+Total Annual Revenue:   NPR      19,340,000
+Average Monthly:        NPR    1,611,666.67
+Median Monthly:         NPR    1,585,000.00
+Best Month:             NPR       2,150,000
+Worst Month:            NPR       1,120,000
+Std Deviation:          NPR      299,967.59
+Variance:               NPR 89,980,555,555.56
 
 Best month index:       Month 12 (March)
 Worst month index:      Month 3 (June)
 
-25th Percentile:        ₹   1,410,000.00
-75th Percentile:        ₹   1,812,500.00
-Interquartile Range:    ₹     402,500.00  (measure of spread)
+25th Percentile:        NPR    1,410,000.00
+75th Percentile:        NPR    1,812,500.00
+Interquartile Range:    NPR      402,500.00  (measure of spread)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cumulative sum — like a running total in a ledger</span>
 <span class="n">monthly_profit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">330000</span><span class="p">,</span> <span class="mi">400000</span><span class="p">,</span> <span class="mi">250000</span><span class="p">,</span> <span class="mi">400000</span><span class="p">,</span> <span class="mi">440000</span><span class="p">,</span> <span class="mi">530000</span><span class="p">,</span>
                            <span class="mi">450000</span><span class="p">,</span> <span class="mi">400000</span><span class="p">,</span> <span class="mi">490000</span><span class="p">,</span> <span class="mi">590000</span><span class="p">,</span> <span class="mi">620000</span><span class="p">,</span> <span class="mi">660000</span><span class="p">])</span>
-<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
-               <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Shrawan&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhadra&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashwin&#39;</span><span class="p">,</span> <span class="s1">&#39;Kartik&#39;</span><span class="p">,</span> <span class="s1">&#39;Mangsir&#39;</span><span class="p">,</span> <span class="s1">&#39;Poush&#39;</span><span class="p">,</span> <span class="s1">&#39;Magh&#39;</span><span class="p">,</span> <span class="s1">&#39;Falgun&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaitra&#39;</span><span class="p">,</span> <span class="s1">&#39;Baishakh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jestha&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashadh&#39;</span><span class="p">]</span>
 
 <span class="n">cumulative_profit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">monthly_profit</span><span class="p">)</span>   <span class="c1"># Running total</span>
 
@@ -509,23 +505,23 @@ Interquartile Range:    ₹     402,500.00  (measure of spread)
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Month&#39;</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Monthly Profit&#39;</span><span class="si">:</span><span class="s2">&gt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Cumulative&#39;</span><span class="si">:</span><span class="s2">&gt;15</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">38</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">month_names</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">monthly_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;13,</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">cumulative_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;13,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">monthly_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;13,</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">cumulative_profit</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;13,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Month-wise Cumulative Profit
 Month  Monthly Profit      Cumulative
 --------------------------------------
-Apr   ₹      330,000 ₹      330,000
-May   ₹      400,000 ₹      730,000
-Jun   ₹      250,000 ₹      980,000
-Jul   ₹      400,000 ₹    1,380,000
-Aug   ₹      440,000 ₹    1,820,000
-Sep   ₹      530,000 ₹    2,350,000
-Oct   ₹      450,000 ₹    2,800,000
-Nov   ₹      400,000 ₹    3,200,000
-Dec   ₹      490,000 ₹    3,690,000
-Jan   ₹      590,000 ₹    4,280,000
-Feb   ₹      620,000 ₹    4,900,000
-Mar   ₹      660,000 ₹    5,560,000
+Shrawan NPR       330,000 NPR       330,000
+Bhadra NPR       400,000 NPR       730,000
+Ashwin NPR       250,000 NPR       980,000
+Kartik NPR       400,000 NPR     1,380,000
+Mangsir NPR       440,000 NPR     1,820,000
+Poush NPR       530,000 NPR     2,350,000
+Magh  NPR       450,000 NPR     2,800,000
+Falgun NPR       400,000 NPR     3,200,000
+Chaitra NPR       490,000 NPR     3,690,000
+Baishakh NPR       590,000 NPR     4,280,000
+Jestha NPR       620,000 NPR     4,900,000
+Ashadh NPR       660,000 NPR     5,560,000
 </code></pre></div>
 <h2 id="section-12-boolean-indexing-filtering-transactions">Section 12: Boolean Indexing — Filtering Transactions</h2>
 <p>One of NumPy's most powerful features — filter data using conditions, without writing a loop.<br />
@@ -540,12 +536,12 @@ This is like <strong>AutoFilter in Excel</strong>, but applied instantly to mill
 
 <span class="c1"># Apply mask to get only high-value invoices</span>
 <span class="n">high_value_invoices</span> <span class="o">=</span> <span class="n">invoice_amounts</span><span class="p">[</span><span class="n">high_value_mask</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;High value invoices (&gt;₹1L):&#39;</span><span class="p">,</span> <span class="n">high_value_invoices</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;High value invoices (&gt;NPR 1L):&#39;</span><span class="p">,</span> <span class="n">high_value_invoices</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Count:&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">high_value_invoices</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Total:&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">high_value_invoices</span><span class="p">))</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>High value mask: [False  True False False  True False  True False  True False False  True]
-High value invoices (&gt;₹1L): [182000 254000 320000 145000 410000]
+High value invoices (&gt;NPR 1L): [182000 254000 320000 145000 410000]
 Count: 5
 Total: 1311000
 </code></pre></div>
@@ -555,34 +551,34 @@ Total: 1311000
 
 <span class="c1"># Invoices in a specific range (like a tax audit threshold)</span>
 <span class="n">audit_sample</span> <span class="o">=</span> <span class="n">invoice_amounts</span><span class="p">[(</span><span class="n">invoice_amounts</span> <span class="o">&gt;=</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">invoice_amounts</span> <span class="o">&lt;=</span> <span class="mi">200000</span><span class="p">)]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Audit sample (₹50K to ₹2L):&#39;</span><span class="p">,</span> <span class="n">audit_sample</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Audit sample (NPR 50K to NPR 2L):&#39;</span><span class="p">,</span> <span class="n">audit_sample</span><span class="p">)</span>
 
 <span class="c1"># Invoices below threshold — possible small cash transactions</span>
 <span class="n">small_transactions</span> <span class="o">=</span> <span class="n">invoice_amounts</span><span class="p">[</span><span class="n">invoice_amounts</span> <span class="o">&lt;</span> <span class="mi">20000</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Small transactions (&lt;₹20K):&#39;</span><span class="p">,</span> <span class="n">small_transactions</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Small transactions (&lt;NPR 20K):&#39;</span><span class="p">,</span> <span class="n">small_transactions</span><span class="p">)</span>
 
 <span class="c1"># np.where() — like Excel&#39;s IF function — returns values based on condition</span>
 <span class="n">risk_flag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">invoice_amounts</span> <span class="o">&gt;</span> <span class="mi">200000</span><span class="p">,</span> <span class="s1">&#39;HIGH RISK&#39;</span><span class="p">,</span> <span class="s1">&#39;Normal&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Risk Classification:&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">amt</span><span class="p">,</span> <span class="n">risk</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">,</span> <span class="n">risk_flag</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  ₹</span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">&gt;8,</span><span class="si">}</span><span class="s1">  →  </span><span class="si">{</span><span class="n">risk</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  NPR </span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">&gt;8,</span><span class="si">}</span><span class="s1">  →  </span><span class="si">{</span><span class="n">risk</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Audit sample (₹50K to ₹2L): [182000  97000  67000 145000  88000]
-Small transactions (&lt;₹20K): [18000  9500]
+<div class="highlight"><pre><span></span><code>Audit sample (NPR 50K to NPR 2L): [182000  97000  67000 145000  88000]
+Small transactions (&lt;NPR 20K): [18000  9500]
 
 Risk Classification:
-  ₹  45,000  →  Normal
-  ₹ 182,000  →  Normal
-  ₹  31,500  →  Normal
-  ₹  97,000  →  Normal
-  ₹ 254,000  →  HIGH RISK
-  ₹  18,000  →  Normal
-  ₹ 320,000  →  HIGH RISK
-  ₹  67,000  →  Normal
-  ₹ 145,000  →  Normal
-  ₹   9,500  →  Normal
-  ₹  88,000  →  Normal
-  ₹ 410,000  →  HIGH RISK
+  NPR   45,000  →  Normal
+  NPR  182,000  →  Normal
+  NPR   31,500  →  Normal
+  NPR   97,000  →  Normal
+  NPR  254,000  →  HIGH RISK
+  NPR   18,000  →  Normal
+  NPR  320,000  →  HIGH RISK
+  NPR   67,000  →  Normal
+  NPR  145,000  →  Normal
+  NPR    9,500  →  Normal
+  NPR   88,000  →  Normal
+  NPR  410,000  →  HIGH RISK
 </code></pre></div>
 <h2 id="section-13-2d-arrays-financial-matrices">Section 13: 2D Arrays — Financial Matrices</h2>
 <p>NumPy arrays can be <strong>2-dimensional</strong> — like a table with rows and columns.<br />
@@ -604,8 +600,8 @@ Think of a 2D array as an entire Excel sheet (rows = time periods, columns = ite
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Shape:&#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (4 rows, 4 columns)</span>
 
 <span class="c1"># Accessing elements: [row, column]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q1 Sales budget:    ₹&#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>   <span class="c1"># Row 0, Col 0</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q3 IT budget:       ₹&#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   <span class="c1"># Row 2, Col 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q1 Sales budget:    NPR &#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>   <span class="c1"># Row 0, Col 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Q3 IT budget:       NPR &#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>   <span class="c1"># Row 2, Col 3</span>
 
 <span class="c1"># Get entire row (Q2 data)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All Q2 budgets:     &#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
@@ -614,8 +610,8 @@ Think of a 2D array as an entire Excel sheet (rows = time periods, columns = ite
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;All HR budgets:     &#39;</span><span class="p">,</span> <span class="n">dept_budgets</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Shape: (4, 4)
-Q1 Sales budget:    ₹ 500000
-Q3 IT budget:       ₹ 185000
+Q1 Sales budget:    NPR  500000
+Q3 IT budget:       NPR  185000
 All Q2 budgets:      [520000 360000 125000 195000]
 All HR budgets:      [120000 125000 118000 132000]
 </code></pre></div>
@@ -637,38 +633,37 @@ All HR budgets:      [120000 125000 118000 132000]
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Annual Budget by Department:&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">dept</span><span class="p">,</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">dept_names</span><span class="p">,</span> <span class="n">dept_totals</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">dept</span><span class="si">:</span><span class="s1">&lt;12</span><span class="si">}</span><span class="s1">: ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">dept</span><span class="si">:</span><span class="s1">&lt;12</span><span class="si">}</span><span class="s1">: NPR </span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Total Budget by Quarter:&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">qtr</span><span class="p">,</span> <span class="n">total</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">quarter_names</span><span class="p">,</span> <span class="n">quarter_totals</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">qtr</span><span class="si">}</span><span class="s1">: ₹</span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  </span><span class="si">{</span><span class="n">qtr</span><span class="si">}</span><span class="s1">: NPR </span><span class="si">{</span><span class="n">total</span><span class="si">:</span><span class="s1">&gt;10,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grand Total: ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dept_budgets</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Grand Total: NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dept_budgets</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Annual Budget by Department:
-  Sales       : ₹ 2,060,000
-  Operations  : ₹ 1,440,000
-  HR          : ₹   495,000
-  IT          : ₹   770,000
+  Sales       : NPR  2,060,000
+  Operations  : NPR  1,440,000
+  HR          : NPR    495,000
+  IT          : NPR    770,000
 
 Total Budget by Quarter:
-  Q1: ₹ 1,150,000
-  Q2: ₹ 1,200,000
-  Q3: ₹ 1,123,000
-  Q4: ₹ 1,292,000
+  Q1: NPR  1,150,000
+  Q2: NPR  1,200,000
+  Q3: NPR  1,123,000
+  Q4: NPR  1,292,000
 
-Grand Total: ₹4,765,000
+Grand Total: NPR 4,765,000
 </code></pre></div>
 <h2 id="section-14-financial-applications-returns-portfolio">Section 14: Financial Applications — Returns &amp; Portfolio</h2>
 <p>NumPy is widely used in finance for <strong>investment analysis</strong>. Here we calculate stock returns and basic portfolio statistics.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Calculate daily/monthly returns from price data</span>
 <span class="c1"># Simple return = (Price_today - Price_yesterday) / Price_yesterday</span>
 
-<span class="c1"># Monthly closing prices of a stock (₹)</span>
+<span class="c1"># Monthly closing prices of a stock (NPR )</span>
 <span class="n">stock_prices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">1285</span><span class="p">,</span> <span class="mi">1190</span><span class="p">,</span> <span class="mi">1340</span><span class="p">,</span> <span class="mi">1410</span><span class="p">,</span> <span class="mi">1380</span><span class="p">,</span>
                           <span class="mi">1455</span><span class="p">,</span> <span class="mi">1510</span><span class="p">,</span> <span class="mi">1490</span><span class="p">,</span> <span class="mi">1620</span><span class="p">,</span> <span class="mi">1585</span><span class="p">,</span> <span class="mi">1710</span><span class="p">])</span>
-<span class="n">month_names</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Apr&#39;</span><span class="p">,</span> <span class="s1">&#39;May&#39;</span><span class="p">,</span> <span class="s1">&#39;Jun&#39;</span><span class="p">,</span> <span class="s1">&#39;Jul&#39;</span><span class="p">,</span> <span class="s1">&#39;Aug&#39;</span><span class="p">,</span> <span class="s1">&#39;Sep&#39;</span><span class="p">,</span>
-                 <span class="s1">&#39;Oct&#39;</span><span class="p">,</span> <span class="s1">&#39;Nov&#39;</span><span class="p">,</span> <span class="s1">&#39;Dec&#39;</span><span class="p">,</span> <span class="s1">&#39;Jan&#39;</span><span class="p">,</span> <span class="s1">&#39;Feb&#39;</span><span class="p">,</span> <span class="s1">&#39;Mar&#39;</span><span class="p">]</span>
+<span class="n">month_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Shrawan&#39;</span><span class="p">,</span> <span class="s1">&#39;Bhadra&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashwin&#39;</span><span class="p">,</span> <span class="s1">&#39;Kartik&#39;</span><span class="p">,</span> <span class="s1">&#39;Mangsir&#39;</span><span class="p">,</span> <span class="s1">&#39;Poush&#39;</span><span class="p">,</span> <span class="s1">&#39;Magh&#39;</span><span class="p">,</span> <span class="s1">&#39;Falgun&#39;</span><span class="p">,</span> <span class="s1">&#39;Chaitra&#39;</span><span class="p">,</span> <span class="s1">&#39;Baishakh&#39;</span><span class="p">,</span> <span class="s1">&#39;Jestha&#39;</span><span class="p">,</span> <span class="s1">&#39;Ashadh&#39;</span><span class="p">]</span>
 
 <span class="c1"># Calculate monthly returns using np.diff()</span>
 <span class="n">price_changes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">stock_prices</span><span class="p">)</span>          <span class="c1"># Price difference month-to-month</span>
@@ -677,10 +672,10 @@ Grand Total: ₹4,765,000
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monthly Stock Returns&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Month&#39;</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Price&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Return&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">26</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Apr&#39;</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">stock_prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">   Base&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Apr&#39;</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">stock_prices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2">   Base&quot;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">month</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">month_names</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
     <span class="n">arrow</span> <span class="o">=</span> <span class="s1">&#39;▲&#39;</span> <span class="k">if</span> <span class="n">returns_pct</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;▼&#39;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">stock_prices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">arrow</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">returns_pct</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s2">&gt;6.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">month</span><span class="si">:</span><span class="s2">&lt;5</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">stock_prices</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">arrow</span><span class="si">}{</span><span class="nb">abs</span><span class="p">(</span><span class="n">returns_pct</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="si">:</span><span class="s2">&gt;6.2f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Average Monthly Return: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">returns_pct</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Volatility (Std Dev):   </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">returns_pct</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">%&#39;</span><span class="p">)</span>
@@ -690,18 +685,18 @@ Grand Total: ₹4,765,000
 <div class="highlight"><pre><span></span><code>Monthly Stock Returns
 Month    Price   Return
 --------------------------
-Apr   ₹  1200   Base
-May   ₹  1285 ▲  7.08%
-Jun   ₹  1190 ▼  7.39%
-Jul   ₹  1340 ▲ 12.61%
-Aug   ₹  1410 ▲  5.22%
-Sep   ₹  1380 ▼  2.13%
-Oct   ₹  1455 ▲  5.43%
-Nov   ₹  1510 ▲  3.78%
-Dec   ₹  1490 ▼  1.32%
-Jan   ₹  1620 ▲  8.72%
-Feb   ₹  1585 ▼  2.16%
-Mar   ₹  1710 ▲  7.89%
+Apr   NPR   1200   Base
+Bhadra NPR   1285 ▲  7.08%
+Ashwin NPR   1190 ▼  7.39%
+Kartik NPR   1340 ▲ 12.61%
+Mangsir NPR   1410 ▲  5.22%
+Poush NPR   1380 ▼  2.13%
+Magh  NPR   1455 ▲  5.43%
+Falgun NPR   1510 ▲  3.78%
+Chaitra NPR   1490 ▼  1.32%
+Baishakh NPR   1620 ▲  8.72%
+Jestha NPR   1585 ▼  2.16%
+Ashadh NPR   1710 ▲  7.89%
 
 Average Monthly Return: 3.43%
 Volatility (Std Dev):   5.68%
@@ -710,7 +705,7 @@ Annual Return (Apr-Mar): 42.50%
 <div class="highlight"><pre><span></span><code><span class="c1"># Portfolio Return Calculation</span>
 <span class="c1"># A client&#39;s portfolio: 3 stocks with different allocations</span>
 
-<span class="n">stocks</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;TCS&#39;</span><span class="p">,</span>    <span class="s1">&#39;Infosys&#39;</span><span class="p">,</span> <span class="s1">&#39;HDFC Bank&#39;</span><span class="p">])</span>
+<span class="n">stocks</span>    <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;NTC&#39;</span><span class="p">,</span>    <span class="s1">&#39;Ncell&#39;</span><span class="p">,</span> <span class="s1">&#39;Nabil Bank&#39;</span><span class="p">])</span>
 <span class="n">invested</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">500000</span><span class="p">,</span>   <span class="mi">300000</span><span class="p">,</span>    <span class="mi">200000</span><span class="p">])</span>       <span class="c1"># Amount invested</span>
 <span class="n">returns</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">18.5</span><span class="p">,</span>     <span class="mf">22.3</span><span class="p">,</span>      <span class="mf">14.8</span><span class="p">])</span>         <span class="c1"># Annual return %</span>
 
@@ -729,24 +724,24 @@ Annual Return (Apr-Mar): 42.50%
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Stock&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Invested&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Weight&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Return&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Profit&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">56</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stocks</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">invested</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">% </span><span class="si">{</span><span class="n">returns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">% ₹</span><span class="si">{</span><span class="n">profit_per_stock</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stocks</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">invested</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">% </span><span class="si">{</span><span class="n">returns</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;7.1f</span><span class="si">}</span><span class="s2">% NPR </span><span class="si">{</span><span class="n">profit_per_stock</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">56</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;TOTAL&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">total_investment</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;100.0%&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">portfolio_return</span><span class="si">:</span><span class="s2">&gt;7.2f</span><span class="si">}</span><span class="s2">% ₹</span><span class="si">{</span><span class="n">total_profit</span><span class="si">:</span><span class="s2">&gt;10,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;TOTAL&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">total_investment</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;100.0%&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">portfolio_return</span><span class="si">:</span><span class="s2">&gt;7.2f</span><span class="si">}</span><span class="s2">% NPR </span><span class="si">{</span><span class="n">total_profit</span><span class="si">:</span><span class="s2">&gt;10,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>=== Portfolio Analysis ===
 Stock            Invested   Weight   Return       Profit
 --------------------------------------------------------
-TCS          ₹   500,000    50.0%    18.5% ₹ 92,500.00
-Infosys      ₹   300,000    30.0%    22.3% ₹ 66,900.00
-HDFC Bank    ₹   200,000    20.0%    14.8% ₹ 29,600.00
+NTC          NPR    500,000    50.0%    18.5% NPR  92,500.00
+Ncell        NPR    300,000    30.0%    22.3% NPR  66,900.00
+Nabil Bank   NPR    200,000    20.0%    14.8% NPR  29,600.00
 --------------------------------------------------------
-TOTAL        ₹ 1,000,000   100.0%   18.90% ₹189,000.00
+TOTAL        NPR  1,000,000   100.0%   18.90% NPR 189,000.00
 </code></pre></div>
 <h2 id="section-15-npv-irr-calculations">Section 15: NPV &amp; IRR Calculations</h2>
 <p><strong>Net Present Value (NPV)</strong> and <strong>Internal Rate of Return (IRR)</strong> are fundamental to capital budgeting.<br />
 NumPy provides ready-to-use functions for both — no more manual discounting!</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># NPV Calculation</span>
-<span class="c1"># A company is considering buying a machine for ₹10,00,000</span>
+<span class="c1"># A company is considering buying a machine for NPR 10,00,000</span>
 <span class="c1"># Expected cash flows over 5 years:</span>
 
 <span class="n">initial_investment</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1000000</span>   <span class="c1"># Negative because it&#39;s an outflow</span>
@@ -771,9 +766,9 @@ NumPy provides ready-to-use functions for both — no more manual discounting!</
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
 <span class="n">year_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;0 (Now)&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">,</span> <span class="s1">&#39;3&#39;</span><span class="p">,</span> <span class="s1">&#39;4&#39;</span><span class="p">,</span> <span class="s1">&#39;5&#39;</span><span class="p">]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">year_labels</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">cash_flows</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">discount_factors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;16.4f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">present_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">cash_flows</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">discount_factors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;16.4f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">present_values</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;12,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;NPV&#39;</span><span class="si">:</span><span class="s2">&gt;38</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">npv</span><span class="si">:</span><span class="s2">&gt;12,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;NPV&#39;</span><span class="si">:</span><span class="s2">&gt;38</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">npv</span><span class="si">:</span><span class="s2">&gt;12,.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="k">if</span> <span class="n">npv</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Decision: ACCEPT the investment ✓ (NPV is positive — creates value)&#39;</span><span class="p">)</span>
@@ -783,14 +778,14 @@ NumPy provides ready-to-use functions for both — no more manual discounting!</
 <div class="highlight"><pre><span></span><code>=== NPV Analysis — Machine Purchase ===
 Year      Cash Flow  Discount Factor  Present Value
 ----------------------------------------------------
-0 (Now) ₹ -1,000,000           1.0000 ₹-1,000,000.00
-1      ₹    250,000           0.8929 ₹  223,214.29
-2      ₹    300,000           0.7972 ₹  239,158.16
-3      ₹    350,000           0.7118 ₹  249,123.09
-4      ₹    320,000           0.6355 ₹  203,365.79
-5      ₹    280,000           0.5674 ₹  158,879.52
+0 (Now) NPR  -1,000,000           1.0000 NPR -1,000,000.00
+1      NPR     250,000           0.8929 NPR   223,214.29
+2      NPR     300,000           0.7972 NPR   239,158.16
+3      NPR     350,000           0.7118 NPR   249,123.09
+4      NPR     320,000           0.6355 NPR   203,365.79
+5      NPR     280,000           0.5674 NPR   158,879.52
 ----------------------------------------------------
-                                   NPV ₹   73,740.84
+                                   NPV NPR    73,740.84
 
 Decision: ACCEPT the investment ✓ (NPV is positive — creates value)
 </code></pre></div>
@@ -844,13 +839,13 @@ Recommendation: Project B has the higher IRR
 <h2 id="section-16-practice-exercises">Section 16: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-payroll-processing">🏋️ Exercise 1 — Payroll Processing</h4>
-<p>You have the following employee salary data (annual CTC in ₹):
+<p>You have the following employee salary data (annual CTC in NPR ):
 <div class="highlight"><pre><span></span><code><span class="n">salaries</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">420000</span><span class="p">,</span> <span class="mi">600000</span><span class="p">,</span> <span class="mi">840000</span><span class="p">,</span> <span class="mi">1080000</span><span class="p">,</span> <span class="mi">1440000</span><span class="p">,</span> <span class="mi">1800000</span><span class="p">,</span> <span class="mi">2400000</span><span class="p">,</span> <span class="mi">3600000</span><span class="p">])</span>
 </code></pre></div>
 Calculate (using NumPy, without loops):
 1. Monthly gross salary for each employee
-2. PF deduction (12% of annual salary, capped at annual salary of ₹1,80,000)
-3. Professional tax (₹200/month for salary ≤ ₹10L, else ₹2,500/year)
+2. EPF @ 10% of annual salary (employee contribution, Nepal), capped at annual salary of NPR 1,80,000)
+3. Social Security Fund (SSF) levy (NPR 200/month for salary ≤ NPR 10L, else NPR 2,500/year)
 4. Net annual take-home for each employee
 5. Total payroll cost for the company</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -886,11 +881,11 @@ Calculate for 3 years:
 
 <span class="n">monthly_gross</span> <span class="o">=</span> <span class="n">salaries</span> <span class="o">/</span> <span class="mi">12</span>
 
-<span class="c1"># PF: 12% of salary capped at ₹1,80,000</span>
+<span class="c1"># PF: 12% of salary capped at NPR 1,80,000</span>
 <span class="n">pf_salary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">salaries</span><span class="p">,</span> <span class="mi">180000</span><span class="p">)</span>   <span class="c1"># Cap at 1,80,000</span>
 <span class="n">pf_annual</span> <span class="o">=</span> <span class="n">pf_salary</span> <span class="o">*</span> <span class="mf">0.12</span>
 
-<span class="c1"># PT: ₹2,400/year if salary ≤ ₹10L, else ₹2,500/year</span>
+<span class="c1"># PT: NPR 2,400/year if salary ≤ NPR 10L, else NPR 2,500/year</span>
 <span class="n">pt_annual</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">salaries</span> <span class="o">&lt;=</span> <span class="mi">1000000</span><span class="p">,</span> <span class="mi">2400</span><span class="p">,</span> <span class="mi">2500</span><span class="p">)</span>
 
 <span class="n">net_takehome</span> <span class="o">=</span> <span class="n">salaries</span> <span class="o">-</span> <span class="n">pf_annual</span> <span class="o">-</span> <span class="n">pt_annual</span>
@@ -898,22 +893,22 @@ Calculate for 3 years:
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Salary&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Monthly&#39;</span><span class="si">:</span><span class="s2">&gt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PF&#39;</span><span class="si">:</span><span class="s2">&gt;8</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;PT&#39;</span><span class="si">:</span><span class="s2">&gt;6</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Net CTC&#39;</span><span class="si">:</span><span class="s2">&gt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">salaries</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;₹</span><span class="si">{</span><span class="n">salaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;9,</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">monthly_gross</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">pf_annual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">pt_annual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;4,</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">net_takehome</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NPR </span><span class="si">{</span><span class="n">salaries</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;9,</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">monthly_gross</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;8,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">pf_annual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;6,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">pt_annual</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;4,</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">net_takehome</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;10,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">52</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total payroll cost: ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total payroll cost: NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">salaries</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>    Salary    Monthly       PF     PT      Net CTC
 ----------------------------------------------------
-₹  420,000 ₹  35,000 ₹21,600 ₹2,400 ₹ 396,000.0
-₹  600,000 ₹  50,000 ₹21,600 ₹2,400 ₹ 576,000.0
-₹  840,000 ₹  70,000 ₹21,600 ₹2,400 ₹ 816,000.0
-₹1,080,000 ₹  90,000 ₹21,600 ₹2,500 ₹1,055,900.0
-₹1,440,000 ₹ 120,000 ₹21,600 ₹2,500 ₹1,415,900.0
-₹1,800,000 ₹ 150,000 ₹21,600 ₹2,500 ₹1,775,900.0
-₹2,400,000 ₹ 200,000 ₹21,600 ₹2,500 ₹2,375,900.0
-₹3,600,000 ₹ 300,000 ₹21,600 ₹2,500 ₹3,575,900.0
+NPR   420,000 NPR   35,000 NPR 21,600 NPR 2,400 NPR  396,000.0
+NPR   600,000 NPR   50,000 NPR 21,600 NPR 2,400 NPR  576,000.0
+NPR   840,000 NPR   70,000 NPR 21,600 NPR 2,400 NPR  816,000.0
+NPR 1,080,000 NPR   90,000 NPR 21,600 NPR 2,500 NPR 1,055,900.0
+NPR 1,440,000 NPR  120,000 NPR 21,600 NPR 2,500 NPR 1,415,900.0
+NPR 1,800,000 NPR  150,000 NPR 21,600 NPR 2,500 NPR 1,775,900.0
+NPR 2,400,000 NPR  200,000 NPR 21,600 NPR 2,500 NPR 2,375,900.0
+NPR 3,600,000 NPR  300,000 NPR 21,600 NPR 2,500 NPR 3,575,900.0
 ----------------------------------------------------
-Total payroll cost: ₹12,180,000
+Total payroll cost: NPR 12,180,000
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: WDV Depreciation Schedule</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -929,40 +924,40 @@ Total payroll cost: ₹12,180,000
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Asset&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Opening WDV&#39;</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Depreciation&#39;</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Closing WDV&#39;</span><span class="si">:</span><span class="s2">&gt;13</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;-&#39;</span> <span class="o">*</span> <span class="mi">54</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">asset_names</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">wdv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">depreciation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">closing_wdv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;TOTAL&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">wdv</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">depreciation</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> ₹</span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">closing_wdv</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">wdv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">depreciation</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">closing_wdv</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;TOTAL&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">wdv</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">depreciation</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2"> NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">closing_wdv</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;11,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
     <span class="n">wdv</span> <span class="o">=</span> <span class="n">closing_wdv</span>   <span class="c1"># Closing becomes opening for next year</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>--- Year 1 ---
 Asset          Opening WDV  Depreciation   Closing WDV
 ------------------------------------------------------
-Building     ₹  5,000,000 ₹    250,000 ₹  4,750,000
-Machinery    ₹  2,500,000 ₹    375,000 ₹  2,125,000
-Computers    ₹    800,000 ₹    320,000 ₹    480,000
-Vehicles     ₹  1,200,000 ₹    180,000 ₹  1,020,000
-Furniture    ₹    350,000 ₹     35,000 ₹    315,000
-TOTAL        ₹  9,850,000 ₹  1,160,000 ₹  8,690,000
+Building     NPR   5,000,000 NPR     250,000 NPR   4,750,000
+Machinery    NPR   2,500,000 NPR     375,000 NPR   2,125,000
+Computers    NPR     800,000 NPR     320,000 NPR     480,000
+Vehicles     NPR   1,200,000 NPR     180,000 NPR   1,020,000
+Furniture    NPR     350,000 NPR      35,000 NPR     315,000
+TOTAL        NPR   9,850,000 NPR   1,160,000 NPR   8,690,000
 
 --- Year 2 ---
 Asset          Opening WDV  Depreciation   Closing WDV
 ------------------------------------------------------
-Building     ₹  4,750,000 ₹    237,500 ₹  4,512,500
-Machinery    ₹  2,125,000 ₹    318,750 ₹  1,806,250
-Computers    ₹    480,000 ₹    192,000 ₹    288,000
-Vehicles     ₹  1,020,000 ₹    153,000 ₹    867,000
-Furniture    ₹    315,000 ₹     31,500 ₹    283,500
-TOTAL        ₹  8,690,000 ₹    932,750 ₹  7,757,250
+Building     NPR   4,750,000 NPR     237,500 NPR   4,512,500
+Machinery    NPR   2,125,000 NPR     318,750 NPR   1,806,250
+Computers    NPR     480,000 NPR     192,000 NPR     288,000
+Vehicles     NPR   1,020,000 NPR     153,000 NPR     867,000
+Furniture    NPR     315,000 NPR      31,500 NPR     283,500
+TOTAL        NPR   8,690,000 NPR     932,750 NPR   7,757,250
 
 --- Year 3 ---
 Asset          Opening WDV  Depreciation   Closing WDV
 ------------------------------------------------------
-Building     ₹  4,512,500 ₹    225,625 ₹  4,286,875
-Machinery    ₹  1,806,250 ₹    270,938 ₹  1,535,312
-Computers    ₹    288,000 ₹    115,200 ₹    172,800
-Vehicles     ₹    867,000 ₹    130,050 ₹    736,950
-Furniture    ₹    283,500 ₹     28,350 ₹    255,150
-TOTAL        ₹  7,757,250 ₹    770,162 ₹  6,987,088
+Building     NPR   4,512,500 NPR     225,625 NPR   4,286,875
+Machinery    NPR   1,806,250 NPR     270,938 NPR   1,535,312
+Computers    NPR     288,000 NPR     115,200 NPR     172,800
+Vehicles     NPR     867,000 NPR     130,050 NPR     736,950
+Furniture    NPR     283,500 NPR      28,350 NPR     255,150
+TOTAL        NPR   7,757,250 NPR     770,162 NPR   6,987,088
 </code></pre></div>
 <hr />
 <h2 id="module-2-complete">🎉 Module 2 Complete!</h2>

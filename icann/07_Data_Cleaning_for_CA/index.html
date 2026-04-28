@@ -290,7 +290,7 @@
 <h2 id="part-1-why-data-cleaning-matters">Part 1: Why Data Cleaning Matters</h2>
 <h2 id="section-1-the-cost-of-dirty-data">Section 1: The Cost of Dirty Data</h2>
 <h3 id="the-scale-of-the-problem">The scale of the problem</h3>
-<p>IBM estimated in 2016 that <strong>dirty data costs the US economy $3.1 trillion per year</strong>. In India, the Reserve Bank of India has flagged data quality as a primary challenge in financial supervision. For a CA firm or finance team, dirty data creates:</p>
+<p>IBM estimated in 2016 that <strong>dirty data costs the US economy $3.1 trillion per year</strong>. In India, Nepal Rastra Bank (NRB) has flagged data quality as a primary challenge in financial supervision. For a CA firm or finance team, dirty data creates:</p>
 <table>
 <thead>
 <tr>
@@ -301,7 +301,7 @@
 <tbody>
 <tr>
 <td>Missing amounts on invoices</td>
-<td>Understated revenue; incorrect GST computation</td>
+<td>Understated revenue; incorrect VAT computation</td>
 </tr>
 <tr>
 <td>Duplicate transactions</td>
@@ -326,13 +326,13 @@
 </tbody>
 </table>
 <h3 id="a-real-world-ca-scenario">A real-world CA scenario</h3>
-<p>A firm is preparing a Quarterly Management Report for a manufacturing client. The data analyst runs the P&amp;L script — revenue for Q2 comes out at ₹47 crores.</p>
-<p>The CFO is alarmed. Last quarter was ₹38 crores. Was there really ₹9 crore growth?</p>
+<p>A firm is preparing a Quarterly Management Report for a manufacturing client. The data analyst runs the P&amp;L script — revenue for Q2 comes out at NPR 47 crores.</p>
+<p>The CFO is alarmed. Last quarter was NPR 38 crores. Was there really NPR 9 crore growth?</p>
 <p>Investigation reveals:
-- One invoice of ₹9.2 crores was accidentally entered <strong>twice</strong> in the ERP
-- Two invoices had amounts entered as <code>₹8,50,000</code> (text) — Python read them as <code>NaN</code>
+- One invoice of NPR 9.2 crores was accidentally entered <strong>twice</strong> in the ERP
+- Two invoices had amounts entered as <code>NPR 8,50,000</code> (text) — Python read them as <code>NaN</code>
 - Three invoices had the party name <code>"Tata Motors Ltd "</code> (trailing space) — shown as a new unknown party</p>
-<p><strong>Actual revenue: ₹37.8 crores — a slight decline, not growth.</strong></p>
+<p><strong>Actual revenue: NPR 37.8 crores — a slight decline, not growth.</strong></p>
 <p>The uncleaned data would have led to a false report, wrong management decisions, and potential professional liability.</p>
 <h3 id="the-8020-rule-of-analytics">The 80/20 rule of analytics</h3>
 <blockquote>
@@ -381,7 +381,7 @@
 </tr>
 <tr>
 <td><strong>Typed correctly</strong></td>
-<td><code>"₹1,20,000"</code> (string)</td>
+<td><code>"NPR 1,20,000"</code> (string)</td>
 <td><code>120000</code> (float)</td>
 </tr>
 <tr>
@@ -396,8 +396,8 @@
 </tr>
 <tr>
 <td><strong>In-range</strong></td>
-<td><code>GST_Rate: 45</code></td>
-<td><code>GST_Rate: 18</code> (valid slab)</td>
+<td><code>VAT_Rate: 45</code></td>
+<td><code>VAT_Rate: 18</code> (valid slab)</td>
 </tr>
 </tbody>
 </table>
@@ -450,7 +450,7 @@
 <tr>
 <td><code>Invoice_Amount</code></td>
 <td><code>float64</code></td>
-<td><code>object</code> — stored as <code>"₹1,20,000"</code></td>
+<td><code>object</code> — stored as <code>"NPR 1,20,000"</code></td>
 </tr>
 <tr>
 <td><code>Due_Date</code></td>
@@ -458,9 +458,9 @@
 <td><code>object</code> — stored as <code>"31-Mar-2025"</code></td>
 </tr>
 <tr>
-<td><code>GST_Rate</code></td>
+<td><code>VAT_Rate</code></td>
 <td><code>int64</code></td>
-<td><code>object</code> — stored as <code>"18%"</code></td>
+<td><code>object</code> — stored as <code>"13%"</code></td>
 </tr>
 <tr>
 <td><code>Is_Paid</code></td>
@@ -475,10 +475,10 @@
 <p>Values that are technically present but incorrect or anomalous.</p>
 <p><strong>Inconsistencies:</strong>
 - Same party with multiple name variants: <code>"Reliance Ind"</code>, <code>"RELIANCE INDUSTRIES"</code>, <code>"Reliance Industries Ltd."</code>
-- Same city with different spellings: <code>"Mumbai"</code>, <code>"Bombay"</code>, <code>"MUMBAI"</code>
+- Same city with different spellings: <code>"Kathmandu"</code>, <code>"Bombay"</code>, <code>"MUMBAI"</code>
 - Mixed date formats: <code>"2025-03-31"</code> and <code>"31/03/2025"</code> in the same column</p>
 <p><strong>Outliers:</strong>
-- Invoice amount of ₹0 or ₹9,999,999,999 (likely a typo)
+- Invoice amount of NPR 0 or NPR 9,999,999,999 (likely a typo)
 - Employee age of 145 or -3
 - GST rate of 55% (not a valid slab)</p>
 <hr />
@@ -498,7 +498,7 @@
 </tr>
 <tr>
 <td>Invoice amount ≤ Credit limit</td>
-<td>Invoice of ₹50L for client with ₹10L credit limit</td>
+<td>Invoice of NPR 50L for client with NPR 10L credit limit</td>
 </tr>
 <tr>
 <td>GST rate ∈ {0, 5, 12, 18, 28}</td>
@@ -510,7 +510,7 @@
 </tr>
 <tr>
 <td>Debits = Credits (trial balance)</td>
-<td>₹1.25L imbalance</td>
+<td>NPR 1.25L imbalance</td>
 </tr>
 </tbody>
 </table>
@@ -603,9 +603,9 @@
 <span class="n">cleaning_log</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Missing GST_Rate&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n_missing</span><span class="si">}</span><span class="s1"> rows missing GST_Rate&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="s1">&#39;Filled with mode (18%) — most common rate in dataset&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Missing VAT_Rate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;issue&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n_missing</span><span class="si">}</span><span class="s1"> rows missing VAT_Rate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="s1">&#39;Filled with mode (13%) — Nepal standard VAT rate&#39;</span><span class="p">,</span>
     <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">n_missing</span><span class="p">,</span>
     <span class="s1">&#39;date&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="p">})</span>
@@ -613,7 +613,7 @@
 <p>This log becomes your <strong>data cleaning audit trail</strong> — essential for professional accountability.</p>
 <h2 id="part-3-hands-on-data-cleaning">Part 3: Hands-on Data Cleaning</h2>
 <h2 id="section-5-load-the-dirty-dataset">Section 5: Load the Dirty Dataset</h2>
-<p>We continue from the Module 06 case study — Meridian Advisory Services, late payment prediction.</p>
+<p>We continue from the Module 06 case study — Himalayan Advisory Services, late payment prediction.</p>
 <p>But now we have received the <strong>raw ERP export</strong> — with all the real-world messiness included. We will clean it step by step, following the CRISP-DM Phase 3 plan we drafted in Module 06.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -667,8 +667,8 @@
 
 <span class="c1"># 1. Inconsistent client names (same client, different spellings)</span>
 <span class="n">company_variants</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">&#39;CL0042&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Alpha Manufacturing Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;ALPHA MANUFACTURING LTD&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha manufacturing&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;CL0107&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sunrise IT Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunrise IT Services Pvt Ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;SUNRISE IT SVCS&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CL0042&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Himalayan Manufacturing Pvt. Ltd.&#39;</span><span class="p">,</span> <span class="s1">&#39;ALPHA MANUFACTURING LTD&#39;</span><span class="p">,</span> <span class="s1">&#39;alpha manufacturing&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;CL0107&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Sunrise Tech Pvt. Ltd.&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunrise Technology Pvt. Ltd.&#39;</span><span class="p">,</span> <span class="s1">&#39;SUNRISE TECH&#39;</span><span class="p">],</span>
     <span class="s1">&#39;CL0213&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Blue Ocean Traders&#39;</span><span class="p">,</span> <span class="s1">&#39;Blue Ocean Traders Ltd.&#39;</span><span class="p">,</span> <span class="s1">&#39;Blue Ocean&#39;</span><span class="p">],</span>
 <span class="p">}</span>
 <span class="n">client_names</span> <span class="o">=</span> <span class="p">[]</span>
@@ -683,7 +683,7 @@
 <span class="n">amounts_str</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">amt</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">amounts_raw</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dirty_idx</span><span class="p">[:</span><span class="mi">15</span><span class="p">]:</span>
-        <span class="n">amounts_str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>          <span class="c1"># e.g. &quot;₹1,50,000&quot;</span>
+        <span class="n">amounts_str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;NPR </span><span class="si">{</span><span class="n">amt</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>          <span class="c1"># e.g. &quot;NPR 1,50,000&quot;</span>
     <span class="k">elif</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dirty_idx</span><span class="p">[</span><span class="mi">15</span><span class="p">:]:</span>
         <span class="n">amounts_str</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">amt</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>  <span class="c1"># e.g. &quot;1.50L&quot;</span>
     <span class="k">else</span><span class="p">:</span>
@@ -716,7 +716,7 @@
     <span class="s1">&#39;Client_Name&#39;</span><span class="p">:</span>   <span class="n">client_names</span><span class="p">,</span>
     <span class="s1">&#39;Industry&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">missing_idx_indust</span> <span class="k">else</span> <span class="n">industries_col</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span>
     <span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">missing_idx_amt</span> <span class="k">else</span> <span class="n">amounts_str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span>
-    <span class="s1">&#39;GST_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">missing_idx_gst</span> <span class="k">else</span> <span class="n">gst_str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span>
+    <span class="s1">&#39;VAT_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">missing_idx_gst</span> <span class="k">else</span> <span class="n">gst_str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span>
     <span class="s1">&#39;Credit_Limit&#39;</span><span class="p">:</span>  <span class="n">cr_limit</span><span class="p">,</span>
     <span class="s1">&#39;Tenure_Years&#39;</span><span class="p">:</span>  <span class="p">[</span><span class="kc">None</span> <span class="k">if</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">missing_idx_tenure</span> <span class="k">else</span> <span class="n">tenure</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)],</span>
     <span class="s1">&#39;Invoice_Date&#39;</span><span class="p">:</span>  <span class="n">inv_dates</span><span class="p">,</span>
@@ -741,7 +741,7 @@
 <div class="highlight"><pre><span></span><code>Raw dataset loaded: 880 rows × 13 columns
 
 First 5 rows:
-  Invoice_ID Client_ID    Client_Name      Industry Invoice_Amount GST_Rate  Credit_Limit  Tenure_Years Invoice_Date   Due_Date Payment_Date  Prev_Late_Count  Is_Late
+  Invoice_ID Client_ID    Client_Name      Industry Invoice_Amount VAT_Rate  Credit_Limit  Tenure_Years Invoice_Date   Due_Date Payment_Date  Prev_Late_Count  Is_Late
 0  INV-00001    CL0130  Client CL0130  Construction         410000      18%       1580000           7.7   2025-03-18 2025-04-17   2025-04-22                1        0
 1  INV-00002    CL0036  Client CL0036   IT Services         163000     None        423000           4.7   2024-02-02 2024-04-02   2024-04-08                1        0
 2  INV-00003    CL0186  Client CL0186   IT Services          81000     None        210000           0.8   2023-11-12 2023-12-27   2024-05-01                2        1
@@ -770,8 +770,8 @@ First 5 rows:
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Sample of Invoice_Amount column (raw):&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Sample of GST_Rate column (raw):&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Sample of VAT_Rate column (raw):&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Client_Name variants for CL0042:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">raw_df</span><span class="p">[</span><span class="n">raw_df</span><span class="p">[</span><span class="s1">&#39;Client_ID&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;CL0042&#39;</span><span class="p">][</span><span class="s1">&#39;Client_Name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
@@ -788,7 +788,7 @@ Client_ID                  object
 Client_Name                object
 Industry                   object
 Invoice_Amount             object
-GST_Rate                   object
+VAT_Rate                   object
 Credit_Limit                int64
 Tenure_Years              float64
 Invoice_Date       datetime64[ns]
@@ -801,7 +801,7 @@ Missing values:
                 Missing    %
 Industry             19  2.2
 Invoice_Amount       26  3.0
-GST_Rate             13  1.5
+VAT_Rate             13  1.5
 Tenure_Years         41  4.7
 
 Duplicate rows: 30
@@ -809,7 +809,7 @@ Duplicate rows: 30
 Sample of Invoice_Amount column (raw):
 [&#39;410000&#39;, &#39;163000&#39;, &#39;81000&#39;, None, &#39;163000&#39;, &#39;336000&#39;, None, &#39;64000&#39;, &#39;101000&#39;, &#39;346000&#39;]
 
-Sample of GST_Rate column (raw):
+Sample of VAT_Rate column (raw):
 [&#39;18%&#39;, None, None, &#39;18%&#39;, &#39;18%&#39;, &#39;5%&#39;, &#39;18%&#39;, &#39;18%&#39;, &#39;18%&#39;, &#39;12%&#39;]
 
 Client_Name variants for CL0042:
@@ -819,7 +819,7 @@ Client_Name variants for CL0042:
 <p><strong>Rule:</strong> Fix data types FIRST — many other cleaning steps depend on correct types (you cannot compute the median of a string column, or compare dates stored as strings).</p>
 <h3 id="priority-order-for-type-fixes">Priority order for type fixes:</h3>
 <ol>
-<li>Numeric columns stored as strings (with ₹, commas, %, L suffixes)</li>
+<li>Numeric columns stored as strings (with NPR , commas, %, L suffixes)</li>
 <li>Date columns stored as strings</li>
 <li>Boolean columns stored as "Yes"/"No" or 1/0 strings</li>
 </ol>
@@ -837,7 +837,7 @@ Client_Name variants for CL0042:
         <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
     <span class="n">val</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
     <span class="c1"># Remove currency symbols and spaces</span>
-    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;₹&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NPR &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NPR&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;रु&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="c1"># Handle &quot;1.50L&quot; format (lakhs)</span>
     <span class="k">if</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="n">val</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">val</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100000</span>
@@ -852,7 +852,7 @@ Client_Name variants for CL0042:
 <span class="n">n_converted</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
     <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Type Fix — Invoice_Amount&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="s1">&#39;Converted string amounts (₹/L format) to float64&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="s1">&#39;Converted string amounts (NPR /L format) to float64&#39;</span><span class="p">,</span>
     <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">n_converted</span><span class="p">,</span>
 <span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">After: dtype = </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Invoice_Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -866,25 +866,25 @@ After: dtype = float64
 Successfully parsed: 854 / 880 rows
 Sample: [410000.0, 163000.0, 81000.0, 163000.0, 336000.0]
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># ── FIX 2: GST_Rate — &quot;18%&quot; string → int ─────────────────────────────────────</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before: GST_Rate sample =&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()[:</span><span class="mi">8</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── FIX 2: VAT_Rate — &quot;13%&quot; string → int ─────────────────────────────────────</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Before: VAT_Rate sample =&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()[:</span><span class="mi">8</span><span class="p">])</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span>
                   <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
                   <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
                   <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
                   <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
                   <span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">))</span>
 
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
 
 <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Type Fix — GST_Rate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Type Fix — VAT_Rate&#39;</span><span class="p">,</span>
     <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="s1">&#39;Removed </span><span class="si">% s</span><span class="s1">uffix; converted to numeric&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
+    <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span>
 <span class="p">})</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After: GST_Rate dtype =&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unique values:&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After: VAT_Rate dtype =&#39;</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Unique values:&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
 
 <span class="c1"># ── FIX 3: Ensure date columns are datetime ───────────────────────────────────</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Due_Date&#39;</span><span class="p">,</span> <span class="s1">&#39;Payment_Date&#39;</span><span class="p">]:</span>
@@ -906,8 +906,8 @@ Sample: [410000.0, 163000.0, 81000.0, 163000.0, 336000.0]
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Data types after all type fixes:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Before: GST_Rate sample = [&#39;18%&#39; &#39;5%&#39; &#39;12%&#39; &#39;28%&#39; &#39;18&#39; &#39;5&#39; &#39;12&#39; &#39;28&#39;]
-After: GST_Rate dtype = float64
+<div class="highlight"><pre><span></span><code>Before: VAT_Rate sample = [&#39;18%&#39; &#39;5%&#39; &#39;12%&#39; &#39;28%&#39; &#39;18&#39; &#39;5&#39; &#39;12&#39; &#39;28&#39;]
+After: VAT_Rate dtype = float64
 Unique values: [np.float64(5.0), np.float64(12.0), np.float64(18.0), np.float64(28.0)]
 
 Date column types:
@@ -924,7 +924,7 @@ Client_ID                  object
 Client_Name                object
 Industry                   object
 Invoice_Amount            float64
-GST_Rate                  float64
+VAT_Rate                  float64
 Credit_Limit                int64
 Tenure_Years              float64
 Invoice_Date       datetime64[ns]
@@ -948,7 +948,7 @@ dtype: object
 <span class="c1"># Invoice_Amount — critical column. Fill with industry median (contextual imputation)</span>
 <span class="n">industry_medians</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Industry&#39;</span><span class="p">)[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Industry medians for Invoice_Amount imputation:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">industry_medians</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;₹</span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">industry_medians</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;NPR </span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 
 <span class="n">n_before</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Industry&#39;</span><span class="p">)[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
@@ -969,34 +969,34 @@ dtype: object
                 Missing    %
 Industry             19  2.2
 Invoice_Amount       26  3.0
-GST_Rate             13  1.5
+VAT_Rate             13  1.5
 Tenure_Years         41  4.7
 
 Industry medians for Invoice_Amount imputation:
 Industry
-Construction     ₹5.3L
-Finance          ₹2.6L
-Healthcare       ₹3.9L
-IT Services      ₹3.1L
-Manufacturing    ₹4.3L
-Real Estate      ₹8.8L
-Retail           ₹1.3L
-Trading          ₹1.9L
+Construction     NPR 5.3L
+Finance          NPR 2.6L
+Healthcare       NPR 3.9L
+IT Services      NPR 3.1L
+Manufacturing    NPR 4.3L
+Real Estate      NPR 8.8L
+Retail           NPR 1.3L
+Trading          NPR 1.9L
 
 Invoice_Amount: filled 26 missing values with industry median
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Handle remaining missing columns ─────────────────────────────────────────</span>
 
-<span class="c1"># GST_Rate — fill with mode (most common valid slab)</span>
-<span class="n">n_miss</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">gst_mode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">gst_mode</span><span class="p">)</span>
+<span class="c1"># VAT_Rate — fill with mode (most common valid slab)</span>
+<span class="n">n_miss</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">gst_mode</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">gst_mode</span><span class="p">)</span>
 <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Missing — GST_Rate&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Missing — VAT_Rate&#39;</span><span class="p">,</span>
     <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Filled </span><span class="si">{</span><span class="n">n_miss</span><span class="si">}</span><span class="s1"> rows with mode (</span><span class="si">{</span><span class="n">gst_mode</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">,</span>
     <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">n_miss</span><span class="p">,</span>
 <span class="p">})</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GST_Rate: filled </span><span class="si">{</span><span class="n">n_miss</span><span class="si">}</span><span class="s1"> missing with mode (</span><span class="si">{</span><span class="n">gst_mode</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;VAT_Rate: filled </span><span class="si">{</span><span class="n">n_miss</span><span class="si">}</span><span class="s1"> missing with mode (</span><span class="si">{</span><span class="n">gst_mode</span><span class="si">}</span><span class="s1">%)&#39;</span><span class="p">)</span>
 
 <span class="c1"># Industry — fill with mode (most common industry in dataset)</span>
 <span class="n">n_miss</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1026,7 +1026,7 @@ Invoice_Amount: filled 26 missing values with industry median
 <span class="k">if</span> <span class="n">remaining_missing</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;✓ No missing values.&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>GST_Rate: filled 13 missing with mode (18%)
+<div class="highlight"><pre><span></span><code>VAT_Rate: filled 13 missing with mode (18%)
 Industry: filled 19 missing with mode (Manufacturing)
 Tenure_Years: filled 41 missing with median (4.2 years)
 
@@ -1060,7 +1060,7 @@ Total missing values remaining: 0
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/1226850125.py:24: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41492/1226850125.py:24: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
   plt.tight_layout()
 /Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
   fig.canvas.print_figure(bytes_io, **kw)
@@ -1108,6 +1108,8 @@ Total missing values remaining: 0
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Resolved by keeping higher-amount record. Rows remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Exact duplicate rows: 30
+
+
 
 Sample duplicates:
     Invoice_ID Client_ID  Invoice_Amount Invoice_Date
@@ -1181,11 +1183,11 @@ Client Cl0150     9
 Client Cl0284     8
 Client Cl0166     8
 Client Cl0040     8
-Client Cl0096     7
+Client Cl0160     7
 Client Cl0152     7
 Client Cl0121     7
-Client Cl0160     7
 Client Cl0032     7
+Client Cl0046     7
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Industry — validate against allowed values ────────────────────────────────</span>
 <span class="n">valid_industries</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Manufacturing&#39;</span><span class="p">,</span> <span class="s1">&#39;IT Services&#39;</span><span class="p">,</span> <span class="s1">&#39;Trading&#39;</span><span class="p">,</span> <span class="s1">&#39;Healthcare&#39;</span><span class="p">,</span>
@@ -1212,22 +1214,22 @@ Client Cl0032     7
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invalid industries remaining: </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Industry_Flag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
 
-<span class="c1"># ── GST_Rate — validate against allowed slabs ─────────────────────────────────</span>
+<span class="c1"># ── VAT_Rate — validate against allowed slabs ─────────────────────────────────</span>
 <span class="n">valid_gst</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">}</span>
-<span class="n">invalid_gst</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">)]</span>
+<span class="n">invalid_gst</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">)]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invalid GST rates: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">invalid_gst</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">invalid_gst</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
     <span class="c1"># Cap/round to nearest valid slab</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">nearest_valid_gst</span><span class="p">(</span><span class="n">rate</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">rate</span><span class="p">))</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest_valid_gst</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">nearest_valid_gst</span><span class="p">)</span>
     <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Category — GST_Rate&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Category — VAT_Rate&#39;</span><span class="p">,</span>
         <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Mapped </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">invalid_gst</span><span class="p">)</span><span class="si">}</span><span class="s1"> invalid rates to nearest valid slab&#39;</span><span class="p">,</span>
         <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">invalid_gst</span><span class="p">),</span>
     <span class="p">})</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After fix:&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After fix:&#39;</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Industry values in dataset:
 Industry
@@ -1257,7 +1259,7 @@ Invalid GST rates: 0
 </code></pre></div>
 <h2 id="section-10-detecting-handling-outliers">Section 10: Detecting &amp; Handling Outliers</h2>
 <p>Outliers in financial data can be:
-- <strong>Data errors</strong> (typo: ₹950 instead of ₹9,50,000)
+- <strong>Data errors</strong> (typo: NPR 950 instead of NPR 9,50,000)
 - <strong>Legitimate extremes</strong> (a single very large invoice)
 - <strong>Fraud signals</strong> (unusual transaction that warrants investigation)</p>
 <p>The fix depends on what the outlier represents — never blindly remove without investigating.</p>
@@ -1274,11 +1276,11 @@ Invalid GST rates: 0
 <span class="n">outliers_high</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">upper_fence</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invoice_Amount statistics:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Q1:           ₹</span><span class="si">{</span><span class="n">Q1</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Q3:           ₹</span><span class="si">{</span><span class="n">Q3</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  IQR:          ₹</span><span class="si">{</span><span class="n">IQR</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Lower fence:  ₹</span><span class="si">{</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Upper fence:  ₹</span><span class="si">{</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Q1:           NPR </span><span class="si">{</span><span class="n">Q1</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Q3:           NPR </span><span class="si">{</span><span class="n">Q3</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  IQR:          NPR </span><span class="si">{</span><span class="n">IQR</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Lower fence:  NPR </span><span class="si">{</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Upper fence:  NPR </span><span class="si">{</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Outliers below lower fence: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_low</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outliers above upper fence: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers_high</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
@@ -1289,11 +1291,11 @@ Invalid GST rates: 0
 <span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span>
             <span class="n">flierprops</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">))</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Lower fence: ₹</span><span class="si">{</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Lower fence: NPR </span><span class="si">{</span><span class="n">lower_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span>
-                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Upper fence: ₹</span><span class="si">{</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+                <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Upper fence: NPR </span><span class="si">{</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount — Box Plot(Red dots = outliers)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="c1"># Histogram with fences</span>
@@ -1302,29 +1304,23 @@ Invalid GST rates: 0
                 <span class="n">label</span><span class="o">=</span><span class="s1">&#39;IQR fences&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">upper_fence</span><span class="o">/</span><span class="mi">100000</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount Distribution</span><span class="se">\n</span><span class="s1">(Fences shown)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Invoice_Amount statistics:
-  Q1:           ₹1.83L
-  Q3:           ₹4.79L
-  IQR:          ₹2.96L
-  Lower fence:  ₹-2.61L
-  Upper fence:  ₹9.22L
+  Q1:           NPR 1.83L
+  Q3:           NPR 4.79L
+  IQR:          NPR 2.96L
+  Lower fence:  NPR -2.61L
+  Upper fence:  NPR 9.22L
 
 Outliers below lower fence: 0
 Outliers above upper fence: 49
-
-
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/2452851524.py:45: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_27_2.png" /></p>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_27_1.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Investigate extreme outliers ──────────────────────────────────────────────</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Extremely low amounts (possible typos):&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">lower_fence</span><span class="p">][[</span><span class="s1">&#39;Invoice_ID&#39;</span><span class="p">,</span><span class="s1">&#39;Client_ID&#39;</span><span class="p">,</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">,</span><span class="s1">&#39;Industry&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
@@ -1356,8 +1352,8 @@ Outliers above upper fence: 49
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Capped </span><span class="si">{</span><span class="n">n_capped_low</span><span class="si">}</span><span class="s1"> low outliers and </span><span class="si">{</span><span class="n">n_capped_high</span><span class="si">}</span><span class="s1"> high outliers.&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Amount_Outlier_Flag column added (</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;Amount_Outlier_Flag&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> flagged rows).&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Invoice_Amount range after capping:&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Min: ₹</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Max: ₹</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Min: NPR </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Max: NPR </span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1">L&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Extremely low amounts (possible typos):
 Empty DataFrame
@@ -1381,8 +1377,8 @@ Capped 0 low outliers and 49 high outliers.
 Amount_Outlier_Flag column added (49 flagged rows).
 
 Invoice_Amount range after capping:
-  Min: ₹0.00L
-  Max: ₹9.22L
+  Min: NPR 0.00L
+  Max: NPR 9.22L
 </code></pre></div>
 <h2 id="section-11-business-rule-validation">Section 11: Business Rule Validation</h2>
 <p>After technical cleaning, validate the data against the rules that make sense for the domain — the audit equivalent of "does this make business sense?".</p>
@@ -1420,10 +1416,10 @@ Invoice_Amount range after capping:
     <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
     <span class="n">cleaning_log</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;step&#39;</span><span class="p">:</span> <span class="s1">&#39;Rule — Zero amount&#39;</span><span class="p">,</span> <span class="s1">&#39;fix&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;Dropped </span><span class="si">{</span><span class="n">rule2</span><span class="si">}</span><span class="s1"> zero-amount rows&#39;</span><span class="p">,</span> <span class="s1">&#39;rows_affected&#39;</span><span class="p">:</span> <span class="n">rule2</span><span class="p">})</span>
 
-<span class="c1"># Rule 3: GST_Rate in valid slabs</span>
+<span class="c1"># Rule 3: VAT_Rate in valid slabs</span>
 <span class="n">valid_gst</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">28</span><span class="p">}</span>
-<span class="n">rule3</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">validation_results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;GST_Rate ∈ {0,5,12,18,28}&#39;</span><span class="p">,</span> <span class="s1">&#39;violations&#39;</span><span class="p">:</span> <span class="n">rule3</span><span class="p">,</span> <span class="s1">&#39;severity&#39;</span><span class="p">:</span> <span class="s1">&#39;MEDIUM&#39;</span><span class="p">})</span>
+<span class="n">rule3</span> <span class="o">=</span> <span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">))</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">validation_results</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;rule&#39;</span><span class="p">:</span> <span class="s1">&#39;VAT_Rate ∈ {0,5,12,18,28}&#39;</span><span class="p">,</span> <span class="s1">&#39;violations&#39;</span><span class="p">:</span> <span class="n">rule3</span><span class="p">,</span> <span class="s1">&#39;severity&#39;</span><span class="p">:</span> <span class="s1">&#39;MEDIUM&#39;</span><span class="p">})</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Rule 3 | GST rate valid slab | Violations: </span><span class="si">{</span><span class="n">rule3</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 
 <span class="c1"># Rule 4: Prev_Late_Count in [0, 5]</span>
@@ -1464,7 +1460,7 @@ Rule 5 | Is_Late recomputed from dates (authoritative source)
 VALIDATION SUMMARY:
   [HIGH  ] Payment_Date &gt;= Invoice_Date        ✓ PASS
   [HIGH  ] Invoice_Amount &gt; 0                  ✓ PASS
-  [MEDIUM] GST_Rate ∈ {0,5,12,18,28}           ✓ PASS
+  [MEDIUM] VAT_Rate ∈ {0,5,12,18,28}           ✓ PASS
   [LOW   ] Prev_Late_Count ∈ [0,5]             ✓ PASS
 </code></pre></div>
 <h2 id="section-12-building-a-reusable-cleaning-pipeline">Section 12: Building a Reusable Cleaning Pipeline</h2>
@@ -1473,7 +1469,7 @@ VALIDATION SUMMARY:
 
 <span class="k">def</span><span class="w"> </span><span class="nf">clean_invoice_data</span><span class="p">(</span><span class="n">raw_df</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Complete cleaning pipeline for the Meridian invoice export.</span>
+<span class="sd">    Complete cleaning pipeline for the Himalayan Advisory invoice export.</span>
 <span class="sd">    Returns: (cleaned_df, cleaning_log)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">df</span>  <span class="o">=</span> <span class="n">raw_df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -1489,7 +1485,7 @@ VALIDATION SUMMARY:
     <span class="c1"># 1. Invoice_Amount: string → float</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">parse_amount</span><span class="p">(</span><span class="n">v</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">isna</span><span class="p">(</span><span class="n">v</span><span class="p">):</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
-        <span class="n">v</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;₹&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">v</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NPR &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">):</span>
             <span class="k">try</span><span class="p">:</span> <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="mi">100000</span>
             <span class="k">except</span><span class="p">:</span> <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
@@ -1499,12 +1495,12 @@ VALIDATION SUMMARY:
     <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Type — Invoice_Amount&#39;</span><span class="p">,</span> <span class="s1">&#39;Parsed string amounts to float64&#39;</span><span class="p">,</span>
              <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
-    <span class="c1"># 2. GST_Rate: remove % → numeric</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span>
-        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="c1"># 2. VAT_Rate: remove % → numeric</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_numeric</span><span class="p">(</span>
+        <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="o">.</span><span class="n">replace</span><span class="p">({</span><span class="s1">&#39;None&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="s1">&#39;nan&#39;</span><span class="p">:</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">}),</span> <span class="n">errors</span><span class="o">=</span><span class="s1">&#39;coerce&#39;</span><span class="p">)</span>
-    <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Type — GST_Rate&#39;</span><span class="p">,</span> <span class="s1">&#39;Removed </span><span class="si">% s</span><span class="s1">uffix, converted to numeric&#39;</span><span class="p">,</span>
-             <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+    <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Type — VAT_Rate&#39;</span><span class="p">,</span> <span class="s1">&#39;Removed </span><span class="si">% s</span><span class="s1">uffix, converted to numeric&#39;</span><span class="p">,</span>
+             <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">notna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
     <span class="c1"># 3. Date types</span>
     <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Invoice_Date&#39;</span><span class="p">,</span><span class="s1">&#39;Due_Date&#39;</span><span class="p">,</span><span class="s1">&#39;Payment_Date&#39;</span><span class="p">]:</span>
@@ -1514,7 +1510,7 @@ VALIDATION SUMMARY:
     <span class="c1"># 4. Missing values</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Industry&#39;</span><span class="p">)[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">median</span><span class="p">()))</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]))</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span>   <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tenure_Years&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tenure_Years&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Tenure_Years&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">())</span>
     <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Missing values&#39;</span><span class="p">,</span> <span class="s1">&#39;Imputed Amount/GST/Industry/Tenure&#39;</span><span class="p">,</span>
@@ -1533,11 +1529,11 @@ VALIDATION SUMMARY:
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span>    <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Industry&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
     <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Text&#39;</span><span class="p">,</span> <span class="s1">&#39;Standardised Client_Name and Industry&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 
-    <span class="c1"># 7. GST_Rate → nearest valid slab</span>
+    <span class="c1"># 7. VAT_Rate → nearest valid slab</span>
     <span class="n">valid_gst</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="mi">28</span><span class="p">}</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
         <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="n">valid_gst</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">r</span><span class="p">)))</span>
-    <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="s1">&#39;GST_Rate mapped to nearest valid slab&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
+    <span class="n">log_step</span><span class="p">(</span><span class="s1">&#39;Category&#39;</span><span class="p">,</span> <span class="s1">&#39;VAT_Rate mapped to nearest valid slab&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">))</span>
 
     <span class="c1"># 8. Outliers — winsorise Invoice_Amount</span>
     <span class="n">Q1</span><span class="p">,</span><span class="n">Q3</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">quantile</span><span class="p">([</span><span class="mf">0.25</span><span class="p">,</span><span class="mf">0.75</span><span class="p">])</span>
@@ -1567,12 +1563,12 @@ VALIDATION SUMMARY:
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Starting cleaning pipeline...
   ✓ Type — Invoice_Amount: Parsed string amounts to float64 (854 rows)
-  ✓ Type — GST_Rate: Removed % suffix, converted to numeric (867 rows)
+  ✓ Type — VAT_Rate: Removed % suffix, converted to numeric (867 rows)
   ✓ Type — Dates: Confirmed datetime64 (3 rows)
   ✓ Missing values: Imputed Amount/GST/Industry/Tenure (99 rows)
   ✓ Duplicates: Dropped exact &amp; key duplicates (30 rows)
   ✓ Text: Standardised Client_Name and Industry (850 rows)
-  ✓ Category: GST_Rate mapped to nearest valid slab (850 rows)
+  ✓ Category: VAT_Rate mapped to nearest valid slab (850 rows)
   ✓ Outliers: Winsorised Invoice_Amount at IQR fences (49 rows)
   ✓ Business rules: Fixed payment dates, zero amounts, clipped counts (0 rows)
 
@@ -1582,7 +1578,7 @@ Pipeline complete. Output: 850 rows × 15 columns
 <p>Professional practice: always produce a <strong>before/after summary</strong> to document what changed and confirm the data is now fit for analysis.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># ── Before vs After Quality Report ───────────────────────────────────────────</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  DATA CLEANING REPORT — Meridian Advisory Services&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  DATA CLEANING REPORT — Himalayan Advisory Services&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  Generated: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2"> %B %Y %H:%M&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
 
@@ -1616,7 +1612,7 @@ Pipeline complete. Output: 850 rows × 15 columns
 
 <span class="c1"># Try to parse raw amounts for comparison</span>
 <span class="n">raw_amounts</span> <span class="o">=</span> <span class="n">raw_backup</span><span class="p">[</span><span class="s1">&#39;Invoice_Amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span>
-    <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;₹&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;000&#39;</span><span class="p">)</span>
+    <span class="k">lambda</span> <span class="n">v</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NPR &#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;000&#39;</span><span class="p">)</span>
                    <span class="o">.</span><span class="n">strip</span><span class="p">())</span> <span class="k">if</span> <span class="n">pd</span><span class="o">.</span><span class="n">notna</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">))</span>
               <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
 <span class="p">)</span>
@@ -1626,19 +1622,19 @@ Pipeline complete. Output: 850 rows × 15 columns
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">raw_amounts</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tomato&#39;</span><span class="p">,</span>
              <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Raw&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Before Cleaning</span><span class="se">\n</span><span class="s1">(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">raw_amounts</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> parseable rows)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">clean_amounts</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">40</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;seagreen&#39;</span><span class="p">,</span>
              <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Clean&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;After Cleaning</span><span class="se">\n</span><span class="s1">(</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">clean_amounts</span><span class="p">)</span><span class="si">:</span><span class="s1">,</span><span class="si">}</span><span class="s1"> rows)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>=================================================================
-  DATA CLEANING REPORT — Meridian Advisory Services
-  Generated: 27 April 2026 22:32
+  DATA CLEANING REPORT — Himalayan Advisory Services
+  Generated: 28 April 2026 07:41
 =================================================================
 Metric                                  Before           After
 ──────────────────────────────────────────────────────────────
@@ -1654,24 +1650,18 @@ Outliers flagged                             —              49  →
 
 CLEANING LOG:
   [01] Type — Invoice_Amount          Parsed string amounts to float64
-  [02] Type — GST_Rate                Removed % suffix, converted to numeric
+  [02] Type — VAT_Rate                Removed % suffix, converted to numeric
   [03] Type — Dates                   Confirmed datetime64
   [04] Missing values                 Imputed Amount/GST/Industry/Tenure
   [05] Duplicates                     Dropped exact &amp; key duplicates
   [06] Text                           Standardised Client_Name and Industry
-  [07] Category                       GST_Rate mapped to nearest valid slab
+  [07] Category                       VAT_Rate mapped to nearest valid slab
   [08] Outliers                       Winsorised Invoice_Amount at IQR fences
   [09] Business rules                 Fixed payment dates, zero amounts, clipped counts
 
 =================================================================
-
-
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/1306054305.py:54: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_34_2.png" /></p>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_34_1.png" /></p>
 <h2 id="section-14-practice-exercises">Section 14: Practice Exercises</h2>
 <hr />
 <h4 id="exercise-1-identify-and-fix-missing-values">🏋️ Exercise 1 — Identify and Fix Missing Values</h4>
@@ -1704,8 +1694,8 @@ CLEANING LOG:
 <p>You receive a GST purchase register with the following issues:
 - Party names in mixed case with extra spaces
 - GSTIN numbers in lowercase (should be uppercase, 15 chars)
-- Taxable value stored as <code>"INR 45,000.00"</code> (string)
-- GST rate stored as <code>"18 %"</code> (string)
+- Taxable value stored as <code>"NPR 45,000.00"</code> (string)
+- GST rate stored as <code>"13%"</code> (string)
 - Some rows with taxable value = 0</p>
 <p>Write a cleaning function <code>clean_gstr2(df)</code> that fixes all these issues and returns a clean DataFrame with a <code>cleaning_summary</code> printed.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Exercise 1: Payroll missing values</span>
@@ -1733,11 +1723,11 @@ CLEANING LOG:
 <div class="highlight"><pre><span></span><code><span class="c1"># Exercise 3: Mini cleaning pipeline for GST Purchase Register</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">gstr2_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="n">vat_purchases_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
     <span class="s1">&#39;Party_Name&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="s1">&#39;  ALPHA TRADERS  &#39;</span><span class="p">,</span> <span class="s1">&#39;beta pvt ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;GAMMA INC.&#39;</span><span class="p">,</span> <span class="s1">&#39;  Delta Corp&#39;</span><span class="p">,</span> <span class="s1">&#39;zeta co  &#39;</span><span class="p">],</span>
     <span class="s1">&#39;GSTIN&#39;</span><span class="p">:</span>         <span class="p">[</span><span class="s1">&#39;27aabct0001a1z5&#39;</span><span class="p">,</span> <span class="s1">&#39;MHBBB0002B1Z4&#39;</span><span class="p">,</span> <span class="s1">&#39;29ccccc0003c1z1&#39;</span><span class="p">,</span> <span class="s1">&#39;DDDDD0004d1Z2&#39;</span><span class="p">,</span> <span class="s1">&#39;33eeeee0005e&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Taxable_Value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;INR 45,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 82,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 1,20,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 67,500.00&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;GST_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;18 %&#39;</span><span class="p">,</span> <span class="s1">&#39;12%&#39;</span><span class="p">,</span> <span class="s1">&#39; 5 %&#39;</span><span class="p">,</span> <span class="s1">&#39;18 %&#39;</span><span class="p">,</span> <span class="s1">&#39;28%&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Taxable_Value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NPR 45,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 82,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 1,20,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 67,500.00&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;VAT_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;13%&#39;</span><span class="p">,</span> <span class="s1">&#39;12%&#39;</span><span class="p">,</span> <span class="s1">&#39; 5 %&#39;</span><span class="p">,</span> <span class="s1">&#39;13%&#39;</span><span class="p">,</span> <span class="s1">&#39;28%&#39;</span><span class="p">],</span>
     <span class="s1">&#39;Invoice_No&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="s1">&#39;PUR-001&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-002&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-003&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-004&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-005&#39;</span><span class="p">],</span>
 <span class="p">})</span>
 
@@ -1745,7 +1735,7 @@ CLEANING LOG:
     <span class="c1"># Your solution here</span>
     <span class="k">pass</span>
 
-<span class="c1"># clean_gstr2(gstr2_raw)</span>
+<span class="c1"># clean_gstr2(vat_purchases_raw)</span>
 </code></pre></div>
 <hr />
 <h3 id="solutions">💡 Solutions</h3>
@@ -1845,7 +1835,7 @@ Missing values remaining: 0
            <span class="n">c</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Invoice Amount vs Days Delayed</span><span class="se">\n</span><span class="s1">(Red = Outlier flagged by IQR)&#39;</span><span class="p">,</span>
              <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (₹ Lakhs)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Invoice Amount (NPR)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Days Delayed&#39;</span><span class="p">)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.patches</span><span class="w"> </span><span class="kn">import</span> <span class="n">Patch</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="o">=</span><span class="p">[</span><span class="n">Patch</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;steelblue&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;Normal&#39;</span><span class="p">),</span>
@@ -1862,27 +1852,21 @@ Missing values remaining: 0
   Z-score (|Z|&gt;3):      0
   IQR (1.5×IQR fence):  0
   Difference: IQR is more sensitive for skewed financial data
-
-
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_83577/2446049920.py:37: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_41_2.png" /></p>
+<p><img alt="png" src="../07_Data_Cleaning_for_CA_files/07_Data_Cleaning_for_CA_41_1.png" /></p>
 <div class="highlight"><pre><span></span><code>Recommendation: Capping (Winsorisation) is preferred over removal because:
   1. Removes distortion without losing rows (important for class balance)
   2. High-value invoices may be genuine and correlated with late payment
   3. Dropping them would bias the model toward smaller-invoice behaviour
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 3: GSTR-2 cleaning pipeline</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 3: VAT Purchase Register cleaning pipeline</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">gstr2_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+<span class="n">vat_purchases_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
     <span class="s1">&#39;Party_Name&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="s1">&#39;  ALPHA TRADERS  &#39;</span><span class="p">,</span> <span class="s1">&#39;beta pvt ltd&#39;</span><span class="p">,</span> <span class="s1">&#39;GAMMA INC.&#39;</span><span class="p">,</span> <span class="s1">&#39;  Delta Corp&#39;</span><span class="p">,</span> <span class="s1">&#39;zeta co  &#39;</span><span class="p">],</span>
     <span class="s1">&#39;GSTIN&#39;</span><span class="p">:</span>         <span class="p">[</span><span class="s1">&#39;27aabct0001a1z5&#39;</span><span class="p">,</span> <span class="s1">&#39;MHBBB0002B1Z4&#39;</span><span class="p">,</span> <span class="s1">&#39;29ccccc0003c1z1&#39;</span><span class="p">,</span> <span class="s1">&#39;DDDDD0004d1Z2&#39;</span><span class="p">,</span> <span class="s1">&#39;33eeeee0005e&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;Taxable_Value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;INR 45,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 82,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 1,20,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;INR 67,500.00&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;GST_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;18 %&#39;</span><span class="p">,</span> <span class="s1">&#39;12%&#39;</span><span class="p">,</span> <span class="s1">&#39; 5 %&#39;</span><span class="p">,</span> <span class="s1">&#39;18 %&#39;</span><span class="p">,</span> <span class="s1">&#39;28%&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Taxable_Value&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;NPR 45,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 82,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 1,20,000.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 0.00&#39;</span><span class="p">,</span> <span class="s1">&#39;NPR 67,500.00&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;VAT_Rate&#39;</span><span class="p">:</span>      <span class="p">[</span><span class="s1">&#39;13%&#39;</span><span class="p">,</span> <span class="s1">&#39;12%&#39;</span><span class="p">,</span> <span class="s1">&#39; 5 %&#39;</span><span class="p">,</span> <span class="s1">&#39;13%&#39;</span><span class="p">,</span> <span class="s1">&#39;28%&#39;</span><span class="p">],</span>
     <span class="s1">&#39;Invoice_No&#39;</span><span class="p">:</span>    <span class="p">[</span><span class="s1">&#39;PUR-001&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-002&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-003&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-004&#39;</span><span class="p">,</span><span class="s1">&#39;PUR-005&#39;</span><span class="p">],</span>
 <span class="p">})</span>
 
@@ -1899,20 +1883,20 @@ Missing values remaining: 0
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GSTIN_Valid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GSTIN&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span> <span class="o">==</span> <span class="mi">15</span>
     <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;GSTIN: uppercased | </span><span class="si">{</span><span class="p">(</span><span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;GSTIN_Valid&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">}</span><span class="s1"> invalid (≠15 chars)&#39;</span><span class="p">)</span>
 
-    <span class="c1"># 3. Taxable Value — remove &quot;INR &quot; and convert</span>
+    <span class="c1"># 3. Taxable Value — remove &quot;NPR &quot; and convert</span>
     <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Taxable_Value&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Taxable_Value&#39;</span><span class="p">]</span>
-        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;INR&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;NPR&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">))</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Taxable_Value: removed INR prefix, commas; converted to float&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;Taxable_Value: removed NPR prefix, commas; converted to float&#39;</span><span class="p">)</span>
 
     <span class="c1"># 4. GST Rate — remove spaces and %</span>
-    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;GST_Rate&#39;</span><span class="p">]</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;VAT_Rate&#39;</span><span class="p">]</span>
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;%&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">,</span><span class="n">regex</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
-    <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;GST_Rate: removed spaces and %, converted to int&#39;</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;VAT_Rate: removed spaces and %, converted to int&#39;</span><span class="p">)</span>
 
     <span class="c1"># 5. Remove zero-value rows</span>
     <span class="n">n_zero</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Taxable_Value&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1920,28 +1904,28 @@ Missing values remaining: 0
     <span class="n">log</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Removed </span><span class="si">{</span><span class="n">n_zero</span><span class="si">}</span><span class="s1"> zero-value rows&#39;</span><span class="p">)</span>
 
     <span class="c1"># Cleaning summary</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GSTR-2 Cleaning Summary:&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;VAT Purchase Register Cleaning Summary:&#39;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">step</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">log</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  [</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">] </span><span class="si">{</span><span class="n">step</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Output: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1"> rows × </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s1"> columns&#39;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">df</span>
 
-<span class="n">clean_df</span> <span class="o">=</span> <span class="n">clean_gstr2</span><span class="p">(</span><span class="n">gstr2_raw</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Cleaned GSTR-2:&#39;</span><span class="p">)</span>
+<span class="n">clean_df</span> <span class="o">=</span> <span class="n">clean_gstr2</span><span class="p">(</span><span class="n">vat_purchases_raw</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">Cleaned VAT Purchase Register:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">clean_df</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>GSTR-2 Cleaning Summary:
+<div class="highlight"><pre><span></span><code>VAT Purchase Register Cleaning Summary:
   [1] Party_Name: stripped, title-cased, collapsed spaces
   [2] GSTIN: uppercased | 3 invalid (≠15 chars)
-  [3] Taxable_Value: removed INR prefix, commas; converted to float
-  [4] GST_Rate: removed spaces and %, converted to int
+  [3] Taxable_Value: removed NPR prefix, commas; converted to float
+  [4] VAT_Rate: removed spaces and %, converted to int
   [5] Removed 1 zero-value rows
 
 Output: 4 rows × 6 columns
 
-Cleaned GSTR-2:
-   Party_Name           GSTIN  Taxable_Value  GST_Rate Invoice_No  GSTIN_Valid
-Alpha Traders 27AABCT0001A1Z5        45000.0        18    PUR-001         True
+Cleaned VAT Purchase Register:
+   Party_Name           GSTIN  Taxable_Value  VAT_Rate Invoice_No  GSTIN_Valid
+Alpha Traders 27AABCT0001A1Z5        45000.0        13    PUR-001         True
  Beta Pvt Ltd   MHBBB0002B1Z4        82000.0        12    PUR-002        False
    Gamma Inc. 29CCCCC0003C1Z1       120000.0         5    PUR-003         True
       Zeta Co    33EEEEE0005E        67500.0        28    PUR-005        False
