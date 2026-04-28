@@ -168,6 +168,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../09_Regression_Classification_for_CA/">Regression & Classification</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -483,6 +485,12 @@ Oct: NPR 15.5L | Nov: NPR 14.2L | Dec: NPR 16.8L | Jan: NPR 19.1L | Feb: NPR 20.
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fig type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fig2</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;ax type:  </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">ax_left</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_7_0.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_7_1.png" /></p>
+<div class="highlight"><pre><span></span><code>Key insight: fig controls the canvas; ax controls the chart.
+fig type: &lt;class &#39;matplotlib.figure.Figure&#39;&gt;
+ax type:  &lt;class &#39;matplotlib.axes._axes.Axes&#39;&gt;
+</code></pre></div>
 <h2 id="section-4-two-interfaces-pyplot-vs-object-oriented">Section 4: Two Interfaces — pyplot vs Object-Oriented</h2>
 <p>Matplotlib has two ways to create charts. Understanding the difference prevents confusion.</p>
 <h3 id="interface-1-pyplot-implicit-state-machine">Interface 1: pyplot (implicit state machine)</h3>
@@ -730,7 +738,7 @@ Ready!
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Data loaded. Amounts are in NPR  Thousands.&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>Data loaded. Amounts are in ₹ Thousands.
+<div class="highlight"><pre><span></span><code>Data loaded. Amounts are in NPR  Thousands.
 </code></pre></div>
 <h2 id="section-7-anatomy-of-a-matplotlib-chart">Section 7: Anatomy of a Matplotlib Chart</h2>
 <div class="highlight"><pre><span></span><code>┌─────────────────────────── Figure (the whole canvas) ─────────────────────────────┐
@@ -996,8 +1004,8 @@ Ready!
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Invoices above NPR </span><span class="si">{</span><span class="n">p80</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">: </span><span class="si">{</span><span class="n">above_p80</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">above_p80</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">invoice_amounts</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">%) — these form the audit focus&#39;</span><span class="p">)</span>
 </code></pre></div>
 <p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_27_0.png" /></p>
-<div class="highlight"><pre><span></span><code>80th percentile: ₹212,208
-Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
+<div class="highlight"><pre><span></span><code>80th percentile: NPR 212,208
+Invoices above NPR 212,208: 40 (20.0%) — these form the audit focus
 </code></pre></div>
 <h2 id="section-14-scatter-plot-profit-vs-revenue-relationship">Section 14: Scatter Plot — Profit vs Revenue Relationship</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Scatter plot — Monthly Revenue vs Profit</span>
@@ -1109,14 +1117,8 @@ Invoices above ₹212,208: 40 (20.0%) — these form the audit focus
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Available styles (first 10): [&#39;Solarize_Light2&#39;, &#39;_classic_test_patch&#39;, &#39;_mpl-gallery&#39;, &#39;_mpl-gallery-nogrid&#39;, &#39;bmh&#39;, &#39;classic&#39;, &#39;dark_background&#39;, &#39;fast&#39;, &#39;fivethirtyeight&#39;, &#39;ggplot&#39;]
-
-
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_31281/936812922.py:19: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_2.png" /></p>
+<p><img alt="png" src="../04_Matplotlib_for_CA_files/04_Matplotlib_for_CA_33_1.png" /></p>
 <h2 id="section-17-saving-charts">Section 17: Saving Charts</h2>
 <p>Save charts as PNG, PDF, or SVG for reports and presentations.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create a chart and save it</span>

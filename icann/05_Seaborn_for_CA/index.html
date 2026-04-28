@@ -172,6 +172,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../09_Regression_Classification_for_CA/">Regression & Classification</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -566,6 +568,17 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Axes-level return type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># AxesSubplot</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Figure-level return type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>       <span class="c1"># PairGrid</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/4191714505.py:20: FutureWarning:
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.boxplot(data=sample, x=&#39;Quarter&#39;, y=&#39;Revenue&#39;, ax=axes[0], palette=&#39;Blues_d&#39;)
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_7_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_7_2.png" /></p>
+<div class="highlight"><pre><span></span><code>Axes-level return type: &lt;class &#39;matplotlib.axes._axes.Axes&#39;&gt;
+Figure-level return type: &lt;class &#39;seaborn.axisgrid.PairGrid&#39;&gt;
+</code></pre></div>
 <h2 id="section-4-tidy-data-the-format-seaborn-expects">Section 4: Tidy Data — The Format Seaborn Expects</h2>
 <h3 id="what-is-tidy-data">What is tidy data?</h3>
 <p>Seaborn is designed to work with <strong>tidy (long) format</strong> DataFrames. Understanding this format is essential — it determines how you pass data to Seaborn.</p>
@@ -669,6 +682,25 @@ May    | Revenue     | 1380000
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Wide format (from Excel):
+  Month  Revenue  COGS  Net_Profit
+0   Apr     1250   750         197
+1   May     1380   828         229
+2   Jun     1120   672         185
+
+Long (tidy) format after melt():
+Month     Metric  Amount
+  Apr    Revenue    1250
+  Apr Net_Profit     197
+  Apr       COGS     750
+  May    Revenue    1380
+  May Net_Profit     229
+  May       COGS     828
+  Jun    Revenue    1120
+  Jun Net_Profit     185
+  Jun       COGS     672
+</code></pre></div>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_9_1.png" /></p>
 <h2 id="section-5-seaborn-themes-palettes">Section 5: Seaborn Themes &amp; Palettes</h2>
 <p>One of Seaborn's most valued features is its built-in themes and colour palettes. One line of code transforms the look of every chart in your notebook.</p>
 <h3 id="built-in-themes">Built-in themes</h3>
@@ -839,18 +871,18 @@ Ready!
 Invoice dataset:  300 records
 
    Department   Grade  Annual_CTC  Experience  Perf_Score  Bonus_Pct  \
-0  Operations     Mid      641700         3.5         2.6        9.2   
-1          IT  Junior      581290         1.3         3.6       11.0   
-2       Sales  Junior      505008         1.0         4.7       14.7   
-3       Sales  Senior     1275030         7.3         4.3       10.5   
-4     Finance     Mid      704174         3.4         4.5       13.1
+0  Operations     Mid      427800         3.5         2.6        9.2   
+1          IT  Junior      339086         1.3         3.6       11.0   
+2       Sales  Junior      294588         1.0         4.7       14.7   
+3       Sales  Senior      850020         7.3         4.3       10.5   
+4     Finance     Mid      469450         3.4         4.5       13.1
 
    Bonus_Amt  
-0      59036  
-1      63942  
-2      74236  
-3     133878  
-4      92247
+0      39358  
+1      37299  
+2      43304  
+3      89252  
+4      61498
 </code></pre></div>
 <h2 id="section-7-seaborn-themes">Section 7: Seaborn Themes</h2>
 <p>Seaborn gives you ready-made, professional themes. Just one line changes the look of all your charts.</p>
@@ -905,12 +937,7 @@ Invoice dataset:  300 records
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/803326696.py:18: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_18_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_18_0.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># kdeplot — Salary distribution by Grade (smooth density curves)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
@@ -930,18 +957,13 @@ Invoice dataset:  300 records
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Average CTC by Grade:&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">employees</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Grade&#39;</span><span class="p">)[</span><span class="s1">&#39;Annual_CTC&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;NPR </span><span class="si">{</span><span class="n">x</span><span class="o">/</span><span class="mi">100000</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1"> Lakhs&#39;</span><span class="p">))</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/2691951554.py:14: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_19_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_19_0.png" /></p>
 <div class="highlight"><pre><span></span><code>Average CTC by Grade:
 Grade
-Junior     ₹5.2 Lakhs
-Mid        ₹7.5 Lakhs
-Senior    ₹11.3 Lakhs
-Lead      ₹16.5 Lakhs
+Junior     NPR 3.0 Lakhs
+Mid        NPR 5.0 Lakhs
+Senior     NPR 7.6 Lakhs
+Lead      NPR 11.4 Lakhs
 Name: Annual_CTC, dtype: object
 </code></pre></div>
 <h2 id="section-9-box-plot-outlier-detection">Section 9: Box Plot — Outlier Detection</h2>
@@ -988,20 +1010,16 @@ They show the spread of data and immediately highlight <strong>outliers</strong>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:5: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/888267004.py:5: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=invoice_df, x=&#39;Category&#39;, y=&#39;Amount&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:15: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/888267004.py:15: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/300025287.py:24: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_21_1.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Box plot with stripplot overlaid — shows individual data points</span>
@@ -1025,15 +1043,11 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4043011023.py:4: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/660531211.py:4: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=employees, x=&#39;Grade&#39;, y=&#39;Annual_CTC&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4043011023.py:19: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_22_1.png" /></p>
 <h2 id="section-10-violin-plot-distribution-shape-by-category">Section 10: Violin Plot — Distribution Shape by Category</h2>
@@ -1054,15 +1068,11 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/568692105.py:4: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/3679463453.py:4: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.violinplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/568692105.py:14: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_24_1.png" /></p>
 <h2 id="section-11-bar-count-plots-category-analysis">Section 11: Bar &amp; Count Plots — Category Analysis</h2>
@@ -1092,20 +1102,16 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:6: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/3403452037.py:6: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.barplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:16: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/3403452037.py:16: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.barplot(data=employees, x=&#39;Grade&#39;, y=&#39;Bonus_Pct&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/182792073.py:23: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_26_1.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># countplot — how many invoices by status and category?</span>
@@ -1135,7 +1141,7 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/4118093210.py:5: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/4118093210.py:5: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -1186,7 +1192,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_29_0.png" /></p>
 <div class="highlight"><pre><span></span><code>Key Insights from Correlation Matrix:
-  CTC vs Experience:  0.93  — Strong +ve
+  CTC vs Experience:  0.94  — Strong +ve
   Bonus% vs Perf:     0.79  — Performance drives bonus
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Monthly revenue heatmap — very common in business analysis</span>
@@ -1218,14 +1224,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.draw()
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/135067131.py:27: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_30_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_30_0.png" /></p>
 <h2 id="section-13-pair-plot-multi-variable-exploration">Section 13: Pair Plot — Multi-variable Exploration</h2>
 <p><code>sns.pairplot()</code> creates a <strong>grid of scatter plots</strong> for all pairs of numeric variables — ideal for initial data exploration. One line of code replaces many separate charts.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pair plot — all relationships in employee data at once</span>
@@ -1281,12 +1280,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1591439558.py:31: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_34_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_34_0.png" /></p>
 <div class="highlight"><pre><span></span><code><span class="c1"># lmplot — regression by subgroup (Grade)</span>
 <span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">lmplot</span><span class="p">(</span>
     <span class="n">data</span><span class="o">=</span><span class="n">employees</span><span class="p">,</span>
@@ -1310,12 +1304,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/308541801.py:21: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_35_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_35_0.png" /></p>
 <h2 id="section-15-facetgrid-charts-by-category">Section 15: FacetGrid — Charts by Category</h2>
 <p><code>FacetGrid</code> creates a grid of the same chart, <strong>split by a categorical variable</strong>. Like applying the same chart to each department, each quarter, etc.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Invoice amount distribution — one histogram per expense category</span>
@@ -1341,12 +1330,7 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1895315369.py:21: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  plt.tight_layout()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
-</code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_37_1.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_37_0.png" /></p>
 <h2 id="section-16-seaborn-matplotlib-together">Section 16: Seaborn + Matplotlib Together</h2>
 <p>Seaborn and Matplotlib work together seamlessly. Use Seaborn for the chart, Matplotlib for fine-tuning.</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Comprehensive HR Analytics Dashboard</span>
@@ -1406,13 +1390,11 @@ In finance: <em>"Does revenue growth correlate with headcount?"</em> <em>"Are sa
 
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/787677977.py:11: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/2995762040.py:11: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=employees, x=&#39;Department&#39;, y=&#39;Annual_CTC&#39;,
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_39_1.png" /></p>
 <h2 id="section-17-practice-exercises">Section 17: Practice Exercises</h2>
@@ -1486,20 +1468,16 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Outlier count: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">invoice_df</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s1">.1f</span><span class="si">}</span><span class="s1">% of invoices)&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Total outlier value: NPR </span><span class="si">{</span><span class="n">outliers</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="si">:</span><span class="s1">,.0f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/2447621650.py:20: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/81329947.py:20: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
-  sns.boxplot(data=invoice_df, x=&#39;GST_Rate&#39;, y=&#39;Amount&#39;, palette=&#39;coolwarm&#39;, ax=axes[0],
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/seaborn/utils.py:61: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.draw()
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
+  sns.boxplot(data=invoice_df, x=&#39;VAT_Rate&#39;, y=&#39;Amount&#39;, palette=&#39;coolwarm&#39;, ax=axes[0],
 </code></pre></div>
 <p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_45_1.png" /></p>
-<div class="highlight"><pre><span></span><code>Outlier threshold: ₹231,375
+<div class="highlight"><pre><span></span><code>Outlier threshold: NPR 231,375
 Outlier count: 11 (3.7% of invoices)
-Total outlier value: ₹3,075,000
+Total outlier value: NPR 3,075,000
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># SOLUTION — Exercise 2: Department-wise Dashboard</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span><span class="o">,</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span><span class="o">,</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span><span class="o">,</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -1559,7 +1537,7 @@ Total outlier value: ₹3,075,000
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_34372/1449637435.py:23: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11210/3553043638.py:23: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
@@ -1571,26 +1549,20 @@ Passing `palette` without assigning `hue` is deprecated and will be removed in v
 
 TypeError                                 Traceback (most recent call last)
 
-Cell In[21], line 48
+Cell In[23], line 48
      45 axes[1,0].legend(fontsize=8, markerscale=1.5)
      47 # 4. Heatmap — avg salary by Dept × Grade
 ---&gt; 48 heat_data = employees.pivot_table(values=&#39;Annual_CTC&#39;, index=&#39;Department&#39;, columns=&#39;Grade&#39;,
      49                                    columns_sort=False,
      50                                    aggfunc=&#39;mean&#39;).reindex(columns=[&#39;Junior&#39;,&#39;Mid&#39;,&#39;Senior&#39;,&#39;Lead&#39;]) / 100000
      51 sns.heatmap(heat_data.round(1), annot=True, fmt=&#39;.1f&#39;, cmap=&#39;YlOrRd&#39;, ax=axes[1,1],
-     52             cbar_kws={&#39;label&#39;: &#39;Avg CTC (₹ Lakhs)&#39;}, linewidths=0.5)
-     53 axes[1,1].set_title(&#39;Avg Salary (₹L) by Dept × Grade&#39;, fontweight=&#39;bold&#39;)
+     52             cbar_kws={&#39;label&#39;: &#39;Avg CTC (NPR  Lakhs)&#39;}, linewidths=0.5)
+     53 axes[1,1].set_title(&#39;Avg Salary (NPR L) by Dept × Grade&#39;, fontweight=&#39;bold&#39;)
 
 
 TypeError: DataFrame.pivot_table() got an unexpected keyword argument &#39;columns_sort&#39;
-
-
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/events.py:82: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  func(*args, **kwargs)
-/Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 8377 (\N{INDIAN RUPEE SIGN}) missing from font(s) Arial.
-  fig.canvas.print_figure(bytes_io, **kw)
 </code></pre></div>
-<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_46_3.png" /></p>
+<p><img alt="png" src="../05_Seaborn_for_CA_files/05_Seaborn_for_CA_46_2.png" /></p>
 <hr />
 <h2 id="module-5-complete-and-thats-the-full-series">🎉 Module 5 Complete — And That's the Full Series!</h2>
 <h3 id="what-youve-learned-in-this-module">What you've learned in this module</h3>

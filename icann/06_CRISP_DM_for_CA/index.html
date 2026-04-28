@@ -212,6 +212,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../09_Regression_Classification_for_CA/">Regression & Classification</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -1332,7 +1334,7 @@ CONSTRAINTS:
 <div class="highlight"><pre><span></span><code>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   DATA PROFILE REPORT
   Dataset: Invoice &amp; Payment History
-  Generated: 28 Apr 2026 07:41
+  Generated: 28 Apr 2026 13:30
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 📐 DIMENSIONS
@@ -1627,26 +1629,26 @@ QUALITY ISSUES FOUND: 0
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice/Credit ratio: late payers use a higher % of their credit limit&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;  • Invoice_Amount alone has weak correlation with Is_Late&#39;</span><span class="p">)</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:7: FutureWarning:
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:7: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Amount&#39;, palette={&#39;0&#39;: &#39;seagreen&#39;, &#39;1&#39;: &#39;tomato&#39;}, ax=axes[0, 0], width=0.45, flierprops=dict(marker=&#39;o&#39;, markersize=3, alpha=0.4))
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:9: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:9: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[0, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:41: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:41: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.violinplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Tenure_Years&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:45: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:45: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[1, 0].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:51: FutureWarning:
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:51: FutureWarning:
 
 Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `x` variable to `hue` and set `legend=False` for the same effect.
 
   sns.boxplot(data=invoices, x=&#39;Is_Late&#39;, y=&#39;Invoice_Credit_Ratio&#39;,
-/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41477/815473773.py:56: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
+/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11251/815473773.py:56: UserWarning: set_ticklabels() should only be used with a fixed number of ticks, i.e. after set_ticks() or using a FixedLocator.
   axes[1, 1].set_xticklabels([&#39;On Time&#39;, &#39;Late &gt;60d&#39;])
 </code></pre></div>
 <p><img alt="png" src="../06_CRISP_DM_for_CA_files/06_CRISP_DM_for_CA_28_1.png" /></p>

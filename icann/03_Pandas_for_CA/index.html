@@ -174,6 +174,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../09_Regression_Classification_for_CA/">Regression & Classification</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -698,7 +700,7 @@ Date       datetime64[ns]
 dtype: object
 
 Memory for 50,000 account-type rows:
-  object dtype:   3,187,885 bytes
+  object dtype:   3,187,540 bytes
   category dtype: 50,555 bytes  (63x smaller!)
 
 Amount column as imported (object): object
@@ -1450,11 +1452,7 @@ Pandas makes this effortless.</p>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Saved financial_report.xlsx (3 sheets)&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Saved pl_data.csv
-
-
 Saved pl_data.xlsx
-
-
 Saved financial_report.xlsx (3 sheets)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Reading back the files</span>
@@ -1479,11 +1477,7 @@ Saved financial_report.xlsx (3 sheets)
 1       41.13  
 2       38.63
 
-
-
-Read from Excel — shape:
-
- (12, 8)
+Read from Excel — shape: (12, 8)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Common read_csv / read_excel options you&#39;ll use in practice</span>
 
@@ -1742,8 +1736,6 @@ Asset      12335000        0
 Expense     3570000        0
 Income            0  5525000
 Liability         0  9130000
-
-
 
 Exported to trial_balance_clean.xlsx
 </code></pre></div>

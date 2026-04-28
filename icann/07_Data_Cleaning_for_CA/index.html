@@ -172,6 +172,8 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../09_Regression_Classification_for_CA/">Regression & Classification</a>
                   </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
               </ul>
       </div>
     </div>
@@ -1060,7 +1062,7 @@ Total missing values remaining: 0
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_41492/1226850125.py:24: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
+<div class="highlight"><pre><span></span><code>/var/folders/kp/mytrwq8157q9s1tmw7r79fkm0000gn/T/ipykernel_11281/1226850125.py:24: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
   plt.tight_layout()
 /Users/aayush/micromamba/envs/stats/lib/python3.10/site-packages/IPython/core/pylabtools.py:170: UserWarning: Glyph 10003 (\N{CHECK MARK}) missing from font(s) Arial.
   fig.canvas.print_figure(bytes_io, **kw)
@@ -1108,8 +1110,6 @@ Total missing values remaining: 0
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Resolved by keeping higher-amount record. Rows remaining: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>Exact duplicate rows: 30
-
-
 
 Sample duplicates:
     Invoice_ID Client_ID  Invoice_Amount Invoice_Date
@@ -1634,7 +1634,7 @@ Pipeline complete. Output: 850 rows × 15 columns
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>=================================================================
   DATA CLEANING REPORT — Himalayan Advisory Services
-  Generated: 28 April 2026 07:41
+  Generated: 28 April 2026 13:31
 =================================================================
 Metric                                  Before           After
 ──────────────────────────────────────────────────────────────
