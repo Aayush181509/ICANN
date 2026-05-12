@@ -1,6 +1,6 @@
 # Python & Data Analytics for CA Professionals
 
-**Welcome!** I'm Aayush, your instructor for this training programme at ICAN.
+**Welcome!** I'm Aayush, your Facilitator for this training programme at ICAN.
 
 This course is designed specifically for **Chartered Accountants and finance professionals** who want to harness the power of Python to automate, analyse, and visualise financial data — with zero prior coding experience required.
 
