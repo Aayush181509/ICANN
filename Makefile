@@ -6,8 +6,8 @@ INPUT_DIR  := notebooks
 NOTEBOOK ?= notebooks/00a_numpy_basics.ipynb
 # Default output directory for converted notebooks
 # If OUTPUT is not set, it defaults to docs/lectures/
-OUTPUT   ?= docs/icann/
-OUTPUT_DIR := docs/icann
+OUTPUT   ?= docs/ican/
+OUTPUT_DIR := docs/ican
 NOTEBOOKS  := $(wildcard $(INPUT_DIR)/*.ipynb)
 
 .PHONY: run deploy build serve convert all convert-all

@@ -1,10 +1,24 @@
-site_name: ICANN Training
-site_description: Data Analytics Training at ICANN
+site_name: ICAN Training
+site_description: Data Analytics Training at ICAN
 
 nav:
-  - Python Basics: index.md
-  - Numpy Basics: icann/00a_numpy_basics.md
-    
+  - Getting Started: index.md
+  - Introduction:
+    - DS, ML & AI Overview: ican/00_Intro_DS_ML_AI_for_CA.md
+  - Basics:
+    - Python Basics: ican/01_Python_for_CA_Beginners.md
+    - Numpy: ican/02_NumPy_for_CA.md
+    - Pandas: ican/03_Pandas_for_CA.md
+    - Matplotlib: ican/04_Matplotlib_for_CA.md
+    - Seaborn: ican/05_Seaborn_for_CA.md
+  - Data Analytics:
+    - CRISP-DM Process: ican/06_CRISP_DM_for_CA.md
+    - Data Cleaning: ican/07_Data_Cleaning_for_CA.md
+    - Feature Engineering: ican/08_Feature_Engineering_for_CA.md
+    - Regression & Classification: ican/09_Regression_Classification_for_CA.md
+    - Clustering & K-Means: ican/10_Clustering_for_CA.md
+
+
 
 theme:
   # name: material
@@ -33,8 +47,8 @@ theme:
 
 markdown_extensions:
   - pymdownx.highlight
-  - pymdownx.superfences  
+  - pymdownx.superfences
 extra:
   generator: false
-      
+
 copyright: Copyright &copy; 2025 - Aayush Raj Regmi
