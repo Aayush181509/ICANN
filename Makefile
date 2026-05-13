@@ -2,12 +2,14 @@
 # Use bash for shell commands
 SHELL := /bin/bash
 # Default variables
-INPUT_DIR  := notebooks
+# INPUT_DIR  := notebooks
+INPUT_DIR  := agentic/RAG/Finance/notebooks
+
 NOTEBOOK ?= notebooks/00a_numpy_basics.ipynb
 # Default output directory for converted notebooks
 # If OUTPUT is not set, it defaults to docs/lectures/
 OUTPUT   ?= docs/ican/
-OUTPUT_DIR := docs/ican
+OUTPUT_DIR := docs/ican/Agentic/
 NOTEBOOKS  := $(wildcard $(INPUT_DIR)/*.ipynb)
 
 .PHONY: run deploy build serve convert all convert-all
