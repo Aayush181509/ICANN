@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Agentic RAG - ICAN Training</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Agentic RAG";
+        var mkdocs_page_input_path = "ican/Agentic/06_agentic_rag_langgraph.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../09_Regression_Classification_for_CA/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Agentic RAG</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-an-ai-agent">What is an AI Agent?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#langgraph-explained">LangGraph Explained</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#workflow-1-financial-health-analysis">Workflow 1: Financial Health Analysis</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#workflow-2-cross-company-ratio-comparison">Workflow 2: Cross-Company Ratio Comparison</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#workflow-3-audit-focused-query">Workflow 3: Audit-Focused Query</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#where-agentic-rag-goes-next">Where Agentic RAG Goes Next</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#multi-agent-systems">Multi-Agent Systems</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#automated-financial-reporting">Automated Financial Reporting</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-changes-for-ca-professionals">What Changes for CA Professionals</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Agentic AI</li>
+      <li class="breadcrumb-item active">Agentic RAG</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="section-06-agentic-rag-with-langgraph">Section 06: Agentic RAG with LangGraph</h1>
+<p><strong>Duration:</strong> ~90 minutes<br />
+<strong>Goal:</strong> Build an AI agent that decides <em>which tools to use</em> for each financial analysis question — vector search, graph query, ratio calculation, or document summarization.</p>
+<hr />
+<h2 id="what-is-an-ai-agent">What is an AI Agent?</h2>
+<p>Think of how a <strong>senior CA analyst</strong> answers a complex question:</p>
+<blockquote>
+<p><em>"Analyze the financial health of NMB Bank for FY2023."</em></p>
+</blockquote>
+<p>They don't just search one textbook. They:
+1. <strong>Look up</strong> the key financial figures (net profit, assets, liabilities)
+2. <strong>Compute</strong> ratios (current ratio, ROE, debt-equity)
+3. <strong>Check</strong> the auditor's notes for any warnings
+4. <strong>Summarize</strong> the MD&amp;A section for strategic context
+5. <strong>Synthesize</strong> everything into a coherent picture</p>
+<p>An AI agent does the same — it has <strong>tools</strong> (functions it can call) and an <strong>LLM brain</strong> (GPT-4o) that decides which tools to call and in what order.</p>
+<div class="highlight"><pre><span></span><code>                    ┌─────────────────────┐
+                    │   Financial Agent   │
+                    │   (LangGraph)       │
+                    └─────────┬───────────┘
+                              │
+              ┌───────────────┼───────────────┐
+              ▼               ▼               ▼               ▼
+        rag_search      graph_query    ratio_calculator  doc_summarizer
+     (ChromaDB vector  (Neo4j Cypher  (compute financial (summarize a
+      similarity)       traversal)    ratios)             document section)
+</code></pre></div>
+<h2 id="langgraph-explained">LangGraph Explained</h2>
+<p>LangGraph builds on LangChain to create <strong>stateful agent workflows</strong> using a graph structure:</p>
+<ul>
+<li><strong>Nodes</strong> = steps in the workflow (Planner, Tool Selector, Synthesizer)</li>
+<li><strong>Edges</strong> = transitions (conditional — based on the LLM's decision)</li>
+<li><strong>State</strong> = working memory (the conversation, tool outputs, intermediate results)</li>
+</ul>
+<div class="highlight"><pre><span></span><code>[START]
+   │
+   ▼
+[Planner] — reads the user question, decides which tools are needed
+   │
+   ▼
+[Tool Selector] — calls the selected tool(s)
+   │
+   ├──► [rag_search]          → returns relevant text chunks
+   ├──► [graph_query]         → returns structured entity/relationship data
+   ├──► [ratio_calculator]    → returns computed financial ratios
+   └──► [doc_summarizer]      → returns section summary
+              │
+              ▼
+        [Synthesizer] — combines all tool outputs into final answer
+              │
+              ▼
+           [Output]
+              │
+         (loop back if answer is incomplete)
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">chromadb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tiktoken</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TypedDict</span><span class="p">,</span> <span class="n">Annotated</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseMessage</span><span class="p">,</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">AIMessage</span><span class="p">,</span> <span class="n">ToolMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span><span class="p">,</span> <span class="n">END</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph.message</span><span class="w"> </span><span class="kn">import</span> <span class="n">add_messages</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolNode</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">Image</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">))</span>
+<span class="n">llm</span> <span class="o">=</span> <span class="n">ChatOpenAI</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">))</span>
+<span class="n">EMBED_MODEL</span> <span class="o">=</span> <span class="s2">&quot;text-embedding-3-small&quot;</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="s2">&quot;cl100k_base&quot;</span><span class="p">)</span>
+
+<span class="n">neo4j_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All libraries loaded.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Visualize the LangGraph agent state graph using Mermaid</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="n">mermaid_diagram</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">graph TD</span>
+<span class="s2">    START([START]) --&gt; planner[Planner]</span>
+<span class="s2">    planner --&gt;|has tool calls| tools[Tool Executor]</span>
+<span class="s2">    planner --&gt;|no tool calls| END([END: Final Answer])</span>
+<span class="s2">    tools --&gt; rag_search[rag_search&lt;br/&gt;ChromaDB]</span>
+<span class="s2">    tools --&gt; graph_query[graph_query&lt;br/&gt;Neo4j]</span>
+<span class="s2">    tools --&gt; ratio_calc[ratio_calculator&lt;br/&gt;Financial Ratios]</span>
+<span class="s2">    tools --&gt; doc_sum[doc_summarizer&lt;br/&gt;Section Summary]</span>
+<span class="s2">    rag_search --&gt; synthesizer[Synthesizer]</span>
+<span class="s2">    graph_query --&gt; synthesizer</span>
+<span class="s2">    ratio_calc --&gt; synthesizer</span>
+<span class="s2">    doc_sum --&gt; synthesizer</span>
+<span class="s2">    synthesizer --&gt;|needs more info| planner</span>
+<span class="s2">    synthesizer --&gt;|complete| END</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s2">&lt;div class=&quot;mermaid&quot;&gt;</span><span class="si">{</span><span class="n">mermaid_diagram</span><span class="si">}</span><span class="s2">&lt;/div&gt;</span>
+<span class="s2">&lt;script&gt;mermaid.initialize(</span><span class="se">{{</span><span class="s2">startOnLoad:true</span><span class="se">}}</span><span class="s2">);&lt;/script&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Agent state graph displayed above.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define agent state schema</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
+    <span class="n">messages</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">BaseMessage</span><span class="p">],</span> <span class="n">add_messages</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AgentState schema defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Tool 1: rag_search — wraps ChromaDB paragraph-based retrieval</span>
+<span class="c1"># Rebuild ChromaDB (or reuse from Section 05 if same session)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">paragraph_chunks</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\n{2,}&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">chunks</span><span class="p">,</span> <span class="n">buffer</span> <span class="o">=</span> <span class="p">[],</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">:</span>
+        <span class="n">para</span> <span class="o">=</span> <span class="n">para</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">para</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">para</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_length</span><span class="p">:</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">para</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_length</span><span class="p">:</span>
+                <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">para</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_length</span><span class="p">:</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="n">chroma_client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">chroma_client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span><span class="s2">&quot;agent_docs&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hnsw:space&quot;</span><span class="p">:</span> <span class="s2">&quot;cosine&quot;</span><span class="p">})</span>
+
+<span class="n">DOCS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s2">&quot;../data/annual_reports/nmb_bank_annual_report_2022.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../data/annual_reports/nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../data/annual_reports/nepal_telecom_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../data/financial_statements/nmb_bank_financials_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;../data/financial_statements/nepal_telecom_financials_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+
+<span class="n">all_chunks</span><span class="p">,</span> <span class="n">all_ids</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">doc_i</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">DOCS</span><span class="p">):</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">reader</span> <span class="o">=</span> <span class="n">PdfReader</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">extract_text</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+        <span class="n">chunks</span> <span class="o">=</span> <span class="n">paragraph_chunks</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+            <span class="n">all_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+            <span class="n">all_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;doc</span><span class="si">{</span><span class="n">doc_i</span><span class="si">}</span><span class="s2">_chunk</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks&quot;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Skipped </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">all_embeds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_chunks</span><span class="p">),</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">all_chunks</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span><span class="p">]</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">all_embeds</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">embedding</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="p">])</span>
+
+<span class="k">if</span> <span class="n">all_chunks</span><span class="p">:</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">all_chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">all_embeds</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">all_ids</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ChromaDB: </span><span class="si">{</span><span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2"> chunks ready.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 1: rag_search</span>
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rag_search</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search for relevant text passages from NMB Bank and Nepal Telecom annual reports and financial statements.</span>
+<span class="sd">    Use for: narrative information, policy descriptions, risk factors, MD&amp;A, board discussions.&quot;&quot;&quot;</span>
+    <span class="n">q_embed</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="n">query</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">q_embed</span><span class="p">],</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 1: rag_search defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 2: graph_query — wraps Neo4j Cypher retrieval</span>
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">graph_query</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Query the financial knowledge graph for structured entity and relationship data.</span>
+<span class="sd">    Use for: financial metrics, subsidiaries, auditors, board members, cross-year comparisons,</span>
+<span class="sd">    inter-company comparisons, and relationship traversals.&quot;&quot;&quot;</span>
+    <span class="c1"># Extract entities from the query</span>
+    <span class="n">entity_prompt</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;Extract company names and financial metric names from this query. &quot;</span>
+        <span class="s1">&#39;Return JSON: {&quot;companies&quot;: [...], &quot;metrics&quot;: [...]}. Return ONLY JSON.&#39;</span>
+    <span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">entity_prompt</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;json_object&quot;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="n">parts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;companies&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">neo4j_graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            MATCH (c)-[:REPORTED]-&gt;(m:FinancialMetric)</span>
+<span class="s2">            WHERE c.name CONTAINS $company</span>
+<span class="s2">            RETURN c.name AS company, m.name AS metric, m.value AS value,</span>
+<span class="s2">                   m.unit AS unit, m.period AS period</span>
+<span class="s2">            LIMIT 20</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">company</span><span class="si">}</span><span class="s2"> — Financial Metrics]&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">rel_type</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;AUDITED_BY&quot;</span><span class="p">,</span> <span class="s2">&quot;AuditFirm&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;SUBSIDIARY_OF&quot;</span><span class="p">,</span> <span class="s2">&quot;Subsidiary&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;CHAIRED_BY&quot;</span><span class="p">,</span> <span class="s2">&quot;Person&quot;</span><span class="p">)]:</span>
+            <span class="n">rows</span> <span class="o">=</span> <span class="n">neo4j_graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;MATCH (c)-[:</span><span class="si">{</span><span class="n">rel_type</span><span class="si">}</span><span class="s2">]-&gt;(t:</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">) WHERE c.name CONTAINS $company RETURN t.name AS name&quot;</span><span class="p">,</span>
+                <span class="n">company</span><span class="o">=</span><span class="n">company</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[</span><span class="si">{</span><span class="n">company</span><span class="si">}</span><span class="s2"> — </span><span class="si">{</span><span class="n">rel_type</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                    <span class="n">parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">parts</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;No relevant data found in the knowledge graph for this query.&quot;</span>
+    <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parts</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 2: graph_query defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 3: ratio_calculator</span>
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">ratio_calculator</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute financial ratios from a text context containing financial figures.</span>
+<span class="sd">    Extracts numbers and computes: Current Ratio, ROE, Debt-Equity Ratio, Net Profit Margin.</span>
+<span class="sd">    Input: text containing financial figures (from rag_search or graph_query output).&quot;&quot;&quot;</span>
+    <span class="n">system</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are a financial calculator assistant. From the provided context:</span>
+<span class="s2">1. Extract key financial figures (Total Assets, Total Liabilities, Equity, Net Profit, Revenue, Current Assets, Current Liabilities)</span>
+<span class="s2">2. Calculate available ratios:</span>
+<span class="s2">   - Current Ratio = Current Assets / Current Liabilities</span>
+<span class="s2">   - ROE = Net Profit / Total Equity × 100%</span>
+<span class="s2">   - Debt-Equity Ratio = Total Liabilities / Total Equity</span>
+<span class="s2">   - Net Profit Margin = Net Profit / Total Revenue × 100%</span>
+<span class="s2">3. Show your working (formula → values → result)</span>
+<span class="s2">4. Clearly state which ratios could NOT be computed (missing data)</span>
+<span class="s2">Return as structured text.&quot;&quot;&quot;</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Financial data context:</span><span class="se">\n</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 3: ratio_calculator defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 4: doc_summarizer</span>
+<span class="nd">@tool</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">doc_summarizer</span><span class="p">(</span><span class="n">section_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Retrieve and summarize a named section from the annual reports.</span>
+<span class="sd">    Use for sections like: MD&amp;A, Auditor&#39;s Report, Board Report, Corporate Governance, Risk Management.</span>
+<span class="sd">    Input: the section name to find and summarize.&quot;&quot;&quot;</span>
+    <span class="n">q_embed</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="n">section_name</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">q_embed</span><span class="p">],</span> <span class="n">n_results</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">section_chunks</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">section_chunks</span><span class="p">)</span>
+
+    <span class="n">system</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Summarize the &#39;</span><span class="si">{</span><span class="n">section_name</span><span class="si">}</span><span class="s2">&#39; section from this annual report context. &quot;</span>
+        <span class="s2">&quot;Focus on key findings, material information, and any red flags. &quot;</span>
+        <span class="s2">&quot;Be concise — aim for 3–5 bullet points.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">context</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 4: doc_summarizer defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Build the LangGraph agent</span>
+<span class="n">tools_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">rag_search</span><span class="p">,</span> <span class="n">graph_query</span><span class="p">,</span> <span class="n">ratio_calculator</span><span class="p">,</span> <span class="n">doc_summarizer</span><span class="p">]</span>
+<span class="n">llm_with_tools</span> <span class="o">=</span> <span class="n">llm</span><span class="o">.</span><span class="n">bind_tools</span><span class="p">(</span><span class="n">tools_list</span><span class="p">)</span>
+<span class="n">tool_node</span> <span class="o">=</span> <span class="n">ToolNode</span><span class="p">(</span><span class="n">tools_list</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">should_continue</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
+    <span class="n">last_message</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">last_message</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">last_message</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;tools&quot;</span>
+    <span class="k">return</span> <span class="n">END</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">call_model</span><span class="p">(</span><span class="n">state</span><span class="p">:</span> <span class="n">AgentState</span><span class="p">):</span>
+    <span class="n">messages</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">llm_with_tools</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">messages</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">response</span><span class="p">]}</span>
+
+<span class="c1"># Build graph</span>
+<span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span> <span class="n">call_model</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="n">tool_node</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">)</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span><span class="s2">&quot;agent&quot;</span><span class="p">,</span> <span class="n">should_continue</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;tools&quot;</span><span class="p">:</span> <span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">:</span> <span class="n">END</span><span class="p">})</span>
+<span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;tools&quot;</span><span class="p">,</span> <span class="s2">&quot;agent&quot;</span><span class="p">)</span>
+
+<span class="n">agent</span> <span class="o">=</span> <span class="n">workflow</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;LangGraph agent compiled successfully.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Try to display the graph</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">Image</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">get_graph</span><span class="p">()</span><span class="o">.</span><span class="n">draw_mermaid_png</span><span class="p">()))</span>
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Install graphviz/playwright to render graph image)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="workflow-1-financial-health-analysis">Workflow 1: Financial Health Analysis</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Run Workflow 1: Analyze the financial health of NMB Bank for FY2023</span>
+<span class="n">SYSTEM_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are an expert financial analyst assistant for CA professionals in Nepal.</span>
+<span class="s2">You have access to NMB Bank and Nepal Telecom annual reports and financial statements.</span>
+<span class="s2">Use your tools to provide comprehensive, data-backed answers.</span>
+<span class="s2">Always cite the source (RAG, graph, or computed ratio) for each fact you state.&quot;&quot;&quot;</span>
+
+<span class="n">QUERY1</span> <span class="o">=</span> <span class="s2">&quot;Analyze the financial health of NMB Bank for FY2023&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running Workflow 1: </span><span class="si">{</span><span class="n">QUERY1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Step-by-step agent trace:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">SYSTEM_PROMPT</span><span class="p">},</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">QUERY1</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">agent</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">stream_mode</span><span class="o">=</span><span class="s2">&quot;updates&quot;</span><span class="p">):</span>
+    <span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">node_output</span> <span class="ow">in</span> <span class="n">chunk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">node_name</span> <span class="o">==</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">node_output</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                    <span class="n">args_preview</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">tc</span><span class="p">[</span><span class="s2">&quot;args&quot;</span><span class="p">])[:</span><span class="mi">80</span><span class="p">]</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [Step </span><span class="si">{</span><span class="n">step_count</span><span class="si">}</span><span class="s2">] Calling tool: </span><span class="si">{</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">args_preview</span><span class="si">}</span><span class="s2">...)&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [Step </span><span class="si">{</span><span class="n">step_count</span><span class="si">}</span><span class="s2">] Agent produced final answer.&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">node_name</span> <span class="o">==</span> <span class="s2">&quot;tools&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">node_output</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+                <span class="n">tool_result_preview</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">content</span><span class="p">)[:</span><span class="mi">120</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    Tool result: </span><span class="si">{</span><span class="n">tool_result_preview</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="c1"># Get the final answer</span>
+<span class="n">final_state</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">final_answer</span> <span class="o">=</span> <span class="n">final_state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final_answer</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Visualize Workflow 1 execution path as highlighted state steps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
+
+<span class="c1"># Replay the trace to build the execution path</span>
+<span class="n">execution_steps</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">final_state2</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">final_state2</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+    <span class="n">role</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ai&quot;</span><span class="p">,</span> <span class="s2">&quot;AIMessage&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+            <span class="n">execution_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Called: &lt;b&gt;</span><span class="si">{</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;tool&quot;</span><span class="p">,</span> <span class="s2">&quot;ToolMessage&quot;</span><span class="p">):</span>
+        <span class="k">pass</span>  <span class="c1"># tool results are implicit</span>
+    <span class="k">elif</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ai&quot;</span><span class="p">,</span> <span class="s2">&quot;AIMessage&quot;</span><span class="p">):</span>
+        <span class="n">execution_steps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Synthesizer:&lt;/b&gt; Final Answer Generated&quot;</span><span class="p">)</span>
+
+<span class="n">steps_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;li style=&#39;margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px&#39;&gt;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&lt;/li&gt;&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">execution_steps</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Execution path (Workflow 1):&lt;/b&gt;&lt;ol style=&#39;font-family:monospace&#39;&gt;</span><span class="si">{</span><span class="n">steps_html</span><span class="si">}</span><span class="s2">&lt;/ol&gt;&quot;</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="workflow-2-cross-company-ratio-comparison">Workflow 2: Cross-Company Ratio Comparison</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Workflow 2: Compare current ratio of Nepal Telecom vs NMB Bank for FY2023</span>
+<span class="n">QUERY2</span> <span class="o">=</span> <span class="s2">&quot;Compare the current ratio of Nepal Telecom vs NMB Bank for FY2023&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running Workflow 2: </span><span class="si">{</span><span class="n">QUERY2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+<span class="n">inputs2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">SYSTEM_PROMPT</span><span class="p">},</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">QUERY2</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">agent</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">inputs2</span><span class="p">,</span> <span class="n">stream_mode</span><span class="o">=</span><span class="s2">&quot;updates&quot;</span><span class="p">):</span>
+    <span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">node_output</span> <span class="ow">in</span> <span class="n">chunk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">node_name</span> <span class="o">==</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">node_output</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [Step </span><span class="si">{</span><span class="n">step_count</span><span class="si">}</span><span class="s2">] Tool: </span><span class="si">{</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">])[:</span><span class="mi">70</span><span class="p">]</span><span class="si">}</span><span class="s2">...)&quot;</span><span class="p">)</span>
+
+<span class="n">final_state3</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final_state3</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Visualize execution path for Workflow 2</span>
+<span class="n">execution_steps2</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">final_state3</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
+    <span class="n">role</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ai&quot;</span><span class="p">,</span> <span class="s2">&quot;AIMessage&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+            <span class="n">execution_steps2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Called: &lt;b&gt;</span><span class="si">{</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&lt;/b&gt;&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ai&quot;</span><span class="p">,</span> <span class="s2">&quot;AIMessage&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">):</span>
+        <span class="n">execution_steps2</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&lt;b&gt;Synthesizer:&lt;/b&gt; Final Answer Generated&quot;</span><span class="p">)</span>
+
+<span class="n">steps_html2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;li style=&#39;margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px&#39;&gt;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&lt;/li&gt;&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">execution_steps2</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Execution path (Workflow 2 — Ratio Comparison):&lt;/b&gt;&lt;ol style=&#39;font-family:monospace&#39;&gt;</span><span class="si">{</span><span class="n">steps_html2</span><span class="si">}</span><span class="s2">&lt;/ol&gt;&quot;</span><span class="p">))</span>
+</code></pre></div>
+<h2 id="workflow-3-audit-focused-query">Workflow 3: Audit-Focused Query</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># Workflow 3: Summarize auditor&#39;s observations and flag going-concern issues</span>
+<span class="n">QUERY3</span> <span class="o">=</span> <span class="s2">&quot;Summarize the auditor&#39;s key observations for NMB Bank and flag any going-concern issues&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Running Workflow 3: </span><span class="si">{</span><span class="n">QUERY3</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+
+<span class="n">inputs3</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">SYSTEM_PROMPT</span><span class="p">},</span>
+        <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="n">QUERY3</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">step_count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">agent</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">inputs3</span><span class="p">,</span> <span class="n">stream_mode</span><span class="o">=</span><span class="s2">&quot;updates&quot;</span><span class="p">):</span>
+    <span class="n">step_count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">for</span> <span class="n">node_name</span><span class="p">,</span> <span class="n">node_output</span> <span class="ow">in</span> <span class="n">chunk</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">node_name</span> <span class="o">==</span> <span class="s2">&quot;agent&quot;</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="n">node_output</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="s2">&quot;tool_calls&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">tc</span> <span class="ow">in</span> <span class="n">msg</span><span class="o">.</span><span class="n">tool_calls</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [Step </span><span class="si">{</span><span class="n">step_count</span><span class="si">}</span><span class="s2">] Tool: </span><span class="si">{</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">tc</span><span class="p">[</span><span class="s1">&#39;args&#39;</span><span class="p">])[:</span><span class="mi">70</span><span class="p">]</span><span class="si">}</span><span class="s2">...)&quot;</span><span class="p">)</span>
+
+<span class="n">final_state4</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="n">inputs3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">final_state4</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="where-agentic-rag-goes-next">Where Agentic RAG Goes Next</h2>
+<p>What we built today is a <strong>single-agent</strong> system with 4 tools. Here is where this technology is heading:</p>
+<h3 id="multi-agent-systems">Multi-Agent Systems</h3>
+<p>Instead of one agent with 4 tools, imagine:
+- <strong>Research Agent</strong> — specialized in retrieving and summarizing documents
+- <strong>Calculation Agent</strong> — specialized in computing ratios, forecasts, and comparisons
+- <strong>Audit Agent</strong> — specialized in checking compliance and flagging risks
+- <strong>Report Agent</strong> — assembles the final analysis into a structured report</p>
+<p>These agents communicate with each other, passing results down the chain.</p>
+<h3 id="automated-financial-reporting">Automated Financial Reporting</h3>
+<p>The same pipeline could:
+1. Read 50 company annual reports automatically (when published)
+2. Extract all key metrics into a structured database
+3. Compute ratio trends year-over-year
+4. Flag anomalies for human review
+5. Draft a preliminary analysis report — leaving the CA to review and finalize</p>
+<h3 id="what-changes-for-ca-professionals">What Changes for CA Professionals</h3>
+<table>
+<thead>
+<tr>
+<th>Today</th>
+<th>With Agentic AI</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Read 300-page annual report</td>
+<td>Agent summarizes key sections in minutes</td>
+</tr>
+<tr>
+<td>Manually compute 10 ratios</td>
+<td>Ratio calculator tool runs instantly</td>
+</tr>
+<tr>
+<td>Compare across 5 companies</td>
+<td>Multi-doc graph stores all — one query</td>
+</tr>
+<tr>
+<td>Audit checklist — line by line</td>
+<td>Agent pre-fills based on document evidence</td>
+</tr>
+<tr>
+<td>Search for going-concern language</td>
+<td>Agent flags it automatically</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Your judgment, professional expertise, and accountability remain irreplaceable. AI handles the extraction and computation — you handle the interpretation and sign-off.</strong></p>
+<hr />
+<blockquote>
+<p><strong>Congratulations on completing the workshop!</strong><br />
+You have built a complete pipeline: Simple RAG → Chunking → Knowledge Graph → Multi-Doc Graph → GraphRAG → Agentic RAG.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../05_graphrag_pipeline/" class="btn btn-neutral float-left" title="Graph RAG"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../05_graphrag_pipeline/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

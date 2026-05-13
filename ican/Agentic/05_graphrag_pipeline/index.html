@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Graph RAG - ICAN Training</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Graph RAG";
+        var mkdocs_page_input_path = "ican/Agentic/05_graphrag_pipeline.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../09_Regression_Classification_for_CA/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Graph RAG</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#the-limitation-of-rag-alone">The Limitation of RAG Alone</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-graphrag-pipeline">The GraphRAG Pipeline</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#when-to-use-graphrag-vs-plain-rag">When to Use GraphRAG vs Plain RAG</a>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Agentic AI</li>
+      <li class="breadcrumb-item active">Graph RAG</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="section-05-graphrag-pipeline">Section 05: GraphRAG Pipeline</h1>
+<p><strong>Duration:</strong> ~75 minutes<br />
+<strong>Goal:</strong> Combine vector search (ChromaDB) and graph traversal (Neo4j) into a single pipeline that outperforms plain RAG on relational financial questions.</p>
+<hr />
+<h2 id="the-limitation-of-rag-alone">The Limitation of RAG Alone</h2>
+<p>Plain RAG (Section 01–02) is great at: <em>"Find me text that looks like the answer."</em></p>
+<p>It struggles with <strong>multi-hop relational questions</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Why RAG fails</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>"Compare NMB Bank's asset growth from FY2022 to FY2023 and identify its auditor"</em></td>
+<td>Three facts from three separate document sections — hard to retrieve in one search</td>
+</tr>
+<tr>
+<td><em>"Which subsidiaries of NMB Bank were mentioned in both annual reports?"</em></td>
+<td>Requires knowing which entity is a subsidiary AND that it appears in 2 documents</td>
+</tr>
+<tr>
+<td><em>"Who were the board members during a period of negative profit growth?"</em></td>
+<td>Requires: (1) find profit values, (2) compute growth, (3) look up board members for that period</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GraphRAG</strong> solves this by running two retrievers in parallel and merging their outputs:
+- <strong>Vector retriever</strong> → semantic chunks from ChromaDB
+- <strong>Graph retriever</strong> → structured relationship context from Neo4j</p>
+<h2 id="the-graphrag-pipeline">The GraphRAG Pipeline</h2>
+<div class="highlight"><pre><span></span><code>User Query
+     │
+     ├──────────────────────┬──────────────────────┐
+     ▼                      ▼                      │
+Query Embedding      Entity Detection           (parallel)
+     │               (GPT-4o-mini)                 │
+     ▼                      │                      │
+ChromaDB Search      Neo4j Cypher Query            │
+(semantic similarity) (graph traversal)            │
+     │                      │                      │
+     └──────────┬───────────┘                      │
+                ▼                                  │
+        Context Merging                            │
+        (deduplicate, rank)                        │
+                │                                  │
+                ▼                                  │
+          GPT-4o (final answer) ◄──────────────────┘
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">chromadb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tiktoken</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib</span>
+<span class="n">matplotlib</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.dpi&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">120</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfReader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">))</span>
+<span class="n">EMBED_MODEL</span> <span class="o">=</span> <span class="s2">&quot;text-embedding-3-small&quot;</span>
+<span class="n">enc</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="s2">&quot;cl100k_base&quot;</span><span class="p">)</span>
+
+<span class="c1"># Connect to Neo4j (must be populated from Section 04)</span>
+<span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+
+<span class="c1"># Verify Neo4j has data</span>
+<span class="n">node_count</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;MATCH (n) RETURN count(n) AS cnt&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;cnt&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Neo4j graph: </span><span class="si">{</span><span class="n">node_count</span><span class="si">}</span><span class="s2"> nodes loaded from Section 04.&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">node_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Run Section 04 first to populate Neo4j.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rebuild ChromaDB using paragraph-based chunking (best strategy from Section 02)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">paragraph_chunks</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">min_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">2000</span><span class="p">):</span>
+    <span class="n">raw</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\n{2,}&quot;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="n">chunks</span><span class="p">,</span> <span class="n">buffer</span> <span class="o">=</span> <span class="p">[],</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">para</span> <span class="ow">in</span> <span class="n">raw</span><span class="p">:</span>
+        <span class="n">para</span> <span class="o">=</span> <span class="n">para</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">para</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">para</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_length</span><span class="p">:</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="p">(</span><span class="n">buffer</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="n">para</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_length</span><span class="p">:</span>
+                <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+            <span class="n">buffer</span> <span class="o">=</span> <span class="n">para</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_length</span><span class="p">:</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="n">chroma_client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+
+<span class="n">DOCS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;nmb_2022&quot;</span> <span class="p">:</span> <span class="s2">&quot;../data/annual_reports/nmb_bank_annual_report_2022.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;nmb_2023&quot;</span> <span class="p">:</span> <span class="s2">&quot;../data/annual_reports/nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;ntc_2023&quot;</span> <span class="p">:</span> <span class="s2">&quot;../data/annual_reports/nepal_telecom_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">collection</span> <span class="o">=</span> <span class="n">chroma_client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span><span class="s2">&quot;graphrag_docs&quot;</span><span class="p">,</span> <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hnsw:space&quot;</span><span class="p">:</span> <span class="s2">&quot;cosine&quot;</span><span class="p">})</span>
+<span class="n">all_chunks</span><span class="p">,</span> <span class="n">all_ids</span><span class="p">,</span> <span class="n">all_metas</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">doc_key</span><span class="p">,</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">DOCS</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">PdfReader</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">extract_text</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">pages</span><span class="p">)</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="n">paragraph_chunks</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">chunks</span><span class="p">):</span>
+        <span class="n">all_chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+        <span class="n">all_ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">doc_key</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">all_metas</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;doc&quot;</span><span class="p">:</span> <span class="n">doc_key</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">doc_key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks&quot;</span><span class="p">)</span>
+
+<span class="c1"># Embed in batches</span>
+<span class="n">all_embeds</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_chunks</span><span class="p">),</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="n">batch</span> <span class="o">=</span> <span class="n">all_chunks</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">100</span><span class="p">]</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+    <span class="n">all_embeds</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">embedding</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">resp</span><span class="o">.</span><span class="n">data</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Embedded batch </span><span class="si">{</span><span class="n">i</span><span class="o">//</span><span class="mi">100</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">all_chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">all_embeds</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">all_ids</span><span class="p">,</span> <span class="n">metadatas</span><span class="o">=</span><span class="n">all_metas</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ChromaDB loaded: </span><span class="si">{</span><span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2"> total chunks across 3 documents.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># RAG retriever: returns top-5 chunks by semantic similarity</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">rag_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="n">q_embed</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="n">query</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">q_embed</span><span class="p">],</span> <span class="n">n_results</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">token_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">token_count</span>
+
+<span class="c1"># Test</span>
+<span class="n">test_chunks</span><span class="p">,</span> <span class="n">test_tokens</span> <span class="o">=</span> <span class="n">rag_retrieve</span><span class="p">(</span><span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RAG retrieved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks (</span><span class="si">{</span><span class="n">test_tokens</span><span class="si">}</span><span class="s2"> tokens)&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">test_chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">...]&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Graph retriever: extracts entities from query, runs Cypher, returns structured context</span>
+
+<span class="n">ENTITY_EXTRACT_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Extract entity names from this financial analysis query.</span>
+<span class="s2">Return JSON: {&quot;companies&quot;: [...], &quot;metrics&quot;: [...], &quot;persons&quot;: [...], &quot;years&quot;: [...]}</span>
+<span class="s2">Only include entities explicitly mentioned. Return ONLY valid JSON.&quot;&quot;&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">graph_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+    <span class="c1"># Step 1: Extract entities from the query</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">ENTITY_EXTRACT_PROMPT</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">response_format</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;json_object&quot;</span><span class="p">}</span>
+    <span class="p">)</span>
+    <span class="n">entities</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+    <span class="n">graph_context_parts</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Step 2: Query Neo4j for relevant subgraphs</span>
+    <span class="k">for</span> <span class="n">company</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;companies&quot;</span><span class="p">,</span> <span class="p">[]):</span>
+        <span class="c1"># Get financial metrics</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            MATCH (c)-[:REPORTED]-&gt;(m:FinancialMetric)</span>
+<span class="s2">            WHERE c.name CONTAINS $company</span>
+<span class="s2">            RETURN c.name AS company, m.name AS metric, m.value AS value,</span>
+<span class="s2">                   m.unit AS unit, m.period AS period</span>
+<span class="s2">            LIMIT 20</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[Financial Metrics for </span><span class="si">{</span><span class="n">company</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get subsidiaries</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            MATCH (c)-[:SUBSIDIARY_OF]-&gt;(s:Subsidiary)</span>
+<span class="s2">            WHERE c.name CONTAINS $company</span>
+<span class="s2">            RETURN s.name AS subsidiary, s.ownership_pct AS pct</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[Subsidiaries of </span><span class="si">{</span><span class="n">company</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;subsidiary&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;pct&#39;</span><span class="p">,</span><span class="s1">&#39;?&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">% owned)&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get auditor</span>
+        <span class="n">rows</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            MATCH (c)-[:AUDITED_BY]-&gt;(a:AuditFirm)</span>
+<span class="s2">            WHERE c.name CONTAINS $company</span>
+<span class="s2">            RETURN a.name AS auditor</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">company</span><span class="o">=</span><span class="n">company</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rows</span><span class="p">:</span>
+            <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">[Auditor of </span><span class="si">{</span><span class="n">company</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">:</span>
+                <span class="n">graph_context_parts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;auditor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">graph_context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">graph_context_parts</span><span class="p">)</span> <span class="k">if</span> <span class="n">graph_context_parts</span> <span class="k">else</span> <span class="s2">&quot;(No graph data found for query entities.)&quot;</span>
+    <span class="n">token_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">graph_context</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">graph_context</span><span class="p">,</span> <span class="n">token_count</span>
+
+<span class="c1"># Test</span>
+<span class="n">test_graph_ctx</span><span class="p">,</span> <span class="n">test_graph_tokens</span> <span class="o">=</span> <span class="n">graph_retrieve</span><span class="p">(</span><span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph retrieved </span><span class="si">{</span><span class="n">test_graph_tokens</span><span class="si">}</span><span class="s2"> tokens&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test_graph_ctx</span><span class="p">[:</span><span class="mi">400</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># GraphRAG answer function: merge both retrievers, send to GPT-4o</span>
+
+<span class="n">GRAPHRAG_SYSTEM</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="s2">&quot;You are a financial analyst assistant for CA professionals. &quot;</span>
+    <span class="s2">&quot;You have access to two types of context: (1) text passages from annual reports, &quot;</span>
+    <span class="s2">&quot;(2) structured graph data (entities and relationships). &quot;</span>
+    <span class="s2">&quot;Use BOTH types of context to provide a comprehensive, precise answer. &quot;</span>
+    <span class="s2">&quot;Cite which document or data source your answer comes from when possible.&quot;</span>
+<span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">graphrag_answer</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="n">rag_chunks</span><span class="p">,</span> <span class="n">rag_tokens</span> <span class="o">=</span> <span class="n">rag_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+    <span class="n">graph_ctx</span><span class="p">,</span> <span class="n">graph_tokens</span> <span class="o">=</span> <span class="n">graph_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
+
+    <span class="n">rag_context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rag_chunks</span><span class="p">)</span>
+    <span class="n">combined_context</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;=== TEXT PASSAGES FROM DOCUMENTS ===</span><span class="se">\n</span><span class="si">{</span><span class="n">rag_context</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">=== GRAPH DATABASE (Entities &amp; Relationships) ===</span><span class="se">\n</span><span class="si">{</span><span class="n">graph_ctx</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">GRAPHRAG_SYSTEM</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">combined_context</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query     : </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RAG tokens: </span><span class="si">{</span><span class="n">rag_tokens</span><span class="si">}</span><span class="s2"> | Graph tokens: </span><span class="si">{</span><span class="n">graph_tokens</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Answer:</span><span class="se">\n</span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;query&quot;</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span> <span class="s2">&quot;answer&quot;</span><span class="p">:</span> <span class="n">answer</span><span class="p">,</span> <span class="s2">&quot;rag_tokens&quot;</span><span class="p">:</span> <span class="n">rag_tokens</span><span class="p">,</span> <span class="s2">&quot;graph_tokens&quot;</span><span class="p">:</span> <span class="n">graph_tokens</span><span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;graphrag_answer() function ready.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 1: Simple factual — RAG-only vs GraphRAG side-by-side</span>
+<span class="n">QUERY1</span> <span class="o">=</span> <span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span>
+
+<span class="c1"># RAG-only answer</span>
+<span class="n">rag_chunks1</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rag_retrieve</span><span class="p">(</span><span class="n">QUERY1</span><span class="p">)</span>
+<span class="n">rag_ctx1</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rag_chunks1</span><span class="p">)</span>
+<span class="n">rag_resp1</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer based strictly on context. Be concise.&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">rag_ctx1</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">QUERY1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">rag_answer1</span> <span class="o">=</span> <span class="n">rag_resp1</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+<span class="c1"># GraphRAG answer</span>
+<span class="n">grag_result1</span> <span class="o">=</span> <span class="n">graphrag_answer</span><span class="p">(</span><span class="n">QUERY1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query: </span><span class="si">{</span><span class="n">QUERY1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RAG-only answer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">rag_answer1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GraphRAG answer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 2: Multi-hop — graph retriever wins</span>
+<span class="n">QUERY2</span> <span class="o">=</span> <span class="s2">&quot;Compare NMB Bank&#39;s asset growth from FY2022 to FY2023 and identify its auditor&quot;</span>
+
+<span class="c1"># RAG-only</span>
+<span class="n">rag_chunks2</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">rag_retrieve</span><span class="p">(</span><span class="n">QUERY2</span><span class="p">)</span>
+<span class="n">rag_ctx2</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">rag_chunks2</span><span class="p">)</span>
+<span class="n">rag_resp2</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+    <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="s2">&quot;Answer based strictly on context. Be concise.&quot;</span><span class="p">},</span>
+        <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">rag_ctx2</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">QUERY2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">}</span>
+    <span class="p">],</span>
+    <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+<span class="p">)</span>
+<span class="n">rag_answer2</span> <span class="o">=</span> <span class="n">rag_resp2</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+<span class="c1"># GraphRAG</span>
+<span class="n">grag_result2</span> <span class="o">=</span> <span class="n">graphrag_answer</span><span class="p">(</span><span class="n">QUERY2</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query: </span><span class="si">{</span><span class="n">QUERY2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RAG-only answer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">rag_answer2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GraphRAG answer:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 3: Cross-document entity — subsidiaries across both annual reports</span>
+<span class="n">QUERY3</span> <span class="o">=</span> <span class="s2">&quot;Which subsidiaries of NMB Bank were mentioned across both annual reports?&quot;</span>
+<span class="n">grag_result3</span> <span class="o">=</span> <span class="n">graphrag_answer</span><span class="p">(</span><span class="n">QUERY3</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Comparison table: Question x Method x Answer quality summary</span>
+<span class="n">comparison_data</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Query&quot;</span>         <span class="p">:</span> <span class="n">QUERY1</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RAG Answer&quot;</span>    <span class="p">:</span> <span class="n">rag_answer1</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GraphRAG Answer&quot;</span><span class="p">:</span> <span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Winner&quot;</span>        <span class="p">:</span> <span class="s2">&quot;Tie (simple factual)&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Query&quot;</span>         <span class="p">:</span> <span class="n">QUERY2</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RAG Answer&quot;</span>    <span class="p">:</span> <span class="n">rag_answer2</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GraphRAG Answer&quot;</span><span class="p">:</span> <span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Winner&quot;</span>        <span class="p">:</span> <span class="s2">&quot;GraphRAG (multi-hop + auditor)&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;Query&quot;</span>         <span class="p">:</span> <span class="n">QUERY3</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;RAG Answer&quot;</span>    <span class="p">:</span> <span class="s2">&quot;(not run for brevity)&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;GraphRAG Answer&quot;</span><span class="p">:</span> <span class="n">grag_result3</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">][:</span><span class="mi">100</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;...&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;Winner&quot;</span>        <span class="p">:</span> <span class="s2">&quot;GraphRAG (cross-document entity)&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">comparison_data</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bar chart: context tokens contributed by RAG vs Graph for each query</span>
+<span class="n">queries_short</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Q1: Net Profit&quot;</span><span class="p">,</span> <span class="s2">&quot;Q2: Asset Growth + Auditor&quot;</span><span class="p">,</span> <span class="s2">&quot;Q3: Subsidiaries&quot;</span><span class="p">]</span>
+<span class="n">rag_tok</span>   <span class="o">=</span> <span class="p">[</span><span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">],</span>   <span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">],</span>   <span class="n">grag_result3</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">]]</span>
+<span class="n">graph_tok</span> <span class="o">=</span> <span class="p">[</span><span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;graph_tokens&quot;</span><span class="p">],</span> <span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;graph_tokens&quot;</span><span class="p">],</span> <span class="n">grag_result3</span><span class="p">[</span><span class="s2">&quot;graph_tokens&quot;</span><span class="p">]]</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">queries_short</span><span class="p">))</span>
+<span class="n">width</span> <span class="o">=</span> <span class="mf">0.35</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">bars1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="n">i</span> <span class="o">-</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="n">rag_tok</span><span class="p">,</span>   <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;RAG (ChromaDB) tokens&quot;</span><span class="p">,</span>  <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+<span class="n">bars2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="n">i</span> <span class="o">+</span> <span class="n">width</span><span class="o">/</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">],</span> <span class="n">graph_tok</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Graph (Neo4j) tokens&quot;</span><span class="p">,</span>   <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkorange&quot;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">queries_short</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Context tokens sent to GPT-4o&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;RAG vs Graph Context Contribution per Query&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bars1</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bars2</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<h2 id="when-to-use-graphrag-vs-plain-rag">When to Use GraphRAG vs Plain RAG</h2>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Use Plain RAG</th>
+<th>Use GraphRAG</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Single-document fact lookup</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Multi-document comparison</td>
+<td>❌ Hard</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Year-over-year trends</td>
+<td>❌ Unreliable</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Relationship traversal (subsidiaries, auditors)</td>
+<td>❌</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Free-form summary of narrative</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>Low-cost, fast prototype</td>
+<td>✅</td>
+<td>❌ Higher upfront cost</td>
+</tr>
+</tbody>
+</table>
+<p><strong>GraphRAG is the right choice</strong> when your users will ask about:
+- Relationships between entities (audit, subsidiaries, board)
+- Cross-document or cross-year comparisons
+- Structured financial metrics (where a KG gives you exact values)</p>
+<hr />
+<blockquote>
+<p><strong>Next:</strong> Section 06 wraps GraphRAG inside an <strong>AI agent</strong> that can decide <em>which</em> retrieval strategy to use based on the question — and also compute financial ratios on the fly.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../04_multi_doc_knowledge_graph/" class="btn btn-neutral float-left" title="Multi Document Knowledge Graphs"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../06_agentic_rag_langgraph/" class="btn btn-neutral float-right" title="Agentic RAG">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../04_multi_doc_knowledge_graph/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../06_agentic_rag_langgraph/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

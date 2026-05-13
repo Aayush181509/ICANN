@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Simple RAG - ICAN Training</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Simple RAG";
+        var mkdocs_page_input_path = "ican/Agentic/01_simple_rag.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../09_Regression_Classification_for_CA/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Simple RAG</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#what-is-rag">What is RAG?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-rag-pipeline">The RAG Pipeline</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-chunking">Why Chunking?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-similarity-search-works">How Similarity Search Works</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-rag-can-and-cannot-do">What RAG Can and Cannot Do</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#rag-excels-at">RAG excels at:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#rag-struggles-with">RAG struggles with:</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#what-we-will-build-next">What we will build next:</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Agentic AI</li>
+      <li class="breadcrumb-item active">Simple RAG</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="section-01-simple-rag-on-financial-documents">Section 01: Simple RAG on Financial Documents</h1>
+<p><strong>Duration:</strong> ~60 minutes<br />
+<strong>Goal:</strong> Build a complete pipeline that reads a PDF annual report and answers financial questions about it.</p>
+<hr />
+<h2 id="what-is-rag">What is RAG?</h2>
+<p><strong>RAG</strong> stands for <strong>Retrieval-Augmented Generation</strong>.</p>
+<p>Think of it like an <strong>open-book exam</strong>:</p>
+<blockquote>
+<p>You give a brilliant student (GPT-4o-mini) a very specific textbook they have never read before (your annual report PDF). During the exam, they can look up relevant pages before answering.</p>
+</blockquote>
+<p>Without RAG, the AI only knows what it learned during training — it has no idea what NMB Bank's FY2023 net profit was.<br />
+With RAG, we <strong>retrieve</strong> the relevant pages from your document first, then <strong>generate</strong> an answer using those pages as context.</p>
+<p><strong>Why not just paste the whole document into the AI?</strong><br />
+Annual reports are 200–400 pages. LLMs have limits on how much text they can process at once. RAG solves this by retrieving only the relevant portions.</p>
+<h2 id="the-rag-pipeline">The RAG Pipeline</h2>
+<p>Here is what we will build today:</p>
+<div class="highlight"><pre><span></span><code>PDF Document
+     │
+     ▼
+ Text Extraction (pypdf)
+     │
+     ▼
+ Fixed-Size Chunking (500 tokens, 50 overlap)
+     │
+     ▼
+ Embedding (text-embedding-3-small)
+     │
+     ▼
+ ChromaDB (Vector Store)
+     │
+     ▼
+ User Query ──► Query Embedding ──► Similarity Search ──► Top-K Chunks
+                                                               │
+                                                               ▼
+                                                   GPT-4o-mini (with context)
+                                                               │
+                                                               ▼
+                                                          Final Answer
+</code></pre></div>
+<p><strong>Each step explained:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What it does</th>
+<th>Analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Text Extraction</td>
+<td>Convert PDF to raw text</td>
+<td>Photocopying pages of the book</td>
+</tr>
+<tr>
+<td>Chunking</td>
+<td>Split text into manageable pieces</td>
+<td>Tearing out individual pages</td>
+</tr>
+<tr>
+<td>Embedding</td>
+<td>Convert each chunk to a number vector</td>
+<td>Giving each page a GPS coordinate based on its meaning</td>
+</tr>
+<tr>
+<td>Vector Store</td>
+<td>Index all the vectors</td>
+<td>Building a map of the book</td>
+</tr>
+<tr>
+<td>Similarity Search</td>
+<td>Find chunks closest to the query</td>
+<td>Navigating the map to find relevant pages</td>
+</tr>
+<tr>
+<td>Generation</td>
+<td>Feed retrieved chunks to GPT + get answer</td>
+<td>The student reads the relevant pages and writes the answer</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="c1"># Install required libraries (run once)</span>
+<span class="c1"># !pip install openai chromadb pypdf tiktoken</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">chromadb</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tiktoken</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">OpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pypdf</span><span class="w"> </span><span class="kn">import</span> <span class="n">PdfReader</span>
+
+<span class="c1"># Initialize OpenAI client</span>
+<span class="c1"># Set your API key: export OPENAI_API_KEY=&quot;sk-...&quot;</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">OpenAI</span><span class="p">(</span><span class="n">api_key</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Libraries loaded successfully.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Load the PDF and extract raw text</span>
+<span class="n">PDF_PATH</span> <span class="o">=</span> <span class="s2">&quot;../data/annual_reports/nmb_bank_annual_report_2023.pdf&quot;</span>
+
+<span class="n">reader</span> <span class="o">=</span> <span class="n">PdfReader</span><span class="p">(</span><span class="n">PDF_PATH</span><span class="p">)</span>
+<span class="n">pages</span> <span class="o">=</span> <span class="p">[</span><span class="n">page</span><span class="o">.</span><span class="n">extract_text</span><span class="p">()</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span> <span class="k">for</span> <span class="n">page</span> <span class="ow">in</span> <span class="n">reader</span><span class="o">.</span><span class="n">pages</span><span class="p">]</span>
+<span class="n">full_text</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total pages extracted : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pages</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total characters      : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">full_text</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Preview of first 800 characters ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">full_text</span><span class="p">[:</span><span class="mi">800</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="why-chunking">Why Chunking?</h2>
+<p>The NMB Bank annual report has hundreds of pages. GPT-4o-mini can only read ~16,000 tokens at once — that is roughly 12,000 words, or about 25 pages.</p>
+<p>Even if we could fit everything, it is expensive and slow. More importantly, the answer to <em>"What was the net profit?"</em> is usually in just 1–2 paragraphs. Sending all 300 pages is wasteful.</p>
+<p><strong>Chunking</strong> solves this by splitting the document into small, overlapping pieces. The overlap ensures we do not accidentally cut off a sentence that spans two chunks.</p>
+<div class="highlight"><pre><span></span><code>Full Document: [AAAAAAAAABBBBBBBBBCCCCCCCCC]
+
+Chunks (500 tokens, 50 overlap):
+  Chunk 1: [AAAAAAAAAB]
+  Chunk 2:         [ABBBBBBBBC]       ← 50-token overlap
+  Chunk 3:                 [BCCCCCCCCC]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Fixed-size chunking: 500 tokens per chunk, 50 token overlap</span>
+<span class="n">CHUNK_SIZE</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">CHUNK_OVERLAP</span> <span class="o">=</span> <span class="mi">50</span>
+<span class="n">ENCODING</span> <span class="o">=</span> <span class="s2">&quot;cl100k_base&quot;</span>  <span class="c1"># tokenizer used by text-embedding-3-small and GPT-4o</span>
+
+<span class="n">enc</span> <span class="o">=</span> <span class="n">tiktoken</span><span class="o">.</span><span class="n">get_encoding</span><span class="p">(</span><span class="n">ENCODING</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">chunk_text</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">CHUNK_SIZE</span><span class="p">,</span> <span class="n">overlap</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">CHUNK_OVERLAP</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">enc</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+    <span class="n">chunks</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">start</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">):</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">start</span> <span class="o">+</span> <span class="n">chunk_size</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+        <span class="n">chunk_tokens</span> <span class="o">=</span> <span class="n">tokens</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">]</span>
+        <span class="n">chunks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">chunk_tokens</span><span class="p">))</span>
+        <span class="n">start</span> <span class="o">+=</span> <span class="n">chunk_size</span> <span class="o">-</span> <span class="n">overlap</span>
+    <span class="k">return</span> <span class="n">chunks</span>
+
+<span class="n">chunks</span> <span class="o">=</span> <span class="n">chunk_text</span><span class="p">(</span><span class="n">full_text</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Total chunks created  : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Average chunk length  : </span><span class="si">{</span><span class="nb">sum</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">chunks</span><span class="p">)</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> characters&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Sample Chunk (first chunk) ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Sample Chunk (chunk 10) ---&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">chunks</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">90</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Embed chunks using OpenAI text-embedding-3-small</span>
+<span class="c1"># This converts each chunk into a 1536-dimensional vector</span>
+
+<span class="n">EMBED_MODEL</span> <span class="o">=</span> <span class="s2">&quot;text-embedding-3-small&quot;</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">embed_texts</span><span class="p">(</span><span class="n">texts</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Embed a list of texts in batches of 100.&quot;&quot;&quot;</span>
+    <span class="n">all_embeddings</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">batch_size</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">),</span> <span class="n">batch_size</span><span class="p">):</span>
+        <span class="n">batch</span> <span class="o">=</span> <span class="n">texts</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">batch_size</span><span class="p">]</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
+        <span class="n">all_embeddings</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">item</span><span class="o">.</span><span class="n">embedding</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">data</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Embedded batch </span><span class="si">{</span><span class="n">i</span><span class="w"> </span><span class="o">//</span><span class="w"> </span><span class="n">batch_size</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">batch</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks)&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_embeddings</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Embedding chunks... (this may take 30–60 seconds for a large report)&quot;</span><span class="p">)</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">embed_texts</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Embedding dimensions : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;First 10 values of embedding[0]: </span><span class="si">{</span><span class="n">embeddings</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Store chunks and embeddings in ChromaDB (in-memory vector store)</span>
+<span class="c1"># ChromaDB lets us search for the most semantically similar chunks to a query</span>
+
+<span class="n">chroma_client</span> <span class="o">=</span> <span class="n">chromadb</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>  <span class="c1"># in-memory — no disk setup needed</span>
+
+<span class="c1"># Create a collection (like a table in a database)</span>
+<span class="n">collection</span> <span class="o">=</span> <span class="n">chroma_client</span><span class="o">.</span><span class="n">create_collection</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;nmb_annual_report_2023&quot;</span><span class="p">,</span>
+    <span class="n">metadata</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;hnsw:space&quot;</span><span class="p">:</span> <span class="s2">&quot;cosine&quot;</span><span class="p">}</span>  <span class="c1"># use cosine similarity</span>
+<span class="p">)</span>
+
+<span class="c1"># Add all chunks with their embeddings</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
+    <span class="n">documents</span><span class="o">=</span><span class="n">chunks</span><span class="p">,</span>
+    <span class="n">embeddings</span><span class="o">=</span><span class="n">embeddings</span><span class="p">,</span>
+    <span class="n">ids</span><span class="o">=</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;chunk_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">chunks</span><span class="p">))]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Stored </span><span class="si">{</span><span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2"> chunks in ChromaDB.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="how-similarity-search-works">How Similarity Search Works</h2>
+<p>When you ask a question, we convert it to an embedding vector (same process as the chunks). Then we find the chunks whose vectors are <em>closest</em> to the question vector.</p>
+<p><strong>Cosine similarity</strong> measures the angle between two vectors. Vectors pointing in the same direction (same topic) have a cosine similarity close to <strong>1.0</strong>. Vectors pointing in opposite directions (very different topics) have similarity close to <strong>0.0</strong> or negative.</p>
+<div class="highlight"><pre><span></span><code>Query: &quot;What was net profit?&quot;
+   Vector: [0.12, -0.34, 0.78, ...]   ← 1536 numbers
+
+Chunk A: &quot;Net profit for FY2023 was NPR 2.3 billion...&quot;
+   Vector: [0.11, -0.33, 0.76, ...]   ← very similar direction → high score
+
+Chunk B: &quot;The board approved 3 new branch openings...&quot;
+   Vector: [0.45, 0.12, -0.23, ...]   ← different direction → low score
+</code></pre></div>
+<p>ChromaDB returns the top-K chunks by cosine similarity — no manual keyword matching needed.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query 1: What was NMB Bank&#39;s net profit in FY2023?</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">rag_answer</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n_results</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="c1"># Step 1: Embed the query</span>
+    <span class="n">query_embedding</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="n">query</span><span class="p">]</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span>
+
+    <span class="c1"># Step 2: Retrieve top-K most similar chunks</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">query</span><span class="p">(</span>
+        <span class="n">query_embeddings</span><span class="o">=</span><span class="p">[</span><span class="n">query_embedding</span><span class="p">],</span>
+        <span class="n">n_results</span><span class="o">=</span><span class="n">n_results</span>
+    <span class="p">)</span>
+    <span class="n">retrieved_chunks</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="s2">&quot;documents&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># Step 3: Build context and send to GPT-4o-mini</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">retrieved_chunks</span><span class="p">)</span>
+    <span class="n">system_prompt</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">&quot;You are a financial analyst assistant. Answer the question based strictly on the &quot;</span>
+        <span class="s2">&quot;provided context from NMB Bank&#39;s annual report. If the answer is not in the context, &quot;</span>
+        <span class="s2">&quot;say so clearly. Be concise and precise.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">user_message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Context:</span><span class="se">\n</span><span class="si">{</span><span class="n">context</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">Question: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">chat</span><span class="o">.</span><span class="n">completions</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+        <span class="n">model</span><span class="o">=</span><span class="s2">&quot;gpt-4o-mini&quot;</span><span class="p">,</span>
+        <span class="n">messages</span><span class="o">=</span><span class="p">[</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;system&quot;</span><span class="p">,</span> <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">system_prompt</span><span class="p">},</span>
+            <span class="p">{</span><span class="s2">&quot;role&quot;</span><span class="p">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>   <span class="s2">&quot;content&quot;</span><span class="p">:</span> <span class="n">user_message</span><span class="p">}</span>
+        <span class="p">],</span>
+        <span class="n">temperature</span><span class="o">=</span><span class="mi">0</span>
+    <span class="p">)</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
+
+    <span class="c1"># Display retrieved chunks</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Query: </span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Retrieved Chunks:&quot;</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">retrieved_chunks</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">chunk</span><span class="p">[:</span><span class="mi">200</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span> <span class="o">*</span> <span class="mi">70</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Answer:</span><span class="se">\n</span><span class="si">{</span><span class="n">answer</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">answer</span>
+
+<span class="n">rag_answer</span><span class="p">(</span><span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query 2: What are the key risk factors mentioned in the annual report?</span>
+<span class="n">rag_answer</span><span class="p">(</span><span class="s2">&quot;What are the key risk factors mentioned in the annual report?&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Query 3: Who are the members of the board of directors?</span>
+<span class="n">rag_answer</span><span class="p">(</span><span class="s2">&quot;Who are the members of the board of directors?&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="what-rag-can-and-cannot-do">What RAG Can and Cannot Do</h2>
+<h3 id="rag-excels-at">RAG excels at:</h3>
+<ul>
+<li><strong>Fact lookup</strong> from a specific document ("What was the net profit?")</li>
+<li><strong>Summarizing</strong> a specific section ("Summarize the MD&amp;A")</li>
+<li><strong>Simple comparisons</strong> within one document</li>
+</ul>
+<h3 id="rag-struggles-with">RAG struggles with:</h3>
+<ul>
+<li><strong>Multi-hop questions</strong> — <em>"Compare NMB Bank's profit growth to Nepal Telecom's across 2022 and 2023"</em><br />
+  → Requires connecting information across 3 documents and multiple relationships</li>
+<li><strong>Counting</strong> — <em>"How many branches were opened?"</em><br />
+  → If the answer is spread across 5 different chunks, RAG may miss some</li>
+<li><strong>Relationship queries</strong> — <em>"Which subsidiaries did NMB Bank acquire after FY2022?"</em><br />
+  → Requires structured relationship knowledge, not just text similarity</li>
+</ul>
+<h3 id="what-we-will-build-next">What we will build next:</h3>
+<table>
+<thead>
+<tr>
+<th>Section</th>
+<th>Addresses Which Limitation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>02: Chunking Strategies</td>
+<td>Improves retrieval quality</td>
+</tr>
+<tr>
+<td>03–04: Knowledge Graphs</td>
+<td>Handles relationships and multi-document connections</td>
+</tr>
+<tr>
+<td>05: GraphRAG</td>
+<td>Combines both — answers multi-hop questions</td>
+</tr>
+<tr>
+<td>06: Agentic RAG</td>
+<td>Adds reasoning and tool selection</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<blockquote>
+<p><strong>Key takeaway:</strong> RAG is powerful for document Q&amp;A, but the quality of your answers depends heavily on how you prepare and retrieve the document chunks. We explore this next.</p>
+</blockquote>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../10_Clustering_for_CA/" class="btn btn-neutral float-left" title="Clustering & K-Means"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../02_chunking_strategies/" class="btn btn-neutral float-right" title="Chunking Strategies">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../10_Clustering_for_CA/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../02_chunking_strategies/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
