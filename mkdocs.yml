@@ -17,6 +17,13 @@ nav:
     - Feature Engineering: ican/08_Feature_Engineering_for_CA.md
     - Regression & Classification: ican/09_Regression_Classification_for_CA.md
     - Clustering & K-Means: ican/10_Clustering_for_CA.md
+  - Agentic AI:
+    - Simple RAG: ican/Agentic/01_simple_rag.md
+    - Chunking Strategies: ican/Agentic/02_chunking_strategies.md
+    - Knowledge Graphs: ican/Agentic/03_knowledge_graph_intro.md
+    - Multi Document Knowledge Graphs: ican/Agentic/04_multi_doc_knowledge_graph.md
+    - Graph RAG: ican/Agentic/05_graphrag_pipeline.md
+    - Agentic RAG: ican/Agentic/06_agentic_rag_langgraph.md
 
 
 
