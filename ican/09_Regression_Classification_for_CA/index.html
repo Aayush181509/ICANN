@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../../img/favicon.ico" />
-    <title>Regression & Classification - ICAN Training</title>
+    <title>Classification - ICAN Training</title>
     <link rel="stylesheet" href="../../css/theme.css" />
     <link rel="stylesheet" href="../../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Regression \u0026 Classification";
+        var mkdocs_page_name = "Classification";
         var mkdocs_page_input_path = "ican/09_Regression_Classification_for_CA.md";
         var mkdocs_page_url = null;
       </script>
@@ -69,54 +69,60 @@
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../08_Feature_Engineering_for_CA/">Feature Engineering</a>
                   </li>
-                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Regression & Classification</a>
+                  <li class="toctree-l1 current"><a class="reference internal current" >Regression & Classification</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#part-1-why-does-this-matter-to-you">Part 1: Why Does This Matter to You?</a>
+                <li class="toctree-l2 current"><a class="reference internal current" href="#">Classification</a>
+    <ul class="current">
+    <li class="toctree-l3"><a class="reference internal" href="#part-1-why-does-this-matter-to-you">Part 1: Why Does This Matter to You?</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#the-business-problem">The Business Problem</a>
+    <li class="toctree-l4"><a class="reference internal" href="#the-business-problem">The Business Problem</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part-2-fundamentals">Part 2: Fundamentals</a>
+    <li class="toctree-l3"><a class="reference internal" href="#part-2-fundamentals">Part 2: Fundamentals</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#what-is-a-model">What is a Model?</a>
+    <li class="toctree-l4"><a class="reference internal" href="#what-is-a-model">What is a Model?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#two-families-of-models">Two Families of Models</a>
+    <li class="toctree-l4"><a class="reference internal" href="#two-families-of-models">Two Families of Models</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#the-modelling-workflow">The Modelling Workflow</a>
+    <li class="toctree-l4"><a class="reference internal" href="#the-modelling-workflow">The Modelling Workflow</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#why-traintest-split">Why Train/Test Split?</a>
+    <li class="toctree-l4"><a class="reference internal" href="#why-traintest-split">Why Train/Test Split?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#evaluation-metrics-the-ca-interpretation">Evaluation Metrics — The CA Interpretation</a>
+    <li class="toctree-l4"><a class="reference internal" href="#evaluation-metrics-the-ca-interpretation">Evaluation Metrics — The CA Interpretation</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part-3-hands-on-build-and-evaluate-two-models">Part 3: Hands-on — Build and Evaluate Two Models</a>
+    <li class="toctree-l3"><a class="reference internal" href="#part-3-hands-on-build-and-evaluate-two-models">Part 3: Hands-on — Build and Evaluate Two Models</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#section-1-setup-and-data-loading">Section 1: Setup and Data Loading</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-1-setup-and-data-loading">Section 1: Setup and Data Loading</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#section-2-prepare-features-and-target">Section 2: Prepare Features and Target</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-2-prepare-features-and-target">Section 2: Prepare Features and Target</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#section-3-model-1-logistic-regression">Section 3: Model 1 — Logistic Regression</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-3-model-1-logistic-regression">Section 3: Model 1 — Logistic Regression</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#section-4-model-2-random-forest">Section 4: Model 2 — Random Forest</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-4-model-2-random-forest">Section 4: Model 2 — Random Forest</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#section-5-feature-importance-what-drives-late-payments">Section 5: Feature Importance — What Drives Late Payments?</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-5-feature-importance-what-drives-late-payments">Section 5: Feature Importance — What Drives Late Payments?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#section-6-risk-scored-invoice-report">Section 6: Risk-Scored Invoice Report</a>
+    <li class="toctree-l4"><a class="reference internal" href="#section-6-risk-scored-invoice-report">Section 6: Risk-Scored Invoice Report</a>
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#part-4-practice-exercises">Part 4: Practice Exercises</a>
+    <li class="toctree-l3"><a class="reference internal" href="#part-4-practice-exercises">Part 4: Practice Exercises</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#exercise-1-threshold-tuning">Exercise 1 — Threshold Tuning</a>
+    <li class="toctree-l4"><a class="reference internal" href="#exercise-1-threshold-tuning">Exercise 1 — Threshold Tuning</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#exercise-2-industry-level-risk-report">Exercise 2 — Industry-Level Risk Report</a>
+    <li class="toctree-l4"><a class="reference internal" href="#exercise-2-industry-level-risk-report">Exercise 2 — Industry-Level Risk Report</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#exercise-3-logistic-regression-coefficients">Exercise 3 — Logistic Regression Coefficients</a>
+    <li class="toctree-l4"><a class="reference internal" href="#exercise-3-logistic-regression-coefficients">Exercise 3 — Logistic Regression Coefficients</a>
     </li>
         </ul>
     </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../09b_Regression_for_CA/">Regression</a>
+                </li>
     </ul>
                   </li>
                   <li class="toctree-l1"><a class="reference internal" href="../10_Clustering_for_CA/">Clustering & K-Means</a>
@@ -152,7 +158,8 @@
   <ul class="wy-breadcrumbs">
     <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
           <li class="breadcrumb-item">Data Analytics</li>
-      <li class="breadcrumb-item active">Regression & Classification</li>
+          <li class="breadcrumb-item">Regression & Classification</li>
+      <li class="breadcrumb-item active">Classification</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -776,7 +783,7 @@ Conversely, is_repeat_offender reduces the probability of late payment.
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../08_Feature_Engineering_for_CA/" class="btn btn-neutral float-left" title="Feature Engineering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../10_Clustering_for_CA/" class="btn btn-neutral float-right" title="Clustering & K-Means">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../09b_Regression_for_CA/" class="btn btn-neutral float-right" title="Regression">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -803,7 +810,7 @@ Conversely, is_repeat_offender reduces the probability of late payment.
       <span><a href="../08_Feature_Engineering_for_CA/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../10_Clustering_for_CA/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../09b_Regression_for_CA/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
