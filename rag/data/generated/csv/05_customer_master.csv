@@ -1,0 +1,9 @@
+customer_code,customer_name,pan,credit_limit,active
+C001,Sagarmatha Distributors,401234567,10000000,Yes
+C002,Manaslu Retail Chain,402345678,2000000,Yes
+C003,Dhaulagiri Wholesale,403456789,5000000,Yes
+C004,Annapurna Holdings Pvt. Ltd.,404567890,5000000,Yes
+C005,Kanchanjunga Mart,405678901,10000000,Yes
+C006,Langtang Stores,,10000000,Yes
+C007,Makalu Trading,407890123,10000000,Yes
+C008,Rara Exporters,408901234,2000000,Yes

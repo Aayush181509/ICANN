@@ -1,1 +1,7 @@
 site
+.env
+.DS*_Store
+*.log
+*.tmp
+*.bak
+*.swp

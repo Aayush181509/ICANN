@@ -37,8 +37,26 @@ set OPENAI_API_KEY=sk-...
 - Set the password to: `icandemo123`
 - Start the database before running notebooks 03–06
 
-### 4. Download the PDF datasets
-Place the following files in the `data/` directory:
+### 4. Prepare the PDF datasets
+
+The notebooks reference 5 PDFs under `data/`. You have two options:
+
+**Option A — Use the included synthetic data (fastest, recommended for class)**
+
+```bash
+cd data && python generate_sample_data.py
+```
+
+This produces realistic but **fictional** Nepali financial PDFs covering
+NMB Bank (FY2022 & FY2023) and Nepal Telecom (FY2023), wired so that all six
+notebooks (chunking, entity extraction, year-over-year comparison, agent
+ratio computation) demonstrate cleanly end-to-end. The first cell of each
+notebook will also run this generator automatically if the PDFs are missing.
+
+**Option B — Use real annual reports**
+
+Replace the generated files with downloads from the issuers' investor relations
+pages. The notebooks key off the exact filenames below, so keep them the same:
 
 ```
 data/
@@ -51,9 +69,12 @@ data/
     └── nepal_telecom_financials_2023.pdf     ← Nepal Telecom financial statements FY2023
 ```
 
-Sources:
+Sources (real data):
 - NMB Bank: https://www.nmb.com.np/investor-relations
 - Nepal Telecom: https://www.ntc.net.np/investors
+
+> Real reports are 200–400 pages each; embedding + Neo4j extraction will be
+> slower and noisier than the synthetic set during a live classroom demo.
 
 ### 5. Pre-populate Neo4j (run the day before)
 To avoid live delays during the workshop, pre-run cells 1–8 of `03_knowledge_graph_intro.ipynb`.
@@ -87,7 +108,7 @@ on each of the 6 notebooks.
 - [ ] `pip install -r requirements.txt` completed successfully
 - [ ] `OPENAI_API_KEY` environment variable set
 - [ ] Neo4j Desktop installed, database `ican-finance` created, password `icandemo123`
-- [ ] All 5 PDFs downloaded and placed in `data/` as shown above
+- [ ] All 5 PDFs present under `data/` — either run `python data/generate_sample_data.py` or drop in real reports
 - [ ] Run cells 1–8 of `03_knowledge_graph_intro.ipynb` to pre-populate Neo4j
 - [ ] Run `Kernel → Restart & Run All` on each notebook — all should complete without errors
 - [ ] Reset Neo4j between dry runs: `utils/neo4j_setup.cypher`

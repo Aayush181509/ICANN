@@ -1,0 +1,11 @@
+risk_id,risk_description,category,likelihood,impact,mitigation
+R001,Revenue cut-off error,Financial reporting,High,Medium,Cut-off testing at YE
+R002,Related-party pricing not at arm's length,Tax / Compliance,Medium,High,Benchmark documentation
+R003,Loan covenant breach,Treasury,Medium,High,Quarterly DSCR monitoring
+R004,Inventory obsolescence under-provisioning,Financial reporting,Medium,Medium,NRV testing
+R005,Duplicate vendor master entries,Procurement,Low,Medium,Master data clean-up
+R006,Late TDS deposit,Tax,Low,Medium,Automated reminder
+R007,Sole-source procurement above threshold,Procurement,Medium,Medium,Tender process enforcement
+R008,Unauthorised journal entries near YE,ICFR,Medium,High,Maker-checker on JE
+R009,Foreign exchange exposure,Treasury,Low,Medium,Forward cover policy
+R010,Going concern under stress scenarios,Strategic,Low,High,Sensitivity in cash forecast

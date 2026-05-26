@@ -15,7 +15,9 @@ nav:
     - CRISP-DM Process: ican/06_CRISP_DM_for_CA.md
     - Data Cleaning: ican/07_Data_Cleaning_for_CA.md
     - Feature Engineering: ican/08_Feature_Engineering_for_CA.md
-    - Regression & Classification: ican/09_Regression_Classification_for_CA.md
+    - Regression & Classification:
+      - Classification: ican/09_Regression_Classification_for_CA.md
+      - Regression: ican/09b_Regression_for_CA.md
     - Clustering & K-Means: ican/10_Clustering_for_CA.md
   - Agentic AI:
     - Simple RAG: ican/Agentic/01_simple_rag.md

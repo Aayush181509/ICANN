@@ -1,0 +1,41 @@
+claim_no,date,employee_code,employee_name,category,amount,receipt_attached,approved
+EXP-0500,2081-07-14,E005,Deepak Adhikari,Office Supplies,42809,Yes,Yes
+EXP-0501,2081-05-13,E002,Sita Karki,Meals,19222,Yes,Yes
+EXP-0502,2081-04-20,E005,Deepak Adhikari,Local Transport,31546,Yes,Yes
+EXP-0503,2081-10-19,E002,Sita Karki,Travel,38728,Yes,Yes
+EXP-0504,2082-02-02,E006,Meera Gurung,Local Transport,74509,Yes,Yes
+EXP-0505,2081-04-11,E002,Sita Karki,Office Supplies,67669,Yes,Yes
+EXP-0506,2081-04-25,E007,Prakash Rai,Local Transport,44996,No,Yes
+EXP-0507,2081-09-12,E003,Bikram Thapa,Meals,21159,Yes,Yes
+EXP-0508,2082-02-11,E008,Sunita Maharjan,Meals,45858,Yes,Yes
+EXP-0509,2082-03-24,E004,Anju Pradhan,Office Supplies,14687,Yes,Yes
+EXP-0510,2081-05-17,E001,Ramesh Shrestha,Meals,53708,Yes,Yes
+EXP-0511,2081-10-02,E004,Anju Pradhan,Client Entertainment,32620,Yes,Yes
+EXP-0512,2081-10-22,E001,Ramesh Shrestha,Meals,77391,Yes,No
+EXP-0513,2081-08-10,E003,Bikram Thapa,Office Supplies,54644,Yes,Yes
+EXP-0514,2082-03-11,E008,Sunita Maharjan,Office Supplies,52392,Yes,Yes
+EXP-0515,2081-08-15,E004,Anju Pradhan,Office Supplies,69414,Yes,Yes
+EXP-0516,2081-12-28,E008,Sunita Maharjan,Office Supplies,78637,Yes,Yes
+EXP-0517,2081-05-09,E001,Ramesh Shrestha,Office Supplies,76086,Yes,Yes
+EXP-0518,2082-02-22,E008,Sunita Maharjan,Meals,13091,Yes,Yes
+EXP-0519,2081-09-01,E008,Sunita Maharjan,Travel,53428,No,Yes
+EXP-0520,2082-02-15,E004,Anju Pradhan,Travel,49819,Yes,Yes
+EXP-0521,2082-03-19,E005,Deepak Adhikari,Travel,70270,Yes,Yes
+EXP-0522,2082-02-07,E005,Deepak Adhikari,Travel,25273,Yes,Yes
+EXP-0523,2081-06-16,E001,Ramesh Shrestha,Office Supplies,24692,Yes,Yes
+EXP-0524,2081-04-21,E005,Deepak Adhikari,Client Entertainment,73618,Yes,Yes
+EXP-0525,2082-01-09,E004,Anju Pradhan,Meals,9966,Yes,Yes
+EXP-0526,2081-09-23,E004,Anju Pradhan,Office Supplies,62433,Yes,Yes
+EXP-0527,2082-03-15,E008,Sunita Maharjan,Office Supplies,39289,Yes,Yes
+EXP-0528,2081-11-26,E008,Sunita Maharjan,Office Supplies,6873,Yes,Yes
+EXP-0529,2081-07-20,E002,Sita Karki,Local Transport,67109,Yes,Yes
+EXP-0530,2081-11-14,E003,Bikram Thapa,Meals,41832,Yes,Yes
+EXP-0531,2081-10-02,E006,Meera Gurung,Local Transport,71275,No,Yes
+EXP-0532,2082-01-12,E005,Deepak Adhikari,Local Transport,46167,Yes,Yes
+EXP-0533,2082-01-22,E004,Anju Pradhan,Travel,63879,Yes,Yes
+EXP-0534,2081-09-13,E002,Sita Karki,Local Transport,56577,Yes,Yes
+EXP-0535,2081-04-02,E001,Ramesh Shrestha,Client Entertainment,3866,Yes,Yes
+EXP-0536,2081-10-17,E007,Prakash Rai,Meals,3772,Yes,Yes
+EXP-0537,2082-03-08,E001,Ramesh Shrestha,Meals,49024,Yes,Yes
+EXP-0538,2081-05-08,E002,Sita Karki,Local Transport,49940,Yes,Yes
+EXP-0539,2081-11-18,E008,Sunita Maharjan,Office Supplies,21097,Yes,Yes

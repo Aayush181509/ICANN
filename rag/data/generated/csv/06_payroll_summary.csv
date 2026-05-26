@@ -1,0 +1,9 @@
+employee_code,name,designation,monthly_gross,ssf_deduction,tds,net_pay
+E001,Ramesh Shrestha,CEO,89862,9885,8986,70991
+E002,Sita Karki,CFO,82848,9113,8285,65450
+E003,Bikram Thapa,Procurement Manager,176090,19370,17609,139111
+E004,Anju Pradhan,Accounts Manager,160372,17641,16037,126694
+E005,Deepak Adhikari,Internal Auditor,93696,10307,9370,74019
+E006,Meera Gurung,Store Officer,88913,9780,8891,70242
+E007,Prakash Rai,HR Manager,179323,19726,17932,141665
+E008,Sunita Maharjan,Junior Accountant,116009,12761,11601,91647

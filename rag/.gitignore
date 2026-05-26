@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+*.egg-info/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Confidential — participants' own files must never be committed
+data/user_data/*
+!data/user_data/put_your_files_here.md
+
+# Build artefacts
+outputs/vector_store/*
+outputs/graph_store/*
+outputs/reports/*
+!outputs/**/.gitkeep
+
+# OS
+.DS_Store
