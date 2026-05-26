@@ -147,6 +147,37 @@ Cross-document edges:
 (NMB Bank FY2022) ──[YEAR_OVER_YEAR]──► (NMB Bank FY2023)
 (Net Profit 2022) ──[PRIOR_YEAR_OF]──► (Net Profit 2023)
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Setup check: verify PDFs and Neo4j connection ────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">PDF_PATHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2022.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nepal_telecom_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PDF_PATHS</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs missing — running data generator...&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;generate_sample_data.py&quot;</span><span class="p">)],</span>
+                   <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All 3 annual report PDFs are ready.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: OPENAI_API_KEY is not set.&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+    <span class="n">_g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+    <span class="n">_g</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;RETURN 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j is reachable.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j NOT reachable — start Neo4j Desktop with database &#39;ican-finance&#39; (password: icandemo123).&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>All 3 annual report PDFs are ready.
+Neo4j is reachable.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
@@ -184,6 +215,8 @@ Cross-document edges:
         <span class="s2">&quot;color&quot;</span>   <span class="p">:</span> <span class="s2">&quot;#E67E22&quot;</span>
     <span class="p">},</span>
 <span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Graph cleared. Ready for multi-document extraction.
 </code></pre></div>
 <h2 id="entity-resolution-why-it-matters">Entity Resolution — Why It Matters</h2>
 <p>The same real-world entity can appear with different names across documents:</p>
@@ -256,6 +289,21 @@ Cross-document edges:
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Extraction complete.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Extracting entities from nmb_2022...
+
+
+  → {&#39;companies&#39;: 4, &#39;persons&#39;: 6, &#39;financial_metrics&#39;: 11, &#39;subsidiaries&#39;: 3, &#39;audit_firms&#39;: 0, &#39;relationships&#39;: 4}
+Extracting entities from nmb_2023...
+
+
+  → {&#39;companies&#39;: 3, &#39;persons&#39;: 7, &#39;financial_metrics&#39;: 11, &#39;subsidiaries&#39;: 2, &#39;audit_firms&#39;: 0, &#39;relationships&#39;: 3}
+Extracting entities from ntc_2023...
+
+
+  → {&#39;companies&#39;: 3, &#39;persons&#39;: 6, &#39;financial_metrics&#39;: 10, &#39;subsidiaries&#39;: 2, &#39;audit_firms&#39;: 0, &#39;relationships&#39;: 4}
+
+Extraction complete.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># GPT-4o-mini prompt for entity normalization across documents</span>
 <span class="c1"># This ensures &#39;NMB Bank&#39; and &#39;NMB Bank Ltd.&#39; become the same node</span>
 
@@ -294,6 +342,8 @@ Cross-document edges:
     <span class="k">if</span> <span class="n">orig</span> <span class="o">!=</span> <span class="n">canonical</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  &#39;</span><span class="si">{</span><span class="n">orig</span><span class="si">}</span><span class="s2">&#39; → &#39;</span><span class="si">{</span><span class="n">canonical</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Canonical name mappings:
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Merge entities across documents into Neo4j using MERGE (create if not exists)</span>
 <span class="c1"># Each node gets a SOURCE_DOC property indicating which document it came from</span>
 
@@ -331,6 +381,12 @@ Cross-document edges:
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total unique nodes in registry: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">node_registry</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Inserting nodes from nmb_2022...
+Inserting nodes from nmb_2023...
+Inserting nodes from ntc_2023...
+
+Total unique nodes in registry: 38
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Add intra-document relationships</span>
 <span class="n">rel_count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">doc_key</span><span class="p">,</span> <span class="n">entities</span> <span class="ow">in</span> <span class="n">doc_entities</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -362,6 +418,20 @@ Cross-document edges:
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total relationships created: </span><span class="si">{</span><span class="n">rel_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>  Linked: (Total Assets) -[PRIOR_YEAR_OF]-&gt; (Total Assets)
+  Linked: (Total Deposits) -[PRIOR_YEAR_OF]-&gt; (Total Deposits)
+  Linked: (Loans and Advances) -[PRIOR_YEAR_OF]-&gt; (Loans and Advances)
+  Linked: (Total Equity) -[PRIOR_YEAR_OF]-&gt; (Total Equity)
+  Linked: (Net Interest Income) -[PRIOR_YEAR_OF]-&gt; (Net Interest Income)
+  Linked: (Operating Income) -[PRIOR_YEAR_OF]-&gt; (Operating Income)
+  Linked: (Net Profit) -[PRIOR_YEAR_OF]-&gt; (Net Profit)
+  Linked: (Capital Adequacy Ratio (CAR)) -[PRIOR_YEAR_OF]-&gt; (Capital Adequacy Ratio (CAR))
+  Linked: (Non-Performing Loans (NPL)) -[PRIOR_YEAR_OF]-&gt; (Non-Performing Loans (NPL))
+  Linked: (Return on Equity (ROE)) -[PRIOR_YEAR_OF]-&gt; (Return on Equity (ROE))
+  Linked: (Earnings Per Share) -[PRIOR_YEAR_OF]-&gt; (Earnings Per Share)
+
+Total relationships created: 22
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Pyvis visualization — nodes color-coded by source document</span>
 <span class="n">SOURCE_COLORS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nmb_2022&quot;</span> <span class="p">:</span> <span class="s2">&quot;#AED6F1&quot;</span><span class="p">,</span>  <span class="c1"># light blue</span>
@@ -373,7 +443,7 @@ Cross-document edges:
 <span class="n">all_nodes</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;MATCH (n) RETURN n, labels(n) AS labels&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 <span class="n">all_rels</span>   <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;MATCH (a)-[r]-&gt;(b) RETURN a.name AS fn, a.value AS fv, type(r) AS rel, b.name AS tn, b.value AS tv, r.SOURCE_DOC AS src&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
-<span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;550px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s2">&quot;inline&quot;</span><span class="p">)</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;550px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s2">&quot;in_line&quot;</span><span class="p">)</span>
 <span class="n">net</span><span class="o">.</span><span class="n">force_atlas_2based</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_nodes</span><span class="p">:</span>
@@ -393,6 +463,17 @@ Cross-document edges:
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Legend: Light Blue=NMB 2022 | Dark Blue=NMB 2023 | Orange=Nepal Telecom | Purple=Multi-doc&quot;</span><span class="p">)</span>
 <span class="n">IFrame</span><span class="p">(</span><span class="s2">&quot;multi_doc_graph.html&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;570&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Legend: Light Blue=NMB 2022 | Dark Blue=NMB 2023 | Orange=Nepal Telecom | Purple=Multi-doc
+</code></pre></div>
+<p><iframe
+    width="100%"
+    height="570"
+    src="multi_doc_graph.html"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cypher traversal: All financial metrics for NMB Bank across both years</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query: All financial metrics for NMB Bank across FY2022 and FY2023&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">65</span><span class="p">)</span>
@@ -412,6 +493,10 @@ Cross-document edges:
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">)</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No REPORTED relationships found. (Check entity extraction output.)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: All financial metrics for NMB Bank across FY2022 and FY2023
+-----------------------------------------------------------------
+  No REPORTED relationships found. (Check entity extraction output.)
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cypher comparison: NMB Bank vs Nepal Telecom total assets in FY2023</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query: Compare NMB Bank vs Nepal Telecom Total Assets in FY2023&quot;</span><span class="p">)</span>
@@ -439,6 +524,10 @@ Cross-document edges:
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;company&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">] </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: Compare NMB Bank vs Nepal Telecom Total Assets in FY2023
+-----------------------------------------------------------------
+  Total Asset metrics not found. Showing all FY2023 metrics instead:
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cross-year NMB Bank subgraph visualization</span>
 <span class="n">results</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    MATCH (a:FinancialMetric)-[r:PRIOR_YEAR_OF]-&gt;(b:FinancialMetric)</span>
@@ -453,6 +542,20 @@ Cross-document edges:
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No PRIOR_YEAR_OF edges found.&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(This link is created when the same metric name appears in both FY2022 and FY2023.)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Year-over-year metric linkages (NMB Bank FY2022 → FY2023):
+------------------------------------------------------------
+  Total Assets (274310) → Total Assets (274310)
+  Total Deposits (230180) → Total Deposits (230180)
+  Loans and Advances (197420) → Loans and Advances (197420)
+  Total Equity (29640) → Total Equity (29640)
+  Net Interest Income (10440) → Net Interest Income (10440)
+  Operating Income (14920) → Operating Income (14920)
+  Net Profit (3810) → Net Profit (3810)
+  Capital Adequacy Ratio (CAR) (12.85) → Capital Adequacy Ratio (CAR) (12.85)
+  Non-Performing Loans (NPL) (2.18) → Non-Performing Loans (NPL) (2.18)
+  Return on Equity (ROE) (13.10) → Return on Equity (ROE) (13.10)
+  Earnings Per Share (22.15) → Earnings Per Share (22.15)
 </code></pre></div>
 <h2 id="what-this-enables-for-ca-professionals">What This Enables for CA Professionals</h2>
 <table>

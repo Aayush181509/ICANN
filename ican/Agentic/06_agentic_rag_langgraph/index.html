@@ -196,6 +196,39 @@
               │
          (loop back if answer is incomplete)
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Setup check: verify PDFs and Neo4j connection ────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">REQUIRED_PDFS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2022.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nepal_telecom_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;financial_statements&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_financials_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;financial_statements&quot;</span> <span class="o">/</span> <span class="s2">&quot;nepal_telecom_financials_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">REQUIRED_PDFS</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs missing — running data generator...&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;generate_sample_data.py&quot;</span><span class="p">)],</span>
+                   <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;All </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">REQUIRED_PDFS</span><span class="p">)</span><span class="si">}</span><span class="s2"> PDFs are ready.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: OPENAI_API_KEY is not set.&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+    <span class="n">_g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+    <span class="n">_g</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;RETURN 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j is reachable. (Run Sections 03 and 04 first to populate it.)&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j NOT reachable — graph_query tool will return empty results until you start Neo4j.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>All 5 PDFs are ready.
+Neo4j is reachable. (Run Sections 03 and 04 first to populate it.)
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
@@ -223,6 +256,16 @@
 
 <span class="n">neo4j_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All libraries loaded.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>/Users/aayush/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the &#39;ssl&#39; module is compiled with &#39;LibreSSL 2.8.3&#39;. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+
+
+/Users/aayush/Library/Python/3.9/lib/python/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects=&#39;messages&#39; or allowed_objects=&#39;core&#39;) to suppress this warning.
+  from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+
+
+All libraries loaded.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Visualize the LangGraph agent state graph using Mermaid</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
@@ -252,11 +295,34 @@
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Agent state graph displayed above.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+graph TD
+    START([START]) --> planner[Planner]
+    planner -->|has tool calls| tools[Tool Executor]
+    planner -->|no tool calls| END([END: Final Answer])
+    tools --> rag_search[rag_search<br/>ChromaDB]
+    tools --> graph_query[graph_query<br/>Neo4j]
+    tools --> ratio_calc[ratio_calculator<br/>Financial Ratios]
+    tools --> doc_sum[doc_summarizer<br/>Section Summary]
+    rag_search --> synthesizer[Synthesizer]
+    graph_query --> synthesizer
+    ratio_calc --> synthesizer
+    doc_sum --> synthesizer
+    synthesizer -->|needs more info| planner
+    synthesizer -->|complete| END
+</div>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
+<div class="highlight"><pre><span></span><code>Agent state graph displayed above.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define agent state schema</span>
 <span class="k">class</span><span class="w"> </span><span class="nc">AgentState</span><span class="p">(</span><span class="n">TypedDict</span><span class="p">):</span>
     <span class="n">messages</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">BaseMessage</span><span class="p">],</span> <span class="n">add_messages</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AgentState schema defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>AgentState schema defined.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Tool 1: rag_search — wraps ChromaDB paragraph-based retrieval</span>
 <span class="c1"># Rebuild ChromaDB (or reuse from Section 05 if same session)</span>
@@ -312,6 +378,16 @@
     <span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">all_chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">all_embeds</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">all_ids</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ChromaDB: </span><span class="si">{</span><span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2"> chunks ready.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>  nmb_bank_annual_report_2022.pdf: 2 chunks
+  nmb_bank_annual_report_2023.pdf: 5 chunks
+  nepal_telecom_annual_report_2023.pdf: 3 chunks
+  nmb_bank_financials_2023.pdf: 3 chunks
+  nepal_telecom_financials_2023.pdf: 3 chunks
+
+
+
+ChromaDB: 16 chunks ready.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 1: rag_search</span>
 <span class="nd">@tool</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rag_search</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -323,6 +399,8 @@
     <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">---</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 1: rag_search defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Tool 1: rag_search defined.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 2: graph_query — wraps Neo4j Cypher retrieval</span>
 <span class="nd">@tool</span>
@@ -376,6 +454,8 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 2: graph_query defined.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Tool 2: graph_query defined.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 3: ratio_calculator</span>
 <span class="nd">@tool</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">ratio_calculator</span><span class="p">(</span><span class="n">context</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -404,6 +484,8 @@
     <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 3: ratio_calculator defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Tool 3: ratio_calculator defined.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Define Tool 4: doc_summarizer</span>
 <span class="nd">@tool</span>
@@ -435,6 +517,8 @@
     <span class="k">return</span> <span class="n">resp</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">message</span><span class="o">.</span><span class="n">content</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tool 4: doc_summarizer defined.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Tool 4: doc_summarizer defined.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Build the LangGraph agent</span>
 <span class="n">tools_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">rag_search</span><span class="p">,</span> <span class="n">graph_query</span><span class="p">,</span> <span class="n">ratio_calculator</span><span class="p">,</span> <span class="n">doc_summarizer</span><span class="p">]</span>
@@ -469,6 +553,9 @@
 <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;(Install graphviz/playwright to render graph image)&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>LangGraph agent compiled successfully.
+</code></pre></div>
+<p><img alt="png" src="../06_agentic_rag_langgraph_files/06_agentic_rag_langgraph_11_1.png" /></p>
 <h2 id="workflow-1-financial-health-analysis">Workflow 1: Financial Health Analysis</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Run Workflow 1: Analyze the financial health of NMB Bank for FY2023</span>
 <span class="n">SYSTEM_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;You are an expert financial analyst assistant for CA professionals in Nepal.</span>
@@ -514,6 +601,49 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">final_answer</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Running Workflow 1: Analyze the financial health of NMB Bank for FY2023
+======================================================================
+Step-by-step agent trace:
+
+
+
+  [Step 1] Calling tool: rag_search({&#39;query&#39;: &#39;NMB Bank financial statements FY2023&#39;}...)
+  [Step 1] Calling tool: doc_summarizer({&#39;section_name&#39;: &#39;Management Discussion and Analysis&#39;}...)
+  [Step 1] Calling tool: doc_summarizer({&#39;section_name&#39;: &quot;Auditor&#39;s Report&quot;}...)
+
+
+    Tool result: NMB Bank Limited Annual Report — Fiscal Year 2022/23 (FY2023) Registered Office: Babarmahal, Kathmandu, Nepal  |  Compan...
+    Tool result: - **Operating Environment**: The Nepalese banking sector faced challenges due to a tight monetary policy by the Nepal Ra...
+    Tool result: **Auditor&#39;s Report Summary: Key Findings and Red Flags**  - **NMB Bank Limited**: The financial statements were deemed t...
+
+
+  [Step 3] Agent produced final answer.
+
+
+
+FINAL ANSWER:
+The financial health of NMB Bank for FY2023 can be assessed through several key metrics and insights from the financial statements, Management Discussion and Analysis (MD&amp;A), and the Auditor&#39;s Report:
+
+### Financial Performance
+- **Net Profit Growth**: NMB Bank achieved a net profit growth of 9.8% year-on-year, indicating a resilient performance despite challenging macroeconomic conditions (RAG).
+- **Total Assets and Deposits**: The bank&#39;s total assets increased by 8.79% to NPR 298,420 million, and total deposits grew by 9.32% to NPR 251,640 million, reflecting strong growth in its balance sheet (RAG).
+- **Net Interest Income**: There was a 13.22% increase in net interest income, which suggests improved interest margins and effective interest rate management (RAG).
+
+### Capital and Liquidity
+- **Capital Adequacy Ratio**: The bank&#39;s Capital Adequacy Ratio improved to 13.20%, which is above the regulatory minimum, indicating a strong capital position (MD&amp;A).
+- **Liquidity Position**: The loans-to-deposits ratio was 84.6%, showing healthy liquidity levels. The bank also issued NPR 2.0 billion in subordinated debentures to strengthen its Tier 2 capital (MD&amp;A).
+
+### Asset Quality
+- **Non-Performing Loans (NPL)**: The NPL ratio rose to 2.41%, primarily due to stress in the tourism and trading sectors. However, the bank has strengthened its provision coverage to 138%, which is a positive step towards managing potential credit risks (MD&amp;A).
+
+### Risk Management
+- **Key Risks**: The bank faces credit risk from concentration in the hydropower and real estate sectors, liquidity risk from tighter interbank markets, and regulatory risks from potential changes in lending guidelines. Investments in cybersecurity were made to mitigate operational risks (MD&amp;A).
+
+### Auditor&#39;s Report
+- **True and Fair View**: The financial statements present a true and fair view in accordance with Nepal Financial Reporting Standards (NFRS). Key audit matters include the management&#39;s judgment in determining provisions for expected credit losses and the reliance on IT systems and controls (Auditor&#39;s Report).
+
+Overall, NMB Bank appears to be in a strong financial position with robust growth in profits, assets, and deposits. The bank has maintained a healthy capital adequacy ratio and liquidity position, although it faces challenges related to asset quality and regulatory risks. The proactive measures in risk management and capital strengthening are positive indicators of its financial health.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Visualize Workflow 1 execution path as highlighted state steps</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">display</span><span class="p">,</span> <span class="n">HTML</span>
 
@@ -533,6 +663,7 @@
 <span class="n">steps_html</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;li style=&#39;margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px&#39;&gt;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&lt;/li&gt;&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">execution_steps</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Execution path (Workflow 1):&lt;/b&gt;&lt;ol style=&#39;font-family:monospace&#39;&gt;</span><span class="si">{</span><span class="n">steps_html</span><span class="si">}</span><span class="s2">&lt;/ol&gt;&quot;</span><span class="p">))</span>
 </code></pre></div>
+<p><b>Execution path (Workflow 1):</b><ol style='font-family:monospace'><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>doc_summarizer</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>doc_summarizer</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'><b>Synthesizer:</b> Final Answer Generated</li></ol></p>
 <h2 id="workflow-2-cross-company-ratio-comparison">Workflow 2: Cross-Company Ratio Comparison</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Workflow 2: Compare current ratio of Nepal Telecom vs NMB Bank for FY2023</span>
 <span class="n">QUERY2</span> <span class="o">=</span> <span class="s2">&quot;Compare the current ratio of Nepal Telecom vs NMB Bank for FY2023&quot;</span>
@@ -562,6 +693,31 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">final_state3</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Running Workflow 2: Compare the current ratio of Nepal Telecom vs NMB Bank for FY2023
+======================================================================
+
+
+  [Step 1] Tool: graph_query({&#39;query&#39;: &#39;Nepal Telecom current ratio FY2023&#39;}...)
+  [Step 1] Tool: graph_query({&#39;query&#39;: &#39;NMB Bank current ratio FY2023&#39;}...)
+
+
+  [Step 3] Tool: rag_search({&#39;query&#39;: &#39;Nepal Telecom current ratio FY2023&#39;}...)
+  [Step 3] Tool: rag_search({&#39;query&#39;: &#39;NMB Bank current ratio FY2023&#39;}...)
+
+
+  [Step 5] Tool: ratio_calculator({&#39;context&#39;: &#39;NMB Bank Limited\nFinancial Statements — Fiscal Year 2022...)
+
+
+
+FINAL ANSWER:
+For the fiscal year 2023, the current ratios for Nepal Telecom and NMB Bank are as follows:
+
+- **Nepal Telecom**: The current ratio is 1.95. This is calculated using the formula: Current Ratio = Current Assets / Current Liabilities, where Current Assets are NPR 42,620 million and Current Liabilities are NPR 21,820 million (Source: Nepal Telecom FY2023 financial statements).
+
+- **NMB Bank**: The current ratio is 1.818. This is calculated using the formula: Current Ratio = Current Assets / Current Liabilities, where Current Assets are NPR 53,220 million and Current Liabilities are NPR 29,260 million (Source: NMB Bank FY2023 financial statements).
+
+Nepal Telecom has a slightly higher current ratio compared to NMB Bank, indicating a better short-term liquidity position.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Visualize execution path for Workflow 2</span>
 <span class="n">execution_steps2</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">final_state3</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]:</span>
@@ -575,6 +731,7 @@
 <span class="n">steps_html2</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;li style=&#39;margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px&#39;&gt;</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">&lt;/li&gt;&quot;</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">execution_steps2</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">HTML</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&lt;b&gt;Execution path (Workflow 2 — Ratio Comparison):&lt;/b&gt;&lt;ol style=&#39;font-family:monospace&#39;&gt;</span><span class="si">{</span><span class="n">steps_html2</span><span class="si">}</span><span class="s2">&lt;/ol&gt;&quot;</span><span class="p">))</span>
 </code></pre></div>
+<p><b>Execution path (Workflow 2 — Ratio Comparison):</b><ol style='font-family:monospace'><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>ratio_calculator</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>ratio_calculator</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'><b>Synthesizer:</b> Final Answer Generated</li></ol></p>
 <h2 id="workflow-3-audit-focused-query">Workflow 3: Audit-Focused Query</h2>
 <div class="highlight"><pre><span></span><code><span class="c1"># Workflow 3: Summarize auditor&#39;s observations and flag going-concern issues</span>
 <span class="n">QUERY3</span> <span class="o">=</span> <span class="s2">&quot;Summarize the auditor&#39;s key observations for NMB Bank and flag any going-concern issues&quot;</span>
@@ -603,6 +760,38 @@
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;FINAL ANSWER:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">final_state4</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Running Workflow 3: Summarize the auditor&#39;s key observations for NMB Bank and flag any going-concern issues
+======================================================================
+
+
+  [Step 1] Tool: doc_summarizer({&#39;section_name&#39;: &quot;Auditor&#39;s Report&quot;}...)
+
+
+  [Step 3] Tool: rag_search({&#39;query&#39;: &quot;NMB Bank auditor&#39;s report going concern issues&quot;}...)
+
+
+
+FINAL ANSWER:
+### NMB Bank Auditor&#39;s Key Observations and Going-Concern Issues
+
+**Key Observations:**
+- **Expected Credit Loss on Loans and Advances:** The auditor noted significant management judgment in determining expected credit loss provisions, particularly concerning the staging of loans and macroeconomic adjustments. This is a critical area due to its impact on asset quality (RAG).
+- **IT Systems and Controls:** The bank&#39;s reliance on IT systems was highlighted, with a focus on the effectiveness of general IT controls and the new core banking system (RAG).
+
+**Going-Concern Issues:**
+- The auditor&#39;s report did not explicitly flag any going-concern issues for NMB Bank. The financial statements were deemed to present a true and fair view in accordance with Nepal Financial Reporting Standards (RAG).
+
+### Nepal Telecom Auditor&#39;s Key Observations and Going-Concern Issues
+
+**Key Observations:**
+- **Revenue Recognition:** The complexity of telecommunications revenue, involving multiple performance obligations, was noted as a key audit matter. This requires significant judgment in identifying performance obligations and allocating transaction prices (RAG).
+- **Network Asset Impairment:** The risk of accelerated obsolescence of 3G network assets due to the 5G rollout was highlighted. Management&#39;s impairment testing was based on discounted cash flow models (RAG).
+
+**Going-Concern Issues:**
+- Similar to NMB Bank, the auditor&#39;s report for Nepal Telecom did not indicate any going-concern issues. The financial statements were considered to present fairly in all material respects (RAG).
+
+Both companies appear to have stable financial positions without explicit going-concern warnings from their auditors.
 </code></pre></div>
 <h2 id="where-agentic-rag-goes-next">Where Agentic RAG Goes Next</h2>
 <p>What we built today is a <strong>single-agent</strong> system with 4 tools. Here is where this technology is heading:</p>

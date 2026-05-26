@@ -178,6 +178,37 @@ ChromaDB Search      Neo4j Cypher Query            │
                 ▼                                  │
           GPT-4o (final answer) ◄──────────────────┘
 </code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Setup check: verify PDFs and Neo4j connection ────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">PDF_PATHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2022.pdf&quot;</span><span class="p">,</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nepal_telecom_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PDF_PATHS</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs missing — running data generator...&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;generate_sample_data.py&quot;</span><span class="p">)],</span>
+                   <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs are ready.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: OPENAI_API_KEY is not set.&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+    <span class="n">_g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+    <span class="n">_g</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;RETURN 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j is reachable. (If empty, run Section 04 first to populate it.)&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j NOT reachable — start Neo4j Desktop first.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>PDFs are ready.
+Neo4j is reachable. (If empty, run Section 04 first to populate it.)
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">textwrap</span>
@@ -204,6 +235,8 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Neo4j graph: </span><span class="si">{</span><span class="n">node_count</span><span class="si">}</span><span class="s2"> nodes loaded from Section 04.&quot;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">node_count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: Run Section 04 first to populate Neo4j.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Neo4j graph: 38 nodes loaded from Section 04.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Rebuild ChromaDB using paragraph-based chunking (best strategy from Section 02)</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
@@ -257,6 +290,15 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="n">collection</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">documents</span><span class="o">=</span><span class="n">all_chunks</span><span class="p">,</span> <span class="n">embeddings</span><span class="o">=</span><span class="n">all_embeds</span><span class="p">,</span> <span class="n">ids</span><span class="o">=</span><span class="n">all_ids</span><span class="p">,</span> <span class="n">metadatas</span><span class="o">=</span><span class="n">all_metas</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">ChromaDB loaded: </span><span class="si">{</span><span class="n">collection</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s2"> total chunks across 3 documents.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>  nmb_2022: 2 chunks
+  nmb_2023: 5 chunks
+  ntc_2023: 3 chunks
+
+
+  Embedded batch 1
+
+ChromaDB loaded: 10 total chunks across 3 documents.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># RAG retriever: returns top-5 chunks by semantic similarity</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">rag_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">int</span><span class="p">]:</span>
     <span class="n">q_embed</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">embeddings</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">model</span><span class="o">=</span><span class="n">EMBED_MODEL</span><span class="p">,</span> <span class="nb">input</span><span class="o">=</span><span class="p">[</span><span class="n">query</span><span class="p">])</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">embedding</span>
@@ -269,6 +311,11 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="n">test_chunks</span><span class="p">,</span> <span class="n">test_tokens</span> <span class="o">=</span> <span class="n">rag_retrieve</span><span class="p">(</span><span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RAG retrieved </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_chunks</span><span class="p">)</span><span class="si">}</span><span class="s2"> chunks (</span><span class="si">{</span><span class="n">test_tokens</span><span class="si">}</span><span class="s2"> tokens)&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  [</span><span class="si">{</span><span class="n">test_chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">150</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="si">}</span><span class="s2">...]&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>RAG retrieved 5 chunks (2556 tokens)
+  [NMB Bank Limited
+Annual Report — Fiscal Year 2022/23 (FY2023)
+Registered Office: Babarmahal, Kathmandu, Nepal  |  Company Registration No.: 25478/064/...]
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Graph retriever: extracts entities from query, runs Cypher, returns structured context</span>
 
@@ -337,6 +384,9 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Graph retrieved </span><span class="si">{</span><span class="n">test_graph_tokens</span><span class="si">}</span><span class="s2"> tokens&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">test_graph_ctx</span><span class="p">[:</span><span class="mi">400</span><span class="p">])</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Graph retrieved 9 tokens
+(No graph data found for query entities.)
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># GraphRAG answer function: merge both retrievers, send to GPT-4o</span>
 
 <span class="n">GRAPHRAG_SYSTEM</span> <span class="o">=</span> <span class="p">(</span>
@@ -378,6 +428,8 @@ ChromaDB Search      Neo4j Cypher Query            │
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;graphrag_answer() function ready.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>graphrag_answer() function ready.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 1: Simple factual — RAG-only vs GraphRAG side-by-side</span>
 <span class="n">QUERY1</span> <span class="o">=</span> <span class="s2">&quot;What was NMB Bank&#39;s net profit in FY2023?&quot;</span>
 
@@ -404,6 +456,19 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GraphRAG answer:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: What was NMB Bank&#39;s net profit in FY2023?
+======================================================================
+RAG-only answer:
+NMB Bank&#39;s net profit in FY2023 was NPR 4,180 million.
+
+GraphRAG answer:
+NMB Bank&#39;s net profit for the fiscal year 2022/23 (FY2023) was NPR 4,185
+million. This is derived from the net profit growth of 9.8 percent over the
+previous year&#39;s net profit of NPR 3,810 million (FY2022). The calculation
+is as follows: NPR 3,810 million * 1.098 = NPR 4,185 million. This
+information is based on the financial highlights provided in the annual
+report for FY2023.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 2: Multi-hop — graph retriever wins</span>
 <span class="n">QUERY2</span> <span class="o">=</span> <span class="s2">&quot;Compare NMB Bank&#39;s asset growth from FY2022 to FY2023 and identify its auditor&quot;</span>
@@ -432,9 +497,38 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GraphRAG answer:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;answer&quot;</span><span class="p">],</span> <span class="n">width</span><span class="o">=</span><span class="mi">75</span><span class="p">))</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: Compare NMB Bank&#39;s asset growth from FY2022 to FY2023 and identify its auditor
+======================================================================
+RAG-only answer:
+NMB Bank&#39;s total assets grew from NPR 274,310 million in FY2022 to NPR
+298,420 million in FY2023, representing an increase of 8.79%. The auditor
+for NMB Bank is Deloitte Haskins &amp; Sells, Chartered Accountants.
+
+GraphRAG answer:
+NMB Bank&#39;s total assets grew from NPR 274,310 million in FY2022 to NPR
+298,420 million in FY2023, representing an increase of 8.79% (source: NMB
+Bank Limited Annual Report — Fiscal Year 2022/23).  The auditor for NMB
+Bank for both FY2022 and FY2023 was Deloitte Haskins &amp; Sells, Chartered
+Accountants, with CA Rajesh Pradhan as the audit partner (source: NMB Bank
+Limited Annual Report — Fiscal Year 2022/23).
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Demo Query 3: Cross-document entity — subsidiaries across both annual reports</span>
 <span class="n">QUERY3</span> <span class="o">=</span> <span class="s2">&quot;Which subsidiaries of NMB Bank were mentioned across both annual reports?&quot;</span>
 <span class="n">grag_result3</span> <span class="o">=</span> <span class="n">graphrag_answer</span><span class="p">(</span><span class="n">QUERY3</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query     : Which subsidiaries of NMB Bank were mentioned across both annual reports?
+RAG tokens: 2556 | Graph tokens: 9
+======================================================================
+Answer:
+The subsidiaries of NMB Bank mentioned across both the FY2022 and FY2023 annual reports are:
+
+1. **NMB Capital Limited** - NMB Bank holds a 51.0% ownership stake in this subsidiary, which is involved in merchant banking and IPO advisory services.
+
+2. **NMB Microfinance Bittiya Sanstha** - The ownership stake increased from 55.0% in FY2022 to 70.0% in FY2023. This subsidiary provides microfinance services.
+
+3. **NMB Insurance Brokers Pvt. Ltd.** - NMB Bank has a 100.0% ownership stake in this subsidiary, which operates in insurance brokerage.
+
+These subsidiaries are consistently mentioned in both annual reports, indicating their ongoing significance to NMB Bank&#39;s operations.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Comparison table: Question x Method x Answer quality summary</span>
 <span class="n">comparison_data</span> <span class="o">=</span> <span class="p">[</span>
@@ -462,6 +556,56 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s2">&quot;display.max_colwidth&quot;</span><span class="p">,</span> <span class="mi">120</span><span class="p">)</span>
 <span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Query</th>
+      <th>RAG Answer</th>
+      <th>GraphRAG Answer</th>
+      <th>Winner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What was NMB Bank's net profit in FY2023?...</td>
+      <td>NMB Bank's net profit in FY2023 was NPR 4,180 million....</td>
+      <td>NMB Bank's net profit for the fiscal year 2022/23 (FY2023) was NPR 4,185 million. This is derived fr...</td>
+      <td>Tie (simple factual)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Compare NMB Bank's asset growth from FY2022 to FY2...</td>
+      <td>NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR 298,420 million in FY2023, re...</td>
+      <td>NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR 298,420 million in FY2023, re...</td>
+      <td>GraphRAG (multi-hop + auditor)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Which subsidiaries of NMB Bank were mentioned acro...</td>
+      <td>(not run for brevity)</td>
+      <td>The subsidiaries of NMB Bank mentioned across both the FY2022 and FY2023 annual reports are:\n\n1. **N...</td>
+      <td>GraphRAG (cross-document entity)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
 <div class="highlight"><pre><span></span><code><span class="c1"># Bar chart: context tokens contributed by RAG vs Graph for each query</span>
 <span class="n">queries_short</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Q1: Net Profit&quot;</span><span class="p">,</span> <span class="s2">&quot;Q2: Asset Growth + Auditor&quot;</span><span class="p">,</span> <span class="s2">&quot;Q3: Subsidiaries&quot;</span><span class="p">]</span>
 <span class="n">rag_tok</span>   <span class="o">=</span> <span class="p">[</span><span class="n">grag_result1</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">],</span>   <span class="n">grag_result2</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">],</span>   <span class="n">grag_result3</span><span class="p">[</span><span class="s2">&quot;rag_tokens&quot;</span><span class="p">]]</span>
@@ -484,6 +628,7 @@ ChromaDB Search      Neo4j Cypher Query            │
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
+<p><img alt="png" src="../05_graphrag_pipeline_files/05_graphrag_pipeline_12_0.png" /></p>
 <h2 id="when-to-use-graphrag-vs-plain-rag">When to Use GraphRAG vs Plain RAG</h2>
 <table>
 <thead>

@@ -189,6 +189,39 @@
 </tbody>
 </table>
 <p><strong>For CA professionals:</strong> Knowledge graphs naturally represent the structure of audit trails, corporate hierarchies, and multi-year comparisons — the same relationships you reason about daily.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># ── Setup check: verify PDFs and Neo4j connection ────────────────────────────</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span><span class="o">,</span><span class="w"> </span><span class="nn">subprocess</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">DATA_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;../data&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+<span class="n">PDF_PATHS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;annual_reports&quot;</span> <span class="o">/</span> <span class="s2">&quot;nmb_bank_annual_report_2023.pdf&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+<span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">PDF_PATHS</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs missing — running data generator...&quot;</span><span class="p">)</span>
+    <span class="n">subprocess</span><span class="o">.</span><span class="n">run</span><span class="p">([</span><span class="n">sys</span><span class="o">.</span><span class="n">executable</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span> <span class="o">/</span> <span class="s2">&quot;generate_sample_data.py&quot;</span><span class="p">)],</span>
+                   <span class="n">check</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cwd</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">DATA_DIR</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PDFs are ready.&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OPENAI_API_KEY&quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;WARNING: OPENAI_API_KEY is not set.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Neo4j connectivity probe — gives a friendly message if the DB is not running</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">py2neo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+    <span class="n">_g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="s2">&quot;bolt://localhost:7687&quot;</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;neo4j&quot;</span><span class="p">,</span> <span class="s2">&quot;icandemo123&quot;</span><span class="p">))</span>
+    <span class="n">_g</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;RETURN 1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j is reachable on bolt://localhost:7687.&quot;</span><span class="p">)</span>
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Neo4j NOT reachable. Make sure Neo4j Desktop is running with:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Database name : ican-finance&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  Password      : icandemo123&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  Bolt URI      : bolt://localhost:7687&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  (Underlying error: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>PDFs are ready.
+Neo4j is reachable on bolt://localhost:7687.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Connect to Neo4j</span>
 <span class="c1"># Prerequisites:</span>
 <span class="c1">#   1. Neo4j Desktop installed and running</span>
@@ -215,6 +248,8 @@
 <span class="c1"># Test connection</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;RETURN &#39;Neo4j connected!&#39; AS message&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;message&quot;</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Neo4j connected!
 </code></pre></div>
 <h2 id="entity-types-we-will-extract">Entity Types We Will Extract</h2>
 <p>We will instruct GPT-4o-mini to extract these entity types from the annual report:</p>
@@ -276,6 +311,17 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;--- Preview ---&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">sample_text_truncated</span><span class="p">[:</span><span class="mi">500</span><span class="p">])</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Using 3000 characters from first 8 pages.
+--- Preview ---
+NMB Bank Limited
+Annual Report — Fiscal Year 2022/23 (FY2023)
+Registered Office: Babarmahal, Kathmandu, Nepal  |  Company Registration No.: 25478/064/065  |  Listed on: Nepal
+Stock Exchange (NEPSE) — Symbol: NMB
+This is a synthetic document created for the ICAN GenAI training workshop. All figures, names, and events are
+fictional and used only for educational demonstration of RAG and Knowledge Graph techniques.
+Chairperson&#39;s Statement
+On behalf of the Board of Directors, I am pleased to present
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># GPT-4o-mini entity extraction prompt</span>
 <span class="n">EXTRACTION_PROMPT</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">You are a financial document analyst. Extract structured entities from this annual report excerpt.</span>
@@ -312,6 +358,157 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Raw extraction output:&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">entities_raw</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Raw extraction output:
+{
+  &quot;companies&quot;: [
+    {
+      &quot;name&quot;: &quot;NMB Bank Limited&quot;,
+      &quot;type&quot;: &quot;Bank&quot;,
+      &quot;registration_no&quot;: &quot;25478/064/065&quot;
+    },
+    {
+      &quot;name&quot;: &quot;NMB Microfinance Bittiya Sanstha&quot;,
+      &quot;type&quot;: &quot;Microfinance&quot;,
+      &quot;registration_no&quot;: null
+    },
+    {
+      &quot;name&quot;: &quot;NMB Capital Limited&quot;,
+      &quot;type&quot;: &quot;Capital&quot;,
+      &quot;registration_no&quot;: null
+    }
+  ],
+  &quot;persons&quot;: [
+    {
+      &quot;name&quot;: &quot;Ram Bahadur Khatri&quot;,
+      &quot;designation&quot;: &quot;Chairperson&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Sunita Sharma&quot;,
+      &quot;designation&quot;: &quot;Director (Independent)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Pradeep K. Joshi&quot;,
+      &quot;designation&quot;: &quot;Director&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Anjali Pradhan&quot;,
+      &quot;designation&quot;: &quot;Director (Independent)&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Bibek Rana&quot;,
+      &quot;designation&quot;: &quot;Director&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Sushil Bhatta&quot;,
+      &quot;designation&quot;: &quot;Chief Executive Officer&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Manish Timalsina&quot;,
+      &quot;designation&quot;: &quot;Chief Financial Officer&quot;
+    }
+  ],
+  &quot;financial_metrics&quot;: [
+    {
+      &quot;name&quot;: &quot;Total Assets&quot;,
+      &quot;value&quot;: &quot;298420&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Total Deposits&quot;,
+      &quot;value&quot;: &quot;251640&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Loans and Advances&quot;,
+      &quot;value&quot;: &quot;212890&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Total Equity&quot;,
+      &quot;value&quot;: &quot;32150&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Net Interest Income&quot;,
+      &quot;value&quot;: &quot;11820&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Operating Income&quot;,
+      &quot;value&quot;: &quot;16540&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Net Profit&quot;,
+      &quot;value&quot;: &quot;4184&quot;,
+      &quot;unit&quot;: &quot;NPR in Millions&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Capital Adequacy Ratio (CAR)&quot;,
+      &quot;value&quot;: &quot;13.20&quot;,
+      &quot;unit&quot;: &quot;%&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Non-Performing Loans (NPL)&quot;,
+      &quot;value&quot;: &quot;2.41&quot;,
+      &quot;unit&quot;: &quot;%&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Return on Equity (ROE)&quot;,
+      &quot;value&quot;: &quot;13.45&quot;,
+      &quot;unit&quot;: &quot;%&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    },
+    {
+      &quot;name&quot;: &quot;Earnings Per Share (NPR)&quot;,
+      &quot;value&quot;: &quot;23.40&quot;,
+      &quot;unit&quot;: &quot;NPR&quot;,
+      &quot;period&quot;: &quot;FY2023&quot;
+    }
+  ],
+  &quot;subsidiaries&quot;: [
+    {
+      &quot;name&quot;: &quot;NMB Microfinance Bittiya Sanstha&quot;,
+      &quot;ownership_pct&quot;: &quot;70.0&quot;
+    },
+    {
+      &quot;name&quot;: &quot;NMB Capital Limited&quot;,
+      &quot;ownership_pct&quot;: &quot;51.0&quot;
+    }
+  ],
+  &quot;audit_firms&quot;: [],
+  &quot;years&quot;: [
+    &quot;2022&quot;,
+    &quot;2023&quot;
+  ],
+  &quot;relationships&quot;: [
+    {
+      &quot;from&quot;: &quot;NMB Bank Limited&quot;,
+      &quot;relation&quot;: &quot;SUBSIDIARY_OF&quot;,
+      &quot;to&quot;: &quot;NMB Microfinance Bittiya Sanstha&quot;
+    },
+    {
+      &quot;from&quot;: &quot;NMB Bank Limited&quot;,
+      &quot;relation&quot;: &quot;SUBSIDIARY_OF&quot;,
+      &quot;to&quot;: &quot;NMB Capital Limited&quot;
+    },
+    {
+      &quot;from&quot;: &quot;Ram Bahadur Khatri&quot;,
+      &quot;relation&quot;: &quot;CHAIRED_BY&quot;,
+      &quot;to&quot;: &quot;NMB Bank Limited&quot;
+    }
+  ]
+}
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Parse and display the extracted entities</span>
 <span class="n">entities</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">entities_raw</span><span class="p">)</span>
 
@@ -321,6 +518,48 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">entity_type</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span><span class="si">}</span><span class="s2"> found):&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>=== Extracted Entities ===
+
+COMPANIES (3 found):
+  {&#39;name&#39;: &#39;NMB Bank Limited&#39;, &#39;type&#39;: &#39;Bank&#39;, &#39;registration_no&#39;: &#39;25478/064/065&#39;}
+  {&#39;name&#39;: &#39;NMB Microfinance Bittiya Sanstha&#39;, &#39;type&#39;: &#39;Microfinance&#39;, &#39;registration_no&#39;: None}
+  {&#39;name&#39;: &#39;NMB Capital Limited&#39;, &#39;type&#39;: &#39;Capital&#39;, &#39;registration_no&#39;: None}
+
+PERSONS (7 found):
+  {&#39;name&#39;: &#39;Ram Bahadur Khatri&#39;, &#39;designation&#39;: &#39;Chairperson&#39;}
+  {&#39;name&#39;: &#39;Sunita Sharma&#39;, &#39;designation&#39;: &#39;Director (Independent)&#39;}
+  {&#39;name&#39;: &#39;Pradeep K. Joshi&#39;, &#39;designation&#39;: &#39;Director&#39;}
+  {&#39;name&#39;: &#39;Anjali Pradhan&#39;, &#39;designation&#39;: &#39;Director (Independent)&#39;}
+  {&#39;name&#39;: &#39;Bibek Rana&#39;, &#39;designation&#39;: &#39;Director&#39;}
+  {&#39;name&#39;: &#39;Sushil Bhatta&#39;, &#39;designation&#39;: &#39;Chief Executive Officer&#39;}
+  {&#39;name&#39;: &#39;Manish Timalsina&#39;, &#39;designation&#39;: &#39;Chief Financial Officer&#39;}
+
+FINANCIAL_METRICS (11 found):
+  {&#39;name&#39;: &#39;Total Assets&#39;, &#39;value&#39;: &#39;298420&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Total Deposits&#39;, &#39;value&#39;: &#39;251640&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Loans and Advances&#39;, &#39;value&#39;: &#39;212890&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Total Equity&#39;, &#39;value&#39;: &#39;32150&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Net Interest Income&#39;, &#39;value&#39;: &#39;11820&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Operating Income&#39;, &#39;value&#39;: &#39;16540&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Net Profit&#39;, &#39;value&#39;: &#39;4184&#39;, &#39;unit&#39;: &#39;NPR in Millions&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Capital Adequacy Ratio (CAR)&#39;, &#39;value&#39;: &#39;13.20&#39;, &#39;unit&#39;: &#39;%&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Non-Performing Loans (NPL)&#39;, &#39;value&#39;: &#39;2.41&#39;, &#39;unit&#39;: &#39;%&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Return on Equity (ROE)&#39;, &#39;value&#39;: &#39;13.45&#39;, &#39;unit&#39;: &#39;%&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+  {&#39;name&#39;: &#39;Earnings Per Share (NPR)&#39;, &#39;value&#39;: &#39;23.40&#39;, &#39;unit&#39;: &#39;NPR&#39;, &#39;period&#39;: &#39;FY2023&#39;}
+
+SUBSIDIARIES (2 found):
+  {&#39;name&#39;: &#39;NMB Microfinance Bittiya Sanstha&#39;, &#39;ownership_pct&#39;: &#39;70.0&#39;}
+  {&#39;name&#39;: &#39;NMB Capital Limited&#39;, &#39;ownership_pct&#39;: &#39;51.0&#39;}
+
+YEARS (2 found):
+  2022
+  2023
+
+RELATIONSHIPS (3 found):
+  {&#39;from&#39;: &#39;NMB Bank Limited&#39;, &#39;relation&#39;: &#39;SUBSIDIARY_OF&#39;, &#39;to&#39;: &#39;NMB Microfinance Bittiya Sanstha&#39;}
+  {&#39;from&#39;: &#39;NMB Bank Limited&#39;, &#39;relation&#39;: &#39;SUBSIDIARY_OF&#39;, &#39;to&#39;: &#39;NMB Capital Limited&#39;}
+  {&#39;from&#39;: &#39;Ram Bahadur Khatri&#39;, &#39;relation&#39;: &#39;CHAIRED_BY&#39;, &#39;to&#39;: &#39;NMB Bank Limited&#39;}
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create nodes in Neo4j for each entity type</span>
 <span class="c1"># First clear any existing data from previous runs</span>
@@ -366,6 +605,9 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Created </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">node_registry</span><span class="p">)</span><span class="si">}</span><span class="s2"> nodes in Neo4j.&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Cleared existing graph.
+Created 23 nodes in Neo4j.
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Create relationships</span>
 <span class="n">rel_count</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="k">for</span> <span class="n">rel</span> <span class="ow">in</span> <span class="n">entities</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;relationships&quot;</span><span class="p">,</span> <span class="p">[]):</span>
@@ -384,6 +626,12 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total relationships created: </span><span class="si">{</span><span class="n">rel_count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>  Created: (NMB Bank Limited) -[SUBSIDIARY_OF]-&gt; (NMB Microfinance Bittiya Sanstha)
+  Created: (NMB Bank Limited) -[SUBSIDIARY_OF]-&gt; (NMB Capital Limited)
+  Created: (Ram Bahadur Khatri) -[CHAIRED_BY]-&gt; (NMB Bank Limited)
+
+Total relationships created: 3
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Visualize the graph using pyvis (renders as HTML in the notebook)</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pyvis.network</span><span class="w"> </span><span class="kn">import</span> <span class="n">Network</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">IFrame</span>
@@ -401,7 +649,7 @@
     <span class="s2">&quot;Year&quot;</span>           <span class="p">:</span> <span class="s2">&quot;#95A5A6&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;500px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s2">&quot;inline&quot;</span><span class="p">)</span>
+<span class="n">net</span> <span class="o">=</span> <span class="n">Network</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="s2">&quot;500px&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">notebook</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cdn_resources</span><span class="o">=</span><span class="s2">&quot;in_line&quot;</span><span class="p">)</span>
 <span class="n">net</span><span class="o">.</span><span class="n">force_atlas_2based</span><span class="p">()</span>
 
 <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">all_nodes</span><span class="p">:</span>
@@ -420,6 +668,17 @@
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Graph visualization saved. Displaying below:&quot;</span><span class="p">)</span>
 <span class="n">IFrame</span><span class="p">(</span><span class="n">graph_html</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;100%&quot;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;520&quot;</span><span class="p">)</span>
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Graph visualization saved. Displaying below:
+</code></pre></div>
+<p><iframe
+    width="100%"
+    height="520"
+    src="nmb_graph.html"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</p>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cypher Query 1: Find all subsidiaries of NMB Bank</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query: Find all subsidiaries of NMB Bank&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
@@ -437,6 +696,13 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No subsidiary relationships found in this extract.&quot;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  (Run on a larger section of the PDF to populate this.)&quot;</span><span class="p">)</span> 
 </code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: Find all subsidiaries of NMB Bank
+--------------------------------------------------
+
+
+  No subsidiary relationships found in this extract.
+  (Run on a larger section of the PDF to populate this.)
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cypher Query 2: Who audited this company and in which year?</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query: Who audited NMB Bank and in which year?&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
@@ -453,6 +719,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;company&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> was audited by </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;auditor&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> for years: </span><span class="si">{</span><span class="n">years</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  No audit relationships found in this extract.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: Who audited NMB Bank and in which year?
+--------------------------------------------------
+  No audit relationships found in this extract.
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><span class="c1"># Cypher Query 3: Show all financial metrics reported for FY2023</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Query: Show all financial metrics reported for FY2023&quot;</span><span class="p">)</span>
@@ -479,6 +749,23 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;  (Showing all extracted financial metrics:)&quot;</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;metric&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">r</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;unit&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Query: Show all financial metrics reported for FY2023
+--------------------------------------------------
+
+
+  (Showing all extracted financial metrics:)
+  Capital Adequacy Ratio (CAR): 13.20 % (FY2023)
+  Earnings Per Share (NPR): 23.40 NPR (FY2023)
+  Loans and Advances: 212890 NPR in Millions (FY2023)
+  Net Interest Income: 11820 NPR in Millions (FY2023)
+  Net Profit: 4184 NPR in Millions (FY2023)
+  Non-Performing Loans (NPL): 2.41 % (FY2023)
+  Operating Income: 16540 NPR in Millions (FY2023)
+  Return on Equity (ROE): 13.45 % (FY2023)
+  Total Assets: 298420 NPR in Millions (FY2023)
+  Total Deposits: 251640 NPR in Millions (FY2023)
+  Total Equity: 32150 NPR in Millions (FY2023)
 </code></pre></div>
 <h2 id="what-cypher-reads-like-sql-analogy">What Cypher Reads Like (SQL Analogy)</h2>
 <p>CA professionals are familiar with SQL-style thinking. Here is how Cypher maps:</p>
@@ -531,6 +818,17 @@
 <span class="n">rel_count_total</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;MATCH ()-[r]-&gt;() RETURN count(r) AS total&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="s2">&quot;total&quot;</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Relationships      : </span><span class="si">{</span><span class="n">rel_count_total</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Next step → Section 04: Scale this to 3 documents!&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Current graph contents:
+------------------------------
+  FinancialMetric      : 11 nodes
+  Person               : 7 nodes
+  Company              : 3 nodes
+  Year                 : 2 nodes
+
+  Relationships      : 3
+
+Next step → Section 04: Scale this to 3 documents!
 </code></pre></div>
               
             </div>
