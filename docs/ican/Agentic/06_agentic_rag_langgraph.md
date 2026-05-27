@@ -66,6 +66,44 @@ LangGraph builds on LangChain to create **stateful agent workflows** using a gra
 
 
 ```python
+# ── Setup check: verify PDFs and Neo4j connection ────────────────────────────
+import os, subprocess, sys
+from pathlib import Path
+
+DATA_DIR = Path("../data").resolve()
+REQUIRED_PDFS = [
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2023.pdf",
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2022.pdf",
+    DATA_DIR / "annual_reports" / "nepal_telecom_annual_report_2023.pdf",
+    DATA_DIR / "financial_statements" / "nmb_bank_financials_2023.pdf",
+    DATA_DIR / "financial_statements" / "nepal_telecom_financials_2023.pdf",
+]
+if any(not p.exists() for p in REQUIRED_PDFS):
+    print("PDFs missing — running data generator...")
+    subprocess.run([sys.executable, str(DATA_DIR / "generate_sample_data.py")],
+                   check=True, cwd=str(DATA_DIR))
+print(f"All {len(REQUIRED_PDFS)} PDFs are ready.")
+
+if not os.environ.get("OPENAI_API_KEY"):
+    print("WARNING: OPENAI_API_KEY is not set.")
+
+try:
+    from py2neo import Graph
+    _g = Graph("bolt://localhost:7687", auth=("neo4j", "icandemo123"))
+    _g.run("RETURN 1").data()
+    print("Neo4j is reachable. (Run Sections 03 and 04 first to populate it.)")
+except Exception as e:
+    print("Neo4j NOT reachable — graph_query tool will return empty results until you start Neo4j.")
+    print(f"  ({type(e).__name__}: {e})")
+
+```
+
+    All 5 PDFs are ready.
+    Neo4j is reachable. (Run Sections 03 and 04 first to populate it.)
+
+
+
+```python
 import os
 import re
 import json
@@ -94,6 +132,17 @@ enc = tiktoken.get_encoding("cl100k_base")
 neo4j_graph = Graph("bolt://localhost:7687", auth=("neo4j", "icandemo123"))
 print("All libraries loaded.")
 ```
+
+    /Users/aayush/Library/Python/3.9/lib/python/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+      warnings.warn(
+
+
+    /Users/aayush/Library/Python/3.9/lib/python/site-packages/langgraph/cache/base/__init__.py:8: LangChainPendingDeprecationWarning: The default value of `allowed_objects` will change in a future version. Pass an explicit value (e.g., allowed_objects='messages' or allowed_objects='core') to suppress this warning.
+      from langgraph.checkpoint.serde.jsonplus import JsonPlusSerializer
+
+
+    All libraries loaded.
+
 
 
 ```python
@@ -127,6 +176,32 @@ print("Agent state graph displayed above.")
 ```
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+<div class="mermaid">
+graph TD
+    START([START]) --> planner[Planner]
+    planner -->|has tool calls| tools[Tool Executor]
+    planner -->|no tool calls| END([END: Final Answer])
+    tools --> rag_search[rag_search<br/>ChromaDB]
+    tools --> graph_query[graph_query<br/>Neo4j]
+    tools --> ratio_calc[ratio_calculator<br/>Financial Ratios]
+    tools --> doc_sum[doc_summarizer<br/>Section Summary]
+    rag_search --> synthesizer[Synthesizer]
+    graph_query --> synthesizer
+    ratio_calc --> synthesizer
+    doc_sum --> synthesizer
+    synthesizer -->|needs more info| planner
+    synthesizer -->|complete| END
+</div>
+<script>mermaid.initialize({startOnLoad:true});</script>
+
+
+
+    Agent state graph displayed above.
+
+
+
 ```python
 # Define agent state schema
 class AgentState(TypedDict):
@@ -134,6 +209,9 @@ class AgentState(TypedDict):
 
 print("AgentState schema defined.")
 ```
+
+    AgentState schema defined.
+
 
 
 ```python
@@ -192,6 +270,17 @@ if all_chunks:
     print(f"\nChromaDB: {collection.count()} chunks ready.")
 ```
 
+      nmb_bank_annual_report_2022.pdf: 2 chunks
+      nmb_bank_annual_report_2023.pdf: 5 chunks
+      nepal_telecom_annual_report_2023.pdf: 3 chunks
+      nmb_bank_financials_2023.pdf: 3 chunks
+      nepal_telecom_financials_2023.pdf: 3 chunks
+
+
+    
+    ChromaDB: 16 chunks ready.
+
+
 
 ```python
 # Define Tool 1: rag_search
@@ -206,6 +295,9 @@ def rag_search(query: str) -> str:
 
 print("Tool 1: rag_search defined.")
 ```
+
+    Tool 1: rag_search defined.
+
 
 
 ```python
@@ -262,6 +354,9 @@ def graph_query(query: str) -> str:
 print("Tool 2: graph_query defined.")
 ```
 
+    Tool 2: graph_query defined.
+
+
 
 ```python
 # Define Tool 3: ratio_calculator
@@ -293,6 +388,9 @@ Return as structured text."""
 
 print("Tool 3: ratio_calculator defined.")
 ```
+
+    Tool 3: ratio_calculator defined.
+
 
 
 ```python
@@ -327,6 +425,9 @@ def doc_summarizer(section_name: str) -> str:
 
 print("Tool 4: doc_summarizer defined.")
 ```
+
+    Tool 4: doc_summarizer defined.
+
 
 
 ```python
@@ -363,6 +464,15 @@ try:
 except Exception:
     print("(Install graphviz/playwright to render graph image)")
 ```
+
+    LangGraph agent compiled successfully.
+
+
+
+    
+![png](06_agentic_rag_langgraph_files/06_agentic_rag_langgraph_11_1.png)
+    
+
 
 ## Workflow 1: Financial Health Analysis
 
@@ -413,6 +523,50 @@ print("FINAL ANSWER:")
 print(final_answer)
 ```
 
+    Running Workflow 1: Analyze the financial health of NMB Bank for FY2023
+    ======================================================================
+    Step-by-step agent trace:
+    
+
+
+      [Step 1] Calling tool: rag_search({'query': 'NMB Bank financial statements FY2023'}...)
+      [Step 1] Calling tool: doc_summarizer({'section_name': 'Management Discussion and Analysis'}...)
+      [Step 1] Calling tool: doc_summarizer({'section_name': "Auditor's Report"}...)
+
+
+        Tool result: NMB Bank Limited Annual Report — Fiscal Year 2022/23 (FY2023) Registered Office: Babarmahal, Kathmandu, Nepal  |  Compan...
+        Tool result: - **Operating Environment**: The Nepalese banking sector faced challenges due to a tight monetary policy by the Nepal Ra...
+        Tool result: **Auditor's Report Summary: Key Findings and Red Flags**  - **NMB Bank Limited**: The financial statements were deemed t...
+
+
+      [Step 3] Agent produced final answer.
+    
+
+
+    FINAL ANSWER:
+    The financial health of NMB Bank for FY2023 can be assessed through several key metrics and insights from the financial statements, Management Discussion and Analysis (MD&A), and the Auditor's Report:
+    
+    ### Financial Performance
+    - **Net Profit Growth**: NMB Bank achieved a net profit growth of 9.8% year-on-year, indicating a resilient performance despite challenging macroeconomic conditions (RAG).
+    - **Total Assets and Deposits**: The bank's total assets increased by 8.79% to NPR 298,420 million, and total deposits grew by 9.32% to NPR 251,640 million, reflecting strong growth in its balance sheet (RAG).
+    - **Net Interest Income**: There was a 13.22% increase in net interest income, which suggests improved interest margins and effective interest rate management (RAG).
+    
+    ### Capital and Liquidity
+    - **Capital Adequacy Ratio**: The bank's Capital Adequacy Ratio improved to 13.20%, which is above the regulatory minimum, indicating a strong capital position (MD&A).
+    - **Liquidity Position**: The loans-to-deposits ratio was 84.6%, showing healthy liquidity levels. The bank also issued NPR 2.0 billion in subordinated debentures to strengthen its Tier 2 capital (MD&A).
+    
+    ### Asset Quality
+    - **Non-Performing Loans (NPL)**: The NPL ratio rose to 2.41%, primarily due to stress in the tourism and trading sectors. However, the bank has strengthened its provision coverage to 138%, which is a positive step towards managing potential credit risks (MD&A).
+    
+    ### Risk Management
+    - **Key Risks**: The bank faces credit risk from concentration in the hydropower and real estate sectors, liquidity risk from tighter interbank markets, and regulatory risks from potential changes in lending guidelines. Investments in cybersecurity were made to mitigate operational risks (MD&A).
+    
+    ### Auditor's Report
+    - **True and Fair View**: The financial statements present a true and fair view in accordance with Nepal Financial Reporting Standards (NFRS). Key audit matters include the management's judgment in determining provisions for expected credit losses and the reliance on IT systems and controls (Auditor's Report).
+    
+    Overall, NMB Bank appears to be in a strong financial position with robust growth in profits, assets, and deposits. The bank has maintained a healthy capital adequacy ratio and liquidity position, although it faces challenges related to asset quality and regulatory risks. The proactive measures in risk management and capital strengthening are positive indicators of its financial health.
+
+
 
 ```python
 # Visualize Workflow 1 execution path as highlighted state steps
@@ -434,6 +588,10 @@ for msg in final_state2["messages"]:
 steps_html = "".join(f"<li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>{s}</li>" for s in execution_steps)
 display(HTML(f"<b>Execution path (Workflow 1):</b><ol style='font-family:monospace'>{steps_html}</ol>"))
 ```
+
+
+<b>Execution path (Workflow 1):</b><ol style='font-family:monospace'><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>doc_summarizer</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'>Called: <b>doc_summarizer</b></li><li style='margin:4px 0;padding:6px;background:#e8f4fd;border-radius:4px'><b>Synthesizer:</b> Final Answer Generated</li></ol>
+
 
 ## Workflow 2: Cross-Company Ratio Comparison
 
@@ -468,6 +626,32 @@ print("FINAL ANSWER:")
 print(final_state3["messages"][-1].content)
 ```
 
+    Running Workflow 2: Compare the current ratio of Nepal Telecom vs NMB Bank for FY2023
+    ======================================================================
+
+
+      [Step 1] Tool: graph_query({'query': 'Nepal Telecom current ratio FY2023'}...)
+      [Step 1] Tool: graph_query({'query': 'NMB Bank current ratio FY2023'}...)
+
+
+      [Step 3] Tool: rag_search({'query': 'Nepal Telecom current ratio FY2023'}...)
+      [Step 3] Tool: rag_search({'query': 'NMB Bank current ratio FY2023'}...)
+
+
+      [Step 5] Tool: ratio_calculator({'context': 'NMB Bank Limited\nFinancial Statements — Fiscal Year 2022...)
+
+
+    
+    FINAL ANSWER:
+    For the fiscal year 2023, the current ratios for Nepal Telecom and NMB Bank are as follows:
+    
+    - **Nepal Telecom**: The current ratio is 1.95. This is calculated using the formula: Current Ratio = Current Assets / Current Liabilities, where Current Assets are NPR 42,620 million and Current Liabilities are NPR 21,820 million (Source: Nepal Telecom FY2023 financial statements).
+    
+    - **NMB Bank**: The current ratio is 1.818. This is calculated using the formula: Current Ratio = Current Assets / Current Liabilities, where Current Assets are NPR 53,220 million and Current Liabilities are NPR 29,260 million (Source: NMB Bank FY2023 financial statements).
+    
+    Nepal Telecom has a slightly higher current ratio compared to NMB Bank, indicating a better short-term liquidity position.
+
+
 
 ```python
 # Visualize execution path for Workflow 2
@@ -483,6 +667,10 @@ for msg in final_state3["messages"]:
 steps_html2 = "".join(f"<li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>{s}</li>" for s in execution_steps2)
 display(HTML(f"<b>Execution path (Workflow 2 — Ratio Comparison):</b><ol style='font-family:monospace'>{steps_html2}</ol>"))
 ```
+
+
+<b>Execution path (Workflow 2 — Ratio Comparison):</b><ol style='font-family:monospace'><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>rag_search</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>ratio_calculator</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'>Called: <b>ratio_calculator</b></li><li style='margin:4px 0;padding:6px;background:#fef9e7;border-radius:4px'><b>Synthesizer:</b> Final Answer Generated</li></ol>
+
 
 ## Workflow 3: Audit-Focused Query
 
@@ -516,6 +704,39 @@ print()
 print("FINAL ANSWER:")
 print(final_state4["messages"][-1].content)
 ```
+
+    Running Workflow 3: Summarize the auditor's key observations for NMB Bank and flag any going-concern issues
+    ======================================================================
+
+
+      [Step 1] Tool: doc_summarizer({'section_name': "Auditor's Report"}...)
+
+
+      [Step 3] Tool: rag_search({'query': "NMB Bank auditor's report going concern issues"}...)
+
+
+    
+    FINAL ANSWER:
+    ### NMB Bank Auditor's Key Observations and Going-Concern Issues
+    
+    **Key Observations:**
+    - **Expected Credit Loss on Loans and Advances:** The auditor noted significant management judgment in determining expected credit loss provisions, particularly concerning the staging of loans and macroeconomic adjustments. This is a critical area due to its impact on asset quality (RAG).
+    - **IT Systems and Controls:** The bank's reliance on IT systems was highlighted, with a focus on the effectiveness of general IT controls and the new core banking system (RAG).
+    
+    **Going-Concern Issues:**
+    - The auditor's report did not explicitly flag any going-concern issues for NMB Bank. The financial statements were deemed to present a true and fair view in accordance with Nepal Financial Reporting Standards (RAG).
+    
+    ### Nepal Telecom Auditor's Key Observations and Going-Concern Issues
+    
+    **Key Observations:**
+    - **Revenue Recognition:** The complexity of telecommunications revenue, involving multiple performance obligations, was noted as a key audit matter. This requires significant judgment in identifying performance obligations and allocating transaction prices (RAG).
+    - **Network Asset Impairment:** The risk of accelerated obsolescence of 3G network assets due to the 5G rollout was highlighted. Management's impairment testing was based on discounted cash flow models (RAG).
+    
+    **Going-Concern Issues:**
+    - Similar to NMB Bank, the auditor's report for Nepal Telecom did not indicate any going-concern issues. The financial statements were considered to present fairly in all material respects (RAG).
+    
+    Both companies appear to have stable financial positions without explicit going-concern warnings from their auditors.
+
 
 ## Where Agentic RAG Goes Next
 

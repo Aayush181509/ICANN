@@ -28,6 +28,42 @@ Cross-document edges:
 
 
 ```python
+# ── Setup check: verify PDFs and Neo4j connection ────────────────────────────
+import os, subprocess, sys
+from pathlib import Path
+
+DATA_DIR = Path("../data").resolve()
+PDF_PATHS = [
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2023.pdf",
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2022.pdf",
+    DATA_DIR / "annual_reports" / "nepal_telecom_annual_report_2023.pdf",
+]
+if any(not p.exists() for p in PDF_PATHS):
+    print("PDFs missing — running data generator...")
+    subprocess.run([sys.executable, str(DATA_DIR / "generate_sample_data.py")],
+                   check=True, cwd=str(DATA_DIR))
+print("All 3 annual report PDFs are ready.")
+
+if not os.environ.get("OPENAI_API_KEY"):
+    print("WARNING: OPENAI_API_KEY is not set.")
+
+try:
+    from py2neo import Graph
+    _g = Graph("bolt://localhost:7687", auth=("neo4j", "icandemo123"))
+    _g.run("RETURN 1").data()
+    print("Neo4j is reachable.")
+except Exception as e:
+    print("Neo4j NOT reachable — start Neo4j Desktop with database 'ican-finance' (password: icandemo123).")
+    print(f"  ({type(e).__name__}: {e})")
+
+```
+
+    All 3 annual report PDFs are ready.
+    Neo4j is reachable.
+
+
+
+```python
 import os
 import json
 import textwrap
@@ -66,6 +102,9 @@ DOCS = {
     },
 }
 ```
+
+    Graph cleared. Ready for multi-document extraction.
+
 
 ## Entity Resolution — Why It Matters
 
@@ -129,6 +168,22 @@ for doc_key, meta in DOCS.items():
 print("\nExtraction complete.")
 ```
 
+    Extracting entities from nmb_2022...
+
+
+      → {'companies': 4, 'persons': 6, 'financial_metrics': 11, 'subsidiaries': 3, 'audit_firms': 0, 'relationships': 4}
+    Extracting entities from nmb_2023...
+
+
+      → {'companies': 3, 'persons': 7, 'financial_metrics': 11, 'subsidiaries': 2, 'audit_firms': 0, 'relationships': 3}
+    Extracting entities from ntc_2023...
+
+
+      → {'companies': 3, 'persons': 6, 'financial_metrics': 10, 'subsidiaries': 2, 'audit_firms': 0, 'relationships': 4}
+    
+    Extraction complete.
+
+
 
 ```python
 # GPT-4o-mini prompt for entity normalization across documents
@@ -170,6 +225,9 @@ for orig, canonical in name_map.items():
         print(f"  '{orig}' → '{canonical}'")
 ```
 
+    Canonical name mappings:
+
+
 
 ```python
 # Merge entities across documents into Neo4j using MERGE (create if not exists)
@@ -210,6 +268,13 @@ for doc_key, entities in doc_entities.items():
 print(f"\nTotal unique nodes in registry: {len(node_registry)}")
 ```
 
+    Inserting nodes from nmb_2022...
+    Inserting nodes from nmb_2023...
+    Inserting nodes from ntc_2023...
+    
+    Total unique nodes in registry: 38
+
+
 
 ```python
 # Add intra-document relationships
@@ -244,6 +309,21 @@ for name_22 in metrics_2022:
 print(f"\nTotal relationships created: {rel_count}")
 ```
 
+      Linked: (Total Assets) -[PRIOR_YEAR_OF]-> (Total Assets)
+      Linked: (Total Deposits) -[PRIOR_YEAR_OF]-> (Total Deposits)
+      Linked: (Loans and Advances) -[PRIOR_YEAR_OF]-> (Loans and Advances)
+      Linked: (Total Equity) -[PRIOR_YEAR_OF]-> (Total Equity)
+      Linked: (Net Interest Income) -[PRIOR_YEAR_OF]-> (Net Interest Income)
+      Linked: (Operating Income) -[PRIOR_YEAR_OF]-> (Operating Income)
+      Linked: (Net Profit) -[PRIOR_YEAR_OF]-> (Net Profit)
+      Linked: (Capital Adequacy Ratio (CAR)) -[PRIOR_YEAR_OF]-> (Capital Adequacy Ratio (CAR))
+      Linked: (Non-Performing Loans (NPL)) -[PRIOR_YEAR_OF]-> (Non-Performing Loans (NPL))
+      Linked: (Return on Equity (ROE)) -[PRIOR_YEAR_OF]-> (Return on Equity (ROE))
+      Linked: (Earnings Per Share) -[PRIOR_YEAR_OF]-> (Earnings Per Share)
+    
+    Total relationships created: 22
+
+
 
 ```python
 # Pyvis visualization — nodes color-coded by source document
@@ -257,7 +337,7 @@ SOURCE_COLORS = {
 all_nodes = graph.run("MATCH (n) RETURN n, labels(n) AS labels").data()
 all_rels   = graph.run("MATCH (a)-[r]->(b) RETURN a.name AS fn, a.value AS fv, type(r) AS rel, b.name AS tn, b.value AS tv, r.SOURCE_DOC AS src").data()
 
-net = Network(height="550px", width="100%", notebook=True, cdn_resources="inline")
+net = Network(height="550px", width="100%", notebook=True, cdn_resources="in_line")
 net.force_atlas_2based()
 
 for row in all_nodes:
@@ -276,7 +356,27 @@ for row in all_rels:
 net.save_graph("multi_doc_graph.html")
 print("Legend: Light Blue=NMB 2022 | Dark Blue=NMB 2023 | Orange=Nepal Telecom | Purple=Multi-doc")
 IFrame("multi_doc_graph.html", width="100%", height="570")
+
 ```
+
+    Legend: Light Blue=NMB 2022 | Dark Blue=NMB 2023 | Orange=Nepal Telecom | Purple=Multi-doc
+
+
+
+
+
+
+<iframe
+    width="100%"
+    height="570"
+    src="multi_doc_graph.html"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+
+
+
 
 
 ```python
@@ -300,6 +400,11 @@ if results:
 else:
     print("  No REPORTED relationships found. (Check entity extraction output.)")
 ```
+
+    Query: All financial metrics for NMB Bank across FY2022 and FY2023
+    -----------------------------------------------------------------
+      No REPORTED relationships found. (Check entity extraction output.)
+
 
 
 ```python
@@ -330,6 +435,11 @@ else:
         print(f"  [{r['company']}] {r['metric']}: {r['value']}")
 ```
 
+    Query: Compare NMB Bank vs Nepal Telecom Total Assets in FY2023
+    -----------------------------------------------------------------
+      Total Asset metrics not found. Showing all FY2023 metrics instead:
+
+
 
 ```python
 # Cross-year NMB Bank subgraph visualization
@@ -347,6 +457,21 @@ else:
     print("No PRIOR_YEAR_OF edges found.")
     print("(This link is created when the same metric name appears in both FY2022 and FY2023.)")
 ```
+
+    Year-over-year metric linkages (NMB Bank FY2022 → FY2023):
+    ------------------------------------------------------------
+      Total Assets (274310) → Total Assets (274310)
+      Total Deposits (230180) → Total Deposits (230180)
+      Loans and Advances (197420) → Loans and Advances (197420)
+      Total Equity (29640) → Total Equity (29640)
+      Net Interest Income (10440) → Net Interest Income (10440)
+      Operating Income (14920) → Operating Income (14920)
+      Net Profit (3810) → Net Profit (3810)
+      Capital Adequacy Ratio (CAR) (12.85) → Capital Adequacy Ratio (CAR) (12.85)
+      Non-Performing Loans (NPL) (2.18) → Non-Performing Loans (NPL) (2.18)
+      Return on Equity (ROE) (13.10) → Return on Equity (ROE) (13.10)
+      Earnings Per Share (22.15) → Earnings Per Share (22.15)
+
 
 ## What This Enables for CA Professionals
 

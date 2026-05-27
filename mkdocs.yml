@@ -26,6 +26,14 @@ nav:
     - Multi Document Knowledge Graphs: ican/Agentic/04_multi_doc_knowledge_graph.md
     - Graph RAG: ican/Agentic/05_graphrag_pipeline.md
     - Agentic RAG: ican/Agentic/06_agentic_rag_langgraph.md
+  - Session:
+    - Numpy Basics: session/01_NumPy_Basics.md
+    - Pandas Basics: session/02_Pandas_Basics.md 
+    - Matplotlib Basics: session/03_Matplotlib_Seaborn.md
+    - Data Cleaning: session/04_Data_Cleaning.md
+    - Feature Engineering: session/05_Feature_Engineering.md
+    - Regression & Classification: session/06_Regression.md
+    - Classification: session/07_Classification.md
 
 
 

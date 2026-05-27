@@ -40,6 +40,33 @@ Same PDF Document
 
 
 ```python
+# ── Setup check: verify the sample PDFs are in place ─────────────────────────
+import os, subprocess, sys
+from pathlib import Path
+
+DATA_DIR = Path("../data").resolve()
+PDF_PATHS = [
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2023.pdf",
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2022.pdf",
+    DATA_DIR / "annual_reports" / "nepal_telecom_annual_report_2023.pdf",
+]
+
+if any(not p.exists() for p in PDF_PATHS):
+    print("Some PDFs missing — running data generator...")
+    subprocess.run([sys.executable, str(DATA_DIR / "generate_sample_data.py")],
+                   check=True, cwd=str(DATA_DIR))
+
+print("All required PDFs are present.")
+if not os.environ.get("OPENAI_API_KEY"):
+    print("WARNING: OPENAI_API_KEY is not set.")
+
+```
+
+    All required PDFs are present.
+
+
+
+```python
 import os
 import re
 import textwrap
@@ -70,6 +97,9 @@ full_text = "\n".join(page.extract_text() or "" for page in reader.pages)
 print(f"Loaded {len(reader.pages)} pages, {len(full_text):,} characters.")
 ```
 
+    Loaded 5 pages, 7,406 characters.
+
+
 
 ```python
 # ── Strategy 1: Fixed-size chunking ──────────────────────────────────────────
@@ -91,6 +121,11 @@ print()
 for i, c in enumerate(chunks_fixed[5:8], start=6):
     print(f"  Chunk {i}: {c[:180].strip()}...\n")
 ```
+
+    Fixed-size chunks : 5
+    Avg length        : 1647 chars
+    
+
 
 
 ```python
@@ -115,6 +150,22 @@ print()
 for i, c in enumerate(chunks_sentence[5:8], start=6):
     print(f"  Chunk {i}: {c[:180].strip()}...\n")
 ```
+
+    Sentence-based chunks : 14
+    Avg length            : 719 chars
+    
+      Chunk 6: The Bank issued NPR 2.0 billion of subordinated debentures in Magh 2079 to support Tier 2 capital. Subsidiaries and Associates
+    Subsidiary / Associate
+    Ownership %
+    Principal Activity...
+    
+      Chunk 7: 2. Liquidity Risk: Tightness in interbank markets during Q2 FY2023 caused short-term funding costs
+    to spike by 180 basis points. The Bank has since increased its high-quality liqui...
+    
+      Chunk 8: Foreign Exchange Risk: Nepal's dependence on imports and remittance inflows exposes the
+    Bank to indirect FX risk. Direct FX exposure is limited to NPR 4.2 billion in approved open...
+    
+
 
 
 ```python
@@ -145,6 +196,11 @@ print()
 for i, c in enumerate(chunks_para[5:8], start=6):
     print(f"  Chunk {i}: {c[:180].strip()}...\n")
 ```
+
+    Paragraph-based chunks : 5
+    Avg length             : 1479 chars
+    
+
 
 
 ```python
@@ -202,6 +258,26 @@ for i, c in enumerate(chunks_semantic[5:8], start=6):
     print(f"  Chunk {i}: {c[:180].strip()}...\n")
 ```
 
+    Running semantic chunking (slowest — embeds every sentence)...
+      Embedding 54 sentences for semantic chunking...
+
+
+    Semantic chunks        : 46
+    Avg length             : 160 chars
+    
+      Chunk 6: The policy rate
+    was held at 7.0 percent for most of the year, and the cash reserve ratio (CRR) was retained at 4.0
+    percent....
+    
+      Chunk 7: Despite these headwinds, NMB Bank maintained healthy net interest margins of 4.3 percent
+    compared to 4.1 percent in FY2022....
+    
+      Chunk 8: Deposit and Lending Growth
+    Total deposits grew by NPR 21.46 billion to reach NPR 251.64 billion. Retail deposits contributed 62
+    percent of the deposit base, demonstrating the stick...
+    
+
+
 
 ```python
 # Build 4 ChromaDB collections, one per strategy
@@ -226,6 +302,22 @@ col_para     = build_collection("para",     chunks_para)
 col_semantic = build_collection("semantic", chunks_semantic)
 print("Done.")
 ```
+
+    Building ChromaDB collections...
+
+
+      Collection 'fixed': 5 chunks stored.
+
+
+      Collection 'sentence': 14 chunks stored.
+
+
+      Collection 'para': 5 chunks stored.
+
+
+      Collection 'semantic': 46 chunks stored.
+    Done.
+
 
 
 ```python
@@ -256,6 +348,86 @@ for name, col in strategies.items():
         print(f"  [{i}] {c[:200].strip()}...")
 ```
 
+    Query: What is the capital adequacy ratio of NMB Bank?
+    ======================================================================
+
+
+    
+    ── Fixed-size ──
+      [1] guidelines and the proposed
+    Banks and Financial Institutions Act (BAFIA) amendments may affect lending margins in FY2024.
+    Independent Auditor's Report
+    To the Shareholders of NMB Bank Limited:
+    We have...
+      [2] 2.41 percent from 2.18 percent the previous year,
+    primarily attributable to stress in the tourism and trading portfolios in the first half of the fiscal year.
+    Provision coverage was strengthened to 1...
+      [3] 2
+    Change %
+    Total Assets
+    298,420
+    274,310
+    +8.79%
+    Total Deposits
+    251,640
+    230,180
+    +9.32%
+    Loans and Advances
+    212,890
+    197,420
+    +7.84%
+    Total Equity
+    32,150
+    29,640
+    +8.47%
+    Net Interest Income
+    11,820
+    10,440
+    +13.2...
+
+
+    
+    ── Sentence ──
+      [1] The Bank issued NPR 2.0 billion of subordinated debentures in Magh 2079 to support Tier 2 capital. Subsidiaries and Associates
+    Subsidiary / Associate
+    Ownership %
+    Principal Activity
+    NMB Capital Limited...
+      [2] Provision coverage was strengthened to 138 percent and write-offs of NPR 412 million were
+    undertaken in the second half. We expect NPL ratios to normalise to under 2.20 percent by Q2
+    FY2024. Capital a...
+      [3] The Risk Management Committee met 6 times
+    and reviewed the Bank's risk appetite framework in Chaitra 2079. Director attendance averaged 92
+    percent across all meetings. NMB Bank complies with the Corpo...
+
+
+    
+    ── Paragraph ──
+      [1] Management Discussion and Analysis (MD&A;)
+    Operating Environment
+    The Nepalese banking sector navigated a difficult year with the Nepal Rastra Bank (NRB) maintaining
+    a tight monetary stance to control...
+      [2] NMB Bank Limited
+    Annual Report — Fiscal Year 2022/23 (FY2023)
+    Registered Office: Babarmahal, Kathmandu, Nepal  |  Company Registration No.: 25478/064/065  |  Listed on: Nepal
+    Stock Exchange (NEPSE) —...
+      [3] Risk Management — Key Risk Factors
+    1. Credit Risk: Concentration in the hydropower and real estate sectors represents 28 percent of
+    total loan exposure. A sustained decline in property prices or hydro...
+
+
+    
+    ── Semantic ──
+      [1] Capital and Liquidity
+    Capital Adequacy Ratio improved to 13.20 percent (FY2022: 12.85 percent), comfortably above the
+    Basel III minimum of 11.0 percent set by Nepal Rastra Bank....
+      [2] NMB Bank complies with the Corporate Governance Directives issued by Nepal Rastra Bank and the
+    Securities Board of Nepal (SEBON). The Bank's Code of Conduct was updated in Bhadra 2079 to
+    incorporate e...
+      [3] Net profit grew by 9.8 percent year-on-year, total deposits crossed NPR 250 billion, and
+    our capital adequacy ratio remained well above the regulatory minimum at 13.2 percent. During the year, the Ban...
+
+
 
 ```python
 # Generate final answers for each strategy and display side-by-side
@@ -284,6 +456,31 @@ for name, chunks_ret in retrieved.items():
     print(textwrap.fill(answers[name], width=80))
     print()
 ```
+
+    Query: What is the capital adequacy ratio of NMB Bank?
+    
+
+
+    ── Fixed-size Strategy ──
+    The capital adequacy ratio of NMB Bank is 13.20%.
+    
+
+
+    ── Sentence Strategy ──
+    The capital adequacy ratio of NMB Bank is 13.20 percent.
+    
+
+
+    ── Paragraph Strategy ──
+    The capital adequacy ratio of NMB Bank is 13.20%, which is above the Basel III
+    minimum requirement of 11.0%.
+    
+
+
+    ── Semantic Strategy ──
+    The capital adequacy ratio of NMB Bank is 13.20 percent.
+    
+
 
 
 ```python
@@ -320,6 +517,12 @@ plt.tight_layout()
 plt.show()
 ```
 
+
+    
+![png](02_chunking_strategies_files/02_chunking_strategies_11_0.png)
+    
+
+
 ## When to Use Which Strategy for Financial Documents
 
 | Question Type | Best Strategy | Reason |
@@ -349,3 +552,46 @@ for name, col in strategies.items():
     print(textwrap.fill(answer, width=80))
     print()
 ```
+
+    Query: Summarize the auditor's observations
+    
+
+
+    ── Fixed-size Strategy ──
+    The auditor's report indicates that the financial statements of NMB Bank Limited
+    for the year ended July 15, 2023, present a true and fair view of the bank's
+    financial position and performance, in accordance with Nepal Financial Reporting
+    Standards and relevant regulations. Key audit matters included the expected
+    credit loss on loans and advances, which involved significant management
+    judgment, and the effectiveness of IT systems and controls, particularly
+    concerning the new core banking system.
+    
+
+
+    ── Sentence Strategy ──
+    The auditor's report indicates that NMB Bank Limited's financial statements for
+    the year ended Ashadh 31, 2080 present a true and fair view of its financial
+    position and performance, compliant with Nepal Financial Reporting Standards and
+    relevant banking regulations. Key audit matters highlighted include the
+    significant management judgment involved in determining expected credit loss
+    provisions on loans and advances, and the importance of IT systems and controls,
+    particularly following the deployment of a new core banking system.
+    
+
+
+    ── Paragraph Strategy ──
+    The auditor's report indicates that the financial statements of NMB Bank Limited
+    for the year ended July 15, 2023, present a true and fair view in accordance
+    with Nepal Financial Reporting Standards and relevant regulations. Key audit
+    matters include the significant management judgment involved in determining
+    expected credit loss provisions on loans and advances, and the reliance on IT
+    systems and controls, which were tested for effectiveness.
+    
+
+
+    ── Semantic Strategy ──
+    The provided context does not include specific observations or findings from the
+    auditor regarding NMB Bank Limited's financial statements. Therefore, I cannot
+    summarize the auditor's observations.
+    
+

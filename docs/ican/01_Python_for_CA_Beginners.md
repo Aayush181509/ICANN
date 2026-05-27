@@ -9,11 +9,13 @@ Now it's time to add one more powerful tool to your arsenal: **Python**.
 > *"Python is the Excel of the future — except it can do in 3 lines what Excel takes 30 clicks to do."*
 
 ### Who is this notebook for?
+
 - CA graduates and finance professionals
 - Absolute beginners — **zero coding experience required**
 - Anyone who wants to automate repetitive financial tasks
 
 ### What will you learn?
+
 By the end of this notebook, you will be able to:
 - Write your first Python programs
 - Work with numbers, text, and data — just like in Excel but far more powerful
@@ -21,6 +23,7 @@ By the end of this notebook, you will be able to:
 - Automate repetitive calculations
 
 ### How to use this notebook
+
 - Each **grey box** below is a **code cell** — it contains Python code you can run
 - Click on a code cell and press **Shift + Enter** to run it
 - **Markdown cells** (like this one) contain explanations — just read them

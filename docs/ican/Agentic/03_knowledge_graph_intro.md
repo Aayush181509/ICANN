@@ -49,6 +49,44 @@ The graph wins when you need to **traverse relationships**: *"Who are the audito
 
 
 ```python
+# ── Setup check: verify PDFs and Neo4j connection ────────────────────────────
+import os, subprocess, sys
+from pathlib import Path
+
+DATA_DIR = Path("../data").resolve()
+PDF_PATHS = [
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2023.pdf",
+]
+if any(not p.exists() for p in PDF_PATHS):
+    print("PDFs missing — running data generator...")
+    subprocess.run([sys.executable, str(DATA_DIR / "generate_sample_data.py")],
+                   check=True, cwd=str(DATA_DIR))
+print("PDFs are ready.")
+
+if not os.environ.get("OPENAI_API_KEY"):
+    print("WARNING: OPENAI_API_KEY is not set.")
+
+# Neo4j connectivity probe — gives a friendly message if the DB is not running
+try:
+    from py2neo import Graph
+    _g = Graph("bolt://localhost:7687", auth=("neo4j", "icandemo123"))
+    _g.run("RETURN 1").data()
+    print("Neo4j is reachable on bolt://localhost:7687.")
+except Exception as e:
+    print("Neo4j NOT reachable. Make sure Neo4j Desktop is running with:")
+    print("  Database name : ican-finance")
+    print("  Password      : icandemo123")
+    print(f"  Bolt URI      : bolt://localhost:7687")
+    print(f"  (Underlying error: {type(e).__name__}: {e})")
+
+```
+
+    PDFs are ready.
+    Neo4j is reachable on bolt://localhost:7687.
+
+
+
+```python
 # Connect to Neo4j
 # Prerequisites:
 #   1. Neo4j Desktop installed and running
@@ -76,6 +114,9 @@ graph = Graph(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD))
 result = graph.run("RETURN 'Neo4j connected!' AS message").data()
 print(result[0]["message"])
 ```
+
+    Neo4j connected!
+
 
 ## Entity Types We Will Extract
 
@@ -119,6 +160,18 @@ print("--- Preview ---")
 print(sample_text_truncated[:500])
 ```
 
+    Using 3000 characters from first 8 pages.
+    --- Preview ---
+    NMB Bank Limited
+    Annual Report — Fiscal Year 2022/23 (FY2023)
+    Registered Office: Babarmahal, Kathmandu, Nepal  |  Company Registration No.: 25478/064/065  |  Listed on: Nepal
+    Stock Exchange (NEPSE) — Symbol: NMB
+    This is a synthetic document created for the ICAN GenAI training workshop. All figures, names, and events are
+    fictional and used only for educational demonstration of RAG and Knowledge Graph techniques.
+    Chairperson's Statement
+    On behalf of the Board of Directors, I am pleased to present 
+
+
 
 ```python
 # GPT-4o-mini entity extraction prompt
@@ -158,6 +211,158 @@ print("Raw extraction output:")
 print(entities_raw)
 ```
 
+    Raw extraction output:
+    {
+      "companies": [
+        {
+          "name": "NMB Bank Limited",
+          "type": "Bank",
+          "registration_no": "25478/064/065"
+        },
+        {
+          "name": "NMB Microfinance Bittiya Sanstha",
+          "type": "Microfinance",
+          "registration_no": null
+        },
+        {
+          "name": "NMB Capital Limited",
+          "type": "Capital",
+          "registration_no": null
+        }
+      ],
+      "persons": [
+        {
+          "name": "Ram Bahadur Khatri",
+          "designation": "Chairperson"
+        },
+        {
+          "name": "Sunita Sharma",
+          "designation": "Director (Independent)"
+        },
+        {
+          "name": "Pradeep K. Joshi",
+          "designation": "Director"
+        },
+        {
+          "name": "Anjali Pradhan",
+          "designation": "Director (Independent)"
+        },
+        {
+          "name": "Bibek Rana",
+          "designation": "Director"
+        },
+        {
+          "name": "Sushil Bhatta",
+          "designation": "Chief Executive Officer"
+        },
+        {
+          "name": "Manish Timalsina",
+          "designation": "Chief Financial Officer"
+        }
+      ],
+      "financial_metrics": [
+        {
+          "name": "Total Assets",
+          "value": "298420",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Total Deposits",
+          "value": "251640",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Loans and Advances",
+          "value": "212890",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Total Equity",
+          "value": "32150",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Net Interest Income",
+          "value": "11820",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Operating Income",
+          "value": "16540",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Net Profit",
+          "value": "4184",
+          "unit": "NPR in Millions",
+          "period": "FY2023"
+        },
+        {
+          "name": "Capital Adequacy Ratio (CAR)",
+          "value": "13.20",
+          "unit": "%",
+          "period": "FY2023"
+        },
+        {
+          "name": "Non-Performing Loans (NPL)",
+          "value": "2.41",
+          "unit": "%",
+          "period": "FY2023"
+        },
+        {
+          "name": "Return on Equity (ROE)",
+          "value": "13.45",
+          "unit": "%",
+          "period": "FY2023"
+        },
+        {
+          "name": "Earnings Per Share (NPR)",
+          "value": "23.40",
+          "unit": "NPR",
+          "period": "FY2023"
+        }
+      ],
+      "subsidiaries": [
+        {
+          "name": "NMB Microfinance Bittiya Sanstha",
+          "ownership_pct": "70.0"
+        },
+        {
+          "name": "NMB Capital Limited",
+          "ownership_pct": "51.0"
+        }
+      ],
+      "audit_firms": [],
+      "years": [
+        "2022",
+        "2023"
+      ],
+      "relationships": [
+        {
+          "from": "NMB Bank Limited",
+          "relation": "SUBSIDIARY_OF",
+          "to": "NMB Microfinance Bittiya Sanstha"
+        },
+        {
+          "from": "NMB Bank Limited",
+          "relation": "SUBSIDIARY_OF",
+          "to": "NMB Capital Limited"
+        },
+        {
+          "from": "Ram Bahadur Khatri",
+          "relation": "CHAIRED_BY",
+          "to": "NMB Bank Limited"
+        }
+      ]
+    }
+
+
 
 ```python
 # Parse and display the extracted entities
@@ -170,6 +375,49 @@ for entity_type, items in entities.items():
         for item in items:
             print(f"  {item}")
 ```
+
+    === Extracted Entities ===
+    
+    COMPANIES (3 found):
+      {'name': 'NMB Bank Limited', 'type': 'Bank', 'registration_no': '25478/064/065'}
+      {'name': 'NMB Microfinance Bittiya Sanstha', 'type': 'Microfinance', 'registration_no': None}
+      {'name': 'NMB Capital Limited', 'type': 'Capital', 'registration_no': None}
+    
+    PERSONS (7 found):
+      {'name': 'Ram Bahadur Khatri', 'designation': 'Chairperson'}
+      {'name': 'Sunita Sharma', 'designation': 'Director (Independent)'}
+      {'name': 'Pradeep K. Joshi', 'designation': 'Director'}
+      {'name': 'Anjali Pradhan', 'designation': 'Director (Independent)'}
+      {'name': 'Bibek Rana', 'designation': 'Director'}
+      {'name': 'Sushil Bhatta', 'designation': 'Chief Executive Officer'}
+      {'name': 'Manish Timalsina', 'designation': 'Chief Financial Officer'}
+    
+    FINANCIAL_METRICS (11 found):
+      {'name': 'Total Assets', 'value': '298420', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Total Deposits', 'value': '251640', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Loans and Advances', 'value': '212890', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Total Equity', 'value': '32150', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Net Interest Income', 'value': '11820', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Operating Income', 'value': '16540', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Net Profit', 'value': '4184', 'unit': 'NPR in Millions', 'period': 'FY2023'}
+      {'name': 'Capital Adequacy Ratio (CAR)', 'value': '13.20', 'unit': '%', 'period': 'FY2023'}
+      {'name': 'Non-Performing Loans (NPL)', 'value': '2.41', 'unit': '%', 'period': 'FY2023'}
+      {'name': 'Return on Equity (ROE)', 'value': '13.45', 'unit': '%', 'period': 'FY2023'}
+      {'name': 'Earnings Per Share (NPR)', 'value': '23.40', 'unit': 'NPR', 'period': 'FY2023'}
+    
+    SUBSIDIARIES (2 found):
+      {'name': 'NMB Microfinance Bittiya Sanstha', 'ownership_pct': '70.0'}
+      {'name': 'NMB Capital Limited', 'ownership_pct': '51.0'}
+    
+    YEARS (2 found):
+      2022
+      2023
+    
+    RELATIONSHIPS (3 found):
+      {'from': 'NMB Bank Limited', 'relation': 'SUBSIDIARY_OF', 'to': 'NMB Microfinance Bittiya Sanstha'}
+      {'from': 'NMB Bank Limited', 'relation': 'SUBSIDIARY_OF', 'to': 'NMB Capital Limited'}
+      {'from': 'Ram Bahadur Khatri', 'relation': 'CHAIRED_BY', 'to': 'NMB Bank Limited'}
+
 
 
 ```python
@@ -218,6 +466,10 @@ for y in entities.get("years", []):
 print(f"Created {len(node_registry)} nodes in Neo4j.")
 ```
 
+    Cleared existing graph.
+    Created 23 nodes in Neo4j.
+
+
 
 ```python
 # Create relationships
@@ -239,6 +491,13 @@ for rel in entities.get("relationships", []):
 print(f"\nTotal relationships created: {rel_count}")
 ```
 
+      Created: (NMB Bank Limited) -[SUBSIDIARY_OF]-> (NMB Microfinance Bittiya Sanstha)
+      Created: (NMB Bank Limited) -[SUBSIDIARY_OF]-> (NMB Capital Limited)
+      Created: (Ram Bahadur Khatri) -[CHAIRED_BY]-> (NMB Bank Limited)
+    
+    Total relationships created: 3
+
+
 
 ```python
 # Visualize the graph using pyvis (renders as HTML in the notebook)
@@ -258,7 +517,7 @@ COLOR_MAP = {
     "Year"           : "#95A5A6",
 }
 
-net = Network(height="500px", width="100%", notebook=True, cdn_resources="inline")
+net = Network(height="500px", width="100%", notebook=True, cdn_resources="in_line")
 net.force_atlas_2based()
 
 for row in all_nodes:
@@ -276,7 +535,27 @@ graph_html = "nmb_graph.html"
 net.save_graph(graph_html)
 print("Graph visualization saved. Displaying below:")
 IFrame(graph_html, width="100%", height="520")
+
 ```
+
+    Graph visualization saved. Displaying below:
+
+
+
+
+
+
+<iframe
+    width="100%"
+    height="520"
+    src="nmb_graph.html"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+
+
+
 
 
 ```python
@@ -298,6 +577,14 @@ else:
     print("  (Run on a larger section of the PDF to populate this.)") 
 ```
 
+    Query: Find all subsidiaries of NMB Bank
+    --------------------------------------------------
+
+
+      No subsidiary relationships found in this extract.
+      (Run on a larger section of the PDF to populate this.)
+
+
 
 ```python
 # Cypher Query 2: Who audited this company and in which year?
@@ -317,6 +604,11 @@ if results:
 else:
     print("  No audit relationships found in this extract.")
 ```
+
+    Query: Who audited NMB Bank and in which year?
+    --------------------------------------------------
+      No audit relationships found in this extract.
+
 
 
 ```python
@@ -346,6 +638,24 @@ else:
     for r in results:
         print(f"  {r['metric']}: {r['value']} {r.get('unit','')} ({r.get('period','')})")
 ```
+
+    Query: Show all financial metrics reported for FY2023
+    --------------------------------------------------
+
+
+      (Showing all extracted financial metrics:)
+      Capital Adequacy Ratio (CAR): 13.20 % (FY2023)
+      Earnings Per Share (NPR): 23.40 NPR (FY2023)
+      Loans and Advances: 212890 NPR in Millions (FY2023)
+      Net Interest Income: 11820 NPR in Millions (FY2023)
+      Net Profit: 4184 NPR in Millions (FY2023)
+      Non-Performing Loans (NPL): 2.41 % (FY2023)
+      Operating Income: 16540 NPR in Millions (FY2023)
+      Return on Equity (ROE): 13.45 % (FY2023)
+      Total Assets: 298420 NPR in Millions (FY2023)
+      Total Deposits: 251640 NPR in Millions (FY2023)
+      Total Equity: 32150 NPR in Millions (FY2023)
+
 
 ## What Cypher Reads Like (SQL Analogy)
 
@@ -381,3 +691,15 @@ rel_count_total = graph.run("MATCH ()-[r]->() RETURN count(r) AS total").data()[
 print(f"\n  Relationships      : {rel_count_total}")
 print("\nNext step → Section 04: Scale this to 3 documents!")
 ```
+
+    Current graph contents:
+    ------------------------------
+      FinancialMetric      : 11 nodes
+      Person               : 7 nodes
+      Company              : 3 nodes
+      Year                 : 2 nodes
+    
+      Relationships      : 3
+    
+    Next step → Section 04: Scale this to 3 documents!
+

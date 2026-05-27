@@ -45,6 +45,42 @@ ChromaDB Search      Neo4j Cypher Query            │
 
 
 ```python
+# ── Setup check: verify PDFs and Neo4j connection ────────────────────────────
+import os, subprocess, sys
+from pathlib import Path
+
+DATA_DIR = Path("../data").resolve()
+PDF_PATHS = [
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2023.pdf",
+    DATA_DIR / "annual_reports" / "nmb_bank_annual_report_2022.pdf",
+    DATA_DIR / "annual_reports" / "nepal_telecom_annual_report_2023.pdf",
+]
+if any(not p.exists() for p in PDF_PATHS):
+    print("PDFs missing — running data generator...")
+    subprocess.run([sys.executable, str(DATA_DIR / "generate_sample_data.py")],
+                   check=True, cwd=str(DATA_DIR))
+print("PDFs are ready.")
+
+if not os.environ.get("OPENAI_API_KEY"):
+    print("WARNING: OPENAI_API_KEY is not set.")
+
+try:
+    from py2neo import Graph
+    _g = Graph("bolt://localhost:7687", auth=("neo4j", "icandemo123"))
+    _g.run("RETURN 1").data()
+    print("Neo4j is reachable. (If empty, run Section 04 first to populate it.)")
+except Exception as e:
+    print("Neo4j NOT reachable — start Neo4j Desktop first.")
+    print(f"  ({type(e).__name__}: {e})")
+
+```
+
+    PDFs are ready.
+    Neo4j is reachable. (If empty, run Section 04 first to populate it.)
+
+
+
+```python
 import os
 import json
 import textwrap
@@ -72,6 +108,9 @@ print(f"Neo4j graph: {node_count} nodes loaded from Section 04.")
 if node_count == 0:
     print("WARNING: Run Section 04 first to populate Neo4j.")
 ```
+
+    Neo4j graph: 38 nodes loaded from Section 04.
+
 
 
 ```python
@@ -128,6 +167,16 @@ collection.add(documents=all_chunks, embeddings=all_embeds, ids=all_ids, metadat
 print(f"\nChromaDB loaded: {collection.count()} total chunks across 3 documents.")
 ```
 
+      nmb_2022: 2 chunks
+      nmb_2023: 5 chunks
+      ntc_2023: 3 chunks
+
+
+      Embedded batch 1
+    
+    ChromaDB loaded: 10 total chunks across 3 documents.
+
+
 
 ```python
 # RAG retriever: returns top-5 chunks by semantic similarity
@@ -143,6 +192,12 @@ test_chunks, test_tokens = rag_retrieve("What was NMB Bank's net profit in FY202
 print(f"RAG retrieved {len(test_chunks)} chunks ({test_tokens} tokens)")
 print(f"  [{test_chunks[0][:150].strip()}...]")
 ```
+
+    RAG retrieved 5 chunks (2556 tokens)
+      [NMB Bank Limited
+    Annual Report — Fiscal Year 2022/23 (FY2023)
+    Registered Office: Babarmahal, Kathmandu, Nepal  |  Company Registration No.: 25478/064/...]
+
 
 
 ```python
@@ -214,6 +269,10 @@ print(f"Graph retrieved {test_graph_tokens} tokens")
 print(test_graph_ctx[:400])
 ```
 
+    Graph retrieved 9 tokens
+    (No graph data found for query entities.)
+
+
 
 ```python
 # GraphRAG answer function: merge both retrievers, send to GPT-4o
@@ -258,6 +317,9 @@ def graphrag_answer(query: str, verbose: bool = True) -> dict:
 print("graphrag_answer() function ready.")
 ```
 
+    graphrag_answer() function ready.
+
+
 
 ```python
 # Demo Query 1: Simple factual — RAG-only vs GraphRAG side-by-side
@@ -287,6 +349,20 @@ print()
 print("GraphRAG answer:")
 print(textwrap.fill(grag_result1["answer"], width=75))
 ```
+
+    Query: What was NMB Bank's net profit in FY2023?
+    ======================================================================
+    RAG-only answer:
+    NMB Bank's net profit in FY2023 was NPR 4,180 million.
+    
+    GraphRAG answer:
+    NMB Bank's net profit for the fiscal year 2022/23 (FY2023) was NPR 4,185
+    million. This is derived from the net profit growth of 9.8 percent over the
+    previous year's net profit of NPR 3,810 million (FY2022). The calculation
+    is as follows: NPR 3,810 million * 1.098 = NPR 4,185 million. This
+    information is based on the financial highlights provided in the annual
+    report for FY2023.
+
 
 
 ```python
@@ -318,12 +394,44 @@ print("GraphRAG answer:")
 print(textwrap.fill(grag_result2["answer"], width=75))
 ```
 
+    Query: Compare NMB Bank's asset growth from FY2022 to FY2023 and identify its auditor
+    ======================================================================
+    RAG-only answer:
+    NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR
+    298,420 million in FY2023, representing an increase of 8.79%. The auditor
+    for NMB Bank is Deloitte Haskins & Sells, Chartered Accountants.
+    
+    GraphRAG answer:
+    NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR
+    298,420 million in FY2023, representing an increase of 8.79% (source: NMB
+    Bank Limited Annual Report — Fiscal Year 2022/23).  The auditor for NMB
+    Bank for both FY2022 and FY2023 was Deloitte Haskins & Sells, Chartered
+    Accountants, with CA Rajesh Pradhan as the audit partner (source: NMB Bank
+    Limited Annual Report — Fiscal Year 2022/23).
+
+
 
 ```python
 # Demo Query 3: Cross-document entity — subsidiaries across both annual reports
 QUERY3 = "Which subsidiaries of NMB Bank were mentioned across both annual reports?"
 grag_result3 = graphrag_answer(QUERY3)
 ```
+
+    Query     : Which subsidiaries of NMB Bank were mentioned across both annual reports?
+    RAG tokens: 2556 | Graph tokens: 9
+    ======================================================================
+    Answer:
+    The subsidiaries of NMB Bank mentioned across both the FY2022 and FY2023 annual reports are:
+    
+    1. **NMB Capital Limited** - NMB Bank holds a 51.0% ownership stake in this subsidiary, which is involved in merchant banking and IPO advisory services.
+    
+    2. **NMB Microfinance Bittiya Sanstha** - The ownership stake increased from 55.0% in FY2022 to 70.0% in FY2023. This subsidiary provides microfinance services.
+    
+    3. **NMB Insurance Brokers Pvt. Ltd.** - NMB Bank has a 100.0% ownership stake in this subsidiary, which operates in insurance brokerage.
+    
+    These subsidiaries are consistently mentioned in both annual reports, indicating their ongoing significance to NMB Bank's operations.
+    
+
 
 
 ```python
@@ -355,6 +463,58 @@ display(df)
 ```
 
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Query</th>
+      <th>RAG Answer</th>
+      <th>GraphRAG Answer</th>
+      <th>Winner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>What was NMB Bank's net profit in FY2023?...</td>
+      <td>NMB Bank's net profit in FY2023 was NPR 4,180 million....</td>
+      <td>NMB Bank's net profit for the fiscal year 2022/23 (FY2023) was NPR 4,185 million. This is derived fr...</td>
+      <td>Tie (simple factual)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Compare NMB Bank's asset growth from FY2022 to FY2...</td>
+      <td>NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR 298,420 million in FY2023, re...</td>
+      <td>NMB Bank's total assets grew from NPR 274,310 million in FY2022 to NPR 298,420 million in FY2023, re...</td>
+      <td>GraphRAG (multi-hop + auditor)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Which subsidiaries of NMB Bank were mentioned acro...</td>
+      <td>(not run for brevity)</td>
+      <td>The subsidiaries of NMB Bank mentioned across both the FY2022 and FY2023 annual reports are:\n\n1. **N...</td>
+      <td>GraphRAG (cross-document entity)</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
 ```python
 # Bar chart: context tokens contributed by RAG vs Graph for each query
 queries_short = ["Q1: Net Profit", "Q2: Asset Growth + Auditor", "Q3: Subsidiaries"]
@@ -378,6 +538,12 @@ ax.bar_label(bars2, padding=3, fontsize=9)
 plt.tight_layout()
 plt.show()
 ```
+
+
+    
+![png](05_graphrag_pipeline_files/05_graphrag_pipeline_12_0.png)
+    
+
 
 ## When to Use GraphRAG vs Plain RAG
 
