@@ -1,0 +1,2168 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Pandas Basics - ICAN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Pandas Basics";
+        var mkdocs_page_input_path = "session/02_Pandas_Basics.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Regression & Classification</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09_Regression_Classification_for_CA/">Classification</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09b_Regression_for_CA/">Regression</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Session</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../01_NumPy_Basics/">Numpy Basics</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Pandas Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-what-is-pandas">1. What is Pandas?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-a-series-one-column-of-data">2. A Series — one column of data</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-1">Practice 1</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-a-dataframe-the-full-table">3. A DataFrame — the full table</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-2">Practice 2</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-loading-data-from-a-csv-file">4. Loading data from a CSV file</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-3">Practice 3</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-quick-inspection-get-to-know-your-data">5. Quick inspection — get to know your data</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-4">Practice 4</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-selecting-columns">6. Selecting columns</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-5">Practice 5</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-filtering-rows-the-autofilter-of-pandas">7. Filtering rows — the AutoFilter of Pandas</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-6">Practice 6</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-sorting">8. Sorting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-7">Practice 7</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-creating-new-columns">9. Creating new columns</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-8">Practice 8</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-groupby-the-pandas-pivot-table">10. GroupBy — the Pandas Pivot Table</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-9">Practice 9</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11-saving-your-work-to-a-file">11. Saving your work to a file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-mini-project-sales-analysis">12. Mini-Project — Sales Analysis</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's next?</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_Matplotlib_Seaborn/">Matplotlib Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Data_Cleaning/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Feature_Engineering/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../06_Regression/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../07_Classification/">Classification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Session</li>
+      <li class="breadcrumb-item active">Pandas Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="notebook-2-pandas-basics-for-ca-professionals">Notebook 2 — Pandas Basics for CA Professionals</h1>
+<p><strong>Goal:</strong> Work with real Excel-style data in Python using Pandas.</p>
+<p><strong>You will learn:</strong>
+1. What Pandas is and how it relates to Excel
+2. Series and DataFrame — the two main objects
+3. Loading a CSV file and looking at it
+4. Selecting columns and filtering rows
+5. Adding new calculated columns (like a new Excel column)
+6. Sorting data
+7. GroupBy — like a Pivot Table
+8. Saving your results back to Excel/CSV
+9. A short mini-project at the end</p>
+<blockquote>
+<p>Throughout the notebook we will use Nepali invoice, sales and payroll data placed in the <code>data/</code> folder beside this notebook.</p>
+</blockquote>
+<hr />
+<h2 id="1-what-is-pandas">1. What is Pandas?</h2>
+<p>Pandas is a Python library that gives you a <strong>DataFrame</strong> — basically an Excel sheet inside Python.</p>
+<table>
+<thead>
+<tr>
+<th>Excel</th>
+<th>Pandas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Workbook</td>
+<td>(your script)</td>
+</tr>
+<tr>
+<td>Worksheet</td>
+<td><code>DataFrame</code></td>
+</tr>
+<tr>
+<td>Column</td>
+<td><code>Series</code></td>
+</tr>
+<tr>
+<td>Cell</td>
+<td>one value</td>
+</tr>
+<tr>
+<td>Pivot Table</td>
+<td><code>groupby()</code></td>
+</tr>
+<tr>
+<td>AutoFilter</td>
+<td>boolean mask</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pandas version:&quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Pandas version: 3.0.3
+</code></pre></div>
+<h2 id="2-a-series-one-column-of-data">2. A Series — one column of data</h2>
+<p>A <code>Series</code> is a single column with a <strong>label</strong> for each row (the <strong>index</strong>).</p>
+<div class="highlight"><pre><span></span><code><span class="n">monthly</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Shrawan&quot;</span><span class="p">,</span> <span class="s2">&quot;Bhadra&quot;</span><span class="p">,</span> <span class="s2">&quot;Ashwin&quot;</span><span class="p">,</span> <span class="s2">&quot;Kartik&quot;</span><span class="p">,</span> <span class="s2">&quot;Mangsir&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">monthly</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total :&quot;</span><span class="p">,</span> <span class="n">monthly</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mean  :&quot;</span><span class="p">,</span> <span class="n">monthly</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Shrawan    1250000
+Bhadra     1380000
+Ashwin     1120000
+Kartik     1450000
+Mangsir    1620000
+Name: Revenue_NPR, dtype: int64
+
+Total : 6820000
+Mean  : 1364000.0
+</code></pre></div>
+<h3 id="practice-1">Practice 1</h3>
+<p>Create a Series called <code>expenses</code> for these 5 months:
+- Shrawan: 920000, Bhadra: 980000, Ashwin: 870000, Kartik: 1050000, Mangsir: 1180000</p>
+<p>Then print the <strong>total</strong> and the <strong>highest</strong> expense.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">expenses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span>
+    <span class="p">[</span><span class="mi">920000</span><span class="p">,</span> <span class="mi">980000</span><span class="p">,</span> <span class="mi">870000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">1180000</span><span class="p">],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Shrawan&quot;</span><span class="p">,</span><span class="s2">&quot;Bhadra&quot;</span><span class="p">,</span><span class="s2">&quot;Ashwin&quot;</span><span class="p">,</span><span class="s2">&quot;Kartik&quot;</span><span class="p">,</span><span class="s2">&quot;Mangsir&quot;</span><span class="p">],</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Expense_NPR&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expenses</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total :&quot;</span><span class="p">,</span> <span class="n">expenses</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max   :&quot;</span><span class="p">,</span> <span class="n">expenses</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</code></pre></div>
+
+    Shrawan     920000
+    Bhadra      980000
+    Ashwin      870000
+    Kartik     1050000
+    Mangsir    1180000
+    Name: Expense_NPR, dtype: int64
+    Total : 5000000
+    Max   : 1180000
+
+
+</details>
+
+<h2 id="3-a-dataframe-the-full-table">3. A DataFrame — the full table</h2>
+<p>A <code>DataFrame</code> is several Series joined together. Each column has a name; each row has an index.</p>
+<div class="highlight"><pre><span></span><code><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Month&quot;</span><span class="p">:</span>   <span class="p">[</span><span class="s2">&quot;Shrawan&quot;</span><span class="p">,</span> <span class="s2">&quot;Bhadra&quot;</span><span class="p">,</span> <span class="s2">&quot;Ashwin&quot;</span><span class="p">,</span> <span class="s2">&quot;Kartik&quot;</span><span class="p">,</span> <span class="s2">&quot;Mangsir&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Revenue&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">],</span>
+    <span class="s2">&quot;Expense&quot;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">920000</span><span class="p">,</span>  <span class="mi">980000</span><span class="p">,</span>  <span class="mi">870000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">1180000</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">df</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Month</th>
+      <th>Revenue</th>
+      <th>Expense</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shrawan</td>
+      <td>1250000</td>
+      <td>920000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bhadra</td>
+      <td>1380000</td>
+      <td>980000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ashwin</td>
+      <td>1120000</td>
+      <td>870000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kartik</td>
+      <td>1450000</td>
+      <td>1050000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mangsir</td>
+      <td>1620000</td>
+      <td>1180000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-2">Practice 2</h3>
+<p>Create a small DataFrame with 4 employees of your choice. Columns:
+<code>Name</code>, <code>Department</code>, <code>Salary</code>. Print the DataFrame.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">staff</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Name&quot;</span><span class="p">:</span>       <span class="p">[</span><span class="s2">&quot;Ramesh&quot;</span><span class="p">,</span> <span class="s2">&quot;Sita&quot;</span><span class="p">,</span> <span class="s2">&quot;Hari&quot;</span><span class="p">,</span> <span class="s2">&quot;Anita&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Department&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Audit&quot;</span><span class="p">,</span> <span class="s2">&quot;Tax&quot;</span><span class="p">,</span> <span class="s2">&quot;Audit&quot;</span><span class="p">,</span> <span class="s2">&quot;Advisory&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;Salary&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">55000</span><span class="p">,</span> <span class="mi">72000</span><span class="p">,</span> <span class="mi">48000</span><span class="p">,</span> <span class="mi">95000</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">staff</span><span class="p">)</span>
+</code></pre></div>
+
+         Name Department  Salary
+    0  Ramesh      Audit   55000
+    1    Sita        Tax   72000
+    2    Hari      Audit   48000
+    3   Anita   Advisory   95000
+
+
+</details>
+
+<h2 id="4-loading-data-from-a-csv-file">4. Loading data from a CSV file</h2>
+<p>In real life you don't type the data — you read it from a file. We have a folder called <code>data/</code> with several Nepali financial datasets already prepared.</p>
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/invoices.csv&quot;</span><span class="p">)</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>        <span class="c1"># show first 5 rows</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>City</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit_Price</th>
+      <th>Amount_NPR</th>
+      <th>VAT_NPR</th>
+      <th>Total_NPR</th>
+      <th>Payment_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>INV-20810001</td>
+      <td>2024-07-16</td>
+      <td>Janakpur Wholesale</td>
+      <td>Birgunj</td>
+      <td>Food</td>
+      <td>39</td>
+      <td>1219.0</td>
+      <td>47541.0</td>
+      <td>6180.33</td>
+      <td>53721.33</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>INV-20810002</td>
+      <td>2024-07-18</td>
+      <td>Kathmandu Distributors</td>
+      <td>Kathmandu</td>
+      <td>Food</td>
+      <td>27</td>
+      <td>1418.0</td>
+      <td>38286.0</td>
+      <td>4977.18</td>
+      <td>43263.18</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>INV-20810003</td>
+      <td>2024-07-20</td>
+      <td>Biratnagar Enterprise</td>
+      <td>Butwal</td>
+      <td>Stationery</td>
+      <td>10</td>
+      <td>1309.0</td>
+      <td>13090.0</td>
+      <td>1701.70</td>
+      <td>14791.70</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>INV-20810004</td>
+      <td>2024-07-22</td>
+      <td>Pokhara Mart</td>
+      <td>Birgunj</td>
+      <td>Food</td>
+      <td>26</td>
+      <td>5501.0</td>
+      <td>143026.0</td>
+      <td>18593.38</td>
+      <td>161619.38</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>INV-20810005</td>
+      <td>2024-07-24</td>
+      <td>Janakpur Wholesale</td>
+      <td>Bhaktapur</td>
+      <td>Food</td>
+      <td>19</td>
+      <td>1669.0</td>
+      <td>31711.0</td>
+      <td>4122.43</td>
+      <td>35833.43</td>
+      <td>Paid</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-3">Practice 3</h3>
+<p>Load the file <code>data/monthly_sales.csv</code> into a DataFrame called <code>sales</code> and show the first 5 rows.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">sales</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/monthly_sales.csv&quot;</span><span class="p">)</span>
+<span class="n">sales</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Month</th>
+      <th>Revenue_NPR</th>
+      <th>Expense_NPR</th>
+      <th>Units_Sold</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shrawan</td>
+      <td>1250000</td>
+      <td>920000</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bhadra</td>
+      <td>1380000</td>
+      <td>980000</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ashwin</td>
+      <td>1120000</td>
+      <td>870000</td>
+      <td>380</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kartik</td>
+      <td>1450000</td>
+      <td>1050000</td>
+      <td>498</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mangsir</td>
+      <td>1620000</td>
+      <td>1180000</td>
+      <td>540</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</details>
+
+<h2 id="5-quick-inspection-get-to-know-your-data">5. Quick inspection — get to know your data</h2>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>df.head(n)</code></td>
+<td>first n rows</td>
+</tr>
+<tr>
+<td><code>df.tail(n)</code></td>
+<td>last n rows</td>
+</tr>
+<tr>
+<td><code>df.shape</code></td>
+<td>(rows, columns)</td>
+</tr>
+<tr>
+<td><code>df.columns</code></td>
+<td>column names</td>
+</tr>
+<tr>
+<td><code>df.dtypes</code></td>
+<td>data type of each column</td>
+</tr>
+<tr>
+<td><code>df.info()</code></td>
+<td>full overview</td>
+</tr>
+<tr>
+<td><code>df.describe()</code></td>
+<td>quick statistics for numeric columns</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape   :&quot;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns :&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Shape   : (200, 11)
+Columns : [&#39;Invoice_No&#39;, &#39;Date&#39;, &#39;Customer&#39;, &#39;City&#39;, &#39;Product&#39;, &#39;Quantity&#39;, &#39;Unit_Price&#39;, &#39;Amount_NPR&#39;, &#39;VAT_NPR&#39;, &#39;Total_NPR&#39;, &#39;Payment_Status&#39;]
+
+&lt;class &#39;pandas.DataFrame&#39;&gt;
+RangeIndex: 200 entries, 0 to 199
+Data columns (total 11 columns):
+ #   Column          Non-Null Count  Dtype  
+---  ------          --------------  -----  
+ 0   Invoice_No      200 non-null    str    
+ 1   Date            200 non-null    str    
+ 2   Customer        200 non-null    str    
+ 3   City            200 non-null    str    
+ 4   Product         200 non-null    str    
+ 5   Quantity        200 non-null    int64  
+ 6   Unit_Price      200 non-null    float64
+ 7   Amount_NPR      200 non-null    float64
+ 8   VAT_NPR         200 non-null    float64
+ 9   Total_NPR       200 non-null    float64
+ 10  Payment_Status  200 non-null    str    
+dtypes: float64(4), int64(1), str(6)
+memory usage: 17.3 KB
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>    <span class="c1"># statistics for all numeric columns</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Quantity</th>
+      <th>Unit_Price</th>
+      <th>Amount_NPR</th>
+      <th>VAT_NPR</th>
+      <th>Total_NPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>200.000000</td>
+      <td>200.000000</td>
+      <td>200.000000</td>
+      <td>200.000000</td>
+      <td>200.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>24.355000</td>
+      <td>4012.410000</td>
+      <td>93674.160000</td>
+      <td>12177.640800</td>
+      <td>105851.800800</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>14.109371</td>
+      <td>2314.909302</td>
+      <td>81983.202634</td>
+      <td>10657.816342</td>
+      <td>92641.018976</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000</td>
+      <td>318.000000</td>
+      <td>891.000000</td>
+      <td>115.830000</td>
+      <td>1006.830000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>12.750000</td>
+      <td>1863.250000</td>
+      <td>33018.000000</td>
+      <td>4292.340000</td>
+      <td>37310.340000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>25.000000</td>
+      <td>3785.500000</td>
+      <td>67947.500000</td>
+      <td>8833.175000</td>
+      <td>76780.675000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>36.000000</td>
+      <td>5984.500000</td>
+      <td>135046.750000</td>
+      <td>17556.077500</td>
+      <td>152602.827500</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>49.000000</td>
+      <td>8416.000000</td>
+      <td>387590.000000</td>
+      <td>50386.700000</td>
+      <td>437976.700000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-4">Practice 4</h3>
+<p>Load <code>data/loans.csv</code> into a DataFrame called <code>loans</code>. Then:</p>
+<ol>
+<li>Print its <strong>shape</strong>.</li>
+<li>Show its <strong>column names</strong>.</li>
+<li>Show <code>describe()</code> for the numeric columns.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">loans</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/loans.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape   :&quot;</span><span class="p">,</span> <span class="n">loans</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Columns :&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">loans</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">loans</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>
+
+    Shape   : (300, 10)
+    Columns : ['Loan_ID', 'Customer', 'Loan_Amount', 'Tenure_Months', 'Interest_Rate', 'Annual_Income', 'Credit_Score', 'Has_Collateral', 'Sector', 'Defaulted']
+
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Loan_Amount</th>
+      <th>Tenure_Months</th>
+      <th>Interest_Rate</th>
+      <th>Annual_Income</th>
+      <th>Credit_Score</th>
+      <th>Defaulted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>3.000000e+02</td>
+      <td>300.000000</td>
+      <td>300.000000</td>
+      <td>3.000000e+02</td>
+      <td>300.000000</td>
+      <td>300.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>9.315000e+05</td>
+      <td>49.720000</td>
+      <td>11.916633</td>
+      <td>6.734000e+05</td>
+      <td>581.816667</td>
+      <td>0.413333</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>1.111396e+06</td>
+      <td>37.531547</td>
+      <td>2.339863</td>
+      <td>6.099118e+05</td>
+      <td>158.994109</td>
+      <td>0.493254</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.000000e+05</td>
+      <td>12.000000</td>
+      <td>8.040000</td>
+      <td>1.800000e+05</td>
+      <td>300.000000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.500000e+05</td>
+      <td>24.000000</td>
+      <td>9.882500</td>
+      <td>3.600000e+05</td>
+      <td>443.500000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>5.000000e+05</td>
+      <td>36.000000</td>
+      <td>11.830000</td>
+      <td>3.600000e+05</td>
+      <td>602.500000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1.000000e+06</td>
+      <td>60.000000</td>
+      <td>13.947500</td>
+      <td>6.000000e+05</td>
+      <td>718.500000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>5.000000e+06</td>
+      <td>120.000000</td>
+      <td>15.920000</td>
+      <td>2.400000e+06</td>
+      <td>849.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</details>
+
+<h2 id="6-selecting-columns">6. Selecting columns</h2>
+<p>You can pick a single column (gives a Series), or several columns (gives a DataFrame).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Single column → Series</span>
+<span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>0     47541.0
+1     38286.0
+2     13090.0
+3    143026.0
+4     31711.0
+Name: Amount_NPR, dtype: float64
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Several columns → DataFrame</span>
+<span class="n">invoices</span><span class="p">[[</span><span class="s2">&quot;Customer&quot;</span><span class="p">,</span> <span class="s2">&quot;City&quot;</span><span class="p">,</span> <span class="s2">&quot;Total_NPR&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Customer</th>
+      <th>City</th>
+      <th>Total_NPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Janakpur Wholesale</td>
+      <td>Birgunj</td>
+      <td>53721.33</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Kathmandu Distributors</td>
+      <td>Kathmandu</td>
+      <td>43263.18</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Biratnagar Enterprise</td>
+      <td>Butwal</td>
+      <td>14791.70</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Pokhara Mart</td>
+      <td>Birgunj</td>
+      <td>161619.38</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Janakpur Wholesale</td>
+      <td>Bhaktapur</td>
+      <td>35833.43</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-5">Practice 5</h3>
+<p>From <code>invoices</code>, show only the columns <code>Invoice_No</code>, <code>Product</code>, <code>Quantity</code>, <code>Amount_NPR</code> — first 10 rows.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span><span class="p">[[</span><span class="s2">&quot;Invoice_No&quot;</span><span class="p">,</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span><span class="s2">&quot;Quantity&quot;</span><span class="p">,</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Amount_NPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>INV-20810001</td>
+      <td>Food</td>
+      <td>39</td>
+      <td>47541.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>INV-20810002</td>
+      <td>Food</td>
+      <td>27</td>
+      <td>38286.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>INV-20810003</td>
+      <td>Stationery</td>
+      <td>10</td>
+      <td>13090.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>INV-20810004</td>
+      <td>Food</td>
+      <td>26</td>
+      <td>143026.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>INV-20810005</td>
+      <td>Food</td>
+      <td>19</td>
+      <td>31711.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>INV-20810006</td>
+      <td>Cosmetics</td>
+      <td>39</td>
+      <td>118404.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>INV-20810007</td>
+      <td>Food</td>
+      <td>3</td>
+      <td>22914.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>INV-20810008</td>
+      <td>Textile</td>
+      <td>45</td>
+      <td>184860.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>INV-20810009</td>
+      <td>Hardware</td>
+      <td>13</td>
+      <td>74412.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>INV-20810010</td>
+      <td>Electronics</td>
+      <td>28</td>
+      <td>44492.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</details>
+
+<h2 id="7-filtering-rows-the-autofilter-of-pandas">7. Filtering rows — the AutoFilter of Pandas</h2>
+<p>Just like <code>np.array[condition]</code>, but on a whole table.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Invoices with amount over NPR 1 lakh</span>
+<span class="n">big</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">100000</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">big</span><span class="p">),</span> <span class="s2">&quot;high-value invoices&quot;</span><span class="p">)</span>
+<span class="n">big</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Found 75 high-value invoices
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>City</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit_Price</th>
+      <th>Amount_NPR</th>
+      <th>VAT_NPR</th>
+      <th>Total_NPR</th>
+      <th>Payment_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>INV-20810004</td>
+      <td>2024-07-22</td>
+      <td>Pokhara Mart</td>
+      <td>Birgunj</td>
+      <td>Food</td>
+      <td>26</td>
+      <td>5501.0</td>
+      <td>143026.0</td>
+      <td>18593.38</td>
+      <td>161619.38</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>INV-20810006</td>
+      <td>2024-07-26</td>
+      <td>Birgunj Cargo</td>
+      <td>Pokhara</td>
+      <td>Cosmetics</td>
+      <td>39</td>
+      <td>3036.0</td>
+      <td>118404.0</td>
+      <td>15392.52</td>
+      <td>133796.52</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>INV-20810008</td>
+      <td>2024-07-30</td>
+      <td>Janakpur Wholesale</td>
+      <td>Bhaktapur</td>
+      <td>Textile</td>
+      <td>45</td>
+      <td>4108.0</td>
+      <td>184860.0</td>
+      <td>24031.80</td>
+      <td>208891.80</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>INV-20810014</td>
+      <td>2024-08-11</td>
+      <td>Annapurna Stores</td>
+      <td>Pokhara</td>
+      <td>Stationery</td>
+      <td>41</td>
+      <td>2476.0</td>
+      <td>101516.0</td>
+      <td>13197.08</td>
+      <td>114713.08</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>INV-20810020</td>
+      <td>2024-08-23</td>
+      <td>Everest Suppliers</td>
+      <td>Nepalgunj</td>
+      <td>Cosmetics</td>
+      <td>49</td>
+      <td>3192.0</td>
+      <td>156408.0</td>
+      <td>20333.04</td>
+      <td>176741.04</td>
+      <td>Overdue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="highlight"><pre><span></span><code><span class="c1"># Combine conditions with &amp; (and) and | (or) — wrap each in ()</span>
+<span class="n">overdue_big</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Overdue&quot;</span><span class="p">)</span> <span class="o">&amp;</span>
+                       <span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50000</span><span class="p">)]</span>
+<span class="n">overdue_big</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>City</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit_Price</th>
+      <th>Amount_NPR</th>
+      <th>VAT_NPR</th>
+      <th>Total_NPR</th>
+      <th>Payment_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>7</th>
+      <td>INV-20810008</td>
+      <td>2024-07-30</td>
+      <td>Janakpur Wholesale</td>
+      <td>Bhaktapur</td>
+      <td>Textile</td>
+      <td>45</td>
+      <td>4108.0</td>
+      <td>184860.0</td>
+      <td>24031.80</td>
+      <td>208891.80</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>INV-20810009</td>
+      <td>2024-08-01</td>
+      <td>Biratnagar Enterprise</td>
+      <td>Hetauda</td>
+      <td>Hardware</td>
+      <td>13</td>
+      <td>5724.0</td>
+      <td>74412.0</td>
+      <td>9673.56</td>
+      <td>84085.56</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>INV-20810019</td>
+      <td>2024-08-21</td>
+      <td>Lumbini Imports</td>
+      <td>Lalitpur</td>
+      <td>Stationery</td>
+      <td>28</td>
+      <td>1873.0</td>
+      <td>52444.0</td>
+      <td>6817.72</td>
+      <td>59261.72</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>INV-20810020</td>
+      <td>2024-08-23</td>
+      <td>Everest Suppliers</td>
+      <td>Nepalgunj</td>
+      <td>Cosmetics</td>
+      <td>49</td>
+      <td>3192.0</td>
+      <td>156408.0</td>
+      <td>20333.04</td>
+      <td>176741.04</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>INV-20810027</td>
+      <td>2024-09-06</td>
+      <td>Birgunj Cargo</td>
+      <td>Bhaktapur</td>
+      <td>Electronics</td>
+      <td>32</td>
+      <td>7444.0</td>
+      <td>238208.0</td>
+      <td>30967.04</td>
+      <td>269175.04</td>
+      <td>Overdue</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-6">Practice 6</h3>
+<p>From <code>invoices</code>:</p>
+<ol>
+<li>Find all invoices from the city <strong>"Kathmandu"</strong>.</li>
+<li>Find all <strong>"Pending"</strong> invoices above NPR 30,000.</li>
+<li>Count how many invoices have <code>Quantity</code> &gt; 30.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">ktm</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;City&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Kathmandu&quot;</span><span class="p">]</span>
+<span class="n">pending</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Pending&quot;</span><span class="p">)</span> <span class="o">&amp;</span>
+                   <span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;KTM invoices    :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ktm</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pending &gt; 30K   :&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">pending</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Qty &gt; 30 count  :&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Quantity&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+
+    KTM invoices    : 26
+    Pending > 30K   : 31
+    Qty > 30 count  : 73
+
+
+</details>
+
+<h2 id="8-sorting">8. Sorting</h2>
+<p><code>sort_values(by="ColumnName")</code> is your friend — just like Data → Sort in Excel.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Top 5 highest invoices</span>
+<span class="n">top5</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">top5</span><span class="p">[[</span><span class="s2">&quot;Invoice_No&quot;</span><span class="p">,</span><span class="s2">&quot;Customer&quot;</span><span class="p">,</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]]</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Customer</th>
+      <th>Total_NPR</th>
+      <th>Payment_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>96</th>
+      <td>INV-20810097</td>
+      <td>Nepalgunj Goods</td>
+      <td>437976.70</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>132</th>
+      <td>INV-20810133</td>
+      <td>Annapurna Stores</td>
+      <td>406037.25</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>INV-20810028</td>
+      <td>Annapurna Stores</td>
+      <td>398613.15</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>163</th>
+      <td>INV-20810164</td>
+      <td>Kathmandu Distributors</td>
+      <td>352471.86</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>INV-20810155</td>
+      <td>Nepalgunj Goods</td>
+      <td>346756.32</td>
+      <td>Pending</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-7">Practice 7</h3>
+<p>Sort <code>invoices</code> by <code>Quantity</code> (largest first) and show the top 10.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Quantity&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Invoice_No</th>
+      <th>Date</th>
+      <th>Customer</th>
+      <th>City</th>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit_Price</th>
+      <th>Amount_NPR</th>
+      <th>VAT_NPR</th>
+      <th>Total_NPR</th>
+      <th>Payment_Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>136</th>
+      <td>INV-20810137</td>
+      <td>2025-04-14</td>
+      <td>Nepalgunj Goods</td>
+      <td>Lalitpur</td>
+      <td>Stationery</td>
+      <td>49</td>
+      <td>4947.0</td>
+      <td>242403.0</td>
+      <td>31512.39</td>
+      <td>273915.39</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>41</th>
+      <td>INV-20810042</td>
+      <td>2024-10-06</td>
+      <td>Everest Suppliers</td>
+      <td>Bhaktapur</td>
+      <td>Electronics</td>
+      <td>49</td>
+      <td>2258.0</td>
+      <td>110642.0</td>
+      <td>14383.46</td>
+      <td>125025.46</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>96</th>
+      <td>INV-20810097</td>
+      <td>2025-01-24</td>
+      <td>Nepalgunj Goods</td>
+      <td>Biratnagar</td>
+      <td>Hardware</td>
+      <td>49</td>
+      <td>7910.0</td>
+      <td>387590.0</td>
+      <td>50386.70</td>
+      <td>437976.70</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>INV-20810020</td>
+      <td>2024-08-23</td>
+      <td>Everest Suppliers</td>
+      <td>Nepalgunj</td>
+      <td>Cosmetics</td>
+      <td>49</td>
+      <td>3192.0</td>
+      <td>156408.0</td>
+      <td>20333.04</td>
+      <td>176741.04</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>103</th>
+      <td>INV-20810104</td>
+      <td>2025-02-07</td>
+      <td>Janakpur Wholesale</td>
+      <td>Biratnagar</td>
+      <td>Food</td>
+      <td>49</td>
+      <td>3702.0</td>
+      <td>181398.0</td>
+      <td>23581.74</td>
+      <td>204979.74</td>
+      <td>Overdue</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>INV-20810197</td>
+      <td>2025-08-12</td>
+      <td>Pokhara Mart</td>
+      <td>Lalitpur</td>
+      <td>Hardware</td>
+      <td>48</td>
+      <td>1666.0</td>
+      <td>79968.0</td>
+      <td>10395.84</td>
+      <td>90363.84</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>76</th>
+      <td>INV-20810077</td>
+      <td>2024-12-15</td>
+      <td>Nepalgunj Goods</td>
+      <td>Kathmandu</td>
+      <td>Textile</td>
+      <td>48</td>
+      <td>1000.0</td>
+      <td>48000.0</td>
+      <td>6240.00</td>
+      <td>54240.00</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>154</th>
+      <td>INV-20810155</td>
+      <td>2025-05-20</td>
+      <td>Nepalgunj Goods</td>
+      <td>Hetauda</td>
+      <td>Food</td>
+      <td>48</td>
+      <td>6393.0</td>
+      <td>306864.0</td>
+      <td>39892.32</td>
+      <td>346756.32</td>
+      <td>Pending</td>
+    </tr>
+    <tr>
+      <th>111</th>
+      <td>INV-20810112</td>
+      <td>2025-02-23</td>
+      <td>Annapurna Stores</td>
+      <td>Lalitpur</td>
+      <td>Cosmetics</td>
+      <td>48</td>
+      <td>4168.0</td>
+      <td>200064.0</td>
+      <td>26008.32</td>
+      <td>226072.32</td>
+      <td>Paid</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>INV-20810029</td>
+      <td>2024-09-10</td>
+      <td>Janakpur Wholesale</td>
+      <td>Hetauda</td>
+      <td>Hardware</td>
+      <td>47</td>
+      <td>660.0</td>
+      <td>31020.0</td>
+      <td>4032.60</td>
+      <td>35052.60</td>
+      <td>Paid</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</details>
+
+<h2 id="9-creating-new-columns">9. Creating new columns</h2>
+<p>You can build new columns from existing ones — like adding a new column with an Excel formula.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sales</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/monthly_sales.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># New calculated columns</span>
+<span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Profit&quot;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Expense_NPR&quot;</span><span class="p">]</span>
+<span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Margin_pct&quot;</span><span class="p">]</span>  <span class="o">=</span> <span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Profit&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sales</span><span class="p">[</span><span class="s2">&quot;VAT_NPR&quot;</span><span class="p">]</span>     <span class="o">=</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.13</span>
+
+<span class="n">sales</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Month</th>
+      <th>Revenue_NPR</th>
+      <th>Expense_NPR</th>
+      <th>Units_Sold</th>
+      <th>Profit</th>
+      <th>Margin_pct</th>
+      <th>VAT_NPR</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Shrawan</td>
+      <td>1250000</td>
+      <td>920000</td>
+      <td>420</td>
+      <td>330000</td>
+      <td>26.40</td>
+      <td>162500.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Bhadra</td>
+      <td>1380000</td>
+      <td>980000</td>
+      <td>465</td>
+      <td>400000</td>
+      <td>28.99</td>
+      <td>179400.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Ashwin</td>
+      <td>1120000</td>
+      <td>870000</td>
+      <td>380</td>
+      <td>250000</td>
+      <td>22.32</td>
+      <td>145600.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Kartik</td>
+      <td>1450000</td>
+      <td>1050000</td>
+      <td>498</td>
+      <td>400000</td>
+      <td>27.59</td>
+      <td>188500.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Mangsir</td>
+      <td>1620000</td>
+      <td>1180000</td>
+      <td>540</td>
+      <td>440000</td>
+      <td>27.16</td>
+      <td>210600.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Poush</td>
+      <td>1780000</td>
+      <td>1250000</td>
+      <td>605</td>
+      <td>530000</td>
+      <td>29.78</td>
+      <td>231400.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Magh</td>
+      <td>1550000</td>
+      <td>1100000</td>
+      <td>515</td>
+      <td>450000</td>
+      <td>29.03</td>
+      <td>201500.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Falgun</td>
+      <td>1420000</td>
+      <td>1020000</td>
+      <td>478</td>
+      <td>400000</td>
+      <td>28.17</td>
+      <td>184600.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Chaitra</td>
+      <td>1680000</td>
+      <td>1190000</td>
+      <td>560</td>
+      <td>490000</td>
+      <td>29.17</td>
+      <td>218400.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Baishakh</td>
+      <td>1910000</td>
+      <td>1320000</td>
+      <td>640</td>
+      <td>590000</td>
+      <td>30.89</td>
+      <td>248300.0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Jestha</td>
+      <td>2030000</td>
+      <td>1410000</td>
+      <td>690</td>
+      <td>620000</td>
+      <td>30.54</td>
+      <td>263900.0</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Ashadh</td>
+      <td>2150000</td>
+      <td>1490000</td>
+      <td>720</td>
+      <td>660000</td>
+      <td>30.70</td>
+      <td>279500.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-8">Practice 8</h3>
+<p>Load <code>data/payroll.csv</code> into <code>pay</code>. Add a new column <code>Annual_Net</code> = <code>Net_Salary</code> × 12. Then sort by <code>Annual_Net</code> (descending) and show the top 5 employees.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">pay</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/payroll.csv&quot;</span><span class="p">)</span>
+<span class="n">pay</span><span class="p">[</span><span class="s2">&quot;Annual_Net&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pay</span><span class="p">[</span><span class="s2">&quot;Net_Salary&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">12</span>
+<span class="n">pay</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Annual_Net&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+
+
+
+
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Emp_ID</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Designation</th>
+      <th>Years_Exp</th>
+      <th>Basic_Salary</th>
+      <th>Allowance</th>
+      <th>Gross</th>
+      <th>EPF_10pct</th>
+      <th>SSF_1pct</th>
+      <th>Net_Salary</th>
+      <th>Annual_Net</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>24</th>
+      <td>E1024</td>
+      <td>Bishnu Paudel</td>
+      <td>Advisory</td>
+      <td>Manager</td>
+      <td>22</td>
+      <td>250000</td>
+      <td>100000.0</td>
+      <td>350000.0</td>
+      <td>25000.0</td>
+      <td>3500.0</td>
+      <td>321500.0</td>
+      <td>3858000.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>E1007</td>
+      <td>Kabita Rai</td>
+      <td>Advisory</td>
+      <td>Senior</td>
+      <td>8</td>
+      <td>250000</td>
+      <td>100000.0</td>
+      <td>350000.0</td>
+      <td>25000.0</td>
+      <td>3500.0</td>
+      <td>321500.0</td>
+      <td>3858000.0</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>E1014</td>
+      <td>Manoj Rana</td>
+      <td>Tax</td>
+      <td>Senior</td>
+      <td>17</td>
+      <td>250000</td>
+      <td>100000.0</td>
+      <td>350000.0</td>
+      <td>25000.0</td>
+      <td>3500.0</td>
+      <td>321500.0</td>
+      <td>3858000.0</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>E1015</td>
+      <td>Kalpana Pokhrel</td>
+      <td>Audit</td>
+      <td>Senior</td>
+      <td>2</td>
+      <td>180000</td>
+      <td>72000.0</td>
+      <td>252000.0</td>
+      <td>18000.0</td>
+      <td>2520.0</td>
+      <td>231480.0</td>
+      <td>2777760.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E1004</td>
+      <td>Bikash Gurung</td>
+      <td>Tax</td>
+      <td>Junior</td>
+      <td>4</td>
+      <td>180000</td>
+      <td>72000.0</td>
+      <td>252000.0</td>
+      <td>18000.0</td>
+      <td>2520.0</td>
+      <td>231480.0</td>
+      <td>2777760.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+</details>
+
+<h2 id="10-groupby-the-pandas-pivot-table">10. GroupBy — the Pandas Pivot Table</h2>
+<p><code>groupby()</code> is the most powerful feature you'll use. It splits data into groups, applies a function to each group, and combines the result. Exactly like a Pivot Table.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Total invoice amount per city</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>City
+Bhaktapur     2608959.82
+Biratnagar    2432223.30
+Kathmandu     2299763.57
+Hetauda       2175177.68
+Lalitpur      2024371.27
+Butwal        1997602.70
+Birgunj       1989168.38
+Janakpur      1975963.20
+Nepalgunj     1934153.20
+Pokhara       1732977.04
+Name: Total_NPR, dtype: float64
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Multiple metrics at once</span>
+<span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+    <span class="n">Count</span>        <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Invoice_No&quot;</span><span class="p">,</span> <span class="s2">&quot;count&quot;</span><span class="p">),</span>
+    <span class="n">Total_Amount</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span> <span class="s2">&quot;sum&quot;</span><span class="p">),</span>
+    <span class="n">Avg_Amount</span>   <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span> <span class="s2">&quot;mean&quot;</span><span class="p">),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Count</th>
+      <th>Total_Amount</th>
+      <th>Avg_Amount</th>
+    </tr>
+    <tr>
+      <th>Payment_Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Overdue</th>
+      <td>28</td>
+      <td>3268298.0</td>
+      <td>116725.0</td>
+    </tr>
+    <tr>
+      <th>Paid</th>
+      <td>133</td>
+      <td>13633958.0</td>
+      <td>102511.0</td>
+    </tr>
+    <tr>
+      <th>Pending</th>
+      <td>39</td>
+      <td>4268104.0</td>
+      <td>109439.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-9">Practice 9</h3>
+<p>Using <code>invoices</code>:</p>
+<ol>
+<li>Find the <strong>total Amount_NPR per Product</strong>.</li>
+<li>Find the <strong>average Quantity per Customer</strong>.</li>
+<li>Count how many invoices each <code>City</code> has.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Product&quot;</span><span class="p">)[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Customer&quot;</span><span class="p">)[</span><span class="s2">&quot;Quantity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">())</span>
+</code></pre></div>
+
+    Product
+    Cosmetics      2304572.0
+    Electronics    2802522.0
+    Food           4614269.0
+    Hardware       3289388.0
+    Stationery     2863125.0
+    Textile        2860956.0
+    Name: Amount_NPR, dtype: float64
+
+    Customer
+    Annapurna Stores          24.0
+    Biratnagar Enterprise     20.9
+    Birgunj Cargo             26.6
+    Everest Suppliers         25.0
+    Himalayan Traders         22.0
+    Janakpur Wholesale        24.2
+    Kathmandu Distributors    27.8
+    Lumbini Imports           26.1
+    Nepalgunj Goods           27.0
+    Pokhara Mart              21.8
+    Name: Quantity, dtype: float64
+
+    City
+    Bhaktapur     26
+    Biratnagar    15
+    Birgunj       21
+    Butwal        18
+    Hetauda       20
+    Janakpur      18
+    Kathmandu     26
+    Lalitpur      16
+    Nepalgunj     20
+    Pokhara       20
+    dtype: int64
+
+
+</details>
+
+<h2 id="11-saving-your-work-to-a-file">11. Saving your work to a file</h2>
+<p>Once you have cleaned / processed data, you can save the result.</p>
+<div class="highlight"><pre><span></span><code><span class="n">top5</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="n">top5</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;top5_invoices.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>   <span class="c1"># save as CSV</span>
+<span class="c1"># top5.to_excel(&quot;top5_invoices.xlsx&quot;, index=False)   # needs openpyxl</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved top5_invoices.csv&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Saved top5_invoices.csv
+</code></pre></div>
+<h2 id="12-mini-project-sales-analysis">12. Mini-Project — Sales Analysis</h2>
+<p>Using <code>data/invoices.csv</code>, answer the following:</p>
+<ol>
+<li><strong>Which city has the highest total sales?</strong></li>
+<li><strong>Which product is sold the most (by quantity)?</strong></li>
+<li><strong>What % of invoices are still pending or overdue?</strong></li>
+<li><strong>List the top 3 customers by total revenue.</strong></li>
+<li><strong>Find the average invoice amount city-wise.</strong></li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">inv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/invoices.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Your code here</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top city by sales:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inv</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top product by qty:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inv</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Product&quot;</span><span class="p">)[</span><span class="s2">&quot;Quantity&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 3</span>
+<span class="n">pending_or_over</span> <span class="o">=</span> <span class="n">inv</span><span class="p">[</span><span class="n">inv</span><span class="p">[</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">&quot;Paid&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pending+Overdue: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pending_or_over</span><span class="p">)</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">inv</span><span class="p">)</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Top 3 customers:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inv</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Customer&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average invoice per city:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">inv</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</code></pre></div>
+
+    Top city by sales:
+    City
+    Bhaktapur    2608959.82
+    Name: Total_NPR, dtype: float64
+
+    Top product by qty:
+    Product
+    Food    1018
+    Name: Quantity, dtype: int64
+
+    Pending+Overdue: 33.5%
+
+    Top 3 customers:
+    Customer
+    Nepalgunj Goods           2634935.13
+    Kathmandu Distributors    2464900.64
+    Janakpur Wholesale        2335671.58
+    Name: Total_NPR, dtype: float64
+
+    Average invoice per city:
+    City
+    Biratnagar    162148.0
+    Lalitpur      126523.0
+    Butwal        110978.0
+    Janakpur      109776.0
+    Hetauda       108759.0
+    Bhaktapur     100345.0
+    Nepalgunj      96708.0
+    Birgunj        94722.0
+    Kathmandu      88452.0
+    Pokhara        86649.0
+    Name: Total_NPR, dtype: float64
+
+
+</details>
+
+<hr />
+<h3 id="whats-next">What's next?</h3>
+<p>Pandas is now your everyday tool for working with tabular data.
+In the next notebook (<code>03_Matplotlib_Seaborn</code>) we will turn this data into <strong>charts</strong> — line graphs, bar charts, heatmaps — so we can present it to clients and partners.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../01_NumPy_Basics/" class="btn btn-neutral float-left" title="Numpy Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../03_Matplotlib_Seaborn/" class="btn btn-neutral float-right" title="Matplotlib Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../01_NumPy_Basics/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../03_Matplotlib_Seaborn/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

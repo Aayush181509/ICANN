@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Matplotlib Basics - ICAN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Matplotlib Basics";
+        var mkdocs_page_input_path = "session/03_Matplotlib_Seaborn.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Regression & Classification</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09_Regression_Classification_for_CA/">Classification</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09b_Regression_for_CA/">Regression</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Session</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../01_NumPy_Basics/">Numpy Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_Pandas_Basics/">Pandas Basics</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Matplotlib Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-why-visualise-data">1. Why visualise data?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-line-chart-showing-a-trend-over-time">2. Line Chart — showing a trend over time</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-1">Practice 1</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-multiple-lines-on-one-chart">3. Multiple lines on one chart</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-bar-chart-comparing-categories">4. Bar Chart — comparing categories</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-2">Practice 2</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-pie-chart-share-of-the-total">5. Pie Chart — share of the total</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-3">Practice 3</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-histogram-distribution-of-one-column">6. Histogram — distribution of one column</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-4">Practice 4</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-scatter-plot-relationship-between-two-columns">7. Scatter Plot — relationship between two columns</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-5">Practice 5</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-seaborn-same-plots-simpler-code">8. Seaborn — same plots, simpler code</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-box-plot-spotting-outliers">9. Box Plot — spotting outliers</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-6">Practice 6</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-heatmap-correlation-between-numeric-columns">10. Heatmap — correlation between numeric columns</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#11-saving-a-chart-to-a-file">11. Saving a chart to a file</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-mini-project-client-style-sales-dashboard">12. Mini-Project — Client-style Sales Dashboard</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's next?</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Data_Cleaning/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Feature_Engineering/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../06_Regression/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../07_Classification/">Classification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Session</li>
+      <li class="breadcrumb-item active">Matplotlib Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="notebook-3-matplotlib-seaborn-for-ca-professionals">Notebook 3 — Matplotlib &amp; Seaborn for CA Professionals</h1>
+<p><strong>Goal:</strong> Turn raw financial numbers into clean, presentable charts.</p>
+<p><strong>You will learn:</strong>
+1. Why charts matter for reporting
+2. Line charts (revenue trends)
+3. Bar charts (department / city comparisons)
+4. Pie chart (expense breakdown)
+5. Histogram (distribution of invoice amounts)
+6. Scatter plot (relationship between two columns)
+7. Seaborn basics — prettier plots with one line
+8. Box plot (spotting outliers)
+9. Heatmap (correlation between metrics)
+10. Saving a chart as an image
+11. A short mini-project</p>
+<hr />
+<h2 id="1-why-visualise-data">1. Why visualise data?</h2>
+<p>A table of 200 invoices is overwhelming. A chart shows the story instantly — trends, outliers, top customers, seasonality. Auditors, managers and clients all understand a chart faster than a spreadsheet.</p>
+<p>We will use <strong>two libraries</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Library</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matplotlib</code></td>
+<td>The foundation — full control, every kind of plot</td>
+</tr>
+<tr>
+<td><code>seaborn</code></td>
+<td>A friendly layer on top — prettier defaults, fewer lines of code</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+
+<span class="c1"># Nicer default style</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s2">&quot;figure.figsize&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ready&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>ready
+</code></pre></div>
+<h2 id="2-line-chart-showing-a-trend-over-time">2. Line Chart — showing a trend over time</h2>
+<p>Best for <strong>time series</strong>: monthly revenue, daily price, quarterly profit.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sales</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/monthly_sales.csv&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;navy&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Monthly Revenue — FY 2081-82 BS&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Revenue (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_4_0.png" /></p>
+<h3 id="practice-1">Practice 1</h3>
+<p>Make a line chart of <code>Expense_NPR</code> against <code>Month</code> from the same <code>sales</code> DataFrame. Use a different colour and add a title.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Expense_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;darkred&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Monthly Expense — FY 2081-82 BS&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Expense (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_8_0.png)
+
+
+
+</details>
+
+<h2 id="3-multiple-lines-on-one-chart">3. Multiple lines on one chart</h2>
+<p>Just call <code>plt.plot()</code> twice (or more) before <code>plt.show()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Expense_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expense&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Revenue vs Expense&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Month&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;NPR&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_11_0.png" /></p>
+<h2 id="4-bar-chart-comparing-categories">4. Bar Chart — comparing categories</h2>
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/invoices.csv&quot;</span><span class="p">)</span>
+
+<span class="n">city_sales</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">city_sales</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">city_sales</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total Sales by City&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;NPR&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_13_0.png" /></p>
+<h3 id="practice-2">Practice 2</h3>
+<p>Group <code>invoices</code> by <code>Product</code> (sum of <code>Amount_NPR</code>). Make a bar chart of the result.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">prod</span> <span class="o">=</span> <span class="n">invoices</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;Product&quot;</span><span class="p">)[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">prod</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">prod</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sales by Product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Amount (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_17_0.png)
+
+
+
+</details>
+
+<h2 id="5-pie-chart-share-of-the-total">5. Pie Chart — share of the total</h2>
+<p>Pie charts are good when you want to show <strong>how a total is split</strong> into parts.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Expense breakdown (made up example)</span>
+<span class="n">heads</span>  <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Salaries&quot;</span><span class="p">,</span> <span class="s2">&quot;Rent&quot;</span><span class="p">,</span> <span class="s2">&quot;Utilities&quot;</span><span class="p">,</span> <span class="s2">&quot;Marketing&quot;</span><span class="p">,</span> <span class="s2">&quot;Other&quot;</span><span class="p">]</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1800000</span><span class="p">,</span> <span class="mi">480000</span><span class="p">,</span> <span class="mi">220000</span><span class="p">,</span> <span class="mi">350000</span><span class="p">,</span> <span class="mi">150000</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">amounts</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">heads</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.1f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Expense Breakdown&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_20_0.png" /></p>
+<h3 id="practice-3">Practice 3</h3>
+<p>Group <code>invoices</code> by <code>Payment_Status</code> (count of invoices). Make a pie chart showing what % are Paid / Pending / Overdue.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">status</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">status</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">status</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.1f%%</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Invoice Payment Status&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_24_0.png)
+
+
+
+</details>
+
+<h2 id="6-histogram-distribution-of-one-column">6. Histogram — distribution of one column</h2>
+<p>Useful to see how amounts are spread: are most invoices small? Are salaries clustered?</p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">invoices</span><span class="p">[</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;seagreen&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Invoice Amounts&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Amount (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Number of invoices&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_27_0.png" /></p>
+<h3 id="practice-4">Practice 4</h3>
+<p>Load <code>data/payroll.csv</code> and plot a histogram of <code>Net_Salary</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">pay</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/payroll.csv&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">pay</span><span class="p">[</span><span class="s2">&quot;Net_Salary&quot;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Distribution of Net Salaries&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;NPR&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Employees&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_31_0.png)
+
+
+
+</details>
+
+<h2 id="7-scatter-plot-relationship-between-two-columns">7. Scatter Plot — relationship between two columns</h2>
+<p>Use this when you want to see: <strong>does X go up when Y goes up?</strong></p>
+<div class="highlight"><pre><span></span><code><span class="n">daily</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/daily_revenue.csv&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">],</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;tomato&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ads Spend vs Daily Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ads Spend (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Revenue (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_34_0.png" /></p>
+<h3 id="practice-5">Practice 5</h3>
+<p>Make a scatter plot of <code>Footfall</code> (x-axis) vs <code>Revenue</code> (y-axis) from the <code>daily</code> DataFrame.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Footfall&quot;</span><span class="p">],</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;teal&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Footfall&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Revenue (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Footfall vs Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_38_0.png)
+
+
+
+</details>
+
+<h2 id="8-seaborn-same-plots-simpler-code">8. Seaborn — same plots, simpler code</h2>
+<p>Seaborn is built on top of matplotlib. You pass it the DataFrame directly.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;City&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">,</span> <span class="n">estimator</span><span class="o">=</span><span class="nb">sum</span><span class="p">,</span> <span class="n">errorbar</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total Sales by City (Seaborn)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_41_0.png" /></p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;seagreen&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Invoice Amount — distribution with KDE curve&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_42_0.png" /></p>
+<h2 id="9-box-plot-spotting-outliers">9. Box Plot — spotting outliers</h2>
+<p>The box shows the middle 50% of data. The line in the middle is the median. Dots beyond the "whiskers" are <strong>outliers</strong> — unusually high or low values that may need investigation.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">invoices</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Invoice Amount distribution per Product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_44_0.png" /></p>
+<h3 id="practice-6">Practice 6</h3>
+<p>Make a box plot of <code>Net_Salary</code> (y-axis) per <code>Department</code> (x-axis), using the <code>pay</code> DataFrame.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">pay</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Department&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Net_Salary&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Net Salary per Department&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_48_0.png)
+
+
+
+</details>
+
+<h2 id="10-heatmap-correlation-between-numeric-columns">10. Heatmap — correlation between numeric columns</h2>
+<p>A correlation heatmap shows how strongly two columns move together. Values close to <strong>+1</strong> mean they move together; close to <strong>−1</strong> mean opposite; close to <strong>0</strong> means no relationship.</p>
+<div class="highlight"><pre><span></span><code><span class="n">corr</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">,</span> <span class="s2">&quot;Footfall&quot;</span><span class="p">,</span> <span class="s2">&quot;Is_Weekend&quot;</span><span class="p">,</span> <span class="s2">&quot;Is_Festival&quot;</span><span class="p">,</span> <span class="s2">&quot;Revenue&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;RdBu_r&quot;</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;.2f&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Correlation: what drives daily revenue?&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_51_0.png" /></p>
+<h2 id="11-saving-a-chart-to-a-file">11. Saving a chart to a file</h2>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sales</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Monthly Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;revenue_chart.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>   <span class="c1"># ← saves to disk</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Saved revenue_chart.png&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p><img alt="png" src="../03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_53_0.png" /></p>
+<div class="highlight"><pre><span></span><code>Saved revenue_chart.png
+</code></pre></div>
+<h2 id="12-mini-project-client-style-sales-dashboard">12. Mini-Project — Client-style Sales Dashboard</h2>
+<p>Using <code>data/invoices.csv</code> and <code>data/monthly_sales.csv</code>, make these 4 charts (one after another):</p>
+<ol>
+<li><strong>Line chart</strong> — monthly Revenue and Expense on one chart (with legend).</li>
+<li><strong>Bar chart</strong> — total <code>Total_NPR</code> per City (sorted, biggest first).</li>
+<li><strong>Pie chart</strong> — share of invoices by <code>Payment_Status</code>.</li>
+<li><strong>Box plot</strong> — <code>Amount_NPR</code> per <code>Product</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">inv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/invoices.csv&quot;</span><span class="p">)</span>
+<span class="n">sl</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/monthly_sales.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># Your code here</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="c1"># 1. Line chart</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sl</span><span class="p">[</span><span class="s2">&quot;Revenue_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sl</span><span class="p">[</span><span class="s2">&quot;Month&quot;</span><span class="p">],</span> <span class="n">sl</span><span class="p">[</span><span class="s2">&quot;Expense_NPR&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Expense&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Revenue vs Expense&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 2. Bar chart</span>
+<span class="n">city</span> <span class="o">=</span> <span class="n">inv</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;City&quot;</span><span class="p">)[</span><span class="s2">&quot;Total_NPR&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">city</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">city</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;steelblue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Total Sales by City&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 3. Pie chart</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">inv</span><span class="p">[</span><span class="s2">&quot;Payment_Status&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">st</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">st</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">autopct</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%1.1f%%</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Invoice Status&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># 4. Box plot</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">inv</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;Product&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;Amount_NPR&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">30</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Invoice Amount per Product&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_57_0.png)
+
+
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_57_1.png)
+
+
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_57_2.png)
+
+
+
+
+
+![png](03_Matplotlib_Seaborn_files/03_Matplotlib_Seaborn_57_3.png)
+
+
+
+</details>
+
+<hr />
+<h3 id="whats-next">What's next?</h3>
+<p>You can now communicate findings visually. Next we go back to data quality —
+in <code>04_Data_Cleaning</code> we will learn how to <strong>clean messy real-world data</strong> before it can be plotted or modelled.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../02_Pandas_Basics/" class="btn btn-neutral float-left" title="Pandas Basics"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../04_Data_Cleaning/" class="btn btn-neutral float-right" title="Data Cleaning">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../02_Pandas_Basics/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../04_Data_Cleaning/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

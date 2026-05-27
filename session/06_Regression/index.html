@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Regression & Classification - ICAN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Regression \u0026 Classification";
+        var mkdocs_page_input_path = "session/06_Regression.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Regression & Classification</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09_Regression_Classification_for_CA/">Classification</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09b_Regression_for_CA/">Regression</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Session</span></p>
+              <ul class="current">
+                  <li class="toctree-l1"><a class="reference internal" href="../01_NumPy_Basics/">Numpy Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_Pandas_Basics/">Pandas Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_Matplotlib_Seaborn/">Matplotlib Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Data_Cleaning/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Feature_Engineering/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Regression & Classification</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-what-is-regression">1. What is regression?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-train-test-split-the-golden-rule">2. Train / Test split — the golden rule</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-simple-linear-regression-one-input">3. Simple linear regression — one input</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-1">Practice 1</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-how-good-is-the-model-mae-rmse-r2">4. How good is the model? — MAE, RMSE, R²</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-visualising-the-fit">5. Visualising the fit</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-multiple-regression-using-several-inputs">6. Multiple regression — using several inputs</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-2">Practice 2</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-actual-vs-predicted-diagnostic-plot">7. Actual vs Predicted — diagnostic plot</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-mini-project-predict-monthly-company-revenue">8. Mini-Project — predict monthly company revenue</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's next?</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../07_Classification/">Classification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Session</li>
+      <li class="breadcrumb-item active">Regression & Classification</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="notebook-6-regression-for-ca-professionals">Notebook 6 — Regression for CA Professionals</h1>
+<p><strong>Goal:</strong> Predict a <strong>number</strong> (revenue, expense, loan amount...) based on other columns.</p>
+<p><strong>You will learn:</strong>
+1. What regression is — in one minute
+2. Train / test split — why we never test on the same data we trained on
+3. Simple linear regression — one input, one output
+4. Multiple regression — several inputs
+5. Measuring how good the model is (MAE, RMSE, R²)
+6. Visualising predictions vs actual
+7. A short mini-project</p>
+<blockquote>
+<p>All examples predict daily store revenue from ads spend, footfall, weekend/festival flags — using <code>data/daily_revenue.csv</code>.</p>
+</blockquote>
+<hr />
+<h2 id="1-what-is-regression">1. What is regression?</h2>
+<p>Regression answers: <strong>"Given some inputs, what number should I expect?"</strong></p>
+<p>Real CA-style examples:
+- Predict <strong>next month's revenue</strong> from ad spend, footfall, season.
+- Predict <strong>a property's value</strong> from area, location, age.
+- Predict <strong>electricity expense</strong> from production output.</p>
+<p>The model <strong>learns</strong> the relationship from past data, then applies it to new rows.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+
+<span class="n">daily</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;data/daily_revenue.csv&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">daily</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">daily</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Shape: (90, 6)
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Date</th>
+      <th>Ads_Spend</th>
+      <th>Footfall</th>
+      <th>Is_Weekend</th>
+      <th>Is_Festival</th>
+      <th>Revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2024-07-16</td>
+      <td>17479.0</td>
+      <td>321</td>
+      <td>0</td>
+      <td>0</td>
+      <td>229308.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2024-07-17</td>
+      <td>20050.0</td>
+      <td>229</td>
+      <td>0</td>
+      <td>0</td>
+      <td>206190.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2024-07-18</td>
+      <td>20294.0</td>
+      <td>462</td>
+      <td>0</td>
+      <td>1</td>
+      <td>309754.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2024-07-19</td>
+      <td>4684.0</td>
+      <td>190</td>
+      <td>0</td>
+      <td>0</td>
+      <td>77360.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2024-07-20</td>
+      <td>9358.0</td>
+      <td>182</td>
+      <td>1</td>
+      <td>0</td>
+      <td>144554.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h2 id="2-train-test-split-the-golden-rule">2. Train / Test split — the golden rule</h2>
+<p>Never check a model against the same rows you taught it. Split your data into two parts:</p>
+<table>
+<thead>
+<tr>
+<th>Subset</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Train</td>
+<td>The model <strong>learns</strong> from this data</td>
+</tr>
+<tr>
+<td>Test</td>
+<td>We check the model on data it has never seen</td>
+</tr>
+</tbody>
+</table>
+<p>A typical split is <strong>80% train, 20% test</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">]]</span>   <span class="c1"># input column(s) — must be 2-D</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">]</span>       <span class="c1"># what we want to predict</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train rows:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test  rows:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Train rows: 72
+Test  rows: 18
+</code></pre></div>
+<h2 id="3-simple-linear-regression-one-input">3. Simple linear regression — one input</h2>
+<p>The model learns the line:  <code>Revenue = m × Ads_Spend + c</code></p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Slope (m): </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Intercept (c): </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;→ Equation: Revenue = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> * Ads_Spend + </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">intercept_</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Slope (m): 7.58
+Intercept (c): 95465
+→ Equation: Revenue = 7.58 * Ads_Spend + 95465
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Predict on the held-out test set</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Actual&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span>
+              <span class="s2">&quot;Predicted&quot;</span><span class="p">:</span> <span class="n">y_pred</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">)})</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Actual</th>
+      <th>Predicted</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>301305.0</td>
+      <td>199253.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>165756.0</td>
+      <td>177601.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>304694.0</td>
+      <td>248972.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>198129.0</td>
+      <td>200542.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>229308.0</td>
+      <td>227979.0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>158795.0</td>
+      <td>176699.0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>179067.0</td>
+      <td>192347.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>216391.0</td>
+      <td>240920.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>131883.0</td>
+      <td>167783.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>249144.0</td>
+      <td>263748.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="practice-1">Practice 1</h3>
+<p>Use the model to predict the revenue when <code>Ads_Spend = 10,000</code>.</p>
+<p>Hint: call <code>model.predict(pd.DataFrame({"Ads_Spend":[10000]}))</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">new_input</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">:[</span><span class="mi">10000</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted revenue:&quot;</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_input</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div>
+
+    Predicted revenue: 171278.0
+
+
+</details>
+
+<h2 id="4-how-good-is-the-model-mae-rmse-r2">4. How good is the model? — MAE, RMSE, R²</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Meaning</th>
+<th>Better when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>MAE</strong></td>
+<td>Mean Absolute Error — avg NPR difference</td>
+<td>smaller</td>
+</tr>
+<tr>
+<td><strong>RMSE</strong></td>
+<td>Root Mean Squared Error — penalises big mistakes</td>
+<td>smaller</td>
+</tr>
+<tr>
+<td><strong>R²</strong></td>
+<td>% of variation in revenue the model explains</td>
+<td>closer to 1</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+
+<span class="n">mae</span>  <span class="o">=</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+<span class="n">r2</span>   <span class="o">=</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE  : NPR </span><span class="si">{</span><span class="n">mae</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE : NPR </span><span class="si">{</span><span class="n">rmse</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R²   : </span><span class="si">{</span><span class="n">r2</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">    (</span><span class="si">{</span><span class="n">r2</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">% of variation explained)&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>MAE  : NPR 25,929
+RMSE : NPR 35,997
+R²   : 0.666    (66.6% of variation explained)
+</code></pre></div>
+<h2 id="5-visualising-the-fit">5. Visualising the fit</h2>
+<p>The scatter shows actual points; the red line is what the model learned.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">],</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Actual&quot;</span><span class="p">)</span>
+<span class="n">xs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">ys</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">:</span> <span class="n">xs</span><span class="p">}))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Fitted line&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Ads Spend (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Revenue (NPR)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Ads Spend → Revenue (Simple Linear Regression)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../06_Regression_files/06_Regression_16_0.png" /></p>
+<h2 id="6-multiple-regression-using-several-inputs">6. Multiple regression — using several inputs</h2>
+<p>Real revenue depends on more than just ads spend. Add <strong>footfall</strong>, <strong>weekend</strong> and <strong>festival</strong> flags and let the model use all of them at once.</p>
+<div class="highlight"><pre><span></span><code><span class="n">X</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[[</span><span class="s2">&quot;Ads_Spend&quot;</span><span class="p">,</span> <span class="s2">&quot;Footfall&quot;</span><span class="p">,</span> <span class="s2">&quot;Is_Weekend&quot;</span><span class="p">,</span> <span class="s2">&quot;Is_Festival&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">daily</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">]</span>
+
+<span class="n">X_tr</span><span class="p">,</span> <span class="n">X_te</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">multi</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+
+<span class="c1"># Coefficients tell us the impact of each input</span>
+<span class="n">coefs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">multi</span><span class="o">.</span><span class="n">coef_</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intercept :&quot;</span><span class="p">,</span> <span class="n">multi</span><span class="o">.</span><span class="n">intercept_</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefs</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Intercept : 7106.53
+Ads_Spend          8.09
+Footfall         264.64
+Is_Weekend     12921.49
+Is_Festival    35531.46
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">y_pred</span> <span class="o">=</span> <span class="n">multi</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE  : NPR </span><span class="si">{</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE : NPR </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">))</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R²   : </span><span class="si">{</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">y_pred</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>MAE  : NPR 13,242
+RMSE : NPR 18,856
+R²   : 0.908
+</code></pre></div>
+<h3 id="practice-2">Practice 2</h3>
+<p>Use the <strong>multiple</strong> model to predict revenue for a day with:
+- Ads_Spend = 12,000
+- Footfall = 300
+- Is_Weekend = 0
+- Is_Festival = 1</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">new_day</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Ads_Spend&quot;</span><span class="p">:[</span><span class="mi">12000</span><span class="p">],</span>
+    <span class="s2">&quot;Footfall&quot;</span><span class="p">:[</span><span class="mi">300</span><span class="p">],</span>
+    <span class="s2">&quot;Is_Weekend&quot;</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span>
+    <span class="s2">&quot;Is_Festival&quot;</span><span class="p">:[</span><span class="mi">1</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted revenue:&quot;</span><span class="p">,</span> <span class="n">multi</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_day</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div>
+
+    Predicted revenue: 219075.0
+
+
+</details>
+
+<h2 id="7-actual-vs-predicted-diagnostic-plot">7. Actual vs Predicted — diagnostic plot</h2>
+<p>A good model has its dots <strong>close to the 45-degree line</strong>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">lims</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">y_te</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">min</span><span class="p">()),</span> <span class="nb">max</span><span class="p">(</span><span class="n">y_te</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">max</span><span class="p">())]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lims</span><span class="p">,</span> <span class="n">lims</span><span class="p">,</span> <span class="s2">&quot;r--&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Perfect prediction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Actual Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Predicted Revenue&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Actual vs Predicted (Multiple Regression)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
+<p><img alt="png" src="../06_Regression_files/06_Regression_26_0.png" /></p>
+<h2 id="8-mini-project-predict-monthly-company-revenue">8. Mini-Project — predict monthly company revenue</h2>
+<p>Imagine you are given the past 12 months data:</p>
+<table>
+<thead>
+<tr>
+<th>Month</th>
+<th>Marketing_Spend</th>
+<th>Salesmen</th>
+<th>Units_Sold</th>
+<th>Revenue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">toy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Marketing_Spend&quot;</span><span class="p">:[</span><span class="mi">50000</span><span class="p">,</span><span class="mi">55000</span><span class="p">,</span><span class="mi">60000</span><span class="p">,</span><span class="mi">45000</span><span class="p">,</span><span class="mi">70000</span><span class="p">,</span><span class="mi">80000</span><span class="p">,</span><span class="mi">75000</span><span class="p">,</span><span class="mi">85000</span><span class="p">,</span><span class="mi">90000</span><span class="p">,</span><span class="mi">100000</span><span class="p">,</span><span class="mi">110000</span><span class="p">,</span><span class="mi">120000</span><span class="p">],</span>
+    <span class="s2">&quot;Salesmen&quot;</span><span class="p">:</span>       <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+    <span class="s2">&quot;Units_Sold&quot;</span><span class="p">:</span>     <span class="p">[</span><span class="mi">420</span><span class="p">,</span> <span class="mi">465</span><span class="p">,</span> <span class="mi">510</span><span class="p">,</span> <span class="mi">380</span><span class="p">,</span> <span class="mi">540</span><span class="p">,</span> <span class="mi">605</span><span class="p">,</span> <span class="mi">580</span><span class="p">,</span> <span class="mi">660</span><span class="p">,</span> <span class="mi">700</span><span class="p">,</span> <span class="mi">760</span><span class="p">,</span> <span class="mi">820</span><span class="p">,</span> <span class="mi">880</span><span class="p">],</span>
+    <span class="s2">&quot;Revenue&quot;</span><span class="p">:</span>        <span class="p">[</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1520000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span> <span class="mi">1700000</span><span class="p">,</span>
+                       <span class="mi">1950000</span><span class="p">,</span> <span class="mi">2080000</span><span class="p">,</span> <span class="mi">2250000</span><span class="p">,</span> <span class="mi">2400000</span><span class="p">,</span> <span class="mi">2580000</span><span class="p">],</span>
+<span class="p">})</span>
+<span class="n">toy</span>
+</code></pre></div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Marketing_Spend</th>
+      <th>Salesmen</th>
+      <th>Units_Sold</th>
+      <th>Revenue</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>50000</td>
+      <td>5</td>
+      <td>420</td>
+      <td>1250000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>55000</td>
+      <td>5</td>
+      <td>465</td>
+      <td>1380000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>60000</td>
+      <td>6</td>
+      <td>510</td>
+      <td>1520000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>45000</td>
+      <td>6</td>
+      <td>380</td>
+      <td>1120000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>70000</td>
+      <td>7</td>
+      <td>540</td>
+      <td>1620000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>80000</td>
+      <td>7</td>
+      <td>605</td>
+      <td>1780000</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>75000</td>
+      <td>7</td>
+      <td>580</td>
+      <td>1700000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>85000</td>
+      <td>8</td>
+      <td>660</td>
+      <td>1950000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>90000</td>
+      <td>8</td>
+      <td>700</td>
+      <td>2080000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>100000</td>
+      <td>9</td>
+      <td>760</td>
+      <td>2250000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>110000</td>
+      <td>9</td>
+      <td>820</td>
+      <td>2400000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>120000</td>
+      <td>10</td>
+      <td>880</td>
+      <td>2580000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p><strong>Your tasks:</strong></p>
+<ol>
+<li>Split the data into train (80%) and test (20%) — use <code>random_state=0</code>.</li>
+<li>Fit a <code>LinearRegression</code> using all three inputs.</li>
+<li>Print the coefficients of each input.</li>
+<li>Report MAE, RMSE and R² on the test set.</li>
+<li>Predict the revenue for a month with: Marketing_Spend = 95,000, Salesmen = 9, Units_Sold = 750.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your code here</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span> <span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">toy</span><span class="p">[[</span><span class="s2">&quot;Marketing_Spend&quot;</span><span class="p">,</span><span class="s2">&quot;Salesmen&quot;</span><span class="p">,</span><span class="s2">&quot;Units_Sold&quot;</span><span class="p">]]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">toy</span><span class="p">[</span><span class="s2">&quot;Revenue&quot;</span><span class="p">]</span>
+
+<span class="n">X_tr</span><span class="p">,</span> <span class="n">X_te</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">,</span> <span class="n">y_te</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_tr</span><span class="p">,</span> <span class="n">y_tr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coefs   :&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">coef_</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Intercept:&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">intercept_</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_te</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;MAE  : </span><span class="si">{</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE : </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">))</span><span class="si">:</span><span class="s2">,.0f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;R²   : </span><span class="si">{</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_te</span><span class="p">,</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">new_month</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;Marketing_Spend&quot;</span><span class="p">:[</span><span class="mi">95000</span><span class="p">],</span><span class="s2">&quot;Salesmen&quot;</span><span class="p">:[</span><span class="mi">9</span><span class="p">],</span><span class="s2">&quot;Units_Sold&quot;</span><span class="p">:[</span><span class="mi">750</span><span class="p">]})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Predicted revenue:&quot;</span><span class="p">,</span> <span class="n">m</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">new_month</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+</code></pre></div>
+
+    Coefs   : {'Marketing_Spend': np.float64(-4.46), 'Salesmen': np.float64(1300.18), 'Units_Sold': np.float64(3576.44)}
+    Intercept: -41061.98
+
+    MAE  : 15,013
+    RMSE : 19,613
+    R²   : 0.998
+
+    Predicted revenue: 2229479.0
+
+
+</details>
+
+<hr />
+<h3 id="whats-next">What's next?</h3>
+<p>Now we can predict numbers. The final notebook (<code>07_Classification</code>) tackles the other big question — <strong>predicting categories</strong> (yes/no, default/not, fraud/not). The workflow is the same; only the metric changes.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../05_Feature_Engineering/" class="btn btn-neutral float-left" title="Feature Engineering"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../07_Classification/" class="btn btn-neutral float-right" title="Classification">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../05_Feature_Engineering/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../07_Classification/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

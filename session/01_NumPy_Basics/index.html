@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Numpy Basics - ICAN Training</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Numpy Basics";
+        var mkdocs_page_input_path = "session/01_NumPy_Basics.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../.." class="icon icon-home"> ICAN Training
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../..">Getting Started</a>
+                </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Introduction</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/00_Intro_DS_ML_AI_for_CA/">DS, ML & AI Overview</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Basics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/01_Python_for_CA_Beginners/">Python Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/02_NumPy_for_CA/">Numpy</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/03_Pandas_for_CA/">Pandas</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/04_Matplotlib_for_CA/">Matplotlib</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/05_Seaborn_for_CA/">Seaborn</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Data Analytics</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/06_CRISP_DM_for_CA/">CRISP-DM Process</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/07_Data_Cleaning_for_CA/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/08_Feature_Engineering_for_CA/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Regression & Classification</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09_Regression_Classification_for_CA/">Classification</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../ican/09b_Regression_for_CA/">Regression</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/10_Clustering_for_CA/">Clustering & K-Means</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Agentic AI</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/01_simple_rag/">Simple RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/02_chunking_strategies/">Chunking Strategies</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/03_knowledge_graph_intro/">Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/04_multi_doc_knowledge_graph/">Multi Document Knowledge Graphs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/05_graphrag_pipeline/">Graph RAG</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../ican/Agentic/06_agentic_rag_langgraph/">Agentic RAG</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Session</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" href="#">Numpy Basics</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#1-what-is-numpy">1. What is NumPy?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2-creating-your-first-array">2. Creating your first array</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-1">Practice 1</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#3-useful-array-properties">3. Useful array properties</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-2">Practice 2</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#4-doing-maths-on-the-whole-array">4. Doing maths on the whole array</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-3">Practice 3</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#5-statistical-summary-functions">5. Statistical summary functions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-4">Practice 4</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#6-picking-values-indexing-slicing">6. Picking values — indexing &amp; slicing</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-5">Practice 5</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#7-filtering-data-with-conditions">7. Filtering data with conditions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-6">Practice 6</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#8-2d-arrays-a-small-table">8. 2D arrays — a small table</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-7">Practice 7</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#9-quick-array-creators">9. Quick array creators</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#practice-8">Practice 8</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#10-mini-project-annual-pl-summary">10. Mini-Project — Annual P&amp;L Summary</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#whats-next">What's next?</a>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../02_Pandas_Basics/">Pandas Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../03_Matplotlib_Seaborn/">Matplotlib Basics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../04_Data_Cleaning/">Data Cleaning</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../05_Feature_Engineering/">Feature Engineering</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../06_Regression/">Regression & Classification</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../07_Classification/">Classification</a>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../..">ICAN Training</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Session</li>
+      <li class="breadcrumb-item active">Numpy Basics</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="notebook-1-numpy-basics-for-ca-professionals">Notebook 1 — NumPy Basics for CA Professionals</h1>
+<p><strong>Goal:</strong> Learn how to do fast number-crunching on financial data using NumPy.</p>
+<p><strong>You will learn:</strong>
+1. What NumPy is and why it is useful
+2. How to create an array
+3. Doing maths on whole columns of data at once
+4. Statistical summaries (sum, mean, min, max)
+5. Picking values (indexing &amp; slicing)
+6. Filtering data with conditions
+7. Working with 2D tables
+8. A short mini-project at the end</p>
+<p><strong>Tip for class:</strong> Read each concept, run the code cell, then try the small <em>Practice</em> cell that follows.</p>
+<hr />
+<h2 id="1-what-is-numpy">1. What is NumPy?</h2>
+<p>NumPy is a Python library used for <strong>fast numerical work</strong>. Think of it as <strong>Excel formulas applied to entire columns at once</strong> — but in Python, and much faster.</p>
+<p>In a normal Python list, if you want to add 13% VAT to 1,000 invoices, you would write a loop. In NumPy you write <strong>one line</strong> and it works on the entire column.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>   <span class="c1"># &#39;np&#39; is the standard short name everyone uses</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;NumPy version:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>NumPy version: 2.4.6
+</code></pre></div>
+<h2 id="2-creating-your-first-array">2. Creating your first array</h2>
+<p>An <strong>array</strong> in NumPy is like a single column of numbers (or a small table).
+We create one from a Python list.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Five monthly revenue figures (in NPR)</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type:&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">revenue</span><span class="p">))</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>[1250000 1380000 1120000 1450000 1620000]
+Type: &lt;class &#39;numpy.ndarray&#39;&gt;
+</code></pre></div>
+<h3 id="practice-1">Practice 1</h3>
+<p>Create a NumPy array called <code>expenses</code> with these 5 monthly expense figures:
+<code>920000, 980000, 870000, 1050000, 1180000</code>. Then print it.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+<span class="c1"># expenses = ...</span>
+<span class="c1"># print(expenses)</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">expenses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">920000</span><span class="p">,</span> <span class="mi">980000</span><span class="p">,</span> <span class="mi">870000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">1180000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expenses</span><span class="p">)</span>
+</code></pre></div>
+
+    [ 920000  980000  870000 1050000 1180000]
+
+
+</details>
+
+<h2 id="3-useful-array-properties">3. Useful array properties</h2>
+<p>Every array gives you quick info about itself.</p>
+<div class="highlight"><pre><span></span><code><span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>   <span class="c1"># (5,) means 5 items in 1 row</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;size  :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>    <span class="c1"># total number of items</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ndim  :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">ndim</span><span class="p">)</span>    <span class="c1"># how many dimensions</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dtype :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>   <span class="c1"># type of data inside</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>shape : (5,)
+size  : 5
+ndim  : 1
+dtype : int64
+</code></pre></div>
+<h3 id="practice-2">Practice 2</h3>
+<p>Create an array of any 7 invoice amounts you like. Print its <code>shape</code> and <code>size</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">82000</span><span class="p">,</span> <span class="mi">31500</span><span class="p">,</span> <span class="mi">97000</span><span class="p">,</span> <span class="mi">54000</span><span class="p">,</span> <span class="mi">120000</span><span class="p">,</span> <span class="mi">63000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;shape:&quot;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;size :&quot;</span><span class="p">,</span> <span class="n">invoices</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</code></pre></div>
+
+    shape: (7,)
+    size : 7
+
+
+</details>
+
+<h2 id="4-doing-maths-on-the-whole-array">4. Doing maths on the whole array</h2>
+<p>This is the <strong>magic of NumPy</strong>. You don't need a loop — just write the operation as if the array was a single number.</p>
+<div class="highlight"><pre><span></span><code><span class="n">amounts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">25000</span><span class="p">,</span> <span class="mi">50000</span><span class="p">,</span> <span class="mi">100000</span><span class="p">,</span> <span class="mi">75000</span><span class="p">])</span>
+
+<span class="c1"># Add 13% VAT to ALL invoices in one line</span>
+<span class="n">vat</span>   <span class="o">=</span> <span class="n">amounts</span> <span class="o">*</span> <span class="mf">0.13</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">amounts</span> <span class="o">+</span> <span class="n">vat</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Amount :&quot;</span><span class="p">,</span> <span class="n">amounts</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VAT    :&quot;</span><span class="p">,</span> <span class="n">vat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total  :&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Amount : [ 10000  25000  50000 100000  75000]
+VAT    : [ 1300.  3250.  6500. 13000.  9750.]
+Total  : [ 11300.  28250.  56500. 113000.  84750.]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># Operations between two arrays — element by element</span>
+<span class="n">revenue</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">])</span>
+<span class="n">expenses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">920000</span><span class="p">,</span>  <span class="mi">980000</span><span class="p">,</span>  <span class="mi">870000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">1180000</span><span class="p">])</span>
+
+<span class="n">profit</span> <span class="o">=</span> <span class="n">revenue</span> <span class="o">-</span> <span class="n">expenses</span>
+<span class="n">margin</span> <span class="o">=</span> <span class="p">(</span><span class="n">profit</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>   <span class="c1"># profit margin in %</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Profit :&quot;</span><span class="p">,</span> <span class="n">profit</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Margin :&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="s2">&quot;%&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Profit : [330000 400000 250000 400000 440000]
+Margin : [26.4  28.99 22.32 27.59 27.16] %
+</code></pre></div>
+<h3 id="practice-3">Practice 3</h3>
+<p>You sold these quantities of a product: <code>[5, 12, 8, 20, 15]</code> at a unit price of NPR 450 each.</p>
+<ol>
+<li>Create the quantity array.</li>
+<li>Multiply by 450 to get sales amount per row.</li>
+<li>Add 13% VAT.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">qty</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">])</span>
+<span class="n">sales</span> <span class="o">=</span> <span class="n">qty</span> <span class="o">*</span> <span class="mi">450</span>
+<span class="n">vat</span>   <span class="o">=</span> <span class="n">sales</span> <span class="o">*</span> <span class="mf">0.13</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sales:&quot;</span><span class="p">,</span> <span class="n">sales</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;VAT  :&quot;</span><span class="p">,</span> <span class="n">vat</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total:&quot;</span><span class="p">,</span> <span class="n">sales</span> <span class="o">+</span> <span class="n">vat</span><span class="p">)</span>
+</code></pre></div>
+
+    Sales: [2250 5400 3600 9000 6750]
+    VAT  : [ 292.5  702.   468.  1170.   877.5]
+    Total: [ 2542.5  6102.   4068.  10170.   7627.5]
+
+
+</details>
+
+<h2 id="5-statistical-summary-functions">5. Statistical summary functions</h2>
+<p>These are the "Excel-style" summary functions you'll use every day.</p>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.sum(a)</code></td>
+<td>total</td>
+</tr>
+<tr>
+<td><code>np.mean(a)</code></td>
+<td>average</td>
+</tr>
+<tr>
+<td><code>np.median(a)</code></td>
+<td>middle value</td>
+</tr>
+<tr>
+<td><code>np.min(a)</code></td>
+<td>smallest</td>
+</tr>
+<tr>
+<td><code>np.max(a)</code></td>
+<td>largest</td>
+</tr>
+<tr>
+<td><code>np.std(a)</code></td>
+<td>standard deviation (spread)</td>
+</tr>
+<tr>
+<td><code>a.cumsum()</code></td>
+<td>running total</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span>
+                    <span class="mi">1780000</span><span class="p">,</span> <span class="mi">1550000</span><span class="p">,</span> <span class="mi">1420000</span><span class="p">,</span> <span class="mi">1680000</span><span class="p">,</span> <span class="mi">1910000</span><span class="p">,</span>
+                    <span class="mi">2030000</span><span class="p">,</span> <span class="mi">2150000</span><span class="p">])</span>   <span class="c1"># full year, 12 months</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total annual revenue  : NPR&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">revenue</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average monthly       : NPR&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best month            : NPR&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">revenue</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Worst month           : NPR&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">revenue</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Standard deviation    : NPR&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">revenue</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Running total (YTD)   :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Total annual revenue  : NPR 19340000
+Average monthly       : NPR 1611667.0
+Best month            : NPR 2150000
+Worst month           : NPR 1120000
+Standard deviation    : NPR 299968.0
+Running total (YTD)   : [ 1250000  2630000  3750000  5200000  6820000  8600000 10150000 11570000
+ 13250000 15160000 17190000 19340000]
+</code></pre></div>
+<h3 id="practice-4">Practice 4</h3>
+<p>For these 6 quarterly expense figures:
+<code>[820000, 950000, 1080000, 1190000, 1310000, 1490000]</code></p>
+<p>Find: total, average, max, min, and the running total (<code>cumsum</code>).</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">exp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">820000</span><span class="p">,</span> <span class="mi">950000</span><span class="p">,</span> <span class="mi">1080000</span><span class="p">,</span> <span class="mi">1190000</span><span class="p">,</span> <span class="mi">1310000</span><span class="p">,</span> <span class="mi">1490000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total  :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Average:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Max    :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Min    :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">exp</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cumsum :&quot;</span><span class="p">,</span> <span class="n">exp</span><span class="o">.</span><span class="n">cumsum</span><span class="p">())</span>
+</code></pre></div>
+
+    Total  : 6840000
+    Average: 1140000.0
+    Max    : 1490000
+    Min    : 820000
+    Cumsum : [ 820000 1770000 2850000 4040000 5350000 6840000]
+
+
+</details>
+
+<h2 id="6-picking-values-indexing-slicing">6. Picking values — indexing &amp; slicing</h2>
+<p>Position numbers (called <strong>index</strong>) in Python start from <strong>0</strong>, not 1.</p>
+<div class="highlight"><pre><span></span><code>revenue:  [1250000, 1380000, 1120000, 1450000, 1620000, 1780000, ...]
+index  :     0        1        2        3        4        5
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="n">months</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Shrawan&quot;</span><span class="p">,</span><span class="s2">&quot;Bhadra&quot;</span><span class="p">,</span><span class="s2">&quot;Ashwin&quot;</span><span class="p">,</span><span class="s2">&quot;Kartik&quot;</span><span class="p">,</span><span class="s2">&quot;Mangsir&quot;</span><span class="p">,</span><span class="s2">&quot;Poush&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;Magh&quot;</span><span class="p">,</span><span class="s2">&quot;Falgun&quot;</span><span class="p">,</span><span class="s2">&quot;Chaitra&quot;</span><span class="p">,</span><span class="s2">&quot;Baishakh&quot;</span><span class="p">,</span><span class="s2">&quot;Jestha&quot;</span><span class="p">,</span><span class="s2">&quot;Ashadh&quot;</span><span class="p">]</span>
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
+                    <span class="mi">1550000</span><span class="p">,</span> <span class="mi">1420000</span><span class="p">,</span> <span class="mi">1680000</span><span class="p">,</span> <span class="mi">1910000</span><span class="p">,</span> <span class="mi">2030000</span><span class="p">,</span> <span class="mi">2150000</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;First month (Shrawan):&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last  month (Ashadh) :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;3rd month  (Ashwin)  :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+<span class="c1"># Slicing  →  array[start : end]   (end is NOT included)</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>      <span class="c1"># months 1,2,3</span>
+<span class="n">q4</span> <span class="o">=</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">12</span><span class="p">]</span>     <span class="c1"># months 10,11,12</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q1 :&quot;</span><span class="p">,</span> <span class="n">q1</span><span class="p">,</span> <span class="s2">&quot;→ total NPR&quot;</span><span class="p">,</span> <span class="n">q1</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q4 :&quot;</span><span class="p">,</span> <span class="n">q4</span><span class="p">,</span> <span class="s2">&quot;→ total NPR&quot;</span><span class="p">,</span> <span class="n">q4</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>First month (Shrawan): 1250000
+Last  month (Ashadh) : 2150000
+3rd month  (Ashwin)  : 1120000
+Q1 : [1250000 1380000 1120000] → total NPR 3750000
+Q4 : [1910000 2030000 2150000] → total NPR 6090000
+</code></pre></div>
+<h3 id="practice-5">Practice 5</h3>
+<p>Using the <code>revenue</code> array above:</p>
+<ol>
+<li>Print the revenue for <strong>Poush</strong> (6th month, so index 5).</li>
+<li>Print the <strong>last 3 months</strong> using slicing.</li>
+<li>Find the average of Q2 (Kartik, Mangsir, Poush → index 3 to 6).</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Poush       :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Last 3      :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q2 average  :&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+</code></pre></div>
+
+    Poush       : 1780000
+    Last 3      : [1910000 2030000 2150000]
+    Q2 average  : 1616666.6666666667
+
+
+</details>
+
+<h2 id="7-filtering-data-with-conditions">7. Filtering data with conditions</h2>
+<p>This is like <strong>AutoFilter in Excel</strong> — but on entire columns. You write a condition and NumPy gives you back only the values that match.</p>
+<div class="highlight"><pre><span></span><code><span class="n">invoices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">45000</span><span class="p">,</span> <span class="mi">182000</span><span class="p">,</span> <span class="mi">31500</span><span class="p">,</span> <span class="mi">97000</span><span class="p">,</span> <span class="mi">254000</span><span class="p">,</span> <span class="mi">18000</span><span class="p">,</span>
+                     <span class="mi">320000</span><span class="p">,</span> <span class="mi">67000</span><span class="p">,</span> <span class="mi">145000</span><span class="p">,</span> <span class="mi">9500</span><span class="p">,</span> <span class="mi">88000</span><span class="p">,</span> <span class="mi">410000</span><span class="p">])</span>
+
+<span class="c1"># Step 1: condition gives True/False for each element</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">invoices</span> <span class="o">&gt;</span> <span class="mi">100000</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mask :&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>
+
+<span class="c1"># Step 2: use the mask to pick values</span>
+<span class="n">big</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[</span><span class="n">mask</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Invoices &gt; NPR 1 lakh:&quot;</span><span class="p">,</span> <span class="n">big</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;How many?&quot;</span><span class="p">,</span> <span class="n">big</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Their total: NPR&quot;</span><span class="p">,</span> <span class="n">big</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Mask : [False  True False False  True False  True False  True False False  True]
+Invoices &gt; NPR 1 lakh: [182000 254000 320000 145000 410000]
+How many? 5
+Their total: NPR 1311000
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># You can combine conditions with &amp; (and) and | (or)</span>
+<span class="n">audit_range</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[(</span><span class="n">invoices</span> <span class="o">&gt;=</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">invoices</span> <span class="o">&lt;=</span> <span class="mi">200000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Audit sample (NPR 50K to 2L):&quot;</span><span class="p">,</span> <span class="n">audit_range</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Audit sample (NPR 50K to 2L): [182000  97000  67000 145000  88000]
+</code></pre></div>
+<h3 id="practice-6">Practice 6</h3>
+<p>From the <code>invoices</code> array above, find:</p>
+<ol>
+<li>All invoices <strong>below NPR 20,000</strong> (small / cash-style).</li>
+<li>All invoices <strong>above NPR 3 lakh</strong> (high value).</li>
+<li>How many invoices are between NPR 50,000 and NPR 1 lakh.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Below 20K  :&quot;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="n">invoices</span> <span class="o">&lt;</span> <span class="mi">20000</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Above 3L   :&quot;</span><span class="p">,</span> <span class="n">invoices</span><span class="p">[</span><span class="n">invoices</span> <span class="o">&gt;</span> <span class="mi">300000</span><span class="p">])</span>
+<span class="n">mid</span> <span class="o">=</span> <span class="n">invoices</span><span class="p">[(</span><span class="n">invoices</span> <span class="o">&gt;=</span> <span class="mi">50000</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">invoices</span> <span class="o">&lt;=</span> <span class="mi">100000</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mid count  :&quot;</span><span class="p">,</span> <span class="n">mid</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</code></pre></div>
+
+    Below 20K  : [18000  9500]
+    Above 3L   : [320000 410000]
+    Mid count  : 3
+
+
+</details>
+
+<h2 id="8-2d-arrays-a-small-table">8. 2D arrays — a small table</h2>
+<p>A 2D array is a table with <strong>rows</strong> and <strong>columns</strong>. Useful for things like <em>months × departments</em>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Rows = Quarters, Columns = Departments</span>
+<span class="c1">#                    Audit    Tax  Advisory  Finance</span>
+<span class="n">budget</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">500000</span><span class="p">,</span> <span class="mi">350000</span><span class="p">,</span> <span class="mi">220000</span><span class="p">,</span> <span class="mi">180000</span><span class="p">],</span>   <span class="c1"># Q1</span>
+                   <span class="p">[</span><span class="mi">520000</span><span class="p">,</span> <span class="mi">360000</span><span class="p">,</span> <span class="mi">230000</span><span class="p">,</span> <span class="mi">195000</span><span class="p">],</span>   <span class="c1"># Q2</span>
+                   <span class="p">[</span><span class="mi">480000</span><span class="p">,</span> <span class="mi">340000</span><span class="p">,</span> <span class="mi">215000</span><span class="p">,</span> <span class="mi">185000</span><span class="p">],</span>   <span class="c1"># Q3</span>
+                   <span class="p">[</span><span class="mi">560000</span><span class="p">,</span> <span class="mi">390000</span><span class="p">,</span> <span class="mi">245000</span><span class="p">,</span> <span class="mi">210000</span><span class="p">]])</span>  <span class="c1"># Q4</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Shape:&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>        <span class="c1"># (4 rows, 4 cols)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q1 Audit  :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>    <span class="c1"># row 0, col 0</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q3 Finance:&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Whole row → all departments in Q2</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q2 row    :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:])</span>
+
+<span class="c1"># Whole column → Audit across all quarters</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Audit col :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>Shape: (4, 4)
+Q1 Audit  : 500000
+Q3 Finance: 185000
+Q2 row    : [520000 360000 230000 195000]
+Audit col : [500000 520000 480000 560000]
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="c1"># axis=0 → sum DOWN each column     (yearly total per dept)</span>
+<span class="c1"># axis=1 → sum ACROSS each row      (total per quarter)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;By dept   :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;By quarter:&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grand     :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>By dept   : [2060000 1440000  910000  770000]
+By quarter: [1250000 1305000 1220000 1405000]
+Grand     : 5180000
+</code></pre></div>
+<h3 id="practice-7">Practice 7</h3>
+<p>Given the <code>budget</code> table above:</p>
+<ol>
+<li>Print the <strong>Tax department's</strong> budget for all four quarters.</li>
+<li>Print the <strong>average</strong> of Q4 across all departments.</li>
+<li>Calculate the <strong>total annual budget</strong>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tax   :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Q4 avg:&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Grand :&quot;</span><span class="p">,</span> <span class="n">budget</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+
+    Tax   : [350000 360000 340000 390000]
+    Q4 avg: 351250.0
+    Grand : 5180000
+
+
+</details>
+
+<h2 id="9-quick-array-creators">9. Quick array creators</h2>
+<p>Sometimes you don't have a list of values — you need to <strong>generate</strong> one.</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>np.zeros(5)</code></td>
+<td><code>[0, 0, 0, 0, 0]</code></td>
+</tr>
+<tr>
+<td><code>np.ones(4)</code></td>
+<td><code>[1, 1, 1, 1]</code></td>
+</tr>
+<tr>
+<td><code>np.arange(1, 6)</code></td>
+<td><code>[1, 2, 3, 4, 5]</code></td>
+</tr>
+<tr>
+<td><code>np.arange(0, 20, 5)</code></td>
+<td><code>[0, 5, 10, 15]</code></td>
+</tr>
+<tr>
+<td><code>np.linspace(0, 10, 5)</code></td>
+<td>5 equally-spaced numbers</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;zeros   :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ones    :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;arange  :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>     <span class="c1"># months 1 to 12</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;step 5  :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;linspace:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span> <span class="c1"># 5 interest rates between 6% and 12%</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>zeros   : [0. 0. 0. 0. 0.]
+ones    : [1. 1. 1. 1.]
+arange  : [ 1  2  3  4  5  6  7  8  9 10 11 12]
+step 5  : [ 0  5 10 15 20]
+linspace: [ 6.   7.5  9.  10.5 12. ]
+</code></pre></div>
+<h3 id="practice-8">Practice 8</h3>
+<ol>
+<li>Create an array of all integers from <strong>1 to 12</strong> (representing months).</li>
+<li>Create an array of <strong>5 interest rates</strong> equally spaced between <strong>8% and 16%</strong>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="c1"># Your turn:</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Months:&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rates :&quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</code></pre></div>
+
+    Months: [ 1  2  3  4  5  6  7  8  9 10 11 12]
+    Rates : [ 8. 10. 12. 14. 16.]
+
+
+</details>
+
+<h2 id="10-mini-project-annual-pl-summary">10. Mini-Project — Annual P&amp;L Summary</h2>
+<p>You have monthly revenue and expense figures for FY 2081-82 BS. Using only NumPy:</p>
+<ol>
+<li>Calculate <strong>monthly profit</strong> (revenue − expenses).</li>
+<li>Calculate <strong>profit margin %</strong> for each month.</li>
+<li>Find the <strong>best and worst month</strong> (highest/lowest profit).</li>
+<li>Calculate <strong>total annual revenue, total expenses, total profit</strong>.</li>
+<li>Identify <strong>how many months had profit margin above 25%</strong>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><span class="n">months</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;Shrawan&quot;</span><span class="p">,</span><span class="s2">&quot;Bhadra&quot;</span><span class="p">,</span><span class="s2">&quot;Ashwin&quot;</span><span class="p">,</span><span class="s2">&quot;Kartik&quot;</span><span class="p">,</span><span class="s2">&quot;Mangsir&quot;</span><span class="p">,</span><span class="s2">&quot;Poush&quot;</span><span class="p">,</span>
+                   <span class="s2">&quot;Magh&quot;</span><span class="p">,</span><span class="s2">&quot;Falgun&quot;</span><span class="p">,</span><span class="s2">&quot;Chaitra&quot;</span><span class="p">,</span><span class="s2">&quot;Baishakh&quot;</span><span class="p">,</span><span class="s2">&quot;Jestha&quot;</span><span class="p">,</span><span class="s2">&quot;Ashadh&quot;</span><span class="p">])</span>
+
+<span class="n">revenue</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1250000</span><span class="p">,</span> <span class="mi">1380000</span><span class="p">,</span> <span class="mi">1120000</span><span class="p">,</span> <span class="mi">1450000</span><span class="p">,</span> <span class="mi">1620000</span><span class="p">,</span> <span class="mi">1780000</span><span class="p">,</span>
+                    <span class="mi">1550000</span><span class="p">,</span> <span class="mi">1420000</span><span class="p">,</span> <span class="mi">1680000</span><span class="p">,</span> <span class="mi">1910000</span><span class="p">,</span> <span class="mi">2030000</span><span class="p">,</span> <span class="mi">2150000</span><span class="p">])</span>
+
+<span class="n">expenses</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mi">920000</span><span class="p">,</span>  <span class="mi">980000</span><span class="p">,</span>  <span class="mi">870000</span><span class="p">,</span> <span class="mi">1050000</span><span class="p">,</span> <span class="mi">1180000</span><span class="p">,</span> <span class="mi">1250000</span><span class="p">,</span>
+                     <span class="mi">1100000</span><span class="p">,</span> <span class="mi">1020000</span><span class="p">,</span> <span class="mi">1190000</span><span class="p">,</span> <span class="mi">1320000</span><span class="p">,</span> <span class="mi">1410000</span><span class="p">,</span> <span class="mi">1490000</span><span class="p">])</span>
+
+<span class="c1"># Your code here</span>
+</code></pre></div>
+<details><summary>Show solution</summary>
+
+
+<div class="highlight"><pre><span></span><code><span class="n">profit</span>  <span class="o">=</span> <span class="n">revenue</span> <span class="o">-</span> <span class="n">expenses</span>
+<span class="n">margin</span>  <span class="o">=</span> <span class="p">(</span><span class="n">profit</span> <span class="o">/</span> <span class="n">revenue</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Monthly profit :&quot;</span><span class="p">,</span> <span class="n">profit</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Margin %       :&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best month  :&quot;</span><span class="p">,</span> <span class="n">months</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">profit</span><span class="p">)],</span> <span class="s2">&quot;→ NPR&quot;</span><span class="p">,</span> <span class="n">profit</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Worst month :&quot;</span><span class="p">,</span> <span class="n">months</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">profit</span><span class="p">)],</span> <span class="s2">&quot;→ NPR&quot;</span><span class="p">,</span> <span class="n">profit</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total revenue  : NPR&quot;</span><span class="p">,</span> <span class="n">revenue</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total expenses : NPR&quot;</span><span class="p">,</span> <span class="n">expenses</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total profit   : NPR&quot;</span><span class="p">,</span> <span class="n">profit</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Months with margin &gt; 25%:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">margin</span> <span class="o">&gt;</span> <span class="mi">25</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</code></pre></div>
+
+    Monthly profit : [330000 400000 250000 400000 440000 530000 450000 400000 490000 590000
+     620000 660000]
+    Margin %       : [26.4 29.  22.3 27.6 27.2 29.8 29.  28.2 29.2 30.9 30.5 30.7]
+
+    Best month  : Ashadh → NPR 660000
+    Worst month : Ashwin → NPR 250000
+
+    Total revenue  : NPR 19340000
+    Total expenses : NPR 13780000
+    Total profit   : NPR 5560000
+
+    Months with margin > 25%: 11
+
+
+</details>
+
+<hr />
+<h3 id="whats-next">What's next?</h3>
+<p>You now know enough NumPy to do fast number-crunching on financial data.
+In the next notebook (<code>02_Pandas_Basics</code>) we will use <strong>Pandas</strong>, which is built on top of NumPy and lets us work with <strong>labelled tables</strong> — almost exactly like Excel sheets.</p>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../ican/Agentic/06_agentic_rag_langgraph/" class="btn btn-neutral float-left" title="Agentic RAG"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../02_Pandas_Basics/" class="btn btn-neutral float-right" title="Pandas Basics">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright &copy; 2025 - Aayush Raj Regmi</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../ican/Agentic/06_agentic_rag_langgraph/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../02_Pandas_Basics/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
